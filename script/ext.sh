@@ -55,7 +55,7 @@ then
 	if [ "$APT_LIST" = "" ]
 	then
 		printf $BLU
-		echo "Installing$BLD wget$NRM$BLU ...$NRM"
+		echo "Installing$BLD wget$NRM$BLU ..."
 		sudo apt-get install wget > /dev/null 2>&1
 	fi
 	echo "Downloading$BLD MinilibX$NRM$BLU ..."

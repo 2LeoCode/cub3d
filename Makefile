@@ -27,7 +27,6 @@ SCRIPT =	ext.sh\
 			fclean.sh
 
 CFLAGS =	-Wall -Wextra -Werror -I $(INCDIR)
-CFLAGS_2 =	
 
 GRN =		\x1b[32m
 RED =		\x1b[31m
@@ -38,10 +37,17 @@ BLD =		\x1b[1m
 NRM =		\x1b[0m
 
 ifeq ("$(OS)", "Darwin")
-	CFLAGS_2 += -L lib -lmlx -framework OpenGL -framework AppKit
+	CFLAGS +=	-L lib -lmlx -framework OpenGL -framework AppKit
 else
 ifeq ("$(OS)", "Linux")
-	CFLAGS_2 += -lmlx -lXext -lX11
+	CFLAGS +=	-lmlx -lXext -lX11
+	GRN =		\x1b[32m
+	RED =		\x1b[31m
+	L_RED =		\x1b[91m
+	L_GRN =		\x1b[92m
+	BLU =		\x1b[34m
+	BLD =		\x1b[1m
+	NRM =		\x1b[0m
 endif
 endif
 
