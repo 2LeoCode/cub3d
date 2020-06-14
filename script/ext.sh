@@ -44,7 +44,6 @@ then
 fi
 
 cd ext
-printf $BLU
 if [ "$OS" = "Linux" ]
 then
 	GRN='\e[32m'
@@ -55,7 +54,7 @@ then
 	BLD='\e[1m'
 	YLW='\e[33m'
 	NRM='\e[0m'
-	APT_LIST=$(apt list --installed | grep wget)
+	APT_LIST=$(apt list --installed | grep wget 2> /dev/null)
 	if [ "$APT_LIST" = "" ]
 	then
 		printf $BLU
@@ -78,10 +77,10 @@ fi
 if [ "$OS" = "Darwin" ]
 then
 	APT_LIST=$(brew list | grep wget)
+	printf $BLU
 	if [ "$APT_LIST" = "" ]
 	then
-		printf $BLU
-		echo "Installing$BLD wget$NRM$BLU ...$NRM"
+		echo "Installing$BLD wget$NRM$BLU ..."
 		brew install wget > /dev/null 2>&1
 	fi
 	echo "Downloading $BLD$A_TAR$NRM$BLU ..."
@@ -133,7 +132,7 @@ then
 		if [ "$check3" = "man" ]
 		then
 			echo "Successfully imported MinilibX man$NRM"
-		else
+		else	
 			printf "$YLW$BLD"
 			echo "Warning:$NRM$YLW Missing man pages for MinilibX"
 		fi
