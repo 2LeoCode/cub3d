@@ -64,10 +64,8 @@ then
 	cd MinilibX/X11
 	make > /dev/null 2>&1
 	cp libmlx.a ../../../lib
-	for file in "$HEAD"
-	do
-		cp $file ../../../inc
-	done
+	cp mlx.h ../../../inc
+	cp mlx_int.h ../../../inc
 	cd ..
 fi
 
@@ -115,13 +113,14 @@ cp get_next_line_utils.c ../../src
 cp get_next_line.h ../../inc
 cd ../..
 
-check=$(ls lib/libmlx.a)
-check2=$(ls inc/mlx* inc/get_next_line.h | wc -w | tr -d ' \n')
+check=$(ls lib | libmlx.a)
+check2=$(ls inc | grep -e mlx_int.h -e mlx.h -e get_next_line.h | wc -w | tr -d ' \n')
 check3=$(ls | grep man)
+
 
 if [ "$check" = "lib/libmlx.a" ]
 then
-	if [ "$check2" = "6" ]
+	if [ "$check2" = "3" ]
 	then
 		printf $GRN
 		echo "Successfully compiled [$BLD$GNL$NRM$GRN]"
