@@ -28,12 +28,18 @@ check3=0
 
 if [ "$1" = "" ]
 then
-	printf $RED
-	echo "Error: wrong arguments$NRM"
+	printf $RED$BLD
+	echo "Error$NRM$RED: wrong arguments$L_RED\nUsage: sh ext.sh [path_to_cub3d]\n$NRM" >&2
+	exit
+fi
+cd $1 > dev/nul 2>&1
+if [ "$?" != 0 ]
+then
+	printf $RED$BLD
+	echo "Error$NRM$RED: wrong path$L_RED\nUsage: sh ext.sh [path_to_cub3d]\n$NRM" >&2
 	exit
 fi
 
-cd $1
 if [ "$(ls | grep ext)" = "" ]
 then
 	mkdir ext
@@ -61,6 +67,13 @@ then
 		echo "Installing$BLD wget$NRM$BLU ..."
 		sudo apt install wget > /dev/null 2>&1
 	fi
+	APT_LIST=$(apt list --installed | grep git 2> /dev/null)
+	if [ "$APT_LIST" = "" ]
+	then
+		printf $BLU
+		echo "Installing$BLD git$NRM$BLU ..."
+		sudo apt install git > /dev/null 2>&1
+	fi
 	printf $BLU
 	echo "Downloading$BLD MinilibX$NRM$BLU ..."
 	git clone https://github.com/pbondoer/MinilibX.git > /dev/null 2>&1
@@ -82,6 +95,13 @@ then
 	then
 		echo "Installing$BLD wget$NRM$BLU ..."
 		brew install wget > /dev/null 2>&1
+	fi
+	APT_LIST=$(brew list | grep git)
+	if [ "$APT_LIST" = "" ]
+	then
+		printf $BLU
+		echo "Installing$BLD git$NRM$BLU ..."
+		brew apt install git > /dev/null 2>&1
 	fi
 	echo "Downloading $BLD$A_TAR$NRM$BLU ..."
 	wget "https://projects.intra.42.fr/uploads/document/document/1753/minilibx_opengl.tgz" > /dev/null 2>&1
@@ -134,11 +154,11 @@ then
 			echo "Successfully imported MinilibX man$NRM"
 		else	
 			printf "$YLW$BLD"
-			echo "Warning:$NRM$YLW Missing man pages for MinilibX"
+			echo "Warning:$NRM$YLW Missing man pages for MinilibX" >&2
 		fi
 		exit
 	fi
 fi
 
 printf $RED
-echo "Error: MinilibX compilation failed or missing files$NRM"
+echo "Error: MinilibX compilation failed or missing files$NRM" >&2

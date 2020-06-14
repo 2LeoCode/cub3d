@@ -13,12 +13,37 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define ER_WPATH 0
+# define ER_OPENF 1
+
+# define NONE 0
+# define SAVE 1
+# define BONUS 2
+
+# define ANY 0
+# define BEG 1
+# define END 2
+# define ALL 3
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
 # include <mlx.h>
 # include <mlx_int.h>
+
+typedef enum	e_bool
+{
+	false,
+	true
+}				t_bool;
+
+typedef enum	e_std
+{
+	stdin,
+	stdout,
+	stderr
+}				t_std;
 
 typedef struct	s_rgb
 {
@@ -40,4 +65,20 @@ typedef struct	s_set
 	t_rgb		C;
 }				t_set;
 
+char	*ft_strstr(char *haystack, char *needle);
+
+char	*search_str(char *needle, char **ar, int size, int how);
+
+int		ft_strcmp(char *s1, char *s2);
+
+int		ft_fputc(int fd, char c);
+int		ft_fputs(int fd, char *s);
+int		ft_putchar(char c);
+int		ft_putstr(char *s);
+
+int		error_wrong_file(int errnum);
+
+int		help(void);
+
+int		cub3D(t_set set, int flags);
 #endif

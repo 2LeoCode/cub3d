@@ -19,6 +19,7 @@ INCDIR =	inc
 LIBDIR =	lib
 EXTDIR =	ext
 SHDIR =		script
+MAPDIR =	map
 
 SRC =		main.c
 OBJ =		$(SRC:.c=.o)
@@ -52,7 +53,7 @@ ifeq ("$(OS)", "Linux")
 	NRM =		\e[0m
 endif
 
-all: $(addprefix $(SHDIR)/, $(SCRIPT)) $(addprefix $(LIBDIR)/, $(LIB)) $(NAME)
+all: $(addprefix $(SHDIR)/, $(SCRIPT)) $(MAPDIR) $(addprefix $(LIBDIR)/, $(LIB)) $(NAME)
 	@(echo '$(GRN)$(BLD)$(NAME)$(NRM)$(GRN) is up to date.$(NRM)')
 
 $(addprefix $(LIBDIR)/, $(LIB)): $(addprefix $(EXTDIR)/, $(EXT))
@@ -66,6 +67,12 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(addprefix $(INCDIR)/, $(INC)) | $(OBJDIR)
 
 $(OBJDIR):
 	@(mkdir $(OBJDIR))
+
+$(MAPDIR):
+	@(mkdir $(MAPDIR))
+
+m: $(MAPDIR)
+	@(sh $(SHDIR)/map.sh .)
 
 clean:
 	@(rm -rf $(OBJDIR); echo '$(RED)Removed [$(BLD)$(RED)$(OBJDIR)$(NRM)$(RED)]$(NRM)')
