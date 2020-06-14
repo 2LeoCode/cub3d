@@ -69,7 +69,7 @@ int				main(int ac, char **av)
 		return (error_wrong_file(ER_WPATH));
 	if (arg_help(ac - 1, av + 1))
 		return (help());
-	if ((fd = open(path, O_RDONLY)) < 0))
+	if ((fd = open(path, O_RDONLY)) < 0)
 		return (error_wrong_file(ER_OPENF));
 	if ((ret = get_set(fd, &settings)) - 0)
 		return (error_wrong_file(ret));
