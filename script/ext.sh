@@ -43,6 +43,14 @@ cd ext
 printf $BLU
 if [ "$OS" = "Linux" ]
 then
+	GRN='\e[32m'
+	RED='\e[31m'
+	L_RED='\e[91m'
+	L_GRN='\e[92m'
+	BLU='\e[34m'
+	BLD='\e[1m'
+	YLW='\e[33m'
+	NRM='\e[0m'
 	APT_LIST=$(apt list --installed | grep wget)
 	if [ "$APT_LIST" = "" ]
 	then
