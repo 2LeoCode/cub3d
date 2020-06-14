@@ -12,8 +12,7 @@
 
 #include <cub3d.h>
 
-int		main()
+int		main(int ac, char **av)
 {
-	printf("Hello World !\n");
-	return (0);
+	
 }
