@@ -56,12 +56,12 @@ then
 	then
 		printf $BLU
 		echo "Installing$BLD wget$NRM$BLU ..."
-		sudo apt-get install wget > /dev/null 2>&1
+		sudo apt install wget > /dev/null 2>&1
 	fi
 	echo "Downloading$BLD MinilibX$NRM$BLU ..."
 	git clone https://github.com/pbondoer/MinilibX.git > /dev/null 2>&1
 
-	cd minilibX/X11
+	cd MinilibX/X11
 	make > /dev/null 2>&1
 	cp libmlx.a ../../../lib
 	for file in "$HEAD"
