@@ -26,7 +26,8 @@ to_remove="ext\
 			inc/get_next_line.h\
 			src/get_next_line*\
 			lib/*mlx*\
-			man"
+			man\
+			map"
 cd $1
 
 rm -rf $to_remove
