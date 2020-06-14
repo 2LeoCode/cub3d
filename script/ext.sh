@@ -121,8 +121,7 @@ check=$(ls lib | grep libmlx.a)
 check2=$(ls inc | grep -e mlx_int.h -e mlx.h -e get_next_line.h | wc -w | tr -d ' \n')
 check3=$(ls | grep man)
 
-
-if [ "$check" = "lib/libmlx.a" ]
+if [ "$check" = "libmlx.a" ]
 then
 	if [ "$check2" = "3" ]
 	then
