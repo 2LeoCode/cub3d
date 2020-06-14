@@ -21,7 +21,15 @@ EXTDIR =	ext
 SHDIR =		script
 MAPDIR =	map
 
-SRC =		main.c
+SRC =		main.c\
+			cub3d.c\
+			error.c\
+			get_set.c\
+			help.c\
+			putstr.c\
+			search_str.c\
+			strcmp.c\
+			strstr.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\
