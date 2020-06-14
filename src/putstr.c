@@ -14,7 +14,10 @@
 
 int		ft_fputc(int fd, char c)
 {
-	if (fd > 0 || (write(fd, &((unsigned char)c), 1) < 1))
+	unsigned char	tmp;
+
+	tmp = (unsigned char)c;
+	if (fd > 0 || (write(fd, &tmp, 1) < 1))
 		return (-1);
 	return (c);
 }
@@ -32,7 +35,10 @@ int		ft_fputs(int fd, char *s)
 
 int		ft_putchar(char c)
 {
-	write(1, &((unsigned char)c), 1);
+	unsigned char	tmp;
+
+	tmp = (unsigned char)c;
+	write(1, &tmp, 1);
 	return (c);
 }
 
@@ -40,7 +46,7 @@ int		ft_putstr(char *s)
 {
 	int		i;
 
-	i = -1
+	i = -1;
 	while (s && s[++i])
 		ft_putchar(s[i]);
 	return (i + (i < 0));
