@@ -38,6 +38,10 @@ if [ "$(ls | grep ext)" = "" ]
 then
 	mkdir ext
 fi
+if [ "$(ls | grep lib)" = "" ]
+then
+	mkdir lib
+fi
 
 cd ext
 printf $BLU
