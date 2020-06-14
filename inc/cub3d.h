@@ -18,10 +18,7 @@
 # include <string.h>
 # include <fcntl.h>
 # include <mlx.h>
-# include <mlx_opengl.h>
 # include <mlx_int.h>
-# include <mlx_png.h>
-# include <mlx_new_window.h>
 
 typedef struct	s_rgb
 {

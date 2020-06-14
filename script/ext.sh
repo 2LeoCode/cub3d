@@ -58,6 +58,7 @@ then
 		echo "Installing$BLD wget$NRM$BLU ..."
 		sudo apt install wget > /dev/null 2>&1
 	fi
+	printf $BLU
 	echo "Downloading$BLD MinilibX$NRM$BLU ..."
 	git clone https://github.com/pbondoer/MinilibX.git > /dev/null 2>&1
 
@@ -85,7 +86,6 @@ then
 
 	tar -xf $DY_TAR
 	cd $DY_FOLD
-	printf $BLU
 	echo "Compiling [$BLD$DY_LIB$NRM$BLU] ..."
 	make > /dev/null 2>&1
 	cp $DY_LIB ../../lib
