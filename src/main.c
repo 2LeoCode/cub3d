@@ -79,7 +79,7 @@ int				main(int ac, char **av)
 			return (cub3D(settings, SAVE | BONUS));
 		return (cub3D(settings, SAVE));
 	}
-	if (print_wrong(path, av + 1, ac - 1))
+	if (print_wrong(path, ac - 1, av + 1))
 		return (-1);
 	if (arg_bonus(ac - 1, av + 1))
 		return (cub3D(settings, BONUS));

@@ -81,4 +81,7 @@ int		error_wrong_file(int errnum);
 int		help(void);
 
 int		cub3D(t_set set, int flags);
+
+int		get_set(int fd, t_set *set);
+
 #endif
