@@ -71,6 +71,7 @@ then
 	cp libmlx.a ../../../lib
 	cp mlx.h ../../../inc
 	cp mlx_int.h ../../../inc
+	cp -r man ../../..
 	cd ..
 fi
 
