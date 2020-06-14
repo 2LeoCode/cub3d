@@ -42,7 +42,7 @@ ifeq ("$(OS)", "Darwin")
 endif
 
 ifeq ("$(OS)", "Linux")
-	CFLAGS_2 =	-lmlx -lXext -lX11
+	CFLAGS_2 =	-L lib -lmlx -lXext -lX11
 	GRN =		\e[32m
 	RED =		\e[31m
 	L_RED =		\e[91m
@@ -60,7 +60,7 @@ $(addprefix $(LIBDIR)/, $(LIB)): $(addprefix $(EXTDIR)/, $(EXT))
 $(NAME): $(OBJDIR) $(addprefix $(OBJDIR)/, $(OBJ))
 	(echo '\n$(BLU)Compiling [$(BLD)$@$(NRM)$(BLU)] ...$(NRM)'; gcc $(CFLAGS) $(CFLAGS_2) $^ -o $@)
 
-%.o: $(SRCDIR)/%.c $(addprefix $(INCDIR)/, $(INC))
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(addprefix $(INCDIR)/, $(INC))
 	(printf '\r$(BLU)Compiling'; gcc $(CFLAGS) -c $< -o $@; printf ' [ $(BLD)'; ls $(OBJDIR) | wc -w | tr -d ' \n'; printf ' $(NRM)$(BLU)/ $(BLD)'; printf $(SRC) | wc -w | tr -d ' \n'; printf ' $(NRM)$(BLU)]$(NRM)')
 
 $(OBJDIR):
