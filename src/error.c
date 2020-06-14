@@ -14,10 +14,10 @@
 
 int		error_wrong_file(int errnum)
 {
-	ft_fputs(stderr, "Error\n");
+	ft_fputs(_stderr, "Error\n");
 	if (errnum == ER_WPATH)
-		ft_fputs(stderr, "No input file or wrong file format (has to be .cub)\nUsage: ./Cub3D [--save] [--bonus] [path_to_map.cub]");
+		ft_fputs(_stderr, "No input file or wrong file format (has to be .cub)\nUsage: ./Cub3D [--save] [--bonus] [path_to_map.cub]");
 	else if (errnum == ER_OPENF)
-		ft_fputs(stderr, "Failed to open map file\nUsage: ./Cub3D [--save] [--bonus] [path_to_map.cub]");
+		ft_fputs(_stderr, "Failed to open map file\nUsage: ./Cub3D [--save] [--bonus] [path_to_map.cub]");
 	return (-1);
 }

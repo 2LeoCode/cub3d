@@ -26,6 +26,18 @@ check=0
 check2=0
 check3=0
 
+if [ "$OS" = "Linux" ]
+then
+	GRN='\e[32m'
+	RED='\e[31m'
+	L_RED='\e[91m'
+	L_GRN='\e[92m'
+	BLU='\e[34m'
+	BLD='\e[1m'
+	YLW='\e[33m'
+	NRM='\e[0m'
+fi
+
 if [ "$1" = "" ]
 then
 	printf $RED$BLD
@@ -52,14 +64,6 @@ fi
 cd ext
 if [ "$OS" = "Linux" ]
 then
-	GRN='\e[32m'
-	RED='\e[31m'
-	L_RED='\e[91m'
-	L_GRN='\e[92m'
-	BLU='\e[34m'
-	BLD='\e[1m'
-	YLW='\e[33m'
-	NRM='\e[0m'
 	APT_LIST=$(apt list --installed | grep wget 2> /dev/null)
 	if [ "$APT_LIST" = "" ]
 	then

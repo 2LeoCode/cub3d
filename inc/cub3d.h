@@ -40,9 +40,9 @@ typedef enum	e_bool
 
 typedef enum	e_std
 {
-	stdin,
-	stdout,
-	stderr
+	_stdin,
+	_stdout,
+	_stderr
 }				t_std;
 
 typedef struct	s_rgb

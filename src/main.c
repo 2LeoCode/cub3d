@@ -12,7 +12,7 @@
 
 #include <cub3d.h>
 
-static void		print_wrong(char *map_path, int ac, char **av)
+static t_bool	print_wrong(char *map_path, int ac, char **av)
 {
 	t_bool	wrong;
 	
@@ -23,12 +23,14 @@ static void		print_wrong(char *map_path, int ac, char **av)
 		&& ft_strcmp("--bonus", av[ac]) && ft_strcmp("-b", av[ac])
 		&& ft_strcmp("--help", av[ac]) && ft_strcmp("-h", av[ac]))
 		{
-			ft_fputs(stderr, "Cub3D: invalid option -- '");
+			wrong = true;
+			ft_fputs(_stderr, "Cub3D: invalid option -- '");
 			while (*av[ac] == '-')
 				av[ac]++;
-			ft_fputs(stderr, av[ac]);
-			ft_fputs(stderr, "'\nUse --help for help\n");
+			ft_fputs(_stderr, av[ac]);
+			ft_fputs(_stderr, "'\nUse --help for help\n");
 		}
+	return (wrong);
 }
 
 static t_bool	arg_save(int ac, char **av)
@@ -63,13 +65,13 @@ int				main(int ac, char **av)
 	int		ret;
 	t_set	settings;
 
-	if ((ac < 2) || !(path = search_str(".cub", av + 1, ac - 1, END))
+	if ((ac < 2) || !(path = search_str(".cub", av + 1, ac - 1, END)))
 		return (error_wrong_file(ER_WPATH));
 	if (arg_help(ac - 1, av + 1))
 		return (help());
 	if ((fd = open(path, O_RDONLY)) < 0))
 		return (error_wrong_file(ER_OPENF));
-	if ((ret = get_set(fd, &settings)) - 0);
+	if ((ret = get_set(fd, &settings)) - 0)
 		return (error_wrong_file(ret));
 	if (arg_save(ac - 1, av + 1))
 	{
@@ -77,7 +79,8 @@ int				main(int ac, char **av)
 			return (cub3D(settings, SAVE | BONUS));
 		return (cub3D(settings, SAVE));
 	}
-	print_wrong(path, ac + 1, ac - 1);
+	if (print_wrong(path, av + 1, ac - 1))
+		return (-1);
 	if (arg_bonus(ac - 1, av + 1))
 		return (cub3D(settings, BONUS));
 	return (cub3D(settings, NONE));
