@@ -57,10 +57,10 @@ all: $(addprefix $(SHDIR)/, $(SCRIPT)) $(addprefix $(LIBDIR)/, $(LIB)) $(NAME)
 $(addprefix $(LIBDIR)/, $(LIB)): $(addprefix $(EXTDIR)/, $(EXT))
 	@(sh $(SHDIR)/ext.sh .)
 
-$(NAME): $(OBJDIR) $(addprefix $(OBJDIR)/, $(OBJ))
+$(NAME): $(addprefix $(OBJDIR)/, $(OBJ))
 	(echo '\n$(BLU)Compiling [$(BLD)$@$(NRM)$(BLU)] ...$(NRM)'; gcc $(CFLAGS) $(CFLAGS_2) $^ -o $@)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c $(addprefix $(INCDIR)/, $(INC))
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(addprefix $(INCDIR)/, $(INC)) | $(OBJDIR)
 	(printf '\r$(BLU)Compiling'; gcc $(CFLAGS) -c $< -o $@; printf ' [ $(BLD)'; ls $(OBJDIR) | wc -w | tr -d ' \n'; printf ' $(NRM)$(BLU)/ $(BLD)'; printf $(SRC) | wc -w | tr -d ' \n'; printf ' $(NRM)$(BLU)]$(NRM)')
 
 $(OBJDIR):
