@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3D.h>
+#include <cub3d.h>
 
 char	*ft_strstr(char *haystack, char *needle)
 {

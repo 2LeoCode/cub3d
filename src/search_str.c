@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3D.h>
+#include <cub3d.h>
 
 char	*search_str(char *needle, char **ar, int size, int how)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3D.h>
+#include <cub3d.h>
 
 static void		print_wrong(char *map_path, int ac, char **av)
 {
