@@ -41,13 +41,13 @@ ifeq ("$(OS)", "Darwin")
 else
 ifeq ("$(OS)", "Linux")
 	CFLAGS +=	-lmlx -lXext -lX11
-	GRN =		\x1b[32m
-	RED =		\x1b[31m
-	L_RED =		\x1b[91m
-	L_GRN =		\x1b[92m
-	BLU =		\x1b[34m
-	BLD =		\x1b[1m
-	NRM =		\x1b[0m
+	GRN =		\e[32m
+	RED =		\e[31m
+	L_RED =		\e[91m
+	L_GRN =		\e[92m
+	BLU =		\e[34m
+	BLD =		\e[1m
+	NRM =		\e[0m
 endif
 endif
 
