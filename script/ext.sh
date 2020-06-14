@@ -32,7 +32,7 @@ then
 	echo "Error$NRM$RED: wrong arguments$L_RED\nUsage: sh ext.sh [path_to_cub3d]\n$NRM" >&2
 	exit
 fi
-cd $1 > dev/null 2>&1
+cd $1  2>&1 1> dev/null
 if [ "$?" != 0 ]
 then
 	printf $RED$BLD
