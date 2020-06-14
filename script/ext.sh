@@ -113,7 +113,7 @@ cp get_next_line_utils.c ../../src
 cp get_next_line.h ../../inc
 cd ../..
 
-check=$(ls lib | libmlx.a)
+check=$(ls lib | grep libmlx.a)
 check2=$(ls inc | grep -e mlx_int.h -e mlx.h -e get_next_line.h | wc -w | tr -d ' \n')
 check3=$(ls | grep man)
 
