@@ -13,6 +13,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# define H_NOARG 0
+# define H_HELP 1
+
 # define ER_WPATH 0
 # define ER_OPENF 1
 
