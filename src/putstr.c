@@ -27,7 +27,9 @@ int		ft_fputs(int fd, char *s)
 	int		i;
 
 	i = -1;
-	while (s && s[++i])
+	if (!s)
+		return (ft_fputs(fd, "(null)"));
+	while (s[++i])
 		if (ft_fputc(fd, s[i]) == -1)
 			return (-1);
 	return (i + (i < 0));
@@ -47,7 +49,9 @@ int		ft_putstr(char *s)
 	int		i;
 
 	i = -1;
-	while (s && s[++i])
+	if (!s)
+		return (ft_putstr("(null)"));
+	while (s[++i])
 		ft_putchar(s[i]);
 	return (i + (i < 0));
 }

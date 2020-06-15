@@ -35,25 +35,25 @@ static t_bool	print_wrong(char *map_path, int ac, char **av)
 
 static t_bool	arg_save(int ac, char **av)
 {
-	if (search_str("-save", av + 1, ac - 1, ALL)
-	|| search_str("--save", av + 1, ac - 1, ALL)
-	|| search_str("-s", av + 1, ac - 1, ALL))
+	if (search_str("-save", av, ac, ALL)
+	|| search_str("--save", av, ac, ALL)
+	|| search_str("-s", av, ac, ALL))
 		return (true);
 	return (false);
 }
 
 static t_bool	arg_bonus(int ac, char **av)
 {
-	if (search_str("--bonus", av + 1, ac - 1, ALL)
-	|| search_str("-b", av + 1, ac - 1, ALL))
+	if (search_str("--bonus", av, ac, ALL)
+	|| search_str("-b", av, ac, ALL))
 		return (true);
 	return (false);
 }
 
 static t_bool	arg_help(int ac, char **av)
 {
-	if (search_str("--help", av + 1, ac - 1, ALL)
-	|| search_str("-h", av + 1, ac - 1, ALL))
+	if (search_str("--help", av, ac, ALL)
+	|| search_str("-h", av, ac, ALL))
 		return (true);
 	return (false);
 }
