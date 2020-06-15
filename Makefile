@@ -81,7 +81,7 @@ $(OBJDIR):
 $(MAPDIR):
 	@(mkdir $(MAPDIR))
 
-m: $(MAPDIR)
+m: all
 	@(sh $(SHDIR)/map.sh .)
 
 clean:
