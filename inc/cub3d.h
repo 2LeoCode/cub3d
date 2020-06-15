@@ -81,7 +81,7 @@ int		ft_putstr(char *s);
 
 int		error_wrong_file(int errnum);
 
-int		help(void);
+int		help(int show_msg);
 
 int		cub3D(t_set set, int flags);
 
