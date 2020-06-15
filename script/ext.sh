@@ -93,15 +93,15 @@ fi
 
 if [ "$OS" = "Darwin" ]
 then
-	APT_LIST=$(brew list | grep wget)
+	WGET=$(brew list | grep wget)
 	printf $BLU
-	if [ "$APT_LIST" = "" ]
+	if [ "$WGET" = "" ]
 	then
 		echo "Installing$BLD wget$NRM$BLU ..."
 		brew install wget > /dev/null 2>&1
 	fi
-	APT_LIST=$(brew list | grep git)
-	if [ "$APT_LIST" = "" ]
+	GIT=$(brew list | grep git)
+	if [ "$GIT" = "" ]
 	then
 		printf $BLU
 		echo "Installing$BLD git$NRM$BLU ..."
