@@ -24,6 +24,7 @@ char	*ft_strstr(char *haystack, char *needle)
 			haystack++;
 		while (haystack[i] && needle[i] && (haystack[i] == needle[i]))
 			i++;
+		haystack += (needle[i] != 0);
 	}
 	return ((!needle || needle[i]) ? NULL : haystack);
 }
