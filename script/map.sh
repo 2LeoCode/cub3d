@@ -29,6 +29,7 @@ then
 fi
 
 cd $1 > dev/nul 2>&1
+echo $?
 if [ "$?" != 0 ]
 then
 	printf $RED$BLD
