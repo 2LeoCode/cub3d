@@ -15,14 +15,14 @@
 int		help(void)
 {
 	ft_putstr("Usage: ./Cub3D [options] [map]\n\
-	The map file must be a valid .cub file\n\n\
-	Available options:\n  \
-	-h, --help\t\tShows help message, also ignores any other argument \
-	and does not start the program\n  \
-	-s, --save\t\tSaves the first rendered image at program start in \
-	<capture> folder\n  \
-	-b, --bonus\t\tEnables the bonus part.\n\nReturn values:\n  \
-	0  succes exit\
-	-1 failure exit\n");
+The map file must be a valid .cub file\n\n\
+Available options:\n  \
+-h, --help\t\tShows help message, also ignores any other argument\n\
+\t\t\tand does not start the program\n  \
+-s, --save\t\tSaves the first rendered image at program start in\n\
+\t\t\t<capture> folder\n  \
+-b, --bonus\t\tEnables the bonus part.\n\nReturn values:\n  \
+0  succes exit\n\
+-1 failure exit\n");
 	return (0);
 }
