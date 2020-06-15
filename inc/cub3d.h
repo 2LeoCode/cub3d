@@ -88,4 +88,6 @@ int		cub3D(t_set set, int flags);
 
 int		get_set(int fd, t_set *set);
 
+size_t	ft_strlen(char *s);
+
 #endif
