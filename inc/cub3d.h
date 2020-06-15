@@ -72,6 +72,7 @@ char	*ft_strstr(char *haystack, char *needle);
 
 char	*search_str(char *needle, char **ar, int size, int how);
 
+int		ft_memcmp(void *m1, void *m2, size_t n);
 int		ft_strcmp(char *s1, char *s2);
 
 int		ft_fputc(int fd, char c);
