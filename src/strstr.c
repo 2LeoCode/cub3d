@@ -14,14 +14,16 @@
 
 char	*ft_strstr(char *haystack, char *needle)
 {
+	int		n;
 
-	while (haystack && needle && *haystack && needle[i])
+	n = ft_strlen(needle);
+	while (haystack && needle && *haystack)
 	{
 		while (*haystack && (*haystack - *needle))
 			haystack++;
-		if (!ft_memcmp(haystack, needle, ft_strlen(needle)))
+		if (!ft_memcmp(haystack, needle, n))
 			return (haystack);
-		haystack++;
+		haystack += (*haystack != 0);
 	}
 	return (NULL);
 }
