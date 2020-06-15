@@ -21,10 +21,6 @@ HEAD="mlx.h\
 		mlx_opengl.h\
 		mlx_png.h"
 OS=$(uname)
-APT_LIST=0
-check=0
-check2=0
-check3=0
 
 if [ "$OS" = "Linux" ]
 then
@@ -64,15 +60,19 @@ fi
 cd ext
 if [ "$OS" = "Linux" ]
 then
-	APT_LIST=$((apt list --installed | grep wget) 2> /dev/null)
-	if [ "$APT_LIST" = "" ]
+	touch temp
+	apt list --installed > temp 2> /dev/null
+	WGET=$(grep -o wget temp)
+	GIT=$(grep -o git temp)
+	rm -f temp
+
+	if [ "$WGET" = "" ]
 	then
 		printf $BLU
 		echo "Installing$BLD wget$NRM$BLU ..."
 		sudo apt install wget > /dev/null 2>&1
 	fi
-	APT_LIST=$((apt list --installed | grep git) 2> /dev/null)
-	if [ "$APT_LIST" = "" ]
+	if [ "$GIT" = "" ]
 	then
 		printf $BLU
 		echo "Installing$BLD git$NRM$BLU ..."
