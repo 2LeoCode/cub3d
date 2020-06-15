@@ -13,7 +13,6 @@ DY_TAR=minilibx_mms_20200219_beta.tgz
 A_TAR=minilibx_opengl.tgz
 DY_FOLD=minilibx_mms_20200219
 A_FOLD=minilibx_opengl_20191021
-DY_LIB=libmlx.dylib
 A_LIB=libmlx.a
 HEAD="mlx.h\
 		mlx_int.h\
@@ -116,7 +115,6 @@ then
 	cd $DY_FOLD
 	echo "Compiling [$BLD$DY_LIB$NRM$BLU] ..."
 	make > /dev/null 2>&1
-	cp $DY_LIB ../../lib
 	cp -r man ../..
 	cd ..
 
@@ -151,7 +149,7 @@ then
 	then
 		printf $GRN
 		echo "Successfully compiled [$BLD$GNL$NRM$GRN]"
-		echo "Successfully compiled [$BLD$DY_LIB$NRM$GRN] and [$BLD$A_LIB$NRM$GRN]"
+		echo "Successfully compiled [$BLD$A_LIB$NRM$GRN]"
 		echo "Successfully imported libraries and includes"
 		if [ "$check3" = "man" ]
 		then
