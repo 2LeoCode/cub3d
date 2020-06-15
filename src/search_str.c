@@ -19,6 +19,7 @@ char	*search_str(char *needle, char **ar, int size, int how)
 	while (size--)
 		if ((tmp = ft_strstr(ar[size], needle)) != NULL)
 		{
+			ft_putstr("%s\n%s\n", tmp, ar[size]);
 			if ((how == ANY)
 			|| ((how == ALL) && (tmp == ar[size]) && !ft_strcmp(tmp, needle))
 			|| ((how == BEG) && (tmp == ar[size]))
