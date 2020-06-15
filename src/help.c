@@ -12,10 +12,13 @@
 
 #include <cub3d.h>
 
-int		help(void)
+int		help(int show_msg)
 {
-	ft_putstr("Usage: ./Cub3D [options] [map]\n\
-The map file must be a valid .cub file\n\n\
+	ft_putstr("Usage: ./Cub3D [options] [map]\n");
+	if (show_msg == H_NOARG)
+		ft_putstr("Execute « ./Cub3D --help » for more informations\n")
+	else
+		ft_putstr("The map file must be a valid .cub file\n\n\
 Available options:\n  \
 -h, --help\t\tShows help message, also ignores any other argument\n\
 \t\t\tand does not start the program\n  \

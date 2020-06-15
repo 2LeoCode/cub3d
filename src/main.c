@@ -65,10 +65,10 @@ int				main(int ac, char **av)
 	int		ret;
 	t_set	settings;
 
-	if ((ac < 2) || !(path = search_str(".cub", av + 1, ac - 1, END)))
+	if ((ac < 2) || arg_help(ac - 1, av + 1))
+		return (help((ac < 2) ? H_NOARG : H_HELP));
+	if (!(path = search_str(".cub", av + 1, ac - 1, END)))
 		return (error_wrong_file(ER_WPATH));
-	if (arg_help(ac - 1, av + 1))
-		return (help());
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (error_wrong_file(ER_OPENF));
 	if ((ret = get_set(fd, &settings)) - 0)
