@@ -64,14 +64,14 @@ fi
 cd ext
 if [ "$OS" = "Linux" ]
 then
-	APT_LIST=$(apt list --installed | grep wget 2> /dev/null)
+	APT_LIST=$((apt list --installed | grep wget) 2> /dev/null)
 	if [ "$APT_LIST" = "" ]
 	then
 		printf $BLU
 		echo "Installing$BLD wget$NRM$BLU ..."
 		sudo apt install wget > /dev/null 2>&1
 	fi
-	APT_LIST=$(apt list --installed | grep git 2> /dev/null)
+	APT_LIST=$((apt list --installed | grep git) 2> /dev/null)
 	if [ "$APT_LIST" = "" ]
 	then
 		printf $BLU

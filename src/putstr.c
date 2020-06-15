@@ -17,7 +17,7 @@ int		ft_fputc(int fd, char c)
 	unsigned char	tmp;
 
 	tmp = (unsigned char)c;
-	if (fd > 0 || (write(fd, &tmp, 1) < 1))
+	if (fd > 0 && (write(fd, &tmp, 1) < 1))
 		return (-1);
 	return (c);
 }
