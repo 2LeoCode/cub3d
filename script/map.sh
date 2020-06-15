@@ -28,8 +28,8 @@ then
 	exit
 fi
 
-cd $1 > dev/nul 2>&1
-echo $?
+cd $1 > /dev/null 2>&1
+
 if [ "$?" != 0 ]
 then
 	printf $RED$BLD
@@ -39,27 +39,27 @@ fi
 
 cd map
 touch default.cub
-printf "R 1920 1080\n" > default.cub
-printf "NO ./path_to_the_north_texture\n" > default.cub
-printf "SO ./path_to_the_south_texture\n" > default.cub
-printf "WE ./path_to_the_west_texture\n" > default.cub
-printf "EA ./path_to_the_east_texture\n" > default.cub
-printf "S ./path_to_the_sprite_texture\n" > default.cub
-printf "F 220,100,0\n" > default.cub
-printf "C 225,30,0\n" > default.cub
-printf "        1111111111111111111111111\n" > default.cub
-printf "        1000000000110000000000001\n" > default.cub
-printf "        1011000001110000002000001\n" > default.cub
-printf "        1001000000000000000000001\n" > default.cub
-printf "111111111011000001110000000000001\n" > default.cub
-printf "100000000011000001110111111111111\n" > default.cub
-printf "11110111111111011100000010001    \n" > default.cub
-printf "11110111111111011101010010001    \n" > default.cub
-printf "11000000110101011100000010001    \n" > default.cub
-printf "10002000000000001100000010001    \n" > default.cub
-printf "10000000000000001101010010001    \n" > default.cub
-printf "11000001110101011111011110N0111  \n" > default.cub
-printf "11110111 1110101 101111010001    \n" > default.cub
-printf "11111111 1111111 111111111111    " > default.cub
+printf "R 1920 1080\n\
+NO ./path_to_the_north_texture\n\
+SO ./path_to_the_south_texture\n\
+WE ./path_to_the_west_texture\n\
+EA ./path_to_the_east_texture\n\
+S ./path_to_the_sprite_texture\n\
+F 220,100,0\
+C 225,30,0\n        \
+1111111111111111111111111\n        \
+1000000000110000000000001\n        \
+1011000001110000002000001\n        \
+1001000000000000000000001\n\
+111111111011000001110000000000001\n\
+100000000011000001110111111111111\n\
+11110111111111011100000010001    \n\
+11110111111111011101010010001    \n\
+11000000110101011100000010001    \n\
+10002000000000001100000010001    \n\
+10000000000000001101010010001    \n\
+11000001110101011111011110N0111  \n\
+11110111 1110101 101111010001    \n\
+11111111 1111111 111111111111    " > default.cub
 printf $GRN$BLD
 echo "Cub3D$NRM$GRN: Generated default map"
