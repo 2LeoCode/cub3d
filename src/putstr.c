@@ -28,7 +28,7 @@ int		ft_fputs(int fd, char *s)
 
 	i = -1;
 	while (s && s[++i])
-		if (ft_fputc(fd, s[i - 1]) == -1)
+		if (ft_fputc(fd, s[i]) == -1)
 			return (-1);
 	return (i + (i < 0));
 }
