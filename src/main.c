@@ -15,21 +15,25 @@
 static t_bool	print_wrong(char *map_path, int ac, char **av)
 {
 	t_bool	wrong;
-	
+	int		i;
+
+	i = -1;
 	wrong = false;
-	while (ac--)
-		if (ft_strcmp(map_path, av[ac]) && ft_strcmp("-save", av[ac])
-		&& ft_strcmp("--save", av[ac]) && ft_strcmp("-s", av[ac])
-		&& ft_strcmp("--bonus", av[ac]) && ft_strcmp("-b", av[ac])
-		&& ft_strcmp("--help", av[ac]) && ft_strcmp("-h", av[ac]))
+	while (++i < ac)
+		if (ft_strcmp(map_path, av[i]) && ft_strcmp("-save", av[i])
+		&& ft_strcmp("--save", av[i]) && ft_strcmp("-s", av[i])
+		&& ft_strcmp("--bonus", av[i]) && ft_strcmp("-b", av[i])
+		&& ft_strcmp("--help", av[i]) && ft_strcmp("-h", av[i]))
 		{
 			wrong = true;
 			ft_fputs(_stderr, "Cub3D: invalid option -- '");
 			while (*av[ac] == '-')
 				av[ac]++;
 			ft_fputs(_stderr, av[ac]);
-			ft_fputs(_stderr, "'\nUse --help for help\n");
+			ft_fputs("'\n");
 		}
+	if (wrong)
+		ft_fputs(_stderr, "Use --help for help\n");
 	return (wrong);
 }
 
