@@ -120,7 +120,7 @@ size_t				ft_strlen(char *s);
 t_bool				ft_isdigit(int c);
 t_bool				ft_isspace(int c);
 
-char				*ft_strchr(char *s, int c)
+char				*ft_strchr(char *s, int c);
 
 int					ft_atoi(char *s);
 #endif
