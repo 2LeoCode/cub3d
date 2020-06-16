@@ -60,8 +60,9 @@ A valid .cub map file must be formatted like this:\n\
 <n><s>F <s>[floor color R]<s>,<s>[floor color G]<s>,<s>[floor color B]\n\
 <n><s>C <s>[ceiling color R]<s>,<s>[ceiling color G]<s>,<s>[ceiling color B]\n\
 <n>[map view from top]<n>\n  0:\t\tfloor\n  1:\t\twall\n  2:\t\tentity\n  \
-N/S/W/E:\tUser spawn point and looking direction\n  Example:\n  \
-1111111\n  1020001\n  1001N01\n  1001021\n  1111111\n\
+N/S/W/E:\tUser spawn point and looking direction\n\
+You must surround the map by 1\n\n  Example:\n  \
+1111111\n  1020001\n  1001N01\n  1001021\n  1111111\n\n\
 <s>: arbitrary number of spaces\n\
 <n>: arbitrary number of new lines\n\n\
 Example: default map file: [default.cub]\n\
@@ -89,9 +90,9 @@ C 225,30,0\n        \
 11111111 1111111 111111111111    \n\n\
 The order of the parameters at the beggining does not matter,\n\
 for example this is a valid .cub file configuration:\n\
-R 800 600\n\
 S ./path_to_sprite_texture\n\
 WE ./path_to_west_texture\n\
+R 800 600\n\
 NO ./path_to_north_texture\n\
 C 225,30,0\n\
 EA ./path_to_east_texture\n\
