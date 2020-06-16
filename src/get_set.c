@@ -12,16 +12,16 @@
 
 #include <cub3d.h>
 
-int		get_res(char *line, t_set *set, t_bool *check)
+static int		get_res(char *line, t_set *set, t_bool *check)
 {
 	if (check[C_X] || check[C_Y])
 		return (error_wrong_file(ER_DOUBL));
 	line++;
-	while ((*line < '0') || (*line > '9'))
+	while (ft_isspace(*line))
 		line++;
 	set->X = ft_atoi(line);
 	check[C_X] = true;
-	while ((*line >= '0') && (*line <= '9'))
+	while (ft_isdigit(*line))
 		line++;
 	while (ft_isspace(*line))
 		line++;
@@ -36,14 +36,16 @@ int		get_res(char *line, t_set *set, t_bool *check)
 	return (0);
 }
 
-int		get_set(int fd, t_set *set)
+int			get_set(int fd, t_set *set)
 {
-	int		i;
+	(void)fd;
+	(void)set
+	return (0);
+	/*int		i;
 	t_bool	check[NB_PARAMS];
 	char	*line;
 	t_bool	total;
 
-	return (0);
 	i = -1;
 	total = false;
 	while (++i < NB_PARAMS)
@@ -70,5 +72,5 @@ int		get_set(int fd, t_set *set)
 		if ((i = get_next_line(fd, &line) < 0))
 			return (error_wrong_file(ER_READF));
 	}
-	return (total ? get_chunks(fd, set) : error_wrong_file(ER_MISSI));
+	return (total ? get_chunks(fd, set) : error_wrong_file(ER_MISSI));*/
 }

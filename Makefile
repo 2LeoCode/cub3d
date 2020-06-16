@@ -32,7 +32,10 @@ SRC =		main.c\
 			search_str.c\
 			strcmp.c\
 			strstr.c\
-			strlen.c
+			strlen.c\
+			isascii.c\
+			strchr.c\
+			atoi.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\

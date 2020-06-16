@@ -48,6 +48,8 @@
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
+# include <limits.h>
+# include <math.h>
 # include <get_next_line.h>
 # include <mlx.h>
 # include <mlx_int.h>
@@ -115,7 +117,10 @@ int					get_set(int fd, t_set *set);
 
 size_t				ft_strlen(char *s);
 
+t_bool				ft_isdigit(int c);
 t_bool				ft_isspace(int c);
 
 char				*ft_strchr(char *s, int c)
+
+int					ft_atoi(char *s);
 #endif
