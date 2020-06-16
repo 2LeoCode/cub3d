@@ -30,7 +30,7 @@ static t_bool	print_wrong(char *map_path, int ac, char **av)
 			while (*av[ac] == '-')
 				av[ac]++;
 			ft_fputs(_stderr, av[ac]);
-			ft_fputs("'\n");
+			ft_fputs(_stderr, "'\n");
 		}
 	if (wrong)
 		ft_fputs(_stderr, "Use --help for help\n");
