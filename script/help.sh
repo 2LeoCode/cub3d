@@ -43,7 +43,6 @@ then
 fi
 cd data
 
-touch help.txt
 printf "The map file must be a valid .cub file\n\n\
 Available options:\n  \
 -h, --help\t\tShows help message, also ignores any other argument\n\
@@ -100,5 +99,5 @@ F 220,100,0\n\
 SO ./path_to_south_texture\n\n\
 Return values:\n  \
 0  succes exit\n \
--1  failure exit\n" > help.sh
+-1  failure exit\n" > help.txt
 cd ..

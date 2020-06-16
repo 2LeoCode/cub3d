@@ -38,7 +38,6 @@ then
 fi
 
 cd map
-touch default.cub
 printf "R 800 600\n\
 NO ./assets/default_north_texture.png\n\
 SO ./assets/default_south_texture.png\n\
