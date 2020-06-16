@@ -68,11 +68,11 @@ int				main(int ac, char **av)
 	if ((ac < 2) || arg_help(ac - 1, av + 1))
 		return (help((ac < 2) ? H_NOARG : H_HELP));
 	if (!(path = search_str(".cub", av + 1, ac - 1, END)))
-		return (error_wrong_file(ER_WPATH));
+		return (error_wrong_map(ER_WPATH));
 	if ((fd = open(path, O_RDONLY)) < 0)
-		return (error_wrong_file(ER_OPENF));
+		return (error_wrong_map(ER_OPENF));
 	if ((ret = get_set(fd, &settings)) - 0)
-		return (error_wrong_file(ret));
+		return (error_wrong_map(ret));
 	if (arg_save(ac - 1, av + 1))
 	{
 		if (arg_bonus(ac - 1, av + 1))

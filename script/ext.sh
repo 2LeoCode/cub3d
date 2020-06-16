@@ -148,7 +148,7 @@ then
 	if [ "$check2" = "3" ]
 	then
 		printf $GRN
-		echo "Successfully compiled [$BLD$GNL$NRM$GRN]"
+		echo "Successfully downloaded [$BLD$GNL$NRM$GRN]"
 		echo "Successfully compiled [$BLD$A_LIB$NRM$GRN]"
 		echo "Successfully imported libraries and includes"
 		if [ "$check3" = "man" ]

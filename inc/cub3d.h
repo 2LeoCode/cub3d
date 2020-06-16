@@ -110,7 +110,7 @@ int					ft_fputs(int fd, char *s);
 int					ft_putchar(char c);
 int					ft_putstr(char *s);
 
-int					error_wrong_file(int errnum);
+int					error_wrong_map(int errnum);
 char				*error_s(int errnum);
 
 int					help(int show_msg);

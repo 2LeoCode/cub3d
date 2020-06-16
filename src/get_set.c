@@ -55,7 +55,7 @@ int			get_set(int fd, t_set *set)
 	if (!i)
 	{
 		free(line);
-		return (error_wrong_file(ER_MISSI));
+		return (error_wrong_map(ER_MISSI));
 	}
 	while (i > 0)
 	{
@@ -70,7 +70,7 @@ int			get_set(int fd, t_set *set)
 		if ((total = is_check(check, NB_PARAMS)) == true)
 			break ;
 		if ((i = get_next_line(fd, &line) < 0))
-			return (error_wrong_file(ER_READF));
+			return (error_wrong_map(ER_READF));
 	}
-	return (total ? get_chunks(fd, set) : error_wrong_file(ER_MISSI));*/
+	return (total ? get_chunks(fd, set) : error_wrong_map(ER_MISSI));*/
 }
