@@ -12,7 +12,7 @@
 
 #include <cub3d.h>
 
-static int		get_res(char *line, t_set *set, t_bool *check)
+/*static int		get_res(char *line, t_set *set, t_bool *check)
 {
 	if (check[C_X] || check[C_Y])
 		return (error_wrong_file(ER_DOUBL));
@@ -34,7 +34,7 @@ static int		get_res(char *line, t_set *set, t_bool *check)
 	if (set->Y > 1080)
 		set->X = 1080;
 	return (0);
-}
+}*/
 
 int			get_set(int fd, t_set *set)
 {
