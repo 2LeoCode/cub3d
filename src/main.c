@@ -27,8 +27,8 @@ static t_bool	print_wrong(char *map_path, int ac, char **av)
 		{
 			wrong = true;
 			ft_fputs(_stderr, "Cub3D: invalid option -- '");
-			while (*av[ac] == '-')
-				av[ac]++;
+			while (*av[i] == '-')
+				av[i]++;
 			ft_fputs(_stderr, av[i]);
 			ft_fputs(_stderr, "'\n");
 		}
