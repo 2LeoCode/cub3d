@@ -67,6 +67,8 @@ int				main(int ac, char **av)
 
 	if ((ac < 2) || arg_help(ac - 1, av + 1))
 		return (help((ac < 2) ? H_NOARG : H_HELP));
+	if (print_wrong(path, ac - 1, av + 1))
+		return (-1);
 	if (!(path = search_str(".cub", av + 1, ac - 1, END)))
 		return (error_wrong_map(ER_WPATH));
 	if ((fd = open(path, O_RDONLY)) < 0)
@@ -79,8 +81,6 @@ int				main(int ac, char **av)
 			return (cub3D(settings, SAVE | BONUS));
 		return (cub3D(settings, SAVE));
 	}
-	if (print_wrong(path, ac - 1, av + 1))
-		return (-1);
 	if (arg_bonus(ac - 1, av + 1))
 		return (cub3D(settings, BONUS));
 	return (cub3D(settings, NONE));
