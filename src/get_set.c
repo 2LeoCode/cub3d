@@ -39,7 +39,7 @@ static int		get_res(char *line, t_set *set, t_bool *check)
 int			get_set(int fd, t_set *set)
 {
 	(void)fd;
-	(void)set
+	(void)set;
 	return (0);
 	/*int		i;
 	t_bool	check[NB_PARAMS];
