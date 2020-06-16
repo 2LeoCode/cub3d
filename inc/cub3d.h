@@ -44,12 +44,15 @@
 # define C_F 6
 # define C_C 7
 
+# define BUFFER_GET_FILE 32
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
+# include <errno.h>
 # include <get_next_line.h>
 # include <mlx.h>
 # include <mlx_int.h>
@@ -108,6 +111,7 @@ int					ft_putchar(char c);
 int					ft_putstr(char *s);
 
 int					error_wrong_file(int errnum);
+char				*error_s(int errnum);
 
 int					help(int show_msg);
 
@@ -123,4 +127,7 @@ t_bool				ft_isspace(int c);
 char				*ft_strchr(char *s, int c);
 
 int					ft_atoi(char *s);
+
+char				*get_file(char *path);
+int					file_size(char *path);
 #endif

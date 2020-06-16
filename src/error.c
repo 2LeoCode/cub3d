@@ -12,7 +12,15 @@
 
 #include <cub3d.h>
 
-int		error_wrong_file(int errnum)
+char	*error_s(int errnum)
+{
+	ft_fputs(_stderr, "Error\nCub3D: ");
+	ft_fputs(_stderr, strerror(errnum));
+	ft_fputc(_stderr, '\n');
+	return (NULL);
+}
+
+int		error_wrong_map(int errnum)
 {
 	ft_fputs(_stderr, "Error\n");
 	if (errnum == ER_WPATH)

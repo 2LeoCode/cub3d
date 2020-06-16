@@ -35,7 +35,8 @@ SRC =		main.c\
 			strlen.c\
 			isascii.c\
 			strchr.c\
-			atoi.c
+			atoi.c\
+			get_file.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\
@@ -68,7 +69,7 @@ ifeq ("$(OS)", "Linux")
 endif
 
 all: $(addprefix $(SHDIR)/, $(SCRIPT)) $(MAPDIR) $(addprefix $(LIBDIR)/, $(LIB)) $(NAME)
-	@(echo '$(GRN)$(BLD)$(NAME)$(NRM)$(GRN) is up to date.$(NRM)')
+	@(sh $(SHDIR)/help.sh .; echo '$(GRN)$(BLD)$(NAME)$(NRM)$(GRN) is up to date.$(NRM)')
 
 $(addprefix $(LIBDIR)/, $(LIB)): $(addprefix $(EXTDIR)/, $(EXT))
 	@(sh $(SHDIR)/ext.sh .)

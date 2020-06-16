@@ -61,5 +61,6 @@ C 225,30,0\n        \
 11000001110101011111011110N0111  \n\
 11110111 1110101 101111010001    \n\
 11111111 1111111 111111111111    " > default.cub
+cd ..
 printf $GRN$BLD
 echo "Cub3D$NRM$GRN: Generated default map"
