@@ -43,6 +43,7 @@ int		get_set(int fd, t_set *set)
 	char	*line;
 	t_bool	total;
 
+	return (0);
 	i = -1;
 	total = false;
 	while (++i < NB_PARAMS)
