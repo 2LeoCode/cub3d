@@ -47,7 +47,6 @@ SRC =		main.c\
 			get_chunks_utils.c\
 			lst_chunk.c\
 			lst_line.c\
-			#test
 			test_functions.c\
 			str_isspace.c
 OBJ =		$(SRC:.c=.o)
