@@ -47,7 +47,7 @@ static int	get_path_2(char *line, t_set *set, int ch)
 	while (ft_isspace(*line))
 		line++;
 	if (*line)
-		return (error_wrong_map(ER_WRPTH));
+		return (error_wrong_map(ER_WPATH));
 	*tmp[1] = 0;
 	if (get_path_3(tmp[0], set, ch))
 		return (-1);
@@ -57,7 +57,6 @@ static int	get_path_2(char *line, t_set *set, int ch)
 int			get_path(char *line, t_set *set, t_bool *check)
 {
 	int		ch;
-	int		fd;
 
 	if (!ft_memcmp(line, "NO", 2))
 		ch = C_NO;

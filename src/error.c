@@ -58,7 +58,7 @@ Use --help to see how a valid .cub file is formatted");
 	else if (errnum == ER_WRRES)
 		ft_fputs(_stderr, "Wrong resolution\n\
 Use --help to see how a valid .cub file is formatted");
-	else if (errnum == ER_WRRES | WARNING)
+	else if (errnum == (ER_WRRES | WARNING))
 		ft_fputs(_stderr, "Too low/high resolution (must be between \
 [50 x 50] and [1980 x 1080]), the resolution is set to 800 x 600\n");
 	else if (errnum == ER_UNKNW)

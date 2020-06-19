@@ -37,19 +37,19 @@ static int		get_one_chunk_4(t_chunk *last, char **lines, t_coord *pos)
 	return (ret);
 }
 
-static t_chunk	*get_one_chunk_3(t_set *set)
+static t_chunk	*get_one_chunk_3(t_set *set, int x, int y);
 {
 	t_chunk		*last;
 
 	if (!set->chunks)
 	{
-		if (!(set->chunks = lst_chunk_new(pos.X, pos.Y)))
+		if (!(set->chunks = lst_chunk_new(x, y)))
 			return (NULL);
 		last = set->chunks;
 	}
 	else
 	{
-		if (!(last = lst_chunk_new(pos.X, pos.Y)))
+		if (!(last = lst_chunk_new(x, y)))
 		{
 			lst_chunk_clr(&set->chunks);
 			return (NULL);

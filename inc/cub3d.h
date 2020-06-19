@@ -176,6 +176,7 @@ void				lst_chunk_clr(t_chunk **lst);
 t_chunk				*lst_chunk_last(t_chunk *lst);
 t_chunk				*lst_chunk_new(int x, int y);
 
+void				get_next_line_end(int fd, char **line);
 
 /*
 ** test

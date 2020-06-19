@@ -29,7 +29,7 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 		return (error_wrong_map(ER_WRRES));
 	while (ft_isspace(*line))
 		line++;
-	set->Y = ft_atoi(line);
+	set->Y = ft_atoi(*line);
 	while (ft_isdigit(*line))
 		line++;
 	while (ft_isspace(*line))
@@ -99,9 +99,9 @@ int			get_set(int fd, t_set *set)
 		i = 0;
 		while (ft_isspace(line[i]))
 			i++;
-		if (line[i] == 'R' && get_res(&line[i], set, check)
-		|| (line[i] == 'F' || line[i] == 'C' && get_rgb(&line[i], set, check))
-		|| (line[i] && get_path(&line[i], set, check))
+		if (((line[i] == 'R') && get_res(&line[i], set, check))
+		|| ((ft_strchr("FC", line[i])) && get_rgb(&line[i], set, check))
+		|| (line[i] && get_path(&line[i], set, check)))
 			return (-1);
 		free(line);
 		if (!i || (total = is_check(check, NB_PARAMS)) == true)

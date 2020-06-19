@@ -15,7 +15,8 @@
 static int	g_prev_len;
 static int	g_prev_start;
 
-static int		is_map_wall_2(char *line, int *pos, int len, int is_spawn_set)
+static int		is_map_wall_2(char *line, int *pos, int len,
+t_bool *is_spawn_set)
 {
 	int		tmp;
 
@@ -23,9 +24,9 @@ static int		is_map_wall_2(char *line, int *pos, int len, int is_spawn_set)
 		return (0);
 	if (ft_strchr("NOSE", line[*pos]))
 	{
-		if (is_spawn_set)
+		if (*is_spawn_set)
 			return (1);
-		is_spawn_set = true;
+		*is_spawn_set = true;
 	}
 	tmp = *pos;
 	while (line[*pos] == '1')
@@ -66,8 +67,9 @@ static t_bool	is_map_wall(char *line, int start, int len)
 		return (line[i] ? false : true);
 	}
 	while (++i < len)
-		if ((ret = is_map_wall_2(line, &i, len)) + 1)
+		if ((ret = is_map_wall_2(line, &i, len, &is_spawn_set)) + 1)
 			return (ret);
+	return (false);
 }
 
 static int		get_chunks_3(t_set *set, t_line **map)
@@ -113,10 +115,8 @@ static int		get_chunks_2(int fd, t_set *set, t_line *map)
 int				get_chunks(int fd, t_set *set)
 {
 	char	*line;
-	int		tmp;
 	int		ret;
 	t_line	*map;
-	t_line	*begin;
 
 	if ((ret = get_next_line(fd, &line) < 0))
 		return (error_wrong_map(ER_READF));

@@ -28,7 +28,7 @@ t_bool	are_chunk_lines_null(char **lines)
 
 	i = -1;
 	while (++i < CHUNK_SIZE)
-		if (line[i])
+		if (lines[i])
 			return (false);
 	return (true);
 }

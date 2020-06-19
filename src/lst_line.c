@@ -45,7 +45,7 @@ t_line	*lst_line_new(char *content)
 {
 	t_line	*tmp;
 
-	if (!(tmp = malloc(sizeof(t_line)))
+	if (!(tmp = malloc(sizeof(t_line))))
 		return (NULL);
 	tmp->line = content;
 	tmp->next = NULL;
