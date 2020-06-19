@@ -24,6 +24,7 @@ MAPDIR =	map
 SRC =		main.c\
 			get_next_line.c\
 			get_next_line_utils.c\
+			get_next_line_end.c\
 			cub3d.c\
 			error.c\
 			get_set.c\
