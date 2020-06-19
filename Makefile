@@ -38,7 +38,6 @@ SRC =		main.c\
 			atoi.c\
 			get_file.c\
 			clear.c\
-			get_set.c\
 			get_path.c\
 			error_2.c\
 			strdup.c\
