@@ -14,7 +14,7 @@
 
 int		cub3D(t_set set, int flags)
 {
-	(void)set;
 	(void)flags;
+	display_chunks(set.chunks);
 	return (0);
 }
