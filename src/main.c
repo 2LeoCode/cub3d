@@ -12,29 +12,14 @@
 
 #include <cub3d.h>
 
-static t_bool	print_wrong(char *map_path, int ac, char **av)
+static void		init_set(t_set *set)
 {
-	t_bool	wrong;
-	int		i;
-
-	i = -1;
-	wrong = false;
-	while (++i < ac)
-		if (ft_strcmp(map_path, av[i]) && ft_strcmp("-save", av[i])
-		&& ft_strcmp("--save", av[i]) && ft_strcmp("-s", av[i])
-		&& ft_strcmp("--bonus", av[i]) && ft_strcmp("-b", av[i])
-		&& ft_strcmp("--help", av[i]) && ft_strcmp("-h", av[i]))
-		{
-			wrong = true;
-			ft_fputs(_stderr, "Cub3D: invalid option -- '");
-			while (*av[i] == '-')
-				av[i]++;
-			ft_fputs(_stderr, av[i]);
-			ft_fputs(_stderr, "'\n");
-		}
-	if (wrong)
-		ft_fputs(_stderr, "Use --help for help\n");
-	return (wrong);
+	set->chunks = NULL;
+	set->NO = NULL;
+	set->SO = NULL;
+	set->WE = NULL;
+	set->EA = NULL;
+	set->S = NULL;
 }
 
 static t_bool	arg_save(int ac, char **av)
@@ -69,6 +54,7 @@ int				main(int ac, char **av)
 	int		ret;
 	t_set	settings;
 
+	init_set(&settings);
 	if ((ac < 2) || arg_help(ac - 1, av + 1))
 		return (help((ac < 2) ? H_NOARG : H_HELP));
 	if (!(path = search_str(".cub", av + 1, ac - 1, END)))

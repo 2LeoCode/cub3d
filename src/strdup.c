@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isascii.c                                          :+:      :+:    :+:   */
+/*   strdup.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/16 13:29:16 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/16 13:29:16 by lsuardi          ###   ########.fr       */
+/*   Created: 2020/06/16 22:58:38 by lsuardi           #+#    #+#             */
+/*   Updated: 2020/06/16 22:58:38 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-t_bool	ft_isspace(int c)
+char	*ft_strdup(char *s)
 {
-	return (ft_strchr(" \n\t\r\f\v", c) ? true : false);
-}
+	char	*tmp;
+	size_t	len;
 
-t_bool	ft_isalpha(int c)
-{
-	return (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
-}
-
-t_bool	ft_isdigit(int c)
-{
-	return ((c >= '0') && (c <= '9'));
+	len = ft_strlen(s);
+	if (!(tmp = (char*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	while (*s)
+		*(tmp++) = *(s++);
+	*tmp = 0;
+	return (tmp - len);
 }

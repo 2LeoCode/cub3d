@@ -16,12 +16,18 @@
 # define H_NOARG 0
 # define H_HELP 1
 
-# define ER_WPATH 0
-# define ER_OPENF 1
-# define ER_MISSI 2
-# define ER_READF 3
-# define ER_DOUBL 4
-# define ER_WRRES 5
+# define ER_DEFLT 0
+# define ER_WPATH 1
+# define ER_OPENF 2
+# define ER_MISSI 3
+# define ER_READF 4
+# define ER_DOUBL 5
+# define ER_WRRES 6
+# define ER_UNKNW 7
+# define ER_WRRGB 8
+# define ER_WRMAP 9
+# define ER_COUNT 10
+# define WARNING 20
 
 # define NONE 0
 # define SAVE 1
@@ -34,7 +40,10 @@
 
 # define CHUNK_SIZE 4
 
-# define NB_PARAMS 8
+# define ANY_START -1
+# define MAP_CHRST "012NOSE"
+
+# define NB_PARAMS 9
 # define C_X 0
 # define C_Y 1
 # define C_NO 2
@@ -43,6 +52,7 @@
 # define C_EA 5
 # define C_F 6
 # define C_C 7
+# define C_S 8
 
 # define BUFFER_GET_FILE 32
 
@@ -57,11 +67,11 @@
 # include <mlx.h>
 # include <mlx_int.h>
 
-typedef enum	e_bool
+typedef enum		e_bool
 {
 	false,
 	true
-}				t_bool;
+}					t_bool;
 
 typedef enum		e_std
 {
@@ -77,9 +87,20 @@ typedef struct		s_rgb
 	int				B;
 }					t_rgb;
 
+typedef struct		s_coord
+{
+	int				X;
+	int				Y;
+}					t_coord;
+
+typedef struct		s_line
+{
+	char			*line;
+	struct s_line	*next;
+}					t_line;
 typedef struct		s_chunk
 {
-	char			chunk[(CHUNK_SIZE * CHUNK_SIZE) + 1];
+	char			chunk[CHUNK_SIZE * CHUNK_SIZE + 1];
 	int				x;
 	int				y;
 	struct s_chunk	*next;
@@ -110,19 +131,32 @@ int					ft_fputs(int fd, char *s);
 int					ft_putchar(char c);
 int					ft_putstr(char *s);
 
+t_bool				print_wrong(char *map_path, int ac, char **av);
+int					error_wrong_file(char *path);
 int					error_wrong_map(int errnum);
 char				*error_s(int errnum);
+
+void				clear_set(t_set *set, t_bool *active);
 
 int					help(int show_msg);
 
 int					cub3D(t_set set, int flags);
 
+
+void				fill_chunk_end(char *chunk, int startX, int startY);
+t_bool				are_chunk_lines_null(char **lines);
+int					get_one_chunk(t_set *set, t_line **map);
+int					get_chunks(int fd, t_set *set);
+int					get_path(char *line, t_set *set, t_bool *check)
 int					get_set(int fd, t_set *set);
 
 size_t				ft_strlen(char *s);
 
+t_bool				str_isspace(char *s);
+
 t_bool				ft_isdigit(int c);
 t_bool				ft_isspace(int c);
+t_bool				ft_isalpha(int c);
 
 char				*ft_strchr(char *s, int c);
 
@@ -130,4 +164,22 @@ int					ft_atoi(char *s);
 
 char				*get_file(char *path);
 int					file_size(char *path);
+
+char				*ft_strdup(char *s);
+
+t_line				*lst_line_new(char *content);
+int					lst_line_addback(t_line **lst, char *content);
+t_line				*lst_line_last(t_line *lst);
+void				lst_line_clr(t_line **lst);
+
+void				lst_chunk_clr(t_chunk **lst);
+t_chunk				*lst_chunk_last(t_chunk *lst);
+t_chunk				*lst_chunk_new(int x, int y);
+
+
+/*
+** test
+*/
+
+void				display_chunks(t_chunk *chunk);
 #endif

@@ -12,36 +12,78 @@
 
 #include <cub3d.h>
 
-/*static int		get_res(char *line, t_set *set, t_bool *check)
+static int	get_res(char *line, t_set *set, t_bool *check)
 {
 	if (check[C_X] || check[C_Y])
-		return (error_wrong_file(ER_DOUBL));
+		return (error_wrong_map(ER_DOUBL));
 	line++;
+	if (*line && !ft_isspace(*line))
+		return (error_wrong_map(ER_WRRES));
 	while (ft_isspace(*line))
 		line++;
 	set->X = ft_atoi(line);
 	check[C_X] = true;
 	while (ft_isdigit(*line))
 		line++;
+	if (*line && !ft_isspace(*line))
+		return (error_wrong_map(ER_WRRES));
 	while (ft_isspace(*line))
 		line++;
 	set->Y = ft_atoi(line);
+	while (ft_isdigit(*line))
+		line++;
+	while (ft_isspace(*line))
+		line++;
+	if (*line)
+		return (error_wrong_map(ER_WRRES));
 	check[C_Y] = true;
-	if (set->X < 50 || set->Y < 50)
-		return (error_wrong_file(ER_WRRES));
-	if (set->X > 1920)
-		set->X = 1920;
-	if (set->Y > 1080)
-		set->X = 1080;
+	if ((set->X < 50) || (set->Y < 50) || (set->X > 1980) || (set->Y > 1080))
+	{
+		error_wrong_map(ER_WRRES | WARNING);
+		set->X = 800;
+		set->Y = 600;
+	}
 	return (0);
-}*/
+}
+
+static int	get_single_rgb(char **line, int *col)
+{
+	while (ft_isspace(**line))
+		(*line)++;
+	if (**line && !ft_isdigit(**line))
+		return (-1);
+	*col = ft_atoi(line);
+	while (ft_isdigit(**line))
+		(*line)++;
+	while (ft_isspace(**line))
+		(*line)++;
+	return (0);
+}
+
+static int	get_rgb(char *line, t_set *set, t_bool *check)
+{
+	t_rgb	*tmp;
+
+	if ((*line == 'F' && check[C_F]) || (*line == 'C' && check[C_C])) 
+		return (error_wrong_map(ER_DOUBL));
+	if (*line == 'F')
+		tmp = &set->F;
+	else if (*line == 'C')
+		tmp = &set->C;
+	line++;
+	if (!ft_isspace(*line))
+		return (error_wrong_map(ER_UNKNW));
+	if (get_single_rgb(&line, &tmp->R) || (*(line++) - ',')
+	|| get_single_rgb(&line, &tmp->G) || (*(line++) - ',')
+	|| get_single_rgb(&line, &tmp->B) || *line)
+		return (error_wrong_map(ER_WRRGB));
+	check[((tmp == &set->F) ? C_F : C_C)] = true;
+	return (0);
+}
 
 int			get_set(int fd, t_set *set)
 {
-	(void)fd;
-	(void)set;
-	return (0);
-	/*int		i;
+	int		i;
 	t_bool	check[NB_PARAMS];
 	char	*line;
 	t_bool	total;
@@ -52,11 +94,6 @@ int			get_set(int fd, t_set *set)
 		check[i] = 0;
 	if ((i = get_next_line(fd, &line) < 0))
 		return (-1);
-	if (!i)
-	{
-		free(line);
-		return (error_wrong_map(ER_MISSI));
-	}
 	while (i > 0)
 	{
 		i = 0;
@@ -64,13 +101,16 @@ int			get_set(int fd, t_set *set)
 			i++;
 		if (line[i] == 'R' && get_res(&line[i], set, check)
 		|| (line[i] == 'F' || line[i] == 'C' && get_rgb(&line[i], set, check))
-		|| get_path(&line[i], set, check))
+		|| (line[i] && get_path(&line[i], set, check))
 			return (-1);
 		free(line);
-		if ((total = is_check(check, NB_PARAMS)) == true)
+		if (!i || (total = is_check(check, NB_PARAMS)) == true)
 			break ;
 		if ((i = get_next_line(fd, &line) < 0))
 			return (error_wrong_map(ER_READF));
 	}
-	return (total ? get_chunks(fd, set) : error_wrong_map(ER_MISSI));*/
+	if (total)
+		return (get_chunks(fd, set));
+	clear_set(set, check);
+	return (error_wrong_map(ER_MISSI));
 }

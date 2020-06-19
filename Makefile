@@ -36,7 +36,20 @@ SRC =		main.c\
 			isascii.c\
 			strchr.c\
 			atoi.c\
-			get_file.c
+			get_file.c\
+			clear.c\
+			get_set.c\
+			get_path.c\
+			error_2.c\
+			strdup.c\
+			get_chunks.c\
+			get_chunks_2.c\
+			get_chunks_utils.c\
+			lst_chunk.c\
+			lst_line.c\
+			#test
+			test_functions.c\
+			str_isspace.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\

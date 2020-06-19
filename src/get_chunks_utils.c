@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isascii.c                                          :+:      :+:    :+:   */
+/*   get_chunks_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/16 13:29:16 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/16 13:29:16 by lsuardi          ###   ########.fr       */
+/*   Created: 2020/06/18 23:50:49 by lsuardi           #+#    #+#             */
+/*   Updated: 2020/06/18 23:50:49 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-t_bool	ft_isspace(int c)
+void	fill_chunk_end(char *chunk, int startX, int startY)
 {
-	return (ft_strchr(" \n\t\r\f\v", c) ? true : false);
+	int		i;
+
+	i = startY * CHUNK_SIZE + startX - 1;
+	while (++i < (CHUNK_SIZE * CHUNK_SIZE))
+		chunk[i] = ' ';
+	chunk[i] = 0;
 }
 
-t_bool	ft_isalpha(int c)
+t_bool	are_chunk_lines_null(char **lines)
 {
-	return (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
-}
+	int		i;
 
-t_bool	ft_isdigit(int c)
-{
-	return ((c >= '0') && (c <= '9'));
+	i = -1;
+	while (++i < CHUNK_SIZE)
+		if (line[i])
+			return (false);
+	return (true);
 }

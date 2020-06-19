@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isascii.c                                          :+:      :+:    :+:   */
+/*   get_next_line_end.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/16 13:29:16 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/16 13:29:16 by lsuardi          ###   ########.fr       */
+/*   Created: 2020/06/17 23:24:19 by lsuardi           #+#    #+#             */
+/*   Updated: 2020/06/17 23:24:19 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-t_bool	ft_isspace(int c)
+void	get_next_line_end(int fd, char **line)
 {
-	return (ft_strchr(" \n\t\r\f\v", c) ? true : false);
-}
+	int		ret;
 
-t_bool	ft_isalpha(int c)
-{
-	return (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')));
-}
-
-t_bool	ft_isdigit(int c)
-{
-	return ((c >= '0') && (c <= '9'));
+	ret = 1;
+	while (ret)
+	{
+		free(*line);
+		ret = get_next_line(fd, line);
+	}
+	close(fd);
+	free(*line);
+	*line = NULL;
 }
