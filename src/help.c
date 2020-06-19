@@ -24,6 +24,7 @@ int		help(int show_msg)
 		if (!(help = get_file("data/help.txt")))
 			return (-1);
 		ft_putstr(help);
+		free(help);
 	}
 	return (0);
 }

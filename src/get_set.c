@@ -12,6 +12,17 @@
 
 #include <cub3d.h>
 
+static t_bool	is_check(t_bool *check)
+{
+	int		i;
+
+	i = -1;
+	while (++i < NB_PARAMS)
+		if (!check[i])
+			return (false);
+	return (true);
+}
+
 static int	get_res(char *line, t_set *set, t_bool *check)
 {
 	if (check[C_X] || check[C_Y])
@@ -29,7 +40,7 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 		return (error_wrong_map(ER_WRRES));
 	while (ft_isspace(*line))
 		line++;
-	set->Y = ft_atoi(*line);
+	set->Y = ft_atoi(line);
 	while (ft_isdigit(*line))
 		line++;
 	while (ft_isspace(*line))
@@ -104,7 +115,7 @@ int			get_set(int fd, t_set *set)
 		|| (line[i] && get_path(&line[i], set, check)))
 			return (-1);
 		free(line);
-		if (!i || (total = is_check(check, NB_PARAMS)) == true)
+		if (!i || (total = is_check(check)) == true)
 			break ;
 		if ((i = get_next_line(fd, &line) < 0))
 			return (error_wrong_map(ER_READF));
