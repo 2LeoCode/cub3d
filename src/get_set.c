@@ -92,7 +92,7 @@ static int	get_rgb(char *line, t_set *set, t_bool *check)
 	return (0);
 }
 
-int			get_set(int fd, t_set *set, char *path)
+int			get_set(int fd, t_set *set)
 {
 	int		i;
 	t_bool	check[NB_PARAMS];

@@ -61,7 +61,7 @@ int				main(int ac, char **av)
 		return (error_wrong_map(ER_WPATH));
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (error_wrong_map(ER_OPENF));
-	if ((ret = get_set(fd, &settings, path)) - 0)
+	if ((ret = get_set(fd, &settings)) - 0)
 	{
 		clear_set(&settings);
 		return (error_wrong_map(ret));

@@ -142,7 +142,7 @@ t_bool				are_chunk_lines_null(char **lines);
 int					get_one_chunk(t_set *set, t_line **map);
 int					get_chunks(int fd, t_set *set);
 int					get_path(char *line, t_set *set, t_bool *check);
-int					get_set(int fd, t_set *set, char *path);
+int					get_set(int fd, t_set *set);
 
 size_t				ft_strlen(char *s);
 
