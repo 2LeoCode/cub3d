@@ -41,9 +41,9 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 	while (ft_isspace(*line))
 		line++;
 	set->Y = ft_atoi(line);
-	while (ft_isdigit(*line))
+	while (*line && ft_isdigit(*line))
 		line++;
-	while (ft_isspace(*line))
+	while (*line && ft_isspace(*line))
 		line++;
 	printf("[%s]\n", line);
 	if (*line)
