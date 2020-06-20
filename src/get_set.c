@@ -63,7 +63,7 @@ static int	get_single_rgb(char **line, int *col)
 		(*line)++;
 	if (**line && !ft_isdigit(**line))
 		return (-1);
-	*col = ft_atoi(line);
+	*col = ft_atoi(*line);
 	while (ft_isdigit(**line))
 		(*line)++;
 	while (ft_isspace(**line))
@@ -92,7 +92,7 @@ static int	get_rgb(char *line, t_set *set, t_bool *check)
 	return (0);
 }
 
-int			get_set(int fd, t_set *set)
+int			get_set(int fd, t_set *set, char *path)
 {
 	int		i;
 	t_bool	check[NB_PARAMS];
@@ -115,13 +115,13 @@ int			get_set(int fd, t_set *set)
 		|| (line[i] && get_path(&line[i], set, check)))
 			return (-1);
 		free(line);
-		if (!i || (total = is_check(check)) == true)
+		if ((total = is_check(check)) == true)
 			break ;
 		if ((i = get_next_line(fd, &line) < 0))
-			return (error_wrong_map(ER_READF));
+			return (ER_READF);
 	}
 	if (total)
-		return (get_chunks(fd, set));
-	clear_set(set, check);
-	return (error_wrong_map(ER_MISSI));
+		return (get_map(fd, set, path));
+	clear_set(set);
+	return (ER_MISSI);
 }

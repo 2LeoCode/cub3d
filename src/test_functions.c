@@ -12,36 +12,14 @@
 
 #include <cub3d.h>
 
-static void	ft_nputstr(char *str, int n)
-{
-	while (str && *str && n--)
-	{
-		write(1, str, 1);
-		str++;
-	}
-}
-
-void	display_chunks(t_chunk *chunk)
+void	display_map(char **map)
 {
 	int		i;
-	int		j;
-	t_chunk	*tmp;
 
-	i = 0;
-	while (chunk)
+	i = -1;
+	while (map[++i])
 	{
-		j = -1;
-		tmp = chunk;
-		while (++j < CHUNK_SIZE)
-		{
-			chunk = tmp;
-			while (chunk && (chunk->y == i))
-			{
-				ft_nputstr(&chunk->chunk[j * CHUNK_SIZE], CHUNK_SIZE);
-				chunk = chunk->next;
-			}
-			ft_putchar('\n');
-		}
-		i++;
+		ft_putstr(map[i]);
+		ft_putchar('\n');
 	}
 }

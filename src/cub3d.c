@@ -12,9 +12,9 @@
 
 #include <cub3d.h>
 
-int		cub3D(t_set set, int flags)
+int		cub3D(t_set *set, int flags)
 {
 	(void)flags;
-	display_chunks(set.chunks);
+	display_map(set.map);
 	return (0);
 }

@@ -24,7 +24,7 @@ static t_bool	is_warning(int errnum)
 {
 	int		i;
 
-	i = 0;
+	i = -1;
 	while ((i < ER_COUNT) && (errnum - (i | WARNING)))
 		i++;
 	return (errnum == (i | WARNING));
@@ -50,28 +50,31 @@ int				error_wrong_map(int errnum)
 [--save] [--bonus] [path_to_map.cub]\n");
 	else if (errnum == ER_MISSI)
 		ft_fputs(_stderr, "Missing parameter(s) in map file\n\
-Use --help to see how a valid .cub file is formatted");
+Use --help for more information\n");
 	else if (errnum == ER_READF)
 		ft_fputs(_stderr, "Failed to read map file\n");
 	else if (errnum == ER_DOUBL)
 		ft_fputs(_stderr, "A parameter is declared 2 times in map file\n");
 	else if (errnum == ER_WRRES)
 		ft_fputs(_stderr, "Wrong resolution\n\
-Use --help to see how a valid .cub file is formatted");
+Use --help for more information\n");
 	else if (errnum == (ER_WRRES | WARNING))
 		ft_fputs(_stderr, "Too low/high resolution (must be between \
 [50 x 50] and [1980 x 1080]), the resolution is set to 800 x 600\n");
 	else if (errnum == ER_UNKNW)
 		ft_fputs(_stderr, "Unknown parameter in map file\n\
-Use --help to see how a valid .cub file is formatted\n");
+Use --help for more information\n");
 	else if (errnum == ER_WRRGB)
 		ft_fputs(_stderr, "Wrong RGB input in map file\n\
-Use --help to see how a valid .cub file is formatted\n");
+Use --help for more information\n");
 	else if (errnum == ER_WRMAP)
 		ft_fputs(_stderr, "Minimap in map file is not valid\n\
-Use --hrlp to see how a valid .cub file is formatted\n");
+Use --help for more information\n");
 	else if (errnum == ER_DEFLT)
 		ft_fputs(_stderr, strerror(errno));
+	else if (errnum == ER_NOSPW)
+		ft_fputs(_stderr, "No spawn point set in map file\n
+Use --help for more information\n");
 	else
 		ft_fputs(_stderr, "An unknown error occured\n");
 	return (-1);

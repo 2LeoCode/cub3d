@@ -12,31 +12,26 @@
 
 #include <cub3d.h>
 
-static char		*index_to_s(int index, t_set *set)
-{
-	if (index == C_NO)
-		return (set->NO);
-	if (index == C_SO)
-		return (set->SO);
-	if (index == C_WE)
-		return (set->WE);
-	if (index == C_EA)
-		return (set->EA);
-	if (index == C_S)
-		return (set->S);
-	return (NULL);
-}
-
-void			clear_set(t_set *set, t_bool *active)
+void	clear_set(t_set *set)
 {
 	int		i;
-	char	*to_free;
 
-	i = -1;
-	while (++i < NB_PARAMS)
-		if (active[i] && ((to_free = index_to_s(i, set)) != NULL))
-		{
-			free(to_free);
-			to_free = NULL;
-		}
+	i = -1;	
+	if (set->NO)
+		free(set->NO);
+	if (set->WE)
+		free(set->WE);
+	if (set->EA)
+		free(set->EA);
+	if (set->SO)
+		free(set->SO);
+	if (set->S)
+		free(set->S);
+	while (set->map[++i])
+	{
+		free(set->map[i]);
+		set->map[i] = NULL;
+	}
+	free(set->map);
+	set->map = NULL;
 }

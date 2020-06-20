@@ -16,7 +16,7 @@
 # define H_NOARG 0
 # define H_HELP 1
 
-# define ER_DEFLT 0
+# define ER_DEFLT -1
 # define ER_WPATH 1
 # define ER_OPENF 2
 # define ER_MISSI 3
@@ -26,7 +26,8 @@
 # define ER_UNKNW 7
 # define ER_WRRGB 8
 # define ER_WRMAP 9
-# define ER_COUNT 10
+# define ER_NOSPW 10
+# define ER_COUNT 11
 # define WARNING 20
 
 # define NONE 0
@@ -98,13 +99,6 @@ typedef struct		s_line
 	char			*line;
 	struct s_line	*next;
 }					t_line;
-typedef struct		s_chunk
-{
-	char			chunk[CHUNK_SIZE * CHUNK_SIZE + 1];
-	int				x;
-	int				y;
-	struct s_chunk	*next;
-}					t_chunk;
 typedef struct		s_set
 {
 	int				X;
@@ -116,7 +110,7 @@ typedef struct		s_set
 	char			*S;
 	t_rgb			F;
 	t_rgb			C;
-	t_chunk			*chunks;
+	char			**map;
 }					t_set;
 
 char				*ft_strstr(char *haystack, char *needle);
@@ -136,11 +130,11 @@ int					error_wrong_file(char *path);
 int					error_wrong_map(int errnum);
 char				*error_s(int errnum);
 
-void				clear_set(t_set *set, t_bool *active);
+void				clear_set(t_set *set);
 
 int					help(int show_msg);
 
-int					cub3D(t_set set, int flags);
+int					cub3D(t_set *set, int flags);
 
 
 void				fill_chunk_end(char *chunk, int startX, int startY);
@@ -148,7 +142,7 @@ t_bool				are_chunk_lines_null(char **lines);
 int					get_one_chunk(t_set *set, t_line **map);
 int					get_chunks(int fd, t_set *set);
 int					get_path(char *line, t_set *set, t_bool *check);
-int					get_set(int fd, t_set *set);
+int					get_set(int fd, t_set *set, char *path);
 
 size_t				ft_strlen(char *s);
 
@@ -177,6 +171,10 @@ t_chunk				*lst_chunk_last(t_chunk *lst);
 t_chunk				*lst_chunk_new(int x, int y);
 
 void				get_next_line_end(int fd, char **line);
+
+t_bool				is_map_wall(char *line);
+int					check_map(t_set *set);
+int					get_map(int fd, t_set *set);
 
 /*
 ** test

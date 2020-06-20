@@ -14,7 +14,7 @@
 
 static void		init_set(t_set *set)
 {
-	set->chunks = NULL;
+	set->map = NULL;
 	set->NO = NULL;
 	set->SO = NULL;
 	set->WE = NULL;
@@ -61,17 +61,20 @@ int				main(int ac, char **av)
 		return (error_wrong_map(ER_WPATH));
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (error_wrong_map(ER_OPENF));
-	if ((ret = get_set(fd, &settings)) - 0)
+	if ((ret = get_set(fd, &settings, path)) - 0)
+	{
+		clear_set(&set);
 		return (error_wrong_map(ret));
+	}
 	if (print_wrong(path, ac - 1, av + 1))
 		return (-1);
 	if (arg_save(ac - 1, av + 1))
 	{
 		if (arg_bonus(ac - 1, av + 1))
-			return (cub3D(settings, SAVE | BONUS));
-		return (cub3D(settings, SAVE));
+			return (cub3D(&settings, SAVE | BONUS));
+		return (cub3D(&settings, SAVE));
 	}
 	if (arg_bonus(ac - 1, av + 1))
-		return (cub3D(settings, BONUS));
-	return (cub3D(settings, NONE));
+		return (cub3D(&settings, BONUS));
+	return (cub3D(&settings, NONE));
 }

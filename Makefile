@@ -42,13 +42,11 @@ SRC =		main.c\
 			get_path.c\
 			error_2.c\
 			strdup.c\
-			get_chunks.c\
-			get_chunks_2.c\
-			get_chunks_utils.c\
-			lst_chunk.c\
 			lst_line.c\
 			test_functions.c\
-			str_isspace.c
+			str_isspace.c\
+			get_map.c\
+			get_map_utils.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\
