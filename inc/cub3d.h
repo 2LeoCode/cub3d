@@ -176,5 +176,7 @@ int					get_map(int fd, t_set *set);
 ** test
 */
 
+# include <stdio.h>
+ 
 void				display_map(char **map);
 #endif

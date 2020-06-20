@@ -27,7 +27,7 @@ void	clear_set(t_set *set)
 		free(set->SO);
 	if (set->S)
 		free(set->S);
-	while (set->map[++i])
+	while (set->map && set->map[++i])
 	{
 		free(set->map[i]);
 		set->map[i] = NULL;

@@ -122,7 +122,8 @@ int			get_set(int fd, t_set *set)
 	}
 	if (total)
 		return (get_map(fd, set));
-	ft_putstr("lol\n");
+	for (i = 0; i < NB_PARAMS; i++)
+		printf("%d\n", check[i]);
 	clear_set(set);
 	return (ER_MISSI);
 }
