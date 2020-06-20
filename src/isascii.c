@@ -14,7 +14,7 @@
 
 t_bool	ft_isspace(int c)
 {
-	return (ft_strchr(" \n\t\r\f\v", c) ? true : false);
+	return ((c && ft_strchr(" \n\t\r\f\v", c)) ? true : false);
 }
 
 t_bool	ft_isalpha(int c)

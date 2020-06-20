@@ -45,7 +45,6 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 		line++;
 	while (*line && ft_isspace(*line))
 		line++;
-	printf("[%s]\n", line);
 	if (*line)
 		return (ER_WRRES);
 	check[C_Y] = true;
