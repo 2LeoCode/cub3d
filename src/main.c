@@ -63,6 +63,7 @@ int				main(int ac, char **av)
 		return (error_wrong_map(ER_OPENF));
 	if ((ret = get_set(fd, &settings)) - 0)
 	{
+		ft_putstr("lol\n");
 		clear_set(&settings);
 		return (error_wrong_map(ret));
 	}
