@@ -103,12 +103,8 @@ int			get_set(int fd, t_set *set)
 	total = false;
 	while (++i < NB_PARAMS)
 		check[i] = 0;
-	if ((i = get_next_line(fd, &line) < 0))
+	if ((i = get_next_line(fd, &line)) < 0)
 		return (-1);
-	printf("%s\n%d\n", line, i);
-	if ((i = get_next_line(fd, &line) < 0))
-		return (-1);
-	printf("%s\n%d\n", line, i);
 	while (i > 0)
 	{
 		i = 0;
