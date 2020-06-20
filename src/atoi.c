@@ -23,8 +23,8 @@ int		ft_atoi(char *s)
 		s++;
 	if ((*s == '+') || (*s == '-'))
 		ng = -1;
-	while ((*s >= '0') && (*(s++) <= '9'))
-		n = ((n * 10) + (*s - 48));
+	while ((*s >= '0') && (*s <= '9'))
+		n = ((n * 10) + (*(s++) - 48));
 	n *= ng;
 	if (n > INT_MAX)
 		return (INT_MAX);
