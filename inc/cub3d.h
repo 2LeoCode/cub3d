@@ -16,7 +16,7 @@
 # define H_NOARG 0
 # define H_HELP 1
 
-# define ER_DEFLT -1
+# define ER_DEFLT 50
 # define ER_WPATH 1
 # define ER_OPENF 2
 # define ER_MISSI 3
@@ -177,6 +177,6 @@ int					get_map(int fd, t_set *set);
 */
 
 # include <stdio.h>
- 
+
 void				display_map(char **map);
 #endif
