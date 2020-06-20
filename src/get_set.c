@@ -122,6 +122,7 @@ int			get_set(int fd, t_set *set)
 	}
 	if (total)
 		return (get_map(fd, set));
+	ft_putstr("lol\n");
 	clear_set(set);
 	return (ER_MISSI);
 }
