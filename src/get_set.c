@@ -26,10 +26,10 @@ static t_bool	is_check(t_bool *check)
 static int	get_res(char *line, t_set *set, t_bool *check)
 {
 	if (check[C_X] || check[C_Y])
-		return (error_wrong_map(ER_DOUBL));
+		return (ER_DOUBL);
 	line++;
 	if (*line && !ft_isspace(*line))
-		return (error_wrong_map(ER_WRRES));
+		return (ER_WRRES);
 	while (ft_isspace(*line))
 		line++;
 	set->X = ft_atoi(line);
@@ -37,7 +37,7 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 	while (ft_isdigit(*line))
 		line++;
 	if (*line && !ft_isspace(*line))
-		return (error_wrong_map(ER_WRRES));
+		return (ER_WRRES);
 	while (ft_isspace(*line))
 		line++;
 	set->Y = ft_atoi(line);
@@ -46,7 +46,7 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 	while (ft_isspace(*line))
 		line++;
 	if (*line)
-		return (error_wrong_map(ER_WRRES));
+		return (ER_WRRES);
 	check[C_Y] = true;
 	if ((set->X < 50) || (set->Y < 50) || (set->X > 1980) || (set->Y > 1080))
 	{
@@ -76,18 +76,18 @@ static int	get_rgb(char *line, t_set *set, t_bool *check)
 	t_rgb	*tmp;
 
 	if ((*line == 'F' && check[C_F]) || (*line == 'C' && check[C_C])) 
-		return (error_wrong_map(ER_DOUBL));
+		return (ER_DOUBL);
 	if (*line == 'F')
 		tmp = &set->F;
 	else if (*line == 'C')
 		tmp = &set->C;
 	line++;
 	if (!ft_isspace(*line))
-		return (error_wrong_map(ER_UNKNW));
+		return (ER_UNKNW);
 	if (get_single_rgb(&line, &tmp->R) || (*(line++) - ',')
 	|| get_single_rgb(&line, &tmp->G) || (*(line++) - ',')
 	|| get_single_rgb(&line, &tmp->B) || *line)
-		return (error_wrong_map(ER_WRRGB));
+		return (ER_WRRGB);
 	check[((tmp == &set->F) ? C_F : C_C)] = true;
 	return (0);
 }
@@ -110,10 +110,10 @@ int			get_set(int fd, t_set *set)
 		i = 0;
 		while (ft_isspace(line[i]))
 			i++;
-		if (((line[i] == 'R') && get_res(&line[i], set, check))
-		|| ((ft_strchr("FC", line[i])) && get_rgb(&line[i], set, check))
-		|| (line[i] && get_path(&line[i], set, check)))
-			return (-1);
+		if (((line[i] == 'R') && (i = get_res(&line[i], set, check)))
+		|| ((ft_strchr("FC", line[i])) && (i = get_rgb(&line[i], set, check)))
+		|| (line[i] && (i = get_path(&line[i], set, check))))
+			return (i);
 		free(line);
 		if ((total = is_check(check)) == true)
 			break ;

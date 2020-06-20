@@ -71,7 +71,10 @@ Use --help for more information\n");
 		ft_fputs(_stderr, "Minimap in map file is not valid\n\
 Use --help for more information\n");
 	else if (errnum == ER_DEFLT)
+	{
 		ft_fputs(_stderr, strerror(errno));
+		ft_fputc(_stderr, '\n');
+	}
 	else if (errnum == ER_NOSPW) 
 		ft_fputs(_stderr, "No spawn point set in map file\n\
 Use --help for more information\n");
