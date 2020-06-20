@@ -33,6 +33,7 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 	while (ft_isspace(*line))
 		line++;
 	set->X = ft_atoi(line);
+	printf("%s\n", line);
 	check[C_X] = true;
 	while (ft_isdigit(*line))
 		line++;
@@ -41,6 +42,7 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 	while (ft_isspace(*line))
 		line++;
 	set->Y = ft_atoi(line);
+	printf("%s\n", line);
 	while (ft_isdigit(*line))
 		line++;
 	while (ft_isspace(*line))
