@@ -15,6 +15,6 @@
 int		cub3D(t_set *set, int flags)
 {
 	(void)flags;
-	display_map(set.map);
+	display_map(set->map);
 	return (0);
 }

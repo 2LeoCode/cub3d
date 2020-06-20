@@ -22,7 +22,7 @@ t_bool			is_map_wall(char *line)
 	{
 		if (*line - '1')
 			return (false);
-		while (*line && ft_strchr(MAP_CHRST, *(line + 1)));
+		while (*line && ft_strchr(MAP_CHRST, *(line + 1)))
 			line++;
 		if (*line - '1')
 			return (false);
@@ -72,7 +72,7 @@ int				check_map(t_set *set)
 				clear_set(set);
 				return (ER_WRMAP);
 			}
-			else if (ft_strchr("NOSE", str[i][j]))
+			else if (ft_strchr("NOSE", tmp[i][j]))
 				check = true;
 		}
 	}

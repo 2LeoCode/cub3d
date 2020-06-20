@@ -72,8 +72,8 @@ Use --help for more information\n");
 Use --help for more information\n");
 	else if (errnum == ER_DEFLT)
 		ft_fputs(_stderr, strerror(errno));
-	else if (errnum == ER_NOSPW)
-		ft_fputs(_stderr, "No spawn point set in map file\n
+	else if (errnum == ER_NOSPW) 
+		ft_fputs(_stderr, "No spawn point set in map file\n\
 Use --help for more information\n");
 	else
 		ft_fputs(_stderr, "An unknown error occured\n");

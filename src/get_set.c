@@ -121,7 +121,7 @@ int			get_set(int fd, t_set *set, char *path)
 			return (ER_READF);
 	}
 	if (total)
-		return (get_map(fd, set, path));
+		return (get_map(fd, set));
 	clear_set(set);
 	return (ER_MISSI);
 }

@@ -72,10 +72,10 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 	int			i;
 	int			j;
 
-	size.y = get_map_y(*lst);
+	size.Y = get_map_y(*lst);
 	if (!(set->map = (char**)malloc(sizeof(char*) * (size.Y + 1))))
 		return (ER_DEFLT);
-	size.x = get_map_x(*lst);
+	size.X = get_map_x(*lst);
 	i = -1;
 	while (++i < size.Y)
 		if (!(set->map[i] = (char*)malloc(sizeof(char) * (size.X + 1))))
@@ -90,7 +90,7 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 		set->map[i][j] = 0;
 		i += (size.Y - 1);
 	}
-	i = 0
+	i = 0;
 	tmp = *lst;
 	while (++i < (size.Y - 1))
 	{
@@ -126,7 +126,7 @@ int				get_map(int fd, t_set *set)
 			return (ER_DEFLT);
 		}
 	free(line);
-	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)));
+	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
 		return (0);
 	clear_set(set);
 	lst_line_clr(&tmp);

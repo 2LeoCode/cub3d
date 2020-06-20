@@ -63,7 +63,7 @@ int				main(int ac, char **av)
 		return (error_wrong_map(ER_OPENF));
 	if ((ret = get_set(fd, &settings, path)) - 0)
 	{
-		clear_set(&set);
+		clear_set(&settings);
 		return (error_wrong_map(ret));
 	}
 	if (print_wrong(path, ac - 1, av + 1))
