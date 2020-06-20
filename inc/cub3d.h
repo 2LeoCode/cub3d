@@ -166,10 +166,6 @@ int					lst_line_addback(t_line **lst, char *content);
 t_line				*lst_line_last(t_line *lst);
 void				lst_line_clr(t_line **lst);
 
-void				lst_chunk_clr(t_chunk **lst);
-t_chunk				*lst_chunk_last(t_chunk *lst);
-t_chunk				*lst_chunk_new(int x, int y);
-
 void				get_next_line_end(int fd, char **line);
 
 t_bool				is_map_wall(char *line);
@@ -180,5 +176,5 @@ int					get_map(int fd, t_set *set);
 ** test
 */
 
-void				display_chunks(t_chunk *chunk);
+void				display_map(char **map);
 #endif
