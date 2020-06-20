@@ -105,7 +105,7 @@ int			get_set(int fd, t_set *set)
 		check[i] = 0;
 	if ((i = get_next_line(fd, &line) < 0))
 		return (-1);
-	printf("%s\n", line);
+	printf("%s\n%d\n", line, i);
 	while (i > 0)
 	{
 		i = 0;
