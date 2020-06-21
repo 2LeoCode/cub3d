@@ -105,7 +105,7 @@ int			get_set(int fd, t_set *set)
 		check[i] = 0;
 	if ((i = get_next_line(fd, &line)) < 0)
 		return (ER_READF);
-	while (!(total = is_check(check)))
+	while (!total)
 	{
 		i = 0;
 		while (ft_isspace(line[i]))
@@ -115,7 +115,7 @@ int			get_set(int fd, t_set *set)
 		|| (!ft_strchr("RFC", line[i]) && (i = get_path(&line[i], set, check))))
 			return (i);
 		free(line);
-		if ((i = get_next_line(fd, &line)) < 0)
+		if (!(total = is_check(check)) && ((i = get_next_line(fd, &line)) < 0))
 			return (ER_READF);
 		if (!i)
 			return (ER_WRMAP);
