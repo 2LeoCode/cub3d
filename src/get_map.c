@@ -111,12 +111,12 @@ int				get_map(int fd, t_set *set)
 	int		j;
 
 	i = get_next_line(fd, &line);
+	printf("%s\n", tmp->line);
 	while (i && str_isspace(line))
 	{
 		free(line);
 		i = get_next_line(fd, &line);
 	}
-	printf("%s\n", line);
 	if ((!i || !is_map_wall(line)) || !(tmp = lst_line_new(line)))
 	{
 		get_next_line_end(fd, &line);
