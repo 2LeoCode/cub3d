@@ -14,9 +14,7 @@
 
 t_bool	str_isspace(char *s)
 {
-	printf("lol\n");
 	while (ft_isspace(*s))
 		s++;
-	printf("mdr\n");
 	return (*s ? false : true);
 }
