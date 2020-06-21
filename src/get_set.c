@@ -104,8 +104,8 @@ int			get_set(int fd, t_set *set)
 	while (++i < NB_PARAMS)
 		check[i] = 0;
 	if ((i = get_next_line(fd, &line)) < 0)
-		return (-1);
-	while (i > 0)
+		return (ER_READF);
+	while (!(total = is_check(check)))
 	{
 		i = 0;
 		printf("%s\n", line);
@@ -116,8 +116,6 @@ int			get_set(int fd, t_set *set)
 		|| (line[i] && (i = get_path(&line[i], set, check))))
 			return (i);
 		free(line);
-		if ((total = is_check(check)) == true)
-			break ;
 		if ((i = get_next_line(fd, &line) < 0))
 			return (ER_READF);
 	}
