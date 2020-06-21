@@ -22,7 +22,7 @@ t_bool			is_map_wall(char *line)
 	{
 		if (*line - '1')
 			return (false);
-		while (*line && ft_strchr(MAP_CHRST, *(line + 1)))
+		while (*line && *(line + 1) && ft_strchr(MAP_CHRST, *(line + 1)))
 			line++;
 		if (*line - '1')
 			return (false);
