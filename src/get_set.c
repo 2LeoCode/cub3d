@@ -25,7 +25,6 @@ static t_bool	is_check(t_bool *check)
 
 static int	get_res(char *line, t_set *set, t_bool *check)
 {
-	printf("RES:%s\n", line);
 	if (check[C_X] || check[C_Y])
 		return (ER_DOUBL);
 	line++;
@@ -112,8 +111,8 @@ int			get_set(int fd, t_set *set)
 		while (ft_isspace(line[i]))
 			i++;
 		if (((line[i] == 'R') && (i = get_res(&line[i], set, check)))
-		|| ((ft_strchr("FC", line[i])) && (i = get_rgb(&line[i], set, check)))
-		|| (line[i] && (i = get_path(&line[i], set, check))))
+		|| ((line[i] && ft_strchr("FC", line[i])) && (i = get_rgb(&line[i], set, check)))
+		|| (!ft_strchr("RFC", line[i]) && (i = get_path(&line[i], set, check))))
 			return (i);
 		free(line);
 		if ((i = get_next_line(fd, &line) < 0))
