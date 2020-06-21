@@ -111,6 +111,7 @@ int				get_map(int fd, t_set *set)
 	int		j;
 
 	i = get_next_line(fd, &line);
+	printf("%s\n", line);
 	while (i && str_isspace(line))
 	{
 		free(line);
