@@ -100,7 +100,6 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 		get_line(set->map, i, tmp->line, size.X);
 		tmp = tmp->next;
 	}
-	display_map(set->map);
 	return (0);
 }
 
@@ -122,6 +121,7 @@ int				get_map(int fd, t_set *set)
 		get_next_line_end(fd, &line);
 		return ((!i || !is_map_wall(line)) ? ER_WRMAP : ER_DEFLT);
 	}
+	printf("%s\n", tmp->line);
 	while ((i = get_next_line(fd, &line)) - 0)
 		if (lst_line_addback(&tmp, line))
 		{
