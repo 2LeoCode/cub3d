@@ -47,6 +47,7 @@ static int	get_path_2(char *line, t_set *set, int ch)
 	tmp[1] = line;
 	while (ft_isspace(*line))
 		line++;
+	printf("[%s]\n", line);
 	if (*line)
 		return (ER_WPATH);
 	*tmp[1] = 0;
@@ -60,7 +61,6 @@ int			get_path(char *line, t_set *set, t_bool *check)
 	int		ch;
 	int		ret;
 
-	printf("OK\n");
 	if (!ft_memcmp(line, "NO", 2))
 		ch = C_NO;
 	else if (!ft_memcmp(line, "SO", 2))
@@ -73,7 +73,6 @@ int			get_path(char *line, t_set *set, t_bool *check)
 		ch = C_S;
 	else
 		return (ER_UNKNW);
-	printf("OK\n");
 	if (check[ch])
 		return (ER_DOUBL);
 	if ((ret = get_path_2(line, set, ch)) != 0)
