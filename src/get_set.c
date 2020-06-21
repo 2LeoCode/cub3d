@@ -105,9 +105,9 @@ int			get_set(int fd, t_set *set)
 		check[i] = 0;
 	if ((i = get_next_line(fd, &line)) < 0)
 		return (-1);
+	printf("%d\n%d\n", i, get_next_line(fd, &line));
 	while (i > 0)
 	{
-		printf("%s\n", line);
 		i = 0;
 		while (ft_isspace(line[i]))
 			i++;
