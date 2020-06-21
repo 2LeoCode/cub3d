@@ -35,6 +35,7 @@ static int		get_map_x(t_line *lst)
 {
 	int		i;
 	int		j;
+	char	*tmp;
 
 	i = 0;
 	while (lst)
@@ -42,8 +43,9 @@ static int		get_map_x(t_line *lst)
 		j = 0;
 		while (ft_isspace(lst->line[j]))
 			j++;
+		tmp = &lst->line[j];
 		j = 0;
-		while (line[j] && !str_isspace(&lst->line[j]))
+		while (tmp[j] && !str_isspace(&tmp[j]))
 			j++;
 		if (i < j)
 			i = j;
