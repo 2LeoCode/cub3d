@@ -17,46 +17,48 @@ static int	get_path_3(char *path, t_set *set, int ch)
 	int		fd;
 
 	if ((fd = open(path, O_RDONLY)) < 0)
-		return (error_wrong_file(path));
+		return (ER_WPATH);
 	close(fd);
 	if (ch == C_NO && !(set->NO = ft_strdup(path)))
-		return (error_wrong_map(ER_DEFLT));
+		return (ER_DEFLT);
 	if (ch == C_SO && !(set->SO = ft_strdup(path)))
-		return (error_wrong_map(ER_DEFLT));
+		return (ER_DEFLT);
 	if (ch == C_WE && !(set->WE = ft_strdup(path)))
-		return (error_wrong_map(ER_DEFLT));
+		return (ER_DEFLT);
 	if (ch == C_EA && !(set->EA = ft_strdup(path)))
-		return (error_wrong_map(ER_DEFLT));
+		return (ER_DEFLT);
 	if (ch == C_S && !(set->S = ft_strdup(path)))
-		return (error_wrong_map(ER_DEFLT));
+		return (ER_DEFLT);
 	return (0);
 }
 
 static int	get_path_2(char *line, t_set *set, int ch)
 {
 	char	*tmp[2];
+	int		ret;
 
 	while (ft_isalpha(*line))
 		line++;
 	while (ft_isspace(*line))
 		line++;
 	tmp[0] = line;
-	while (!ft_isspace(*line))
+	while (*line && !ft_isspace(*line))
 		line++;
 	tmp[1] = line;
 	while (ft_isspace(*line))
 		line++;
 	if (*line)
-		return (error_wrong_map(ER_WPATH));
+		return (ER_WPATH);
 	*tmp[1] = 0;
-	if (get_path_3(tmp[0], set, ch))
-		return (-1);
+	if ((ret = get_path_3(tmp[0], set, ch)) != 0)
+		return (ret);
 	return (0);
 }
 
 int			get_path(char *line, t_set *set, t_bool *check)
 {
 	int		ch;
+	int		ret;
 
 	if (!ft_memcmp(line, "NO", 2))
 		ch = C_NO;
@@ -72,8 +74,8 @@ int			get_path(char *line, t_set *set, t_bool *check)
 		return (ER_UNKNW);
 	if (check[ch])
 		return (ER_DOUBL);
-	if (get_path_2(line, set, ch))
-		return (-1);
+	if ((ret = get_path_2(line, set, ch)) != 0)
+		return (ret);
 	check[ch] = true;
 	return (0);
 }
