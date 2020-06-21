@@ -110,6 +110,7 @@ int			get_set(int fd, t_set *set)
 		i = 0;
 		while (ft_isspace(line[i]))
 			i++;
+		printf("%s\n", line);
 		if (((line[i] == 'R') && (i = get_res(&line[i], set, check)))
 		|| ((line[i] && ft_strchr("FC", line[i])) && (i = get_rgb(&line[i], set, check)))
 		|| (!ft_strchr("RFC", line[i]) && (i = get_path(&line[i], set, check))))
