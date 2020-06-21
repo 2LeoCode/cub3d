@@ -100,12 +100,12 @@ int			get_set(int fd, t_set *set)
 	t_bool	total;
 
 	i = -1;
+	printf("ok\n");
 	total = false;
 	while (++i < NB_PARAMS)
 		check[i] = 0;
 	if ((i = get_next_line(fd, &line)) < 0)
 		return (-1);
-	printf("%d\n%d\n", i, get_next_line(fd, &line));
 	while (i > 0)
 	{
 		i = 0;
