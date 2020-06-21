@@ -120,7 +120,6 @@ int			get_set(int fd, t_set *set)
 		if (!i)
 			return (ER_WRMAP);
 	}
-	printf("here\n");
 	if (total)
 		return (get_map(fd, set));
 	clear_set(set);
