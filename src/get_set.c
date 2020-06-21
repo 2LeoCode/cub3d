@@ -100,7 +100,6 @@ int			get_set(int fd, t_set *set)
 	t_bool	total;
 
 	i = -1;
-	printf("ok\n");
 	total = false;
 	while (++i < NB_PARAMS)
 		check[i] = 0;
@@ -109,6 +108,7 @@ int			get_set(int fd, t_set *set)
 	while (i > 0)
 	{
 		i = 0;
+		printf("%s\n", line);
 		while (ft_isspace(line[i]))
 			i++;
 		if (((line[i] == 'R') && (i = get_res(&line[i], set, check)))
