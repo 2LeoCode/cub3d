@@ -72,7 +72,6 @@ int			get_path(char *line, t_set *set, t_bool *check)
 		ch = C_S;
 	else
 		return (ER_UNKNW);
-	printf("%d\n", ch);
 	if (check[ch])
 		return (ER_DOUBL);
 	if ((ret = get_path_2(line, set, ch)) != 0)
