@@ -107,6 +107,7 @@ int			get_set(int fd, t_set *set)
 		return (-1);
 	while (i > 0)
 	{
+		printf("%s\n", line);
 		i = 0;
 		while (ft_isspace(line[i]))
 			i++;
