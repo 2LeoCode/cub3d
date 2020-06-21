@@ -57,6 +57,7 @@ static int	get_path_2(char *line, t_set *set, int ch)
 int			get_path(char *line, t_set *set, t_bool *check)
 {
 	int		ch;
+	printf("PATH:%s\n", line);
 
 	if (!ft_memcmp(line, "NO", 2))
 		ch = C_NO;
@@ -69,9 +70,9 @@ int			get_path(char *line, t_set *set, t_bool *check)
 	else if (*line == 'S' && ft_isspace(*(line + 1)))
 		ch = C_S;
 	else
-		return (error_wrong_map(ER_UNKNW));
+		return (ER_UNKNW);
 	if (check[ch])
-		return (error_wrong_map(ER_DOUBL));
+		return (ER_DOUBL);
 	if (get_path_2(line, set, ch))
 		return (-1);
 	check[ch] = true;
