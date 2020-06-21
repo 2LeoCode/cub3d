@@ -47,7 +47,6 @@ static int	get_path_2(char *line, t_set *set, int ch)
 	tmp[1] = line;
 	while (ft_isspace(*line))
 		line++;
-	printf("[%s]\n", line);
 	if (*line)
 		return (ER_WPATH);
 	*tmp[1] = 0;

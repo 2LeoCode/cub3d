@@ -75,8 +75,11 @@ static int	get_rgb(char *line, t_set *set, t_bool *check)
 {
 	t_rgb	*tmp;
 
-	if ((*line == 'F' && check[C_F]) || (*line == 'C' && check[C_C])) 
+	if ((*line == 'F' && check[C_F]) || (*line == 'C' && check[C_C]))
+	{
+		printf("here\n");
 		return (ER_DOUBL);
+	}
 	if (*line == 'F')
 		tmp = &set->F;
 	else if (*line == 'C')
@@ -118,6 +121,8 @@ int			get_set(int fd, t_set *set)
 		free(line);
 		if ((i = get_next_line(fd, &line) < 0))
 			return (ER_READF);
+		if (!i)
+			return (ER_WRMAP);
 	}
 	if (total)
 		return (get_map(fd, set));
