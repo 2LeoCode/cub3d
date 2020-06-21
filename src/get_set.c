@@ -117,7 +117,7 @@ int			get_set(int fd, t_set *set)
 		free(line);
 		if (!(total = is_check(check)) && ((i = get_next_line(fd, &line)) < 0))
 			return (ER_READF);
-		if (!i)
+		if (!total && !i)
 			return (ER_WRMAP);
 	}
 	if (total)
