@@ -17,7 +17,7 @@ static int	get_path_3(char *path, t_set *set, int ch)
 	int		fd;
 
 	if ((fd = open(path, O_RDONLY)) < 0)
-		return (ER_WPATH);
+		return (ER_WPIMG);
 	close(fd);
 	if (ch == C_NO && !(set->NO = ft_strdup(path)))
 		return (ER_DEFLT);
