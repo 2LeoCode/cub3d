@@ -31,19 +31,15 @@ to_remove="ext\
 			map"
 cd $1
 
-rm -rf ext
-if [ $? = 0 ]
-then
-	echo "OK"
-else
-	echo "KO"
-fi
-
-rm -rf $to_remove
-printf $RED
-printf "Removed [$BLD"
-printf "ext$NRM$RED]\nRemoved [$BLD"
-printf "MinilibX$NRM$RED]\nRemoved [$BLD"
-printf "get_next_line$NRM$RED]\nRemoved [$BLD"
-printf "man$NRM$RED]\nRemoved [$BLD"
-echo "map$NRM$RED]$NRM"
+for i in $to_remove
+do
+	chmod -R 777 $i > /dev/null 2>&1
+	rm -r $i > /dev/null 2> data/temp
+	err=$(cat data/temp)
+	if [ "$err" = "" ]
+	then
+		printf $RED
+		echo "Removed [$BLD$i$NRM$RED]$NRM"
+	fi
+done
+rm -rf data/temp
