@@ -48,7 +48,7 @@ static int	get_path_2(char *line, t_set *set, int ch)
 	while (ft_isspace(*line))
 		line++;
 	if (*line)
-		return (ER_WPATH);
+		return (ER_WPIMG);
 	*tmp[1] = 0;
 	if ((ret = get_path_3(tmp[0], set, ch)) != 0)
 		return (ret);

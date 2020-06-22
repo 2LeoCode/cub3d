@@ -27,7 +27,8 @@
 # define ER_WRRGB 8
 # define ER_WRMAP 9
 # define ER_NOSPW 10
-# define ER_COUNT 11
+# define ER_WPIMG 11
+# define ER_COUNT 12
 # define WARNING 20
 
 # define NONE 0
