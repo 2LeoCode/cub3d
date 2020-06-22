@@ -24,7 +24,8 @@ fi
 to_remove="ext\
 			inc/mlx*\
 			inc/get_next_line.h\
-			src/get_next_line*\
+			src/get_next_line_utils.c\
+			src/get_next_line.c\
 			lib/*mlx*\
 			man\
 			map"
