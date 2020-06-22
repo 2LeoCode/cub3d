@@ -31,6 +31,14 @@ to_remove="ext\
 			map"
 cd $1
 
+rm -rf ext
+if [ $? = 0 ]
+then
+	echo "OK"
+else
+	echo "KO"
+fi
+
 rm -rf $to_remove
 printf $RED
 printf "Removed [$BLD"
