@@ -67,7 +67,8 @@ int				check_map(t_set *set)
 		j = -1;
 		while (tmp[i][++j])
 		{
-			if ((tmp[i][j] == '0') && !check_case(tmp, i, j))
+			if (!ft_strchr("NOSE012 ", tmp[i][j])
+			|| ((tmp[i][j] == '0') && !check_case(tmp, i, j)))
 			{
 				clear_set(set);
 				return (ER_WRMAP);
