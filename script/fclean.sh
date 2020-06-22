@@ -36,4 +36,6 @@ printf $RED
 printf "Removed [$BLD"
 printf "ext$NRM$RED]\nRemoved [$BLD"
 printf "MinilibX$NRM$RED]\nRemoved [$BLD"
-echo "get_next_line$NRM$RED]$NRM"
+printf "get_next_line$NRM$RED]\nRemoved [$BLD"
+printf "man$NRM$RED]\nRemoved [$BLD"
+echo "map$NRM$RED]$NRM"
