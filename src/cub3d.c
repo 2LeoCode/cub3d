@@ -14,7 +14,8 @@
 
 int		cub3D(t_set *set, int flags)
 {
-	t_bool	save;
+	(void)flags;
+	/*t_bool	save;
 	void	*key;
 	void	*init;
 	int		check;
@@ -32,5 +33,7 @@ int		cub3D(t_set *set, int flags)
 		return (error_mlx(ER_DEFLT));
 	if (!(init = mlx_new_window(key, set->X, set->Y, "Cub3D")))
 		return (error_mlx(ER_DEFLT));
+	*/
+	clear_set(set);
 	return (0);
 }
