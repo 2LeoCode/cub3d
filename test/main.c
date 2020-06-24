@@ -105,17 +105,6 @@ int		putcu(t_mlxcu *cube)
 
 	init_cubpos(cube, &cubPos);
 	putline(cube->mlx, cubPos.A, cubPos.B);
-	putline(cube->mlx, cubPos.B, cubPos.C);
-	putline(cube->mlx, cubPos.C, cubPos.D);
-	putline(cube->mlx, cubPos.D, cubPos.A);
-	putline(cube->mlx, cubPos.E, cubPos.F);
-	putline(cube->mlx, cubPos.F, cubPos.G);
-	putline(cube->mlx, cubPos.G, cubPos.H);
-	putline(cube->mlx, cubPos.H, cubPos.E);
-	putline(cube->mlx, cubPos.A, cubPos.E);
-	putline(cube->mlx, cubPos.B, cubPos.F);
-	putline(cube->mlx, cubPos.C, cubPos.G);
-	putline(cube->mlx, cubPos.D, cubPos.H);
 	return (0);
 }
 
@@ -126,7 +115,7 @@ int		main(void)
 
 	mlx.key = mlx_init();
 	mlx.res.X = 800;
-	mlx.res.Y = 800;
+	mlx.res.Y = 600;
 	mlx.win = mlx_new_window(mlx.key, mlx.res.X, mlx.res.Y, "square");
 	init_nrm(&mlx);
 	cube = init_cu(50, 100, 100, mlx);
