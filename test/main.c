@@ -104,7 +104,6 @@ int		putcu(t_mlxcu *cube)
 	t_cupos		cubPos;
 
 	init_cubpos(cube, &cubPos);
-	printf("[%f][%f]\n[%f][%f]\n", cubPos.A.X, cubPos.A.Y, cubPos.D.X, cubPos.D.Y);
 	putline(cube->mlx, cubPos.A, cubPos.B);
 	putline(cube->mlx, cubPos.B, cubPos.C);
 	putline(cube->mlx, cubPos.C, cubPos.D);
@@ -120,6 +119,12 @@ int		putcu(t_mlxcu *cube)
 	return (0);
 }
 
+int		show_coords(int x, int y)
+{
+	printf("\r[%d][%d]", x, y);
+	return (0);
+}
+
 int		main(void)
 {
 	t_mlxvar	mlx;
@@ -132,6 +137,7 @@ int		main(void)
 	init_nrm(&mlx);
 	cube = init_cu(50, 100, 100, mlx);
 	putcu(&cube);
+	mlx_hook(mlx.win, MotionNotify, PointerMotionMask, &show_coords, ((void*)0));
 	mlx_loop(mlx.key);
 	return (0);
 }
