@@ -126,7 +126,7 @@ int		main(void)
 
 	mlx.key = mlx_init();
 	mlx.res.X = 800;
-	mlx.res.Y = 600;
+	mlx.res.Y = 800;
 	mlx.win = mlx_new_window(mlx.key, mlx.res.X, mlx.res.Y, "square");
 	init_nrm(&mlx);
 	cube = init_cu(50, 100, 100, mlx);
