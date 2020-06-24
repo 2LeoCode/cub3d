@@ -116,6 +116,7 @@ int		putcu(t_mlxcu *cube)
 	putline(cube->mlx, cubPos.B, cubPos.F);
 	putline(cube->mlx, cubPos.C, cubPos.G);
 	putline(cube->mlx, cubPos.D, cubPos.H);
+	return (0);
 }
 
 int		main(void)
@@ -130,6 +131,6 @@ int		main(void)
 	init_nrm(&mlx);
 	cube = init_cu(50, 100, 100, mlx);
 	putcu(&cube);
-	mlx_loop();
+	mlx_loop(mlx.key);
 	return (0);
 }
