@@ -129,7 +129,7 @@ int		main(void)
 {
 	t_mlxvar	mlx;
 	t_mlxcu		cube;
-
+	
 	mlx.key = mlx_init();
 	mlx.res.X = 800;
 	mlx.res.Y = 600;
