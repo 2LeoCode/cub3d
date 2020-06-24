@@ -119,9 +119,9 @@ int		putcu(t_mlxcu *cube)
 	return (0);
 }
 
-int		show_coords(int x, int y)
+int		rotate(int key, t_mlxcu *cube)
 {
-	printf("\r[%d][%d]", x, y);
+	printf("%d\n", key);
 	return (0);
 }
 
@@ -137,7 +137,7 @@ int		main(void)
 	init_nrm(&mlx);
 	cube = init_cu(50, 100, 100, mlx);
 	putcu(&cube);
-	mlx_hook(mlx.win, MotionNotify, PointerMotionMask, &show_coords, ((void*)0));
+	mlx_hook(mlx.win, KeyPress, KeyPressMask, &rotate, &cube);
 	mlx_loop(mlx.key);
 	return (0);
 }
