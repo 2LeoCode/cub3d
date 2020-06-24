@@ -104,7 +104,19 @@ int		putcu(t_mlxcu *cube)
 	t_cupos		cubPos;
 
 	init_cubpos(cube, &cubPos);
+	printf("[%d][%d]\n[%d][%d]", cubPos.A.X, cubPos.A.Y, cubPos.B.X, cubPos.B.Y);
 	putline(cube->mlx, cubPos.A, cubPos.B);
+	putline(cube->mlx, cubPos.B, cubPos.C);
+	putline(cube->mlx, cubPos.C, cubPos.D);
+	putline(cube->mlx, cubPos.D, cubPos.A);
+	putline(cube->mlx, cubPos.E, cubPos.F);
+	putline(cube->mlx, cubPos.F, cubPos.G);
+	putline(cube->mlx, cubPos.G, cubPos.H);
+	putline(cube->mlx, cubPos.H, cubPos.E);
+	putline(cube->mlx, cubPos.A, cubPos.E);
+	putline(cube->mlx, cubPos.B, cubPos.F);
+	putline(cube->mlx, cubPos.C, cubPos.G);
+	putline(cube->mlx, cubPos.D, cubPos.H);
 	return (0);
 }
 
