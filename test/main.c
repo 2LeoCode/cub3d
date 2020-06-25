@@ -152,7 +152,7 @@ void	mlx_clear(t_mlxvar mlx)
 
 int		rotate_y(int key, t_mlxcu *cube)
 {
-	static int degrees = 1;
+	static int degrees = 5;
 
 	if (key == 65361)
 	{
