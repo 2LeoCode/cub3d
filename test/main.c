@@ -102,11 +102,13 @@ void	init_cubpos(t_mlxcu *cube, t_cupos *pos)
 	pos->H.Y = pos->G.Y - (cube->size * cube->mlx.nrm_x.Y);
 }
 
+
 void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 {
 	double	pasX = B.X - A.X;
 	double	pasY = B.Y - A.Y;
 
+	printf("%f %d", A.X, (int)(A.X - (int)A.X));
 	while ((ABS(pasX) > 1) || (ABS(pasY) > 1))
 	{
 		pasX /= 2;
