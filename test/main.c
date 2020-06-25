@@ -114,8 +114,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		pasX /= 2;
 		pasY /= 2;
 	}
-	printf ("%f %f\n", pasX, pasY);
-	while (((int)A.X - (int)B.X) || ((int)A.Y - (int)B.Y))
+	while ((int)(A.X - B.X) || (int)(A.Y - B.Y))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
 		A.X += pasX;
@@ -127,20 +126,20 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 {
 	double	pasX = B.X - A.X;
 	double	pasY = B.Y - A.Y;
+	int tmp = (int)A.X;
 
 	while ((ABS(pasX) > 1) || (ABS(pasY) > 1))
 	{
 		pasX /= 2;
 		pasY /= 2;
 	}
-	while ((((int)A.X - (int)B.X) > 1) || (((int)A.Y - (int)B.Y) > 1))
+	while ((int)(A.X - B.X) || (int)(A.Y - B.Y))
 	{
-		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 0);
+		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
 		A.X += pasX;
 		A.Y += pasY;
 	}
 }
-
 void	erasecu(t_cupos cubPos, t_mlxvar mlx)
 {
 	erline(mlx, cubPos.A, cubPos.B);
