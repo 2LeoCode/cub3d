@@ -63,6 +63,9 @@ void	init_nrm(t_mlxvar *mlx)
 	mlx->nrm_z0.X = 0;
 	mlx->nrm_z0.Y = 0;
 	mlx->nrm_z0.Z = 1;
+	mlx->nrm_x = mlx->nrm_x0;
+	mlx->nrm_y = mlx->nrm_y0;
+	mlx->nrm_z = mlx->nrm_z0;
 }
 
 t_mlxcu	init_cu(int size, int posX, int posY, t_mlxvar mlx)
@@ -149,7 +152,7 @@ void	mlx_clear(t_mlxvar mlx)
 
 int		rotate_y(int key, t_mlxcu *cube)
 {
-	static int degrees = 10;
+	static int degrees = 5;
 
 	if (key == 65361)
 	{
@@ -157,7 +160,7 @@ int		rotate_y(int key, t_mlxcu *cube)
 		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(RAD * degrees);
 		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(RAD * degrees);
 		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(RAD * degrees);
-		degrees += 10;
+		degrees += 5;
 		mlx_clear(cube->mlx);
 		putcu(cube);
 	}
