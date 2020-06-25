@@ -1,3 +1,4 @@
+#define _USE_MATH_DEFINES
 #include "mlx.h"
 #include "mlx_int.h"
 #include <X11/Xlib.h>
@@ -5,7 +6,7 @@
 #include <math.h>
 #define ABS(X) ((X < 0) ? -X : X)
 #define SQ(X) (X * X)
-#define RAD 57.2958
+#define degToRad(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
 typedef struct	s_coord
 {
@@ -156,10 +157,10 @@ int		rotate_y(int key, t_mlxcu *cube)
 
 	if (key == 65361)
 	{
-		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * sin(RAD * degrees);
-		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(RAD * degrees);
-		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(RAD * degrees);
-		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(RAD * degrees);
+		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * sin(degToRad(degrees));
+		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(degToRad(degrees));
+		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(degToRad(degrees));
+		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(degToRad(degrees));
 		degrees += 10;
 		printf("x %f %f\nz %f %f\n", cube->mlx.nrm_x.X, cube->mlx.nrm_x.Z, cube->mlx.nrm_z.X, cube->mlx.nrm_z.Z);
 		mlx_clear(cube->mlx);
