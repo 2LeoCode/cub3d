@@ -160,7 +160,7 @@ int		rotate_y(int key, t_mlxcu *cube)
 		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(RAD * degrees);
 		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(RAD * degrees);
 		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(RAD * degrees);
-		degrees += 1;
+		degrees++;
 		mlx_clear(cube->mlx);
 		putcu(cube);
 	}
