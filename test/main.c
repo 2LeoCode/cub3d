@@ -119,23 +119,42 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 }
 
+int		is_in_line(int x, int y, t_coord A, t_coord B)
+{
+	return (((x - A.X) * (B.Y - A.Y)) == ((B.X - A.X) * (y - A.Y)));
+}
+
+int		is_in_lines(int x, int y, t_cupos cube)
+{
+	return (is_in_line(x, y, cube.A, cube.B)
+	|| is_in_line(x, y, cube.B, cube.C)
+	|| is_in_line(x, y, cube.C, cube.D)
+	|| is_in_line(x, y, cube.D, cube.A)
+	|| is_in_line(x, y, cube.A, cube.E)
+	|| is_in_line(x, y, cube.E, cube.F)
+	|| is_in_line(x, y, cube.F, cube.G)
+	|| is_in_line(x, y, cube.G, cube.H)
+	|| is_in_line(x, y, cube.H, cube.E));
+}
+
 int		putcu(t_mlxcu *cube)
 {
 	t_cupos		cubPos;
+	int i;
+	int j = -1;
 
 	init_cubpos(cube, &cubPos);
-	putline(cube->mlx, cubPos.A, cubPos.B);
-	putline(cube->mlx, cubPos.B, cubPos.C);
-	putline(cube->mlx, cubPos.C, cubPos.D);
-	putline(cube->mlx, cubPos.D, cubPos.A);
-	putline(cube->mlx, cubPos.E, cubPos.F);
-	putline(cube->mlx, cubPos.F, cubPos.G);
-	putline(cube->mlx, cubPos.G, cubPos.H);
-	putline(cube->mlx, cubPos.H, cubPos.E);
-	putline(cube->mlx, cubPos.A, cubPos.E);
-	putline(cube->mlx, cubPos.B, cubPos.F);
-	putline(cube->mlx, cubPos.C, cubPos.G);
-	putline(cube->mlx, cubPos.D, cubPos.H);
+	while (++j < cube->mlx.res.Y)
+	{
+		i = -1;
+		while (++i < cube->mlx.res.X)
+		{
+			if (is_in_lines(i, j, cubPos))
+				mlx_pixel_put(cube->mlx.key, cube->mlx.win, i, j, 255);
+			else
+				mlx_pixel_put(cube->mlx.key, cube->mlx.win, i, j, 0);
+		}
+	}
 	return (0);
 }
 
@@ -154,7 +173,7 @@ void	mlx_clear(t_mlxvar mlx)
 
 int		rotate_y(int key, t_mlxcu *cube)
 {
-	static int degrees = 10;
+	static int degrees = 1;
 
 	if (key == 65361)
 	{
@@ -162,9 +181,8 @@ int		rotate_y(int key, t_mlxcu *cube)
 		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(degToRad(degrees));
 		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(degToRad(degrees));
 		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(degToRad(degrees));
-		degrees += 10;
+		degrees += 1;
 		printf("x %f %f\nz %f %f\n", cube->mlx.nrm_x.X, cube->mlx.nrm_x.Z, cube->mlx.nrm_z.X, cube->mlx.nrm_z.Z);
-		mlx_clear(cube->mlx);
 		putcu(cube);
 	}
 	return (0);
