@@ -107,12 +107,12 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	double	pasX = B.X - A.X;
 	double	pasY = B.Y - A.Y;
 
-	while ((ABS(pasX) > 1) || (ABS(pasY) > 1))
+	while ((ABS(pasX) > 1) || (ABS(pasY) > (A.Y - (int)A.Y)))
 	{
 		pasX /= 2;
 		pasY /= 2;
 	}
-	while ((ABS(A.X - B.X) > 1) || (ABS(A.Y - B.Y) > 1))
+	while (((int)A.X - (int)B.X) || ((int)A.Y - (int)B.Y))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
 		A.X += pasX;
