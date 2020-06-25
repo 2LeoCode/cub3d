@@ -108,7 +108,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	double	pasX = B.X - A.X;
 	double	pasY = B.Y - A.Y;
 
-	printf("%f %d", A.X, (int)(A.X - (int)A.X));
+	printf("%f %d\n", A.X, (int)(A.X - (int)A.X));
 	while ((ABS(pasX) > 1) || (ABS(pasY) > 1))
 	{
 		pasX /= 2;
