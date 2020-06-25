@@ -123,7 +123,7 @@ int		is_in_line(int x, int y, t_coord A, t_coord B)
 {
 	if (((B.X - A.X) * (y - A.Y)) == ((x - A.X) * (B.Y - A.Y)))
 	{
-		printf("%f %f\n", ((B.X - A.X) * (y - A.Y)), ((x - A.X) * (B.Y - A.Y)));
+		printf("%f %f\n", (B.X - A.X), (y - A.Y));
 		return (1);
 	}
 	return (0);
