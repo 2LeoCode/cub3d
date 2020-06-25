@@ -110,12 +110,12 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		pasX /= 2;
 		pasY /= 2;
 	}
-	printf("%f %f %f %f\n", A.X, A.Y, B.X, B.Y);
 	while (((int)A.X - (int)B.X) || ((int)A.Y - (int)B.Y))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
 		A.X += pasX;
 		A.Y += pasY;
+		printf("%f %f %f %f\n", A.X, A.Y, B.X, B.Y);
 	}
 }
 
