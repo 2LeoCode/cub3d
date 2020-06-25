@@ -152,7 +152,7 @@ void	mlx_clear(t_mlxvar mlx)
 
 int		rotate_y(int key, t_mlxcu *cube)
 {
-	static int degrees = 5;
+	static int degrees = 10;
 
 	if (key == 65361)
 	{
@@ -160,7 +160,8 @@ int		rotate_y(int key, t_mlxcu *cube)
 		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(RAD * degrees);
 		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(RAD * degrees);
 		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(RAD * degrees);
-		degrees += 5;
+		degrees += 10;
+		printf("x %d %d\nz %d %d\n", cube->mlx.nrm_x.X, cube->mlx.nrm_x.Z, cube->mlx.nrm_z.X, cube->mlx.nrm_z.Z);
 		mlx_clear(cube->mlx);
 		putcu(cube);
 	}
