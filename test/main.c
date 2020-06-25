@@ -34,13 +34,6 @@ typedef struct	s_mlxvar
 	t_coord		res;
 }				t_mlxvar;
 
-typedef struct	s_mlxcu
-{
-	t_mlxvar	mlx;
-	t_coord		pos;
-	int			size;
-}				t_mlxcu;
-
 typedef struct	s_cupos
 {
 	t_coord A;
@@ -52,6 +45,15 @@ typedef struct	s_cupos
 	t_coord G;
 	t_coord H;
 }				t_cupos;
+
+typedef struct	s_mlxcu
+{
+	t_mlxvar	mlx;
+	t_coord		pos;
+	int			size;
+	t_cupos		old;
+}				t_mlxcu;
+
 
 void	init_nrm(t_mlxvar *mlx)
 {
@@ -77,6 +79,7 @@ t_mlxcu	init_cu(int size, int posX, int posY, t_mlxvar mlx)
 	tmp.size = size;
 	tmp.pos.X = posX;
 	tmp.pos.Y = posY;
+	tmp.old = tmp;
 	return (tmp);
 }
 
@@ -110,70 +113,70 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		pasX /= 2;
 		pasY /= 2;
 	}
-	while (((int)A.X - (int)B.X) || ((int)A.Y - (int)B.Y))
+	while ((((int)A.X - (int)B.X) > 1) || (((int)A.Y - (int)B.Y) > 1))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
 		A.X += pasX;
 		A.Y += pasY;
-		printf("%f %f %f %f\n", A.X, A.Y, B.X, B.Y);
 	}
 }
 
-int		is_in_line(int x, int y, t_coord A, t_coord B)
+void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 {
-	if (!(B.X - A.X))
+	double	pasX = B.X - A.X;
+	double	pasY = B.Y - A.Y;
+
+	while ((ABS(pasX) > 1) || (ABS(pasY) > 1))
 	{
-		if ((x == A.X) && (A.Y < B.Y) && (y >= A.Y) && (y <= B.Y))
-			return (1);
-		if ((x == A.X) && (A.Y > B.Y) && (y >= B.Y) && (y <= A.Y))
-			return (1);
-		return (0);
+		pasX /= 2;
+		pasY /= 2;
 	}
-	if (!(B.Y - A.Y))
+	while ((((int)A.X - (int)B.X) > 1) || (((int)A.Y - (int)B.Y) > 1))
 	{
-		if ((y == A.Y) && (A.X < B.X) && (x >= A.X) && (x <= B.X))
-			return (1);
-		if ((y == A.Y) && (A.X > B.X) && (x >= B.X) && (x <= A.X))
-			return (1);
-		return (0);
+		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 0);
+		A.X += pasX;
+		A.Y += pasY;
 	}
-	return (((B.X - A.X) * (y - A.Y)) == ((x - A.X) * (B.Y - A.Y)));
 }
 
-int		is_in_lines(int x, int y, t_cupos cube)
+void	erasecu(t_cupos cubPos, t_mlxvar mlx)
 {
-	return (is_in_line(x, y, cube.A, cube.B)
-	|| is_in_line(x, y, cube.B, cube.C)
-	|| is_in_line(x, y, cube.C, cube.D)
-	|| is_in_line(x, y, cube.D, cube.A)
-	|| is_in_line(x, y, cube.A, cube.E)
-	|| is_in_line(x, y, cube.E, cube.F)
-	|| is_in_line(x, y, cube.F, cube.G)
-	|| is_in_line(x, y, cube.G, cube.H)
-	|| is_in_line(x, y, cube.H, cube.E)
-	|| is_in_line(x, y, cube.B, cube.F)
-	|| is_in_line(x, y, cube.C, cube.G)
-	|| is_in_line(x, y, cube.D, cube.H));
+	erline(mlx, cubPos.A, cubPos.B);
+	erline(mlx, cubPos.B, cubPos.C);
+	erline(mlx, cubPos.C, cubPos.D);
+	erline(mlx, cubPos.D, cubPos.A);
+	erline(mlx, cubPos.E, cubPos.F);
+	erline(mlx, cubPos.F, cubPos.G);
+	erline(mlx, cubPos.G, cubPos.H);
+	erline(mlx, cubPos.H, cubPos.E);
+	erline(mlx, cubPos.A, cubPos.E);
+	erline(mlx, cubPos.B, cubPos.F);
+	erline(mlx, cubPos.C, cubPos.G);
+	erline(mlx, cubPos.D, cubPos.H);
 }
 
 int		putcu(t_mlxcu *cube)
 {
 	t_cupos		cubPos;
-	int i;
-	int j = -1;
+	static int init = 0;
 
 	init_cubpos(cube, &cubPos);
-	while (++j < cube->mlx.res.Y)
-	{
-		i = -1;
-		while (++i < cube->mlx.res.X)
-		{
-			if (is_in_lines(i, j, cubPos))
-				mlx_pixel_put(cube->mlx.key, cube->mlx.win, i, j, 255);
-			else
-				mlx_pixel_put(cube->mlx.key, cube->mlx.win, i, j, 0);
-		}
-	}
+	putline(cube->mlx, cubPos.A, cubPos.B);
+	putline(cube->mlx, cubPos.B, cubPos.C);
+	putline(cube->mlx, cubPos.C, cubPos.D);
+	putline(cube->mlx, cubPos.D, cubPos.A);
+	putline(cube->mlx, cubPos.E, cubPos.F);
+	putline(cube->mlx, cubPos.F, cubPos.G);
+	putline(cube->mlx, cubPos.G, cubPos.H);
+	putline(cube->mlx, cubPos.H, cubPos.E);
+	putline(cube->mlx, cubPos.A, cubPos.E);
+	putline(cube->mlx, cubPos.B, cubPos.F);
+	putline(cube->mlx, cubPos.C, cubPos.G);
+	putline(cube->mlx, cubPos.D, cubPos.H);
+	if (init)
+		erasecu(cube->old, cube->mlx);
+	cube->old = cubPos;
+	init = 1;
 	return (0);
 }
 
@@ -200,8 +203,7 @@ int		rotate_y(int key, t_mlxcu *cube)
 		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(degToRad(degrees));
 		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(degToRad(degrees));
 		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(degToRad(degrees));
-		degrees += 1;
-		printf("x %f %f\nz %f %f\n", cube->mlx.nrm_x.X, cube->mlx.nrm_x.Z, cube->mlx.nrm_z.X, cube->mlx.nrm_z.Z);
+		degrees++;
 		putcu(cube);
 	}
 	return (0);
