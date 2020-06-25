@@ -123,17 +123,17 @@ int		is_in_line(int x, int y, t_coord A, t_coord B)
 {
 	if (!(B.X - A.X))
 	{
-		if ((A.Y < B.Y) && (y >= A.Y) && (y <= B.Y))
+		if ((x == A.X) && (A.Y < B.Y) && (y >= A.Y) && (y <= B.Y))
 			return (1);
-		if ((A.Y > B.Y) && (y >= B.Y) && (y <= A.Y))
+		if ((x == A.X) && (A.Y > B.Y) && (y >= B.Y) && (y <= A.Y))
 			return (1);
 		return (0);
 	}
 	if (!(B.Y - A.Y))
 	{
-		if ((A.X < B.X) && (x >= A.X) && (x <= B.X))
+		if ((y == A.Y) && (A.X < B.X) && (x >= A.X) && (x <= B.X))
 			return (1);
-		if ((A.X > B.X) && (x >= B.X) && (x <= A.X))
+		if ((y == A.Y) && (A.X > B.X) && (x >= B.X) && (x <= A.X))
 			return (1);
 		return (0);
 	}
