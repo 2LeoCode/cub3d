@@ -5,6 +5,8 @@
 #include <math.h>
 #define ABS(X) ((X < 0) ? -X : X)
 #define SQ(X) (X * X)
+#define RAD 57.2958
+
 typedef struct	s_coord
 {
 	double		X;
@@ -146,10 +148,10 @@ int		rotate_y(int key, t_mlxcu *cube)
 {
 	if (key == 65361)
 	{
-		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X)) * sin(10);
-		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X)) * cos(10);
-		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X)) * cos(10);
-		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X)) * sin(10);
+		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X)) * sin(RAD * 10);
+		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X)) * cos(RAD * 10);
+		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X)) * cos(RAD * 10);
+		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X)) * sin(RAD * 10);
 		printf("x[%d][%d]\nz[%d][%d]\n", cube->mlx.nrm_x.X, cube->mlx.nrm_x.Z, cube->mlx.nrm_z.X, cube->mlx.nrm_z.Z);
 		mlx_clear(cube->mlx);
 		putcu(cube);
