@@ -121,10 +121,22 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 
 int		is_in_line(int x, int y, t_coord A, t_coord B)
 {
-	if (!(B.X - A.X) && !(B.Y - A.Y))
-		return ((x == B.X) && (y == B.Y));
-	else if (!(B.X - A.X) || !(B.Y - A.Y))
+	if (!(B.X - A.X))
+	{
+		if ((A.Y < B.Y) && (y >= A.Y) && (y <= B.Y))
+			return (1);
+		if ((A.Y > B.Y) && (y >= B.Y) && (y <= A.Y))
+			return (1);
 		return (0);
+	}
+	if (!(B.Y - A.Y))
+	{
+		if ((A.X < B.X) && (x >= A.X) && (x <= B.X))
+			return (1);
+		if ((A.X > B.X) && (x >= B.X) && (x <= A.X))
+			return (1);
+		return (0);
+	}
 	return ((int)((B.X - A.X) * (y - A.Y)) == (int)((x - A.X) * (B.Y - A.Y)));
 }
 
