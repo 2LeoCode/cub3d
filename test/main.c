@@ -4,20 +4,27 @@
 #include <stdio.h>
 #include <math.h>
 #define ABS(X) ((X < 0) ? -X : X)
-
+#define SQ(X) (X * X)
 typedef struct	s_coord
 {
 	double		X;
 	double		Y;
 }				t_coord;
 
+typedef struct	s_ccoord
+{
+	double		X;
+	double		Y;
+	double		Z;
+}				t_ccoord;
+
 typedef struct	s_mlxvar
 {
 	void		*key;
 	void		*win;
-	t_coord		nrm_x;
-	t_coord		nrm_y;
-	t_coord		nrm_z;
+	t_ccoord	nrm_x;
+	t_ccoord	nrm_y;
+	t_ccoord	nrm_z;
 	t_coord		res;
 }				t_mlxvar;
 
@@ -44,10 +51,13 @@ void	init_nrm(t_mlxvar *mlx)
 {
 	mlx->nrm_x.X = 1;
 	mlx->nrm_x.Y = 0;
+	mlx->nrm_x.Z = 0;
 	mlx->nrm_y.X = 0;
 	mlx->nrm_y.Y = 1;
+	mlx->nrm_y.Z = 0;
 	mlx->nrm_z.X = 0;
 	mlx->nrm_z.Y = 0;
+	mlx->nrm_z.Z = 1;
 }
 
 t_mlxcu	init_cu(int size, int posX, int posY, t_mlxvar mlx)
@@ -119,9 +129,30 @@ int		putcu(t_mlxcu *cube)
 	return (0);
 }
 
-int		rotate(int key, t_mlxcu *cube)
+void	mlx_clear(t_mlxvar mlx)
 {
-	printf("%d\n", key);
+	int i;
+	int j = -1;
+
+	while (++j < mlx.res.Y)
+	{
+		i = -1;
+		while (++i < mlx.res.X)
+			mlx_pixel_put(mlx.key, mlx.win, i, j, 0);
+	}
+}
+
+int		rotate_y(int key, t_mlxcu *cube)
+{
+	if (key == 65361)
+	{
+		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X)) * sin(10);
+		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X))  * cos(10);
+		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X))  * cos(10);
+		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X))  * sin(10);
+		mlx_clear(cube->mlx);
+		putcu(cube);
+	}
 	return (0);
 }
 
@@ -137,7 +168,7 @@ int		main(void)
 	init_nrm(&mlx);
 	cube = init_cu(50, 100, 100, mlx);
 	putcu(&cube);
-	mlx_hook(mlx.win, KeyPress, KeyPressMask, &rotate, &cube);
+	mlx_hook(mlx.win, KeyPress, KeyPressMask, &rotate_y, &cube);
 	mlx_loop(mlx.key);
 	return (0);
 }
