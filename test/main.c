@@ -137,7 +137,7 @@ int		is_in_line(int x, int y, t_coord A, t_coord B)
 			return (1);
 		return (0);
 	}
-	return ((int)((B.X - A.X) * (y - A.Y)) == (int)((x - A.X) * (B.Y - A.Y)));
+	return (((B.X - A.X) * (y - A.Y)) == ((x - A.X) * (B.Y - A.Y)));
 }
 
 int		is_in_lines(int x, int y, t_cupos cube)
