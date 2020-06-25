@@ -150,7 +150,10 @@ int		is_in_lines(int x, int y, t_cupos cube)
 	|| is_in_line(x, y, cube.E, cube.F)
 	|| is_in_line(x, y, cube.F, cube.G)
 	|| is_in_line(x, y, cube.G, cube.H)
-	|| is_in_line(x, y, cube.H, cube.E));
+	|| is_in_line(x, y, cube.H, cube.E)
+	|| is_in_line(x, y, cube.B, cube.F)
+	|| is_in_line(x, y, cube.C, Dube.G)
+	|| is_in_line(x, y, cube.D, Dube.H));
 }
 
 int		putcu(t_mlxcu *cube)
