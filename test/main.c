@@ -79,7 +79,6 @@ t_mlxcu	init_cu(int size, int posX, int posY, t_mlxvar mlx)
 	tmp.size = size;
 	tmp.pos.X = posX;
 	tmp.pos.Y = posY;
-	tmp.old = tmp;
 	return (tmp);
 }
 
