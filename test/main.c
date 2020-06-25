@@ -121,6 +121,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 
 int		is_in_line(int x, int y, t_coord A, t_coord B)
 {
+	printf ("%f\n%f\n", ((x - A.X) * (B.Y - A.Y)), ((B.X - A.X) * (y - A.Y)));
 	return (((x - A.X) * (B.Y - A.Y)) == ((B.X - A.X) * (y - A.Y)));
 }
 
