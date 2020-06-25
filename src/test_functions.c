@@ -14,6 +14,7 @@
 
 void	display_map(char **map)
 {
+	
 	int		i;
 
 	i = -1;

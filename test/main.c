@@ -147,9 +147,10 @@ int		rotate_y(int key, t_mlxcu *cube)
 	if (key == 65361)
 	{
 		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X)) * sin(10);
-		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X))  * cos(10);
-		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X))  * cos(10);
-		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X))  * sin(10);
+		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z.Z) + SQ(cube->mlx.nrm_z.X)) * cos(10);
+		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X)) * cos(10);
+		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x.Z) + SQ(cube->mlx.nrm_x.X)) * sin(10);
+		printf("x[%d][%d]\nz[%d][%d]\n", cube->mlx.nrm_x.X, cube->mlx.nrm_x.Z, cube->mlx.nrm_z.X, cube->mlx.nrm_z.Z);
 		mlx_clear(cube->mlx);
 		putcu(cube);
 	}
