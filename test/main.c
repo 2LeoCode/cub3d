@@ -135,7 +135,7 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 	while ((int)(A.X - B.X) || (int)(A.Y - B.Y))
 	{
-		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
+		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 0);
 		A.X += pasX;
 		A.Y += pasY;
 	}
