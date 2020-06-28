@@ -4,7 +4,7 @@
 #include <X11/Xlib.h>
 #include <stdio.h>
 #include <math.h>
-#define ABS(X) ((X < 0) ? -X : X)
+#define ABS(X) ((X < 0.0) ? -X : X)
 #define SQ(X) (X * X)
 #define degToRad(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
@@ -147,7 +147,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	while (++j <= ABS(A.Y - B.Y))
 	{
 		i = -1;
-		printf("%f\n", ABS(A.X - B.X));
+		printf("%d\n", ABS(A.X - B.X));
 		while (++i <= ABS(A.X - B.X))
 			if (!pasX || !pasY || ((int)(i * pasY + (A.Y - startY)) == j))
 				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 255);
