@@ -135,7 +135,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		startX = B.X;
 		startY = A.Y;
 	}*/
-	while ((ABS(A.X - B.X) >= ABS(pasX))  || (ABS(A.X - B.X) >= ABS(pasX)))
+	while ((ABS(A.X - B.X) >= 1)  || (ABS(A.X - B.X) >= 1))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
 		A.X += pasX;
@@ -175,7 +175,7 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 		startX = B.X;
 		startY = A.Y;
 	}*/
-	while ((ABS(A.X - B.X) >= ABS(pasX))  || (ABS(A.X - B.X) >= ABS(pasX)))
+	while ((ABS(A.X - B.X) >= 1)  || (ABS(A.X - B.X) >= 1))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 0);
 		A.X += pasX;
