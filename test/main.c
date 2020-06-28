@@ -255,10 +255,12 @@ void	mlx_clear(t_mlxvar mlx)
 	}
 }
 
-int		rotate_y(int key, t_mlxcu *cube)
+int		rotate(int key, t_mlxcu *cube)
 {
 	static int degreesR = 1;
 	static int degreesL = 1;
+	static int degreesT = 1;
+	static int degreesB = 1;
 
 	if (key == 65361)
 	{
@@ -281,6 +283,17 @@ int		rotate_y(int key, t_mlxcu *cube)
 		degreesL++;
 		putcu(cube);
 	}
+	else if (key == 65362)
+	{
+		
+		cube->mlx.nrm_z.Y = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.Y)) * sin(degToRad(-degreesT));
+		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.Y)) * cos(degToRad(-degreesT));
+		cube->mlx.nrm_y.Y = sqrt(SQ(cube->mlx.nrm_y0.Z) + SQ(cube->mlx.nrm_y0.Y)) * cos(degToRad(-degreesT));
+		cube->mlx.nrm_y.Z = sqrt(SQ(cube->mlx.nrm_y0.Z) + SQ(cube->mlx.nrm_y0.Y)) * sin(degToRad(-degreesT));
+		degreesT++;
+		degreesB--;
+		putcu(cube);
+	}
 	return (0);
 }
 
@@ -296,7 +309,7 @@ int		main(void)
 	init_nrm(&mlx);
 	cube = init_cu(50, 100, 100, mlx);
 	putcu(&cube);
-	mlx_hook(mlx.win, KeyPress, KeyPressMask, &rotate_y, &cube);
+	mlx_hook(mlx.win, KeyPress, KeyPressMask, &rotate, &cube);
 	mlx_loop(mlx.key);
 	return (0);
 }
