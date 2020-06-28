@@ -105,8 +105,8 @@ void	init_cubpos(t_mlxcu *cube, t_cupos *pos)
 
 void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 {
-	double	pasX = A.X - B.X;
-	double	pasY = A.Y - B.Y;
+	double	pasX = B.X - A.X;
+	double	pasY = B.Y - A.Y;
 	//int		startX;
 	//int		startY;
 
