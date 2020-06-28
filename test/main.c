@@ -134,10 +134,11 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		startX = B.X;
 		startY = A.Y;
 	}
-	while (++j < ABS(A.Y - B.Y))
+	printf ("%d\n%d\n%d\n%d\n%d\n%d\n", pasX, pasY, A.X, A.Y, startX, startY);
+	while (++j <= ABS(A.Y - B.Y))
 	{
 		i = -1;
-		while (++i < ABS(A.X - B.X))
+		while (++i <= ABS(A.X - B.X))
 			if ((int)(i * pasY + (A.Y - startY)) == j)
 				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 255);
 	}
@@ -145,16 +146,15 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 
 void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 {
-	double	pasX = B.X - A.X;
-	double	pasY = B.Y - A.Y;
+	double	pasX = A.X - B.X;
+	double	pasY = A.Y - B.Y;
 	int		startX;
 	int		startY;
+	int		j = -1;
+	int		i;
 
-	while ((ABS(pasX) >= 1) || (ABS(pasY) >= 1))
-	{
-		pasX /= 2;
-		pasY /= 2;
-	}
+	pasY /= pasX;
+	pasX /= pasX;
 	if ((A.X < 0) && (A.Y > 0))
 	{
 		startX = A.X;
@@ -175,11 +175,12 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 		startX = B.X;
 		startY = A.Y;
 	}
-	while ((ABS(A.X - B.X) >= 1)  || (ABS(A.X - B.X) >= 1))
+	while (++j < ABS(A.Y - B.Y))
 	{
-		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 0);
-		A.X += pasX;
-		A.Y += pasY;
+		i = -1;
+		while (++i < ABS(A.X - B.X))
+			if ((int)(i * pasY + (A.Y - startY)) == j)
+				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 255);
 	}
 }
 
