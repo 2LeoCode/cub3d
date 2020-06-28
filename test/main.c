@@ -132,13 +132,12 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		startX = B.X;
 		startY = A.Y;
 	}
-	printf ("before pas x %f\n before pas y %f\n", pasX, pasY);
 	if (pasX)
 	{
 		pasY = pasY / pasX;
 		pasX = 1;
 	}
-	printf ("pas x %f\npas y %f\nax %f\nay %f\nstartx %d\nstarty %d\n", pasX, pasY, A.X, A.Y, startX, startY);
+	printf ("ax %f\nay %f\nbx %f\nby %f\n", A.X, A.Y, B.X, B.Y);
 	while (++j <= ABS(A.Y - B.Y))
 	{
 		i = -1;
@@ -148,7 +147,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 }
 
-void	erline(t_mlxvar mlx, t_coord A, t_coord B)
+void	erline(t_mlxvar mlx, t_coord A, t_coord B, t_coord newA, t_coord newB);
 {
 	double	pasX = A.X - B.X;
 	double	pasY = A.Y - B.Y;
@@ -185,26 +184,26 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 	while (++j <= ABS(A.Y - B.Y))
 	{
 		i = -1;
-		while (++i <= ABS(A.X - B.X))
+		while (++i <= ABS(A.X - B.X) && !((A.X == newA.X) && (A.Y == newA.Y) && (B.X == newB.X) && (B.Y == newB.Y)))
 			if (!pasX || !pasY || ((int)(i * pasY + (A.Y - startY)) == j))
 				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 0);
 	}
 }
 
-void	erasecu(t_cupos cubPos, t_mlxvar mlx)
+void	erasecu(t_cupos cubPos, t_cupos newCuPos, t_mlxvar mlx)
 {
-	erline(mlx, cubPos.A, cubPos.B);
-	erline(mlx, cubPos.B, cubPos.C);
-	erline(mlx, cubPos.C, cubPos.D);
-	erline(mlx, cubPos.D, cubPos.A);
-	erline(mlx, cubPos.E, cubPos.F);
-	erline(mlx, cubPos.F, cubPos.G);
-	erline(mlx, cubPos.G, cubPos.H);
-	erline(mlx, cubPos.H, cubPos.E);
-	erline(mlx, cubPos.A, cubPos.E);
-	erline(mlx, cubPos.B, cubPos.F);
-	erline(mlx, cubPos.C, cubPos.G);
-	erline(mlx, cubPos.D, cubPos.H);
+	erline(mlx, cubPos.A, cubPos.B, newCuPos.A, newCuPos.B);
+	erline(mlx, cubPos.B, cubPos.C, newCuPos.B, newCuPos.C);
+	erline(mlx, cubPos.C, cubPos.D, newCuPos.C, newCuPos.D);
+	erline(mlx, cubPos.D, cubPos.A, newCuPos.D, newCuPos.A);
+	erline(mlx, cubPos.E, cubPos.F, newCuPos.E, newCuPos.F);
+	erline(mlx, cubPos.F, cubPos.G, newCuPos.F, newCuPos.G);
+	erline(mlx, cubPos.G, cubPos.H, newCuPos.G, newCuPos.H);
+	erline(mlx, cubPos.H, cubPos.E, newCuPos.H, newCuPos.E);
+	erline(mlx, cubPos.A, cubPos.E, newCuPos.A, newCuPos.E);
+	erline(mlx, cubPos.B, cubPos.F, newCuPos.B, newCuPos.F);
+	erline(mlx, cubPos.C, cubPos.G, newCuPos.C, newCuPos.G);
+	erline(mlx, cubPos.D, cubPos.H, newCuPos.D, newCuPos.H);
 }
 
 int		putcu(t_mlxcu *cube)
