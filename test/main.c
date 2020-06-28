@@ -147,7 +147,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 }
 
-void	erline(t_mlxvar mlx, t_coord A, t_coord B, t_coord newA, t_coord newB);
+void	erline(t_mlxvar mlx, t_coord A, t_coord B, t_coord newA, t_coord newB)
 {
 	double	pasX = A.X - B.X;
 	double	pasY = A.Y - B.Y;
