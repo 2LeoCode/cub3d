@@ -188,7 +188,7 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B, t_coord newA, t_coord newB)
 	{
 		i = -1;
 		while (++i <= ABS(A.X - B.X) && !((A.X == newA.X) && (A.Y == newA.Y) && (B.X == newB.X) && (B.Y == newB.Y)))
-			if (!pasX || !pasY || ((int)(i * pasY + (A.Y - startY)) == j))
+			if (!pasX || !(int)pasY || ((int)(i * pasY + (A.Y - startY)) == j))
 				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 0);
 	}
 }
