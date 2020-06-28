@@ -102,6 +102,10 @@ void	init_cubpos(t_mlxcu *cube, t_cupos *pos)
 	pos->H.Y = pos->G.Y - (cube->size * cube->mlx.nrm_x.Y);
 }
 
+double	ft_abs(double n)
+{
+	return ((n < 0) ? -n : n);
+}
 
 void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 {
@@ -144,11 +148,11 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 	else
 		pasY = 0.0;
-	while (++j <= ABS(A.Y - B.Y))
+	while (++j <= ft_abs(A.Y - B.Y))
 	{
 		i = -1;
-		printf("%d\n", ABS(A.X - B.X));
-		while (++i <= ABS(A.X - B.X))
+		printf("%d\n", ft_abs(A.X - B.X));
+		while (++i <= ft_abs(A.X - B.X))
 			if (!pasX || !pasY || ((int)(i * pasY + (A.Y - startY)) == j))
 				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 255);
 	}
@@ -188,10 +192,10 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B, t_coord newA, t_coord newB)
 		pasY /= pasX;
 		pasX = 1;
 	}
-	while (++j <= ABS(A.Y - B.Y))
+	while (++j <= ft_abs(A.Y - B.Y))
 	{
 		i = -1;
-		while (++i <= ABS(A.X - B.X) && !((A.X == newA.X) && (A.Y == newA.Y) && (B.X == newB.X) && (B.Y == newB.Y)))
+		while (++i <= ft_abs(A.X - B.X) && !((A.X == newA.X) && (A.Y == newA.Y) && (B.X == newB.X) && (B.Y == newB.Y)))
 			if (!pasX || !pasY || ((int)(i * pasY + (A.Y - startY)) == j))
 				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 0);
 	}
