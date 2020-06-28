@@ -112,28 +112,28 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	int		j = -1;
 	int		i;
 
-	pasY /= pasX;
-	pasX /= pasX;
-	if ((A.X < 0) && (A.Y > 0))
+	if ((pasX < 0) && (pasY > 0))
 	{
 		startX = A.X;
 		startY = B.Y;
 	}
-	else if ((A.X >= 0) && (A.Y >= 0))
+	else if ((pasX >= 0) && (pasY >= 0))
 	{
 		startX = B.X;
 		startY = B.Y;
 	}
-	else if ((A.X <= 0) && (A.Y <= 0))
+	else if ((pasX <= 0) && (pasY <= 0))
 	{
 		startX = A.X;
 		startY = A.Y;
 	}
-	else if ((A.X > 0) && (A.Y < 0))
+	else if ((pasX > 0) && (pasY < 0))
 	{
 		startX = B.X;
 		startY = A.Y;
 	}
+	pasY = pasY / pasX;
+	pasX = 1;
 	printf ("%d\n%d\n%d\n%d\n%d\n%d\n", pasX, pasY, A.X, A.Y, startX, startY);
 	while (++j <= ABS(A.Y - B.Y))
 	{
