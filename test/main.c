@@ -144,7 +144,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 	else
 		pasY = 0.0;
-	printf("pasX %f pasy %f\n", pasX, pasY);
+	printf("ay %f by %f\n", A.Y, B.Y);
 	while (++j <= ABS(A.Y - B.Y))
 	{
 		i = -1;
