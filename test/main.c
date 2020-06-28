@@ -148,7 +148,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	while (++j <= ABS(A.Y - B.Y))
 	{
 		i = -1;
-		while (++i <= ABS(A.X - B.X))
+		while (++i <= (int)ABS(A.X - B.X))
 			if (!pasX || !pasY || ((int)(i * pasY + (A.Y - startY)) == j)){printf("here\n");
 				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 255);}
 	}
