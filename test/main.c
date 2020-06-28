@@ -108,12 +108,12 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	double	pasX = B.X - A.X;
 	double	pasY = B.Y - A.Y;
 
-	while ((ABS(pasX) > 1) || (ABS(pasY) > 1))
+	while ((pasX >= 1) || (pasY >= 1))
 	{
 		pasX /= 2;
 		pasY /= 2;
 	}
-	while (((int)A.X - (int)B.X) || ((int)A.Y - (int)B.Y))
+	while ((ABS(A.X - B.X) >= ABS(pasX))  || (ABS(A.X - B.X) >= ABS(pasX)))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
 		A.X += pasX;
@@ -138,6 +138,7 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 		A.Y += pasY;
 	}
 }
+
 void	erasecu(t_cupos cubPos, t_mlxvar mlx)
 {
 	erline(mlx, cubPos.A, cubPos.B);
@@ -160,6 +161,8 @@ int		putcu(t_mlxcu *cube)
 	static int init = 0;
 
 	init_cubpos(cube, &cubPos);
+	if (init)
+		erasecu(cube->old, cube->mlx);
 	putline(cube->mlx, cubPos.A, cubPos.B);
 	putline(cube->mlx, cubPos.B, cubPos.C);
 	putline(cube->mlx, cubPos.C, cubPos.D);
@@ -172,8 +175,6 @@ int		putcu(t_mlxcu *cube)
 	putline(cube->mlx, cubPos.B, cubPos.F);
 	putline(cube->mlx, cubPos.C, cubPos.G);
 	putline(cube->mlx, cubPos.D, cubPos.H);
-	if (init)
-		erasecu(cube->old, cube->mlx);
 	cube->old = cubPos;
 	init = 1;
 	return (0);
