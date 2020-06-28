@@ -134,6 +134,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 	if (pasX)
 	{
+		printf("pasX %f pasy %f\n", pasX, pasY);
 		pasY = pasY / pasX;
 		pasX = 1;
 	}
@@ -179,7 +180,6 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B, t_coord newA, t_coord newB)
 		startX = B.X;
 		startY = A.Y;
 	}
-	printf("pasX %f pasy %f\n", pasX, pasY);
 	if (pasX)
 	{
 		pasY /= pasX;
