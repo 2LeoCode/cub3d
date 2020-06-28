@@ -134,18 +134,17 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 	if (pasX)
 	{
-		if (pasY)
-			pasY = pasY / pasX;
+		if (!pasY)
+		pasY = pasY / pasX;
 		pasX = 1;
 	}
+	printf ("ax %f\nay %f\nbx %f\nby %f\npas x %f\npas y %f\n", A.X, A.Y, B.X, B.Y, pasX, pasY);
 	while (++j <= ABS(A.Y - B.Y))
 	{
 		i = -1;
 		while (++i <= ABS(A.X - B.X))
 			if (!pasX || !pasY || ((int)(i * pasY + (A.Y - startY)) == j))
-			{
 				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 255);
-			}
 	}
 }
 
