@@ -257,15 +257,28 @@ void	mlx_clear(t_mlxvar mlx)
 
 int		rotate_y(int key, t_mlxcu *cube)
 {
-	static int degrees = 1;
+	static int degreesR = 1;
+	static int degreesL = 1;
 
 	if (key == 65361)
 	{
-		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * sin(degToRad(degrees));
-		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(degToRad(degrees));
-		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(degToRad(degrees));
-		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(degToRad(degrees));
-		degrees++;
+		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * sin(degToRad(degreesR));
+		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) + SQ(cube->mlx.nrm_z0.X)) * cos(degToRad(degreesR));
+		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * cos(degToRad(degreesR));
+		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) + SQ(cube->mlx.nrm_x0.X)) * sin(degToRad(degreesR));
+		degreesR++;
+		degreesL--;
+		putcu(cube);
+	}
+	else if (key == 65363)
+	{
+		
+		cube->mlx.nrm_z.X = sqrt(SQ(cube->mlx.nrm_z0.Z) - SQ(cube->mlx.nrm_z0.X)) * sin(degToRad(degreesL));
+		cube->mlx.nrm_z.Z = sqrt(SQ(cube->mlx.nrm_z0.Z) - SQ(cube->mlx.nrm_z0.X)) * cos(degToRad(degreesL));
+		cube->mlx.nrm_x.X = sqrt(SQ(cube->mlx.nrm_x0.Z) - SQ(cube->mlx.nrm_x0.X)) * cos(degToRad(degreesL));
+		cube->mlx.nrm_x.Z = sqrt(SQ(cube->mlx.nrm_x0.Z) - SQ(cube->mlx.nrm_x0.X)) * sin(degToRad(degreesL));
+		degreesR--;
+		degreesL++;
 		putcu(cube);
 	}
 	return (0);
