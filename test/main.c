@@ -181,6 +181,7 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B, t_coord newA, t_coord newB)
 	}
 	if (pasX)
 	{
+		printf("pasX %f pas y %f\n", pasX, pasY);
 		pasY /= pasX;
 		pasX = 1;
 	}
