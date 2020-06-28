@@ -133,12 +133,12 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		startY = A.Y;
 	}
 	if (pasX)
-	{
+	{printf("mdr\n");
 		if (pasY)
 		{printf("lol\n");
 			pasY = pasY / pasX;}
-		else
-			pasX = 0;
+		else{printf("lol\n");
+			pasX = 0;}
 		pasX = 1;
 	}
 	else
