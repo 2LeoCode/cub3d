@@ -137,7 +137,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		if (pasY)
 		{printf("lol\n");
 			pasY = pasY / pasX;}
-		else{printf("lol\n");
+		else{printf("loffff\n");
 			pasX = 0.0;}
 		pasX = 1.0;
 	}
