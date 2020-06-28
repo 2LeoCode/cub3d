@@ -157,34 +157,37 @@ void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 	int		j = -1;
 	int		i;
 
-	pasY /= pasX;
-	pasX /= pasX;
-	if ((A.X < 0) && (A.Y > 0))
+	if ((pasX < 0) && (pasY > 0))
 	{
 		startX = A.X;
 		startY = B.Y;
 	}
-	else if ((A.X >= 0) && (A.Y >= 0))
+	else if ((pasX >= 0) && (pasY >= 0))
 	{
 		startX = B.X;
 		startY = B.Y;
 	}
-	else if ((A.X <= 0) && (A.Y <= 0))
+	else if ((pasX <= 0) && (pasY <= 0))
 	{
 		startX = A.X;
 		startY = A.Y;
 	}
-	else if ((A.X > 0) && (A.Y < 0))
+	else if ((pasX > 0) && (pasY < 0))
 	{
 		startX = B.X;
 		startY = A.Y;
 	}
-	while (++j < ABS(A.Y - B.Y))
+	if (pasX)
+	{
+		pasY = pasY / pasX;
+		pasX = 1;
+	}
+	while (++j <= ABS(A.Y - B.Y))
 	{
 		i = -1;
-		while (++i < ABS(A.X - B.X))
-			if ((int)(i * pasY + (A.Y - startY)) == j)
-				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 255);
+		while (++i <= ABS(A.X - B.X))
+			if (!pasX || !pasY || ((int)(i * pasY + (A.Y - startY)) == j))
+				mlx_pixel_put(mlx.key, mlx.win, i + startX, j + startY, 0);
 	}
 }
 
