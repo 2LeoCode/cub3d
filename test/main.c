@@ -132,7 +132,7 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 		startX = B.X;
 		startY = A.Y;
 	}
-	printf ("before pas x %d\n before pas y %d\n", pasX, pasY);
+	printf ("before pas x %f\n before pas y %f\n", pasX, pasY);
 	pasY = pasY / pasX;
 	pasX = 1;
 	printf ("pas x %f\npas y %f\nax %f\nay %f\nstartx %d\nstarty %d\n", pasX, pasY, A.X, A.Y, startX, startY);
