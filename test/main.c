@@ -105,14 +105,36 @@ void	init_cubpos(t_mlxcu *cube, t_cupos *pos)
 
 void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 {
-	double	pasX = B.X - A.X;
-	double	pasY = B.Y - A.Y;
+	double	pasX = A.X - B.X;
+	double	pasY = A.Y - B.Y;
+	//int		startX;
+	//int		startY;
 
-	while ((pasX >= 1) || (pasY >= 1))
+	while ((ABS(pasX) >= 1) || (ABS(pasY) >= 1))
 	{
 		pasX /= 2;
 		pasY /= 2;
 	}
+	/*if ((A.X < 0) && (A.Y > 0))
+	{
+		startX = A.X;
+		startY = B.Y;
+	}
+	else if ((A.X >= 0) && (A.Y >= 0))
+	{
+		startX = B.X;
+		startY = B.Y;
+	}
+	else if ((A.X <= 0) && (A.Y <= 0))
+	{
+		startX = A.X;
+		startY = A.Y;
+	}
+	else if ((A.X > 0) && (A.Y < 0))
+	{
+		startX = B.X;
+		startY = A.Y;
+	}*/
 	while ((ABS(A.X - B.X) >= ABS(pasX))  || (ABS(A.X - B.X) >= ABS(pasX)))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 255);
@@ -123,15 +145,37 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 
 void	erline(t_mlxvar mlx, t_coord A, t_coord B)
 {
-	double	pasX = B.X - A.X;
-	double	pasY = B.Y - A.Y;
+	double	pasX = A.X - B.X;
+	double	pasY = A.Y - B.Y;
+	//int		startX;
+	//int		startY;
 
-	while ((ABS(pasX) > 1) || (ABS(pasY) > 1))
+	while ((ABS(pasX) >= 1) || (ABS(pasY) >= 1))
 	{
 		pasX /= 2;
 		pasY /= 2;
 	}
-	while (((int)A.X - (int)B.X) || ((int)A.Y - (int)B.Y))
+	/*if ((A.X < 0) && (A.Y > 0))
+	{
+		startX = A.X;
+		startY = B.Y;
+	}
+	else if ((A.X >= 0) && (A.Y >= 0))
+	{
+		startX = B.X;
+		startY = B.Y;
+	}
+	else if ((A.X <= 0) && (A.Y <= 0))
+	{
+		startX = A.X;
+		startY = A.Y;
+	}
+	else if ((A.X > 0) && (A.Y < 0))
+	{
+		startX = B.X;
+		startY = A.Y;
+	}*/
+	while ((ABS(A.X - B.X) >= ABS(pasX))  || (ABS(A.X - B.X) >= ABS(pasX)))
 	{
 		mlx_pixel_put(mlx.key, mlx.win, A.X, A.Y, 0);
 		A.X += pasX;
