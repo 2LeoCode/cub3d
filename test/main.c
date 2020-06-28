@@ -213,7 +213,7 @@ int		putcu(t_mlxcu *cube)
 
 	init_cubpos(cube, &cubPos);
 	if (init)
-		erasecu(cube->old, cube->mlx);
+		erasecu(cube->old, cubPos, cube->mlx);
 	putline(cube->mlx, cubPos.A, cubPos.B);
 	putline(cube->mlx, cubPos.B, cubPos.C);
 	putline(cube->mlx, cubPos.C, cubPos.D);
