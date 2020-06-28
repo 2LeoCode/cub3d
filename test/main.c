@@ -134,9 +134,8 @@ void	putline(t_mlxvar mlx, t_coord A, t_coord B)
 	}
 	if (pasX)
 	{
-		if (!pasY)
-			break ;
-		pasY = pasY / pasX;
+		if (pasY)
+			pasY = pasY / pasX;
 		pasX = 1;
 	}
 	while (++j <= ABS(A.Y - B.Y))
