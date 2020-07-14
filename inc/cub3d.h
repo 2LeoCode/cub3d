@@ -58,6 +58,8 @@
 
 # define BUFFER_GET_FILE 32
 
+# define _USE_MATH_DEFINES
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
@@ -68,6 +70,10 @@
 # include <get_next_line.h>
 # include <mlx.h>
 # include <mlx_int.h>
+
+# ifndef M_PI
+#  define M_PI 3.14159265358979323846
+# endif
 
 typedef enum		e_bool
 {
@@ -111,9 +117,42 @@ typedef struct		s_set
 	char			*S;
 	t_rgb			F;
 	t_rgb			C;
+	int				FOV;
+	t_coord			spawn;
+	double			rot_vert;
+	double			rot_hor;
 	char			**map;
 }					t_set;
 
+# define CUB_WALL 0
+# define CUB_FLOOR 1
+# define CUB_VOID 2
+
+typedef struct		s_xyz
+{
+	int X;
+	int Y;
+	int Z;
+}					t_xyz;
+
+typedef struct		s_lstcub
+{
+	int				type;
+	t_xyz 			pos;
+	struct s_lstcub *next;
+}					t_lstcub;
+
+typedef struct		s_mlxvar
+{
+	void			*key;
+	void			*win;
+	t_xyz			player_pos;
+	t_set			*set;
+	const t_xyz		nrm_X;
+	const t_xyz		nrm_Y;
+	const t_xyz		nrm_Z;
+	t_xyz			look;
+}					t_mlxvar;
 char				*ft_strstr(char *haystack, char *needle);
 
 char				*search_str(char *needle, char **ar, int size, int how);
@@ -137,7 +176,6 @@ int					help(int show_msg);
 
 int					cub3D(t_set *set, int flags);
 
-
 void				fill_chunk_end(char *chunk, int startX, int startY);
 t_bool				are_chunk_lines_null(char **lines);
 int					get_one_chunk(t_set *set, t_line **map);
@@ -148,6 +186,7 @@ int					get_set(int fd, t_set *set);
 size_t				ft_strlen(char *s);
 
 t_bool				str_isspace(char *s);
+t_bool				str_isdigit(char *s);
 
 t_bool				ft_isdigit(int c);
 t_bool				ft_isspace(int c);

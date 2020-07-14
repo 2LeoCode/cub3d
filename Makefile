@@ -34,7 +34,7 @@ SRC =		main.c\
 			strcmp.c\
 			strstr.c\
 			strlen.c\
-			isascii.c\
+			c_is.c\
 			strchr.c\
 			atoi.c\
 			get_file.c\
@@ -44,7 +44,7 @@ SRC =		main.c\
 			strdup.c\
 			lst_line.c\
 			test_functions.c\
-			str_isspace.c\
+			str_is.c\
 			get_map.c\
 			get_map_utils.c
 OBJ =		$(SRC:.c=.o)

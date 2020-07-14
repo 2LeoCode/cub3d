@@ -23,7 +23,8 @@ t_bool	print_wrong(char *map_path, int ac, char **av)
 		if (ft_strcmp(map_path, av[i]) && ft_strcmp("-save", av[i])
 		&& ft_strcmp("--save", av[i]) && ft_strcmp("-s", av[i])
 		&& ft_strcmp("--bonus", av[i]) && ft_strcmp("-b", av[i])
-		&& ft_strcmp("--help", av[i]) && ft_strcmp("-h", av[i]))
+		&& ft_strcmp("--help", av[i]) && ft_strcmp("-h", av[i])
+		&& ft_strcmp("--fov", av[i]))
 		{
 			wrong = true;
 			ft_fputs(_stderr, "Cub3D: invalid option -- '");

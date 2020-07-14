@@ -6,6 +6,9 @@
 #include <math.h>
 #define ABS(X) ((X < 0.0) ? -X : X)
 #define SQ(X) (X * X)
+#ifndef M_PI
+# define M_PI 3.14159265358979323846
+#endif
 #define degToRad(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
 typedef struct	s_coord
@@ -31,7 +34,6 @@ typedef struct	s_mlxvar
 	t_ccoord	nrm_x0;
 	t_ccoord	nrm_y0;
 	t_ccoord	nrm_z0;
-	t_coord		res;
 }				t_mlxvar;
 
 typedef struct	s_cupos

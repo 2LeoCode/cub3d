@@ -18,3 +18,10 @@ t_bool	str_isspace(char *s)
 		s++;
 	return (*s ? false : true);
 }
+
+t_bool	str_isdigit(char *s)
+{
+	while (ft_isdigit(*s))
+		s++;
+	return (*s ? false : true);
+}

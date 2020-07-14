@@ -74,7 +74,19 @@ int				check_map(t_set *set)
 				return (ER_WRMAP);
 			}
 			else if (ft_strchr("NOSE", tmp[i][j]))
+			{
 				check = true;
+				set->spawn.X = i;
+				set->spawn.Y = j;
+				if (tmp[i][j] == 'N')
+					set->rot_hor = 0;
+				if (tmp[i][j] == 'E')
+					set->rot_hor = 90 * M_PI / 180;
+				if (tmp[i][j] == 'S')
+					set->rot_hor = M_PI;
+				if (tmp[i][j] == 'O')
+					set->rot_hor = 270 * M_PI / 180;
+			}
 		}
 	}
 	if (!check)
@@ -82,5 +94,6 @@ int				check_map(t_set *set)
 		clear_set(set);
 		return (ER_NOSPW);
 	}
+	set->rot_vert = 0;
 	return (0);
 }
