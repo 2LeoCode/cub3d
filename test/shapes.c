@@ -96,6 +96,12 @@ typedef struct	s_mlxvar
 	int					box_size_y;
 }				t_mlxvar;
 
+unsigned long	create_color_int(t_rgb color)
+{
+	return (((color.R & 0xff) << 16) + ((color.G & 0xff) << 8)
+	+ (color.B & 0xff));
+}
+
 int				ft_round(double nb)
 {
 	int 	strict = (int)nb;
@@ -132,7 +138,7 @@ int				draw2d_player(t_mlxvar *mlx_var)
 	{
 		i = -1;
 		while (++i < 5)
-			mlx_pixel_put(mlx_var->id, mlx_var->win, mlx_var->px - 2 + i, mlx_var->py - 2 + j, mlx_var->color_2d_player);
+			mlx_pixel_put(mlx_var->id, mlx_var->win, mlx_var->px - 2 + i, mlx_var->py - 2 + j, create_color_int(mlx_var->color_2d_player));
 	}
 }
 
@@ -153,12 +159,6 @@ int				draw2d_map(t_mlxvar *mlx_var)
 			else if (mlx_var->map[j][i] == '0')
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
 	}
-}
-
-unsigned long	create_color_int(t_rgb color)
-{
-	return (((color.R & 0xff) << 16) + ((color.G & 0xff) << 8)
-	+ (color.B & 0xff));
 }
 
 char			*ft_strcpy(char *d, char *s)
