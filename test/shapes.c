@@ -4,6 +4,7 @@
 #include <X11/Xlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
 #endif
@@ -95,6 +96,16 @@ typedef struct	s_mlxvar
 	int					box_size_x;
 	int					box_size_y;
 }				t_mlxvar;
+
+size_t			ft_strlen(char *s)
+{
+	size_t	len;
+
+	len = 0;
+	while (*s++)
+		len++;
+	return (len);
+}
 
 unsigned long	create_color_int(t_rgb color)
 {
@@ -229,7 +240,7 @@ int				main(void)
 	mlx_var.win = mlx_new_window(mlx_var.id, mlx_var.winX * 2, mlx_var.winY, "Ray-casting");
 	mlx_expose_hook(mlx_var.win, &draw2d_map, &mlx_var);
 	mlx_expose_hook(mlx_var.win, &draw2d_player, &mlx_var);
-	mlx_hook(mlx.win, KeyPress, KeyPressMask, &process_key, &mlx_var);
+	mlx_hook(mlx_var.win, KeyPress, KeyPressMask, &process_key, &mlx_var);
 	mlx_loop(mlx_var.win);
 	return (0);
 }
