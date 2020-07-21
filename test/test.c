@@ -4,7 +4,6 @@
 #include <X11/Xlib.h>
 #include <stdio.h>
 #include <math.h>
-#define SQ(X) (X * X)
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
 #endif
