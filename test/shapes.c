@@ -53,8 +53,8 @@ typedef struct			s_quad
 	t_triangle			top;
 	t_triangle			bot;
 
-	t_screen_triangle	top;
-	t_screen_triangle	bot;
+	t_screen_triangle	stop;
+	t_screen_triangle	sbot;
 
 }						t_quad;
 
