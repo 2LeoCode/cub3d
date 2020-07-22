@@ -132,8 +132,8 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, unsigned long color)
 	{
 		i = -1;
 		while (++i < mlx_var->box_size_x)
-			if (((x + i < (mlx_var->box_size_x * mlx_var->px - 2)) || (x + i > (mlx_var->box_size_x * mlx_var->px + 2)))
-			&& ((y + j < (mlx_var->box_size_y * mlx_var->py - 2)) || (y + j > (mlx_var->box_size_y * mlx_var->py + 2))))
+			if (((x + i < (mlx_var->box_size_x * mlx_var->px - 2)) && (x + i > (mlx_var->box_size_x * mlx_var->px + 2)))
+			&& ((y + j < (mlx_var->box_size_y * mlx_var->py - 2)) && (y + j > (mlx_var->box_size_y * mlx_var->py + 2))))
 			{
 				if (i == 0 || j == 0 || i == (mlx_var->box_size_x - 1) || j == (mlx_var->box_size_y - 1))
 					mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, 0);
