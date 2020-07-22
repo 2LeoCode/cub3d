@@ -179,6 +179,7 @@ int				draw2d_map(t_mlxvar *mlx_var)
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
 			}
 	}
+	printf ("success\n");
 	return (0);
 }
 
