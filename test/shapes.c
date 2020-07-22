@@ -139,7 +139,7 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
 		i = -1;
 		while (++i < mlx_var->box_size_x)
 			if (is_player_pos(x + i, y + j, mlx_var))
-				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->player_color);
+				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_player);
 			else if (i == 0 || j == 0 || i == (mlx_var->box_size_x - 1) || j == (mlx_var->box_size_y - 1))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, 0);
 			else
