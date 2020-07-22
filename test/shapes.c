@@ -162,9 +162,7 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
 	{
 		i = -1;
 		while (++i < mlx_var->box_size_x)
-			if (is_ray_pos(x + i, y + j, mlx_var) || is_ray_pos(x + i + 1, y + j, mlx_var) || is_ray_pos(x + i, y + j + 1, mlx_var)
-			|| is_ray_pos(x + i + 1, y + j + 1, mlx_var) || is_ray_pos(x + i - 1, y + j, mlx_var) || is_ray_pos(x + i, y + j - 1, mlx_var)
-			|| is_ray_pos(x + i - 1, y + j + 1, mlx_var) || is_ray_pos(x + i + 1, y + j - 1, mlx_var))
+			if (is_ray_pos(x + i, y + j, mlx_var))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_ray);
 			else if (is_player_pos(x + i, y + j, mlx_var))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_player);
