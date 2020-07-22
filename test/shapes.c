@@ -159,11 +159,9 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	int		i;
 	int		j;
 
-	printf("1\n");
 	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
-	printf("2\n");
 	while (++j < (int)mlx_var->mapY)
 	{
 		i = -1;
@@ -171,12 +169,13 @@ int				draw2d_map(t_mlxvar *mlx_var)
 			if (mlx_var->map[j][i] == '1')
 			{
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
-				printf("3\n");}
+			}
 			else if (mlx_var->map[j][i] == '0')
 			{
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
-				printf("3\n");}
+			}
 	}
+	printf("OK\n");
 	return (0);
 }
 
