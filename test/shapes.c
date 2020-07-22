@@ -167,10 +167,13 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	{
 		i = -1;
 		while (++i < (int)mlx_var->mapX)
-			if (mlx_var->map[j][i] == '1')
-				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
-			else if (mlx_var->map[j][i] == '0')
-				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
+			if ((i < (mlx_var->px - 2)) || (i > (mlx_var->px + 2)) && (j < (mlx_var->py - 2)) || (j > (mlx_var->py + 2)))
+			{
+				if (mlx_var->map[j][i] == '1')
+					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
+				else if (mlx_var->map[j][i] == '0')
+					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
+			}
 	}
 	draw2d_player(mlx_var);
 	return (0);
