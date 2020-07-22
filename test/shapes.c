@@ -143,13 +143,16 @@ int				draw2d_player(t_mlxvar *mlx_var)
 {
 	int		i;
 	int		j;
+	unsigned long color;
 
+	color = create_color_int(mlx_var->color_2d_player);
 	j = -1;
+	printf("OK?\n");
 	while (++j < 5)
 	{
 		i = -1;
 		while (++i < 5)
-			mlx_pixel_put(mlx_var->id, mlx_var->win, mlx_var->px - 2 + i, mlx_var->py - 2 + j, create_color_int(mlx_var->color_2d_player));
+			mlx_pixel_put(mlx_var->id, mlx_var->win, mlx_var->px - 2 + i, mlx_var->py - 2 + j, (int)color);
 	}
 	printf("OK\n");
 	return (0);
@@ -230,8 +233,8 @@ int				main(void)
 	mlx_var.mapX = 8;
 	mlx_var.mapY = 8;
 
-	mlx_var.px = 3;
-	mlx_var.py = 3;
+	mlx_var.px = 2.5;
+	mlx_var.py = 2.5;
 	mlx_var.rot = 0;
 
 	mlx_var.map = (char**)malloc(sizeof(char*) * (mlx_var.mapX + 1));
