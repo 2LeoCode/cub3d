@@ -134,20 +134,17 @@ int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 {
 	int posX;
 	int posY;
-	double	bX;
-	double	bY;
-	double	squarelen;
-	double	crossproduct;
-	double	dotproduct;
+	int	bX;
+	int	bY;
+	int	squarelen;
+	int	crossproduct;
+	int	dotproduct;
 
 	posX = mlx_var->px * mlx_var->box_size_x - 1;
-	bX = posX + cos(mlx_var->rot) * (double)mlx_var->box_size_x;
-	bY = posY + sin(mlx_var->rot) * (double)mlx_var->box_size_y;
-	printf("%f, %f", bX, bY);
+	bX = posX + cos(mlx_var->rot) * mlx_var->box_size_x;
+	bY = posY + sin(mlx_var->rot) * mlx_var->box_size_y;
 	squarelen = (x - posX) * (x - posX) + (y - posY) * (y - posY);
-	crossproduct = (double)(y - posY) * (bX - (double)posX) - (double)(x - posX) * (bY - (double)posY);
-
-	if (crossproduct > 1)
+	if ((crossproduct = (y - posY) * (bX - posX) - (x - posX) * (bY - posY)) != 0)
 		return (0);
 	if ((dotproduct = (x - posX) * (bX - posX) + (y - posY) * (bY - posY)) < 0)
 		return (0);
@@ -164,7 +161,7 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
 	{
 		i = -1;
 		while (++i < mlx_var->box_size_x)
-			if (is_ray_pos(x + i, y + j, mlx_var))
+			if (is_ray_pos(x + i, y + j, mlx_var) || is_ray_pos(x + i + 1, y + j, mlx_var) || is_ray_pos(x + i, y + j + 1, mlx_var))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_ray);
 			else if (is_player_pos(x + i, y + j, mlx_var))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_player);
