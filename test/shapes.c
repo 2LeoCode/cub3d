@@ -139,7 +139,7 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, unsigned long color)
 	}
 }
 
-int				draw2d_player(t_mlxvar *mlx_var)
+void			draw2d_player(t_mlxvar *mlx_var)
 {
 	int		i;
 	int		j;
@@ -147,15 +147,14 @@ int				draw2d_player(t_mlxvar *mlx_var)
 
 	color = create_color_int(mlx_var->color_2d_player);
 	j = -1;
-	printf("OK?\n");
+	printf("in2\n");
 	while (++j < 5)
 	{
 		i = -1;
 		while (++i < 5)
 			mlx_pixel_put(mlx_var->id, mlx_var->win, mlx_var->px - 2 + i, mlx_var->py - 2 + j, (int)color);
 	}
-	printf("OK\n");
-	return (0);
+	printf("out2\n");
 }
 
 int				draw2d_map(t_mlxvar *mlx_var)
@@ -166,6 +165,7 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
+	printf ("in1\n");
 	while (++j < (int)mlx_var->mapY)
 	{
 		i = -1;
@@ -179,7 +179,8 @@ int				draw2d_map(t_mlxvar *mlx_var)
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
 			}
 	}
-	printf ("success\n");
+	printf ("out1\n");
+	draw2d_player(mlx_var);
 	return (0);
 }
 
