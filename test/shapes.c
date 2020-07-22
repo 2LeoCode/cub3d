@@ -8,6 +8,7 @@
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
 #endif
+#define ONE_DEGREE 0.0174533
 #define degToRad(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
 #define KEY_LEFT
@@ -216,13 +217,27 @@ char			*ft_strdup(char *s)
 int				process_key(int key, t_mlxvar *mlx_var)
 {
 	if (key == 65361) //left
-		mlx_var->px -= 0.03;
+	{
+		if (mlx_var->rot > 2 * M_PI)
+			mlx_var->rot = 0;
+		mlx_var->rot += ONE_DEGREE;
+	}
 	if (key == 65363) //right
-		mlx_var->px += 0.03;
+	{
+		if (mlx_var->rot < 0)
+			mlx_var->rot = 2 * M_PI;
+		mlx_var->rot -= ONE_DEGREE;
+	}
 	if (key == 65362) //top
-		mlx_var->py -= 0.03;
+	{
+		mlx_var->px += cos(mlx_var->rot);
+		mlx_var->py += sin(mlx_var->rot);
+	}
 	if (key == 65364) //bot
-		mlx_var->py += 0.03;
+	{
+		mlx_var->px -= cos(mlx_var->rot);
+		mlx_var->py -= sin(mlx_var->rot);
+	}
 	return (0);
 }
 
