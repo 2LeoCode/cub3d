@@ -201,6 +201,7 @@ char			*ft_strdup(char *s)
 int				process_key(int key, t_mlxvar *mlx_var)
 {
 	printf("%d\n", key);
+	return (0);
 }
 
 int				main(void)
@@ -243,15 +244,11 @@ int				main(void)
 	mlx_var.map[6] = ft_strdup("10010011");
 	mlx_var.map[7] = ft_strdup("11111111");
 	mlx_var.map[8] = NULL;
-	printf("main1\n");
 	mlx_var.win = mlx_new_window(mlx_var.id, mlx_var.winX * 2, mlx_var.winY, "Ray-casting");
-	printf("main2\n");
+	draw2d_map(&mlx_var);
 	mlx_loop_hook(mlx_var.win, &draw2d_map, &mlx_var);
-	printf("main3\n");
-	mlx_expose_hook(mlx_var.win, &draw2d_player, &mlx_var);
-	printf("main4\n");
+	mlx_loop_hook(mlx_var.win, &draw2d_player, &mlx_var);
 	mlx_hook(mlx_var.win, KeyPress, KeyPressMask, &process_key, &mlx_var);
-	printf("main5\n");
-	mlx_loop(mlx_var.id);
+	mlx_loop(mlx_var.win);
 	return (0);
 }
