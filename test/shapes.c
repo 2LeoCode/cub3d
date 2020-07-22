@@ -147,14 +147,12 @@ void			draw2d_player(t_mlxvar *mlx_var)
 
 	color = create_color_int(mlx_var->color_2d_player);
 	j = -1;
-	printf("in2\n");
 	while (++j < 5)
 	{
 		i = -1;
 		while (++i < 5)
 			mlx_pixel_put(mlx_var->id, mlx_var->win, (mlx_var->px * mlx_var->box_size_x) - 2 + i, (mlx_var->py * mlx_var->box_size_y) - 2 + j, (int)color);
 	}
-	printf("out2\n");
 }
 
 int				draw2d_map(t_mlxvar *mlx_var)
@@ -165,21 +163,15 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
-	printf ("in1\n");
 	while (++j < (int)mlx_var->mapY)
 	{
 		i = -1;
 		while (++i < (int)mlx_var->mapX)
 			if (mlx_var->map[j][i] == '1')
-			{
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
-			}
 			else if (mlx_var->map[j][i] == '0')
-			{
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
-			}
 	}
-	printf ("out1\n");
 	draw2d_player(mlx_var);
 	return (0);
 }
@@ -259,7 +251,7 @@ int				main(void)
 	mlx_var.map[8] = NULL;
 	mlx_var.win = mlx_new_window(mlx_var.id, mlx_var.winX * 2, mlx_var.winY, "Ray-casting");
 	draw2d_map(&mlx_var);
-	mlx_loop_hook(mlx_var.id, &draw2d_map, &mlx_var);
+	mlx_expose_hook(mlx_var.id, &draw2d_map, &mlx_var);
 	mlx_hook(mlx_var.win, KeyPress, KeyPressMask, &process_key, &mlx_var);
 	mlx_loop(mlx_var.id);
 	return (0);
