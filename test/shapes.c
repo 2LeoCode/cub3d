@@ -152,7 +152,7 @@ void			draw2d_player(t_mlxvar *mlx_var)
 	{
 		i = -1;
 		while (++i < 5)
-			mlx_pixel_put(mlx_var->id, mlx_var->win, mlx_var->px - 2 + i, mlx_var->py - 2 + j, (int)color);
+			mlx_pixel_put(mlx_var->id, mlx_var->win, (mlx_var->px * mlx_var->box_size_x) - 2 + i, (mlx_var->py * mlx_var->box_size_y) - 2 + j, (int)color);
 	}
 	printf("out2\n");
 }
@@ -252,7 +252,8 @@ int				main(void)
 	mlx_var.map[8] = NULL;
 	mlx_var.win = mlx_new_window(mlx_var.id, mlx_var.winX * 2, mlx_var.winY, "Ray-casting");
 	draw2d_map(&mlx_var);
-	mlx_expose_hook(mlx_var.win, &draw2d_map, &mlx_var);
+	mlx_loop_hook(mlx_var.win, &draw2d_map, &mlx_var);
+	mlx_hook(mlx_var.win, KeyPress, KeyPressMask, &process_key, &mlx_var);
 	mlx_loop(mlx_var.win);
 	return (0);
 }
