@@ -175,6 +175,7 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	{
 		while (++j < (int)mlx_var->mapY)
 		{
+			draw2d_player(mlx_var);
 			i = -1;
 			while (++i < (int)mlx_var->mapX)
 				if (mlx_var->map[j][i] == '1')
@@ -183,7 +184,6 @@ int				draw2d_map(t_mlxvar *mlx_var)
 					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
 		}
 	}
-	draw2d_player(mlx_var);
 	old_rot = mlx_var->rot;
 	old_px = mlx_var->px;
 	old_py = mlx_var->py;
