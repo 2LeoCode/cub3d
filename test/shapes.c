@@ -160,6 +160,7 @@ int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 		}
 		posX++;
 	}
+	return (0);
 }
 
 void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
