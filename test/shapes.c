@@ -140,17 +140,27 @@ int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 	int	crossproduct;
 	int dotproduct;
 
-	posX = mlx_var->px * mlx_var->box_size_x;
-	posY = mlx_var->py * mlx_var->box_size_y;
+	posX = mlx_var->px * mlx_var->box_size_x - 1;
+	posY = ;
 	bX = posX + cos(mlx_var->rot) * mlx_var->box_size_x;
 	bY = posY + sin(mlx_var->rot) * mlx_var->box_size_y;
 	squarelen = (x - posX) * (x - posX) + (y - posY) * (y - posY);
 
-	if ((crossproduct = (y - posY) * (bX - posX) - (x - posX) * (bY - posY)) > 1)
-		return (0);
-	if ((dotproduct = (x - posX) * (bX - posX) + (y - posY) * (bY - posY)) < 0)
-		return (0);
-	return (dotproduct >= squarelen);
+	while (posX < mlx_var->px * mlx_var->box_size_x + 1)
+	{
+		posY = mlx_var->py * mlx_var->box_size_y - 1;
+		while (posY < mlx_var->py * mlx_var->box_size_y + 1)
+		{
+			if (!(crossproduct = (y - posY) * (bX - posX) - (x - posX) * (bY - posY)))
+			{
+				if (((dotproduct = (x - posX) * (bX - posX) + (y - posY) * (bY - posY)) < 0)
+				&& (dotproduct >= squarelen))
+					return (1);
+			}
+			posY++;
+		}
+		posX++;
+	}
 }
 
 void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
