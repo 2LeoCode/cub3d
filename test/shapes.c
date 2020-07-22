@@ -169,9 +169,9 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
 	if ((!old_rot && !old_px && !old_py)
-	|| ((int)((old_rot << 6)) != (int)((mlx_var->rot << 6)))
-	|| ((int)((old_px << 6)) != (int)((mlx_var->px << 6)))
-	|| ((int)((old_py << 6)) != (int)((mlx_var->py << 6))))
+	|| ((int)((old_rot * 10000)) != (int)((mlx_var->rot * 10000)))
+	|| ((int)((old_px * 10000)) != (int)((mlx_var->px * 10000)))
+	|| ((int)((old_py * 10000)) != (int)((mlx_var->py * 10000))))
 	{
 		while (++j < (int)mlx_var->mapY)
 		{
