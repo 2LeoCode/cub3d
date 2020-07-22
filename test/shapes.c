@@ -144,8 +144,10 @@ int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 	bX = posX + cos(mlx_var->rot) * (double)mlx_var->box_size_x;
 	bY = posY + sin(mlx_var->rot) * (double)mlx_var->box_size_y;
 	squarelen = (x - posX) * (x - posX) + (y - posY) * (y - posY);
+	crossproduct = (double)(y - posY) * (bX - (double)posX) - (double)(x - posX) * (bY - (double)posY);
 
-	if ((crossproduct = (y - posY) * (bX - (double)posX) - (x - posX) * (bY - (double)posY)) > 0.01)
+	printf ("%f\n", crossproduct)
+	if (crossproduct > 1)
 		return (0);
 	if ((dotproduct = (x - posX) * (bX - posX) + (y - posY) * (bY - posY)) < 0)
 		return (0);
