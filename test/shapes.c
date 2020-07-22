@@ -95,8 +95,8 @@ typedef struct	s_mlxvar
 	int					color_2d_floor;
 	int					color_2d_player;
 	int					color_2d_ray;
-	double				box_size_x;
-	double				box_size_y;
+	int					box_size_x;
+	int					box_size_y;
 }				t_mlxvar;
 
 size_t			ft_strlen(char *s)
@@ -132,22 +132,22 @@ int				is_player_pos(int x, int y, t_mlxvar *mlx_var)
 
 int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 {
-	double	posX;
-	double	posY;
+	int 	posX;
+	int 	posY;
 	double	bX;
 	double	bY;
-	double	squarelen;
-	double	crossproduct;
-	double	dotproduct;
+	int		squarelen;
+	int		crossproduct;
+	int		dotproduct;
 
 	posX = mlx_var->px * mlx_var->box_size_x;
 	posY = mlx_var->py * mlx_var->box_size_y;
-	bX = (double)posX + cos(mlx_var->rot) * mlx_var->box_size_x;
-	bY = (double)posY + sin(mlx_var->rot) * mlx_var->box_size_y;
-	squarelen = ((double)x - posX) * ((double)x - posX) + ((double)y - posY) * ((double)y - posY);
-	if ((crossproduct = ((double)y - posY) * (bX - posX) - ((double)x - posX) * (bY - posY)) > 0.000000000001)
+	bX = posX + cos(mlx_var->rot) * mlx_var->box_size_x;
+	bY = posY + sin(mlx_var->rot) * mlx_var->box_size_y;
+	squarelen = (x - posX) * (x - posX) + (y - posY) * (y - posY);
+	if ((crossproduct = (y - posY) * (bX - posX) - (x - posX) * (bY - posY)) != 0)
 		return (0);
-	if ((dotproduct = ((double)x - posX) * (bX - posX) + ((double)y - posY) * (bY - posY)) < 0)
+	if ((dotproduct = (x - posX) * (bX - posX) + (y - posY) * (bY - posY)) < 0)
 		return (0);
 	return (dotproduct >= squarelen);
 }
@@ -162,7 +162,9 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
 	{
 		i = -1;
 		while (++i < mlx_var->box_size_x)
-			if (is_ray_pos(x + i, y + j, mlx_var))
+			if (is_ray_pos(x + i, y + j, mlx_var) || is_ray_pos(x + i + 1, y + j, mlx_var) || is_ray_pos(x + i, y + j + 1, mlx_var)
+			|| is_ray_pos(x + i + 1, y + j + 1, mlx_var) || is_ray_pos(x + i - 1, y + j, mlx_var) || is_ray_pos(x + i, y + j - 1, mlx_var)
+			|| is_ray_pos(x + i - 1, y + j + 1, mlx_var) || is_ray_pos(x + i + 1, y + j - 1, mlx_var))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_ray);
 			else if (is_player_pos(x + i, y + j, mlx_var))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_player);
@@ -177,22 +179,18 @@ int				draw2d_map(t_mlxvar *mlx_var)
 {
 	int				i;
 	int				j;
-	int				round_x;
-	int				round_y;
 
-	mlx_var->box_size_x = mlx_var->winX / (double)mlx_var->mapX;
-	mlx_var->box_size_y = mlx_var->winY / (double)mlx_var->mapY;
-	round_x = ft_round(mlx_var->box_size_x);
-	round_y = ft_round(mlx_var->box_size_y);
+	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
+	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
-	while (++j < round_y)
+	while (++j < (int)mlx_var->mapY)
 	{
 		i = -1;
-		while (++i < round_x)
+		while (++i < (int)mlx_var->mapX)
 			if (mlx_var->map[j][i] == '1')
-				draw_box(mlx_var, i * round_x, j * round_y, mlx_var->color_2d_wall);
+				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, mlx_var->color_2d_wall);
 			else if (mlx_var->map[j][i] == '0')
-				draw_box(mlx_var, i * round_x, j * round_y, mlx_var->color_2d_floor);
+				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, mlx_var->color_2d_floor);
 	}
 	return (0);
 }
