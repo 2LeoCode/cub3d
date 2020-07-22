@@ -132,8 +132,6 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, unsigned long color)
 	{
 		i = -1;
 		while (++i < mlx_var->box_size_x)
-			if (((x + i < (mlx_var->box_size_x * mlx_var->px - 3)) || (x + i > (mlx_var->box_size_x * mlx_var->px + 2)))
-			|| ((y + j < (mlx_var->box_size_y * mlx_var->py - 3)) || (y + j > (mlx_var->box_size_y * mlx_var->py + 2))))
 			{
 				if (i == 0 || j == 0 || i == (mlx_var->box_size_x - 1) || j == (mlx_var->box_size_y - 1))
 					mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, 0);
@@ -161,21 +159,27 @@ void			draw2d_player(t_mlxvar *mlx_var)
 
 int				draw2d_map(t_mlxvar *mlx_var)
 {
-	int		i;
-	int		j;
+	static double	old_rot;
+	static double	old_px;
+	static double	old_py;
+	int				i;
+	int				j;
 
 	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
-	draw2d_player(mlx_var);
-	while (++j < (int)mlx_var->mapY)
+	if ((!old_rot && !old_px && !old_py) || (old_rot != mlx_var->rot) || (old_px != mlx_var->px) || (old_py != mlx_var->py))
 	{
-		i = -1;
-		while (++i < (int)mlx_var->mapX)
-			if (mlx_var->map[j][i] == '1')
-				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
-			else if (mlx_var->map[j][i] == '0')
-				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
+		while (++j < (int)mlx_var->mapY)
+		{
+			i = -1;
+			while (++i < (int)mlx_var->mapX)
+				if (mlx_var->map[j][i] == '1')
+					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
+				else if (mlx_var->map[j][i] == '0')
+					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
+		}
+		draw2d_player(mlx_var);
 	}
 	return (0);
 }
