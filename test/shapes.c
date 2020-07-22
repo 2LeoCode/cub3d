@@ -149,7 +149,7 @@ int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 		return (0);
 	if ((dotproduct = (x - posX) * (bX - posX) + (y - posY) * (bY - posY)) < 0)
 		return (0);
-	return (dotproduct >= squarelen);
+	return (1);
 }
 
 void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
