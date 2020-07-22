@@ -184,6 +184,9 @@ int				draw2d_map(t_mlxvar *mlx_var)
 		}
 		draw2d_player(mlx_var);
 	}
+	old_rot = mlx_var->rot;
+	old_px = mlx_var->px;
+	old_py = mlx_var->py;
 	return (0);
 }
 
