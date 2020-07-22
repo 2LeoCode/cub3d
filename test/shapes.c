@@ -172,7 +172,6 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
-	draw2d_player(mlx_var);
 	while (++j < (int)mlx_var->mapY)
 	{
 		i = -1;
@@ -182,6 +181,7 @@ int				draw2d_map(t_mlxvar *mlx_var)
 			else if (mlx_var->map[j][i] == '0')
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
 	}
+	draw2d_player(mlx_var);
 	return (0);
 }
 
