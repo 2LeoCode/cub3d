@@ -122,6 +122,12 @@ int				ft_round(double nb)
 	return (strict);
 }
 
+int				is_player_pos(int x, int y, t_mlxvar *mlx_var)
+{
+	return ((x >= (mlx_var->px * mlx_var->box_size_x) - 3) && (x <= (mlx_var->px * mlx_var->box_size_x) + 2)
+	&& (y >= (mlx_var->py * mlx_var->box_size_y) - 3) && (y <= (mlx_var->py * mlx_var->box_size_y) + 2));
+}
+
 void			draw_box(t_mlxvar *mlx_var, int x, int y, unsigned long color)
 {
 	int		i;
@@ -132,6 +138,7 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, unsigned long color)
 	{
 		i = -1;
 		while (++i < mlx_var->box_size_x)
+			if (!is_player_pos(x + i, y + j, mlx_var))
 			{
 				if (i == 0 || j == 0 || i == (mlx_var->box_size_x - 1) || j == (mlx_var->box_size_y - 1))
 					mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, 0);
@@ -159,34 +166,22 @@ void			draw2d_player(t_mlxvar *mlx_var)
 
 int				draw2d_map(t_mlxvar *mlx_var)
 {
-	static double	old_rot;
-	static double	old_px;
-	static double	old_py;
 	int				i;
 	int				j;
 
 	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
-	if ((!old_rot && !old_px && !old_py)
-	|| ((int)((old_rot * 10000)) != (int)((mlx_var->rot * 10000)))
-	|| ((int)((old_px * 10000)) != (int)((mlx_var->px * 10000)))
-	|| ((int)((old_py * 10000)) != (int)((mlx_var->py * 10000))))
+	draw2d_player(mlx_var);
+	while (++j < (int)mlx_var->mapY)
 	{
-		while (++j < (int)mlx_var->mapY)
-		{
-			draw2d_player(mlx_var);
-			i = -1;
-			while (++i < (int)mlx_var->mapX)
-				if (mlx_var->map[j][i] == '1')
-					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
-				else if (mlx_var->map[j][i] == '0')
-					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
-		}
+		i = -1;
+		while (++i < (int)mlx_var->mapX)
+			if (mlx_var->map[j][i] == '1')
+				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
+			else if (mlx_var->map[j][i] == '0')
+				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
 	}
-	old_rot = mlx_var->rot;
-	old_px = mlx_var->px;
-	old_py = mlx_var->py;
 	return (0);
 }
 
@@ -266,6 +261,7 @@ int				main(void)
 	mlx_var.win = mlx_new_window(mlx_var.id, mlx_var.winX * 2, mlx_var.winY, "Ray-casting");
 	draw2d_map(&mlx_var);
 	mlx_loop_hook(mlx_var.id, &draw2d_map, &mlx_var);
+	mlx_loop_hook(mlx_var.id, &draw2d_player, &mlx_var);
 	mlx_hook(mlx_var.win, KeyPress, KeyPressMask, &process_key, &mlx_var);
 	mlx_loop(mlx_var.id);
 	return (0);
