@@ -266,7 +266,7 @@ int				main(void)
 	mlx_var.win = mlx_new_window(mlx_var.id, mlx_var.winX * 2, mlx_var.winY, "Ray-casting");
 	draw2d_map(&mlx_var);
 	mlx_loop_hook(mlx_var.id, &draw2d_player, &mlx_var);
-	mlx_expose_hook(mlx_var.win, &draw2d_map, &mlx_var);
+	mlx_loop_hook(mlx_var.win, &draw2d_map, &mlx_var);
 	mlx_hook(mlx_var.win, KeyPress, KeyPressMask, &process_key, &mlx_var);
 	mlx_loop(mlx_var.id);
 	return (0);
