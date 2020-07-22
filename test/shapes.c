@@ -90,9 +90,9 @@ typedef struct	s_mlxvar
 	double				py;
 	double				rot;
 	int					FOV;
-	t_rgb				color_2d_wall;
-	t_rgb				color_2d_floor;
-	t_rgb				color_2d_player;
+	int					color_2d_wall;
+	int					color_2d_floor;
+	int					color_2d_player;
 	int					box_size_x;
 	int					box_size_y;
 }				t_mlxvar;
@@ -128,23 +128,22 @@ int				is_player_pos(int x, int y, t_mlxvar *mlx_var)
 	&& (y >= (mlx_var->py * mlx_var->box_size_y) - 3) && (y <= (mlx_var->py * mlx_var->box_size_y) + 2));
 }
 
-void			draw_box(t_mlxvar *mlx_var, int x, int y, unsigned long color)
+void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
 {
-	int		i;
-	int		j;
+	int				i;
+	int				j;
 
 	j = -1;
 	while (++j < mlx_var->box_size_y)
 	{
 		i = -1;
 		while (++i < mlx_var->box_size_x)
-			if (!is_player_pos(x + i, y + j, mlx_var))
-			{
-				if (i == 0 || j == 0 || i == (mlx_var->box_size_x - 1) || j == (mlx_var->box_size_y - 1))
-					mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, 0);
-				else
-					mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, (int)color);
-			}
+			if (is_player_pos(x + i, y + j, mlx_var))
+				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->player_color);
+			else if (i == 0 || j == 0 || i == (mlx_var->box_size_x - 1) || j == (mlx_var->box_size_y - 1))
+				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, 0);
+			else
+				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, color);
 	}
 }
 
@@ -177,11 +176,10 @@ int				draw2d_map(t_mlxvar *mlx_var)
 		i = -1;
 		while (++i < (int)mlx_var->mapX)
 			if (mlx_var->map[j][i] == '1')
-				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_wall));
+				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, mlx_var->color_2d_wall);
 			else if (mlx_var->map[j][i] == '0')
-				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
+				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, mlx_var->color_2d_floor);
 	}
-	draw2d_player(mlx_var);
 	return (0);
 }
 
@@ -221,6 +219,9 @@ int				process_key(int key, t_mlxvar *mlx_var)
 int				main(void)
 {
 	t_mlxvar	mlx_var;
+	t_rgb		color_2d_floor;
+	t_rgb		color_2d_wall;
+	t_rgb		color_2d_player;
 	int			i;
 
 	mlx_var.id = mlx_init();
@@ -228,18 +229,21 @@ int				main(void)
 	mlx_var.winX = 500;
 	mlx_var.winY = 500;
 
-	mlx_var.color_2d_floor.R = 180;
-	mlx_var.color_2d_floor.G = 180;
-	mlx_var.color_2d_floor.B = 180;
+	color_2d_floor.R = 180;
+	color_2d_floor.G = 180;
+	color_2d_floor.B = 180;
 
-	mlx_var.color_2d_wall.R = 255;
-	mlx_var.color_2d_wall.G = 255;
-	mlx_var.color_2d_wall.B = 255;
+	color_2d_wall.R = 255;
+	color_2d_wall.G = 255;
+	color_2d_wall.B = 255;
 
-	mlx_var.color_2d_player.R = 255;
-	mlx_var.color_2d_player.G = 255;
-	mlx_var.color_2d_player.B = 0;
-	
+	color_2d_player.R = 255;
+	color_2d_player.G = 255;
+	color_2d_player.B = 0;
+
+	mlx_var.color_2d_floor = (int)create_color_int(color_2d_floor);
+	mlx_var.color_2d_wall = (int)create_color_int(color_2d_wall);
+	mlx_var.color_2d_player = (int)create_color_int(color_2d_player);
 	mlx_var.mapX = 8;
 	mlx_var.mapY = 8;
 
