@@ -147,22 +147,6 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
 	}
 }
 
-void			draw2d_player(t_mlxvar *mlx_var)
-{
-	int		i;
-	int		j;
-	unsigned long color;
-
-	color = create_color_int(mlx_var->color_2d_player);
-	j = -1;
-	while (++j < 5)
-	{
-		i = -1;
-		while (++i < 5)
-			mlx_pixel_put(mlx_var->id, mlx_var->win, (mlx_var->px * mlx_var->box_size_x) - 2 + i, (mlx_var->py * mlx_var->box_size_y) - 2 + j, (int)color);
-	}
-}
-
 int				draw2d_map(t_mlxvar *mlx_var)
 {
 	int				i;
