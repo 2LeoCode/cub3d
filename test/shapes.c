@@ -146,7 +146,7 @@ int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 	squarelen = (x - posX) * (x - posX) + (y - posY) * (y - posY);
 	crossproduct = (double)(y - posY) * (bX - (double)posX) - (double)(x - posX) * (bY - (double)posY);
 
-	printf ("%f\n", crossproduct)
+	printf ("%f\n", crossproduct);
 	if (crossproduct > 1)
 		return (0);
 	if ((dotproduct = (x - posX) * (bX - posX) + (y - posY) * (bY - posY)) < 0)
