@@ -203,13 +203,13 @@ char			*ft_strdup(char *s)
 int				process_key(int key, t_mlxvar *mlx_var)
 {
 	if (key == 65361) //left
-		mlx_var->px -= 0.1;
+		mlx_var->px -= 0.01;
 	if (key == 65363) //right
-		mlx_var->px += 0.1;
+		mlx_var->px += 0.01;
 	if (key == 65362) //top
-		mlx_var->py -= 0.1;
+		mlx_var->py -= 0.01;
 	if (key == 65364) //bot
-		mlx_var->py += 0.1;
+		mlx_var->py += 0.01;
 	return (0);
 }
 
