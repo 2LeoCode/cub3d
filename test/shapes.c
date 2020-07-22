@@ -141,7 +141,6 @@ int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 	int dotproduct;
 
 	posX = mlx_var->px * mlx_var->box_size_x - 1;
-	posY = ;
 	bX = posX + cos(mlx_var->rot) * mlx_var->box_size_x;
 	bY = posY + sin(mlx_var->rot) * mlx_var->box_size_y;
 	squarelen = (x - posX) * (x - posX) + (y - posY) * (y - posY);
