@@ -227,7 +227,7 @@ int				main(void)
 	mlx_var.py = 3;
 	mlx_var.rot = 0;
 
-	mlx_var.map = (char**)malloc(sizeof(char*) * mlx_var.mapX);
+	mlx_var.map = (char**)malloc(sizeof(char*) * (mlx_var.mapX + 1));
 	i = -1;
 	mlx_var.map[0] = ft_strdup("11111111");
 	mlx_var.map[1] = ft_strdup("10000101");
@@ -237,6 +237,8 @@ int				main(void)
 	mlx_var.map[5] = ft_strdup("10010001");
 	mlx_var.map[6] = ft_strdup("10010011");
 	mlx_var.map[7] = ft_strdup("11111111");
+	mlx_var.map[8] = NULL;
+	printf("OK\n%s\n", mlx_var.map[0]);
 	mlx_var.win = mlx_new_window(mlx_var.id, mlx_var.winX * 2, mlx_var.winY, "Ray-casting");
 	mlx_expose_hook(mlx_var.win, &draw2d_map, &mlx_var);
 	mlx_expose_hook(mlx_var.win, &draw2d_player, &mlx_var);
