@@ -95,8 +95,8 @@ typedef struct	s_mlxvar
 	int					color_2d_floor;
 	int					color_2d_player;
 	int					color_2d_ray;
-	int					box_size_x;
-	int					box_size_y;
+	double				box_size_x;
+	double				box_size_y;
 }				t_mlxvar;
 
 size_t			ft_strlen(char *s)
@@ -132,18 +132,18 @@ int				is_player_pos(int x, int y, t_mlxvar *mlx_var)
 
 int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
 {
-	int posX;
-	int posY;
-	int	bX;
-	int	bY;
-	int	squarelen;
-	int	crossproduct;
-	int	dotproduct;
+	double	posX;
+	double	posY;
+	double	bX;
+	double	bY;
+	double	squarelen;
+	double	crossproduct;
+	double	dotproduct;
 
 	posX = mlx_var->px * mlx_var->box_size_x;
 	posY = mlx_var->py * mlx_var->box_size_y;
-	bX = posX + cos(mlx_var->rot) * mlx_var->box_size_x;
-	bY = posY + sin(mlx_var->rot) * mlx_var->box_size_y;
+	bX = (double)posX + cos(mlx_var->rot) * mlx_var->box_size_x;
+	bY = (double)posY + sin(mlx_var->rot) * mlx_var->box_size_y;
 	squarelen = (x - posX) * (x - posX) + (y - posY) * (y - posY);
 	if ((crossproduct = (y - posY) * (bX - posX) - (x - posX) * (bY - posY)) != 0)
 		return (0);
@@ -180,13 +180,13 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	int				i;
 	int				j;
 
-	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
-	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
+	mlx_var->box_size_x = mlx_var->winX / (double)mlx_var->mapX;
+	mlx_var->box_size_y = mlx_var->winY / (double)mlx_var->mapY;
 	j = -1;
-	while (++j < (int)mlx_var->mapY)
+	while (++j < mlx_var->mapY)
 	{
 		i = -1;
-		while (++i < (int)mlx_var->mapX)
+		while (++i < mlx_var->mapX)
 			if (mlx_var->map[j][i] == '1')
 				draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, mlx_var->color_2d_wall);
 			else if (mlx_var->map[j][i] == '0')
