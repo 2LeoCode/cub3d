@@ -168,6 +168,7 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	mlx_var->box_size_x = ft_round(mlx_var->winX / (double)mlx_var->mapX);
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
+	draw2d_player(mlx_var);
 	if ((!old_rot && !old_px && !old_py)
 	|| ((int)((old_rot * 10000)) != (int)((mlx_var->rot * 10000)))
 	|| ((int)((old_px * 10000)) != (int)((mlx_var->px * 10000)))
@@ -182,7 +183,6 @@ int				draw2d_map(t_mlxvar *mlx_var)
 				else if (mlx_var->map[j][i] == '0')
 					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, create_color_int(mlx_var->color_2d_floor));
 		}
-		draw2d_player(mlx_var);
 	}
 	old_rot = mlx_var->rot;
 	old_px = mlx_var->px;
