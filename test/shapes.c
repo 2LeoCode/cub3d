@@ -174,14 +174,13 @@ int				draw2d_map(t_mlxvar *mlx_var)
 
 char			*ft_strcpy(char *d, char *s)
 {
-	int		len;
+	int		i;
 
-	while (*(s - 1))
-	{
-		*(d++) = *(s++);
-		len++;
-	}
-	return (d - len + 1);
+	i = -1;
+	while (s[++i])
+		d[i] = s[i];
+	d[i] = 0;
+	return (d);
 }
 
 char			*ft_strdup(char *s)
