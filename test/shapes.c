@@ -162,7 +162,6 @@ int				draw2d_map(t_mlxvar *mlx_var)
 {
 	static double	old_px;
 	static double	old_py;
-	static double	old_rot;
 	int				i;
 	int				j;
 
@@ -170,7 +169,7 @@ int				draw2d_map(t_mlxvar *mlx_var)
 	mlx_var->box_size_y = ft_round(mlx_var->winY / (double)mlx_var->mapY);
 	j = -1;
 	while (++j < (int)mlx_var->mapY)
-		if ((!old_px && !old_py && !old_rot) || old_px != mlx_var->px || old_py != mlx_var->py || old_rot != mlx_var->rot)
+		if ((!old_px && !old_py) || old_px != mlx_var->px || old_py != mlx_var->py)
 		{
 			i = -1;
 			while (++i < (int)mlx_var->mapX)
@@ -182,7 +181,6 @@ int				draw2d_map(t_mlxvar *mlx_var)
 		}
 	old_px = mlx_var->px;
 	old_py = mlx_var->py;
-	old_rot = mlx_var->rot;
 	return (0);
 }
 
