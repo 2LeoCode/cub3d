@@ -218,13 +218,13 @@ int				process_key(int key, t_mlxvar *mlx_var)
 {
 	if (key == 65361) //left
 	{
-		if (mlx_var->rot > 2 * M_PI)
+		if (mlx_var->rot < 0)
 			mlx_var->rot = 2 * M_PI;
 		mlx_var->rot -= ONE_DEGREE;
 	}
 	if (key == 65363) //right
 	{
-		if (mlx_var->rot < 0)
+		if (mlx_var->rot > 2 * M_PI)
 			mlx_var->rot = 0;
 		mlx_var->rot += ONE_DEGREE;
 	}
