@@ -252,7 +252,7 @@ int				main(void)
 	mlx_var.map[8] = NULL;
 	mlx_var.win = mlx_new_window(mlx_var.id, mlx_var.winX * 2, mlx_var.winY, "Ray-casting");
 	draw2d_map(&mlx_var);
-	mlx_loop_hook(mlx_var.win, &draw2d_map, &mlx_var);
+	mlx_expose_hook(mlx_var.win, &draw2d_map, &mlx_var);
 	mlx_loop(mlx_var.win);
 	return (0);
 }
