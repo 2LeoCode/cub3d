@@ -230,8 +230,8 @@ int				process_key(int key, t_mlxvar *mlx_var)
 	}
 	if (key == 65362) //top
 	{
-		mlx_var->px += cos(mlx_var->rot);
-		mlx_var->py += sin(mlx_var->rot);
+		mlx_var->px += cos(mlx_var->rot) / mlx_var->box_size_x;
+		mlx_var->py += sin(mlx_var->rot) / mlx_var->box_size_y;
 	}
 	if (key == 65364) //bot
 	{
