@@ -93,6 +93,7 @@ typedef struct	s_mlxvar
 	int					color_2d_wall;
 	int					color_2d_floor;
 	int					color_2d_player;
+	int					color_2d_ray;
 	int					box_size_x;
 	int					box_size_y;
 }				t_mlxvar;
@@ -128,6 +129,29 @@ int				is_player_pos(int x, int y, t_mlxvar *mlx_var)
 	&& (y >= (mlx_var->py * mlx_var->box_size_y) - 3) && (y <= (mlx_var->py * mlx_var->box_size_y) + 2));
 }
 
+int				is_ray_pos(int x, int y, t_mlxvar *mlx_var)
+{
+	int posX;
+	int posY;
+	int	bX;
+	int	bY;
+	int	squarelen;
+	int	crossproduct;
+	int dotproduct;
+
+	posX = mlx_var->px * mlx_var->box_size_x;
+	posY = mlx_var->py * mlx_var->box_size_y;
+	bX = posX + cos(mlx_var->rot) * mlx_var->box_size_x;
+	bY = posY + sin(mlx_var->rot) * mlx_var->box_size_y;
+	squarelen = (x - posX) * (x - posX) + (y - posY) * (y - posY);
+
+	if ((crossproduct = (y - posY) * (bX - posX) - (x - posX) * (bY - posY)) != 0)
+		return (0);
+	if ((dotproduct = (x - posX) * (bX - posX) + (y - posY) * (bY - posY)) < 0)
+		return (0);
+	return (dotproduct >= squarelen);
+}
+
 void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
 {
 	int				i;
@@ -138,7 +162,9 @@ void			draw_box(t_mlxvar *mlx_var, int x, int y, int color)
 	{
 		i = -1;
 		while (++i < mlx_var->box_size_x)
-			if (is_player_pos(x + i, y + j, mlx_var))
+			if (is_ray_pos(x + i, y + j, mlx_var))
+				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_ray);
+			else if (is_player_pos(x + i, y + j, mlx_var))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, mlx_var->color_2d_player);
 			else if (i == 0 || j == 0 || i == (mlx_var->box_size_x - 1) || j == (mlx_var->box_size_y - 1))
 				mlx_pixel_put(mlx_var->id, mlx_var->win, x + i, y + j, 0);
@@ -206,6 +232,7 @@ int				main(void)
 	t_rgb		color_2d_floor;
 	t_rgb		color_2d_wall;
 	t_rgb		color_2d_player;
+	t_rgb		color_2d_ray;
 	int			i;
 
 	mlx_var.id = mlx_init();
@@ -221,6 +248,10 @@ int				main(void)
 	color_2d_wall.G = 255;
 	color_2d_wall.B = 255;
 
+	color_2d_ray.R = 255;
+	color_2d_ray.G = 0;
+	color_2d_ray.B = 0;
+
 	color_2d_player.R = 255;
 	color_2d_player.G = 255;
 	color_2d_player.B = 0;
@@ -228,6 +259,7 @@ int				main(void)
 	mlx_var.color_2d_floor = (int)create_color_int(color_2d_floor);
 	mlx_var.color_2d_wall = (int)create_color_int(color_2d_wall);
 	mlx_var.color_2d_player = (int)create_color_int(color_2d_player);
+	mlx_var.color_2d_ray = (int)create_color_int(color_2d_ray);
 	mlx_var.mapX = 8;
 	mlx_var.mapY = 8;
 
