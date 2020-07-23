@@ -213,7 +213,7 @@ void			draw_rays(t_mlxvar *mlx_var)
 		cond = &condition_top_left;
 	else if (mlx_var->rot >= 3 * M_PI / 2)
 		cond = &condition_top_right;*/
-	while (mlx_var->map[(int)(y / mlx_var->box_size_y)][(int)(y / mlx_var->box_size_y)] == '0')
+	while (mlx_var->map[(int)(posY / mlx_var->box_size_y)][(int)(posX / mlx_var->box_size_x)] == '0')
 	{
 		mlx_pixel_put(mlx_var->id, mlx_var->win, (int)posX, (int)posY, mlx_var->color_2d_ray);
 		posX += dX;
