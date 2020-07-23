@@ -314,8 +314,8 @@ int				main(void)
 
 	mlx_var.id = mlx_init();
 
-	mlx_var.winX = 500;
-	mlx_var.winY = 500;
+	mlx_var.winX = 200;
+	mlx_var.winY = 200;
 
 	color_2d_floor.R = 180;
 	color_2d_floor.G = 180;
