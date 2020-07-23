@@ -193,9 +193,9 @@ void			draw_rays(t_mlxvar *mlx_var)
 	double	bX;
 	double	bY;
 
-	i = -1;
+	i = 0;
 
-	while (++i < mlx_var->FOV)
+	while (i < mlx_var->FOV)
 	{
 		posX = mlx_var->px * (double)mlx_var->box_size_x;
 		posY = mlx_var->py * (double)mlx_var->box_size_y;
@@ -215,6 +215,7 @@ void			draw_rays(t_mlxvar *mlx_var)
 			posX += dX;
 			posY += dY;
 		}
+		i += ONE_DEGREE;
 	}
 }
 
@@ -338,7 +339,7 @@ int				main(void)
 	mlx_var.px = 2.5;
 	mlx_var.py = 2.5;
 	mlx_var.rot = 0;
-	mlx_var.FOV = 90;
+	mlx_var.FOV = M_PI / 2;
 
 	mlx_var.map = (char**)malloc(sizeof(char*) * (mlx_var.mapX + 1));
 	i = -1;
