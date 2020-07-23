@@ -163,7 +163,7 @@ double			ft_abs(double nb)
 	return ((nb < 0) ? -nb : nb);
 }
 
-int				condition_bot_right(double aX, double aY, double bX, double bY)
+int				condition_bot_right(double x, double y, double bX, double bY)
 {
 	return ((aX < bX) || (aY < bY));
 }
@@ -185,7 +185,6 @@ int				condition_top_right(double aX, double aY, double bX, double bY)
 
 void			draw_rays(t_mlxvar *mlx_var)
 {
-	int		(*cond)(double, double, double, double);
 	double	posX;
 	double	posY;
 	double	dX;
@@ -206,15 +205,15 @@ void			draw_rays(t_mlxvar *mlx_var)
 		dX /= 1.1;
 		dY /= 1.1;
 	}
-	if (mlx_var->rot < M_PI / 2)
+	/*if (mlx_var->rot < M_PI / 2)
 		cond = &condition_bot_right;
 	else if ((mlx_var->rot < M_PI) && (mlx_var->rot >= M_PI / 2))
 		cond = &condition_bot_left;
 	else if ((mlx_var->rot < 3 * M_PI / 2) && (mlx_var->rot >= M_PI))
 		cond = &condition_top_left;
 	else if (mlx_var->rot >= 3 * M_PI / 2)
-		cond = &condition_top_right;
-	while ((*cond)(posX, posY, bX, bY))
+		cond = &condition_top_right;*/
+	while (mlx_var->map[(int)(y / mlx_var->box_size_y)][(int)(y / mlx_var->box_size_y)] == '0')
 	{
 		mlx_pixel_put(mlx_var->id, mlx_var->win, (int)posX, (int)posY, mlx_var->color_2d_ray);
 		posX += dX;
