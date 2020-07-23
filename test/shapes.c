@@ -206,7 +206,6 @@ void			draw_rays(t_mlxvar *mlx_var)
 		dX /= 1.1;
 		dY /= 1.1;
 	}
-	return ;
 	if (mlx_var->rot < M_PI / 2)
 		cond = &condition_top_right;
 	else if ((mlx_var->rot < M_PI) && (mlx_var->rot >= M_PI / 2))
