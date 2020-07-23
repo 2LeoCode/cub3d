@@ -288,13 +288,13 @@ int				process_key(int key, t_mlxvar *mlx_var)
 	}
 	if (key == 65362) //top
 	{
-		mlx_var->px += cos(mlx_var->rot) / mlx_var->box_size_x;
-		mlx_var->py += sin(mlx_var->rot) / mlx_var->box_size_y;
+		mlx_var->px += (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
+		mlx_var->py += (sin(mlx_var->rot) / mlx_var->box_size_y) * 3;
 	}
 	if (key == 65364) //bot
 	{
-		mlx_var->px -= cos(mlx_var->rot) / mlx_var->box_size_x;
-		mlx_var->py -= sin(mlx_var->rot) / mlx_var->box_size_x;
+		mlx_var->px -= (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
+		mlx_var->py -= (sin(mlx_var->rot) / mlx_var->box_size_x) * 3;
 	}
 	if (mlx_var->rot > 2 * M_PI)
 		mlx_var->rot = mlx_var->rot - 2 * M_PI;
