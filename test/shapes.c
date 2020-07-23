@@ -187,37 +187,34 @@ void			draw_rays(t_mlxvar *mlx_var)
 {
 	double	posX;
 	double	posY;
+	int		i;
 	double	dX;
 	double	dY;
 	double	bX;
 	double	bY;
 
+	i = -1;
 	posX = mlx_var->px * (double)mlx_var->box_size_x;
 	posY = mlx_var->py * (double)mlx_var->box_size_y;
 
-	bX = posX + cos(mlx_var->rot) * (double)mlx_var->box_size_x;
-	bY = posY + sin(mlx_var->rot) * (double)mlx_var->box_size_y;
+	while (++i < mlx_var->FOV)
+	{
+		bX = posX + cos(mlx_var->rot - mlx_var->FOV / 2 + i) * (double)mlx_var->box_size_x;
+		bY = posY + sin(mlx_var->rot - mlx_var->FOV / 2 + i) * (double)mlx_var->box_size_y;
 
-	dX = bX - posX;
-	dY = bY - posY;
-	while ((ft_abs(dX) > 1) || (ft_abs(dY) > 1))
-	{
-		dX /= 1.1;
-		dY /= 1.1;
-	}
-	/*if (mlx_var->rot < M_PI / 2)
-		cond = &condition_bot_right;
-	else if ((mlx_var->rot < M_PI) && (mlx_var->rot >= M_PI / 2))
-		cond = &condition_bot_left;
-	else if ((mlx_var->rot < 3 * M_PI / 2) && (mlx_var->rot >= M_PI))
-		cond = &condition_top_left;
-	else if (mlx_var->rot >= 3 * M_PI / 2)
-		cond = &condition_top_right;*/
-	while (mlx_var->map[(int)(posY / mlx_var->box_size_y)][(int)(posX / mlx_var->box_size_x)] == '0')
-	{
-		mlx_pixel_put(mlx_var->id, mlx_var->win, (int)posX, (int)posY, mlx_var->color_2d_ray);
-		posX += dX;
-		posY += dY;
+		dX = bX - posX;
+		dY = bY - posY;
+		while ((ft_abs(dX) > 1) || (ft_abs(dY) > 1))
+		{
+			dX /= 1.1;
+			dY /= 1.1;
+		}
+		while (mlx_var->map[(int)(posY / mlx_var->box_size_y)][(int)(posX / mlx_var->box_size_x)] == '0')
+		{
+			mlx_pixel_put(mlx_var->id, mlx_var->win, (int)posX, (int)posY, mlx_var->color_2d_ray);
+			posX += dX;
+			posY += dY;
+		}
 	}
 }
 
@@ -341,6 +338,7 @@ int				main(void)
 	mlx_var.px = 2.5;
 	mlx_var.py = 2.5;
 	mlx_var.rot = 0;
+	mlx_var.FOV = 90;
 
 	mlx_var.map = (char**)malloc(sizeof(char*) * (mlx_var.mapX + 1));
 	i = -1;
