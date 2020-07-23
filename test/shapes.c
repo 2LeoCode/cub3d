@@ -163,22 +163,22 @@ double			ft_abs(double nb)
 	return ((nb < 0) ? -nb : nb);
 }
 
-int				condition_top_right(double aX, double aY, double bX, double bY)
+int				condition_bot_right(double aX, double aY, double bX, double bY)
+{
+	return ((aX < bX) || (aY < bY));
+}
+
+int				condition_bot_left(double aX, double aY, double bX, double bY)
 {
 	return ((aX > bX) || (aY < bY));
 }
 
 int				condition_top_left(double aX, double aY, double bX, double bY)
 {
-	return ((aX > bX) || (aY < bY));
-}
-
-int				condition_bot_left(double aX, double aY, double bX, double bY)
-{
 	return ((aX > bX) || (aY > bY));
 }
 
-int				condition_bot_right(double aX, double aY, double bX, double bY)
+int				condition_top_right(double aX, double aY, double bX, double bY)
 {
 	return ((aX < bX) || (aY > bY));
 }
@@ -208,13 +208,13 @@ void			draw_rays(t_mlxvar *mlx_var)
 	}
 	printf ("%f %f %f %f %f %f\n%f\n", posX, posY, bX, bY, dX, dY, mlx_var->rot);
 	if (mlx_var->rot < M_PI / 2)
-		cond = &condition_top_right;
-	else if ((mlx_var->rot < M_PI) && (mlx_var->rot >= M_PI / 2))
-		cond = &condition_top_left;
-	else if ((mlx_var->rot < 3 * M_PI / 2) && (mlx_var->rot >= M_PI))
-		cond = &condition_bot_left;
-	else if (mlx_var->rot >= 3 * M_PI / 2)
 		cond = &condition_bot_right;
+	else if ((mlx_var->rot < M_PI) && (mlx_var->rot >= M_PI / 2))
+		cond = &condition_bot_left;
+	else if ((mlx_var->rot < 3 * M_PI / 2) && (mlx_var->rot >= M_PI))
+		cond = &condition_top_left;
+	else if (mlx_var->rot >= 3 * M_PI / 2)
+		cond = &condition_top_right;
 	while ((*cond)(posX, posY, bX, bY))
 	{
 		mlx_pixel_put(mlx_var->id, mlx_var->win, (int)posX, (int)posY, mlx_var->color_2d_ray);
