@@ -206,13 +206,13 @@ void			draw_rays(t_mlxvar *mlx_var)
 		dX /= 1.1;
 		dY /= 1.1;
 	}
-	if (rot < M_PI / 2)
+	if (mlx_var->rot < M_PI / 2)
 		cond = &condition_top_right;
-	else if ((rot < M_PI) && (rot >= M_PI / 2))
+	else if ((mlx_var->rot < M_PI) && (mlx_var->rot >= M_PI / 2))
 		cond = &condition_top_left;
-	else if ((rot < 3 * M_PI / 2) && (rot >= M_PI))
+	else if ((mlx_var->rot < 3 * M_PI / 2) && (mlx_var->rot >= M_PI))
 		cond = &condition_bot_left;
-	else if (rot >= 3 * M_PI / 2)
+	else if (mlx_var->rot >= 3 * M_PI / 2)
 		cond = &condition_bot_right;
 	while ((*cond)(posX, posY, bX, bY))
 	{
