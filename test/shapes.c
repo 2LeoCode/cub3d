@@ -187,14 +187,13 @@ void			draw_rays(t_mlxvar *mlx_var)
 {
 	double	posX;
 	double	posY;
-	int		i;
+	double	i;
 	double	dX;
 	double	dY;
 	double	bX;
 	double	bY;
 
 	i = 0;
-
 	while (i < mlx_var->FOV)
 	{
 		posX = mlx_var->px * (double)mlx_var->box_size_x;
