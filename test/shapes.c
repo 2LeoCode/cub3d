@@ -201,13 +201,12 @@ void			draw_rays(t_mlxvar *mlx_var)
 
 	dX = bX - posX;
 	dY = bY - posY;
-	while ((ft_abs(dX) > 1) && (ft_abs(dY) > 1))
+	while ((ft_abs(dX) > 1) || (ft_abs(dY) > 1))
 	{
 		dX /= 1.1;
 		dY /= 1.1;
 	}
 	printf ("%f %f %f %f %f %f\n", posX, posY, bX, bY, dX, dY);
-	return ;
 	if (mlx_var->rot < M_PI / 2)
 		cond = &condition_top_right;
 	else if ((mlx_var->rot < M_PI) && (mlx_var->rot >= M_PI / 2))
