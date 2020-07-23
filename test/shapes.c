@@ -201,7 +201,7 @@ void			draw_rays(t_mlxvar *mlx_var)
 
 	dX = bX - posX;
 	dY = bY - posY;
-	while ((dX > 1) && (dY > 1))
+	while ((dX > 2) && (dY > 2))
 	{
 		dX /= 1.1;
 		dY /= 1.1;
