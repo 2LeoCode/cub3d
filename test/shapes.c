@@ -297,7 +297,7 @@ int				process_key(int key, t_mlxvar *mlx_var)
 		mlx_var->py -= sin(mlx_var->rot) / mlx_var->box_size_x;
 	}
 	if (mlx_var->rot > 2 * M_PI)
-		mlx_var->rot = 2 * M_PI - mlx_var->rot;
+		mlx_var->rot = mlx_var->rot - 2 * M_PI;
 	if (mlx_var->rot < 0)
 		mlx_var->rot = 2 * M_PI + mlx_var->rot;
 	return (0);
