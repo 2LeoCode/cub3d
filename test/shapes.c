@@ -165,22 +165,22 @@ double			ft_abs(double nb)
 
 int				condition_top_right(double aX, double aY, double bX, double bY)
 {
-	return ((aX < bX) && (aY > bY));
+	return ((aX < bX) || (aY > bY));
 }
 
 int				condition_top_left(double aX, double aY, double bX, double bY)
 {
-	return ((aX > bX) && (aY > bY));
+	return ((aX > bX) || (aY > bY));
 }
 
 int				condition_bot_left(double aX, double aY, double bX, double bY)
 {
-	return ((aX > bX) && (aY < bY));
+	return ((aX > bX) || (aY < bY));
 }
 
 int				condition_bot_right(double aX, double aY, double bX, double bY)
 {
-	return ((aX > bX) && (aY < bY));
+	return ((aX > bX) || (aY < bY));
 }
 
 void			draw_rays(t_mlxvar *mlx_var)
@@ -214,8 +214,7 @@ void			draw_rays(t_mlxvar *mlx_var)
 		cond = &condition_bot_left;
 	else if (mlx_var->rot >= 3 * M_PI / 2)
 		cond = &condition_bot_right;
-		//(*cond)(posX, posY, bX, bY)
-	while ((posX < bX) && (posY > bY))
+	while ((*cond)(posX, posY, bX, bY))
 	{
 		mlx_pixel_put(mlx_var->id, mlx_var->win, (int)posX, (int)posY, mlx_var->color_2d_ray);
 		posX += dX;
