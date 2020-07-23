@@ -165,22 +165,22 @@ double			ft_abs(double nb)
 
 int				condition_top_right(double aX, double aY, double bX, double bY)
 {
-	return ((aX < bX) || (aY > bY));
+	return ((aX > bX) || (aY < bY));
 }
 
 int				condition_top_left(double aX, double aY, double bX, double bY)
 {
-	return ((aX > bX) || (aY > bY));
+	return ((aX > bX) || (aY < bY));
 }
 
 int				condition_bot_left(double aX, double aY, double bX, double bY)
 {
-	return ((aX > bX) || (aY < bY));
+	return ((aX > bX) || (aY > bY));
 }
 
 int				condition_bot_right(double aX, double aY, double bX, double bY)
 {
-	return ((aX > bX) || (aY < bY));
+	return ((aX < bX) || (aY > bY));
 }
 
 void			draw_rays(t_mlxvar *mlx_var)
