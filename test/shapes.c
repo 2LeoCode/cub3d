@@ -197,7 +197,7 @@ void			draw_rays(t_mlxvar *mlx_var)
 	posY = mlx_var->py * (double)mlx_var->box_size_y;
 
 	bX = posX + cos(mlx_var->rot) * (double)mlx_var->box_size_x;
-	bX = posY + sin(mlx_var->rot) * (double)mlx_var->box_size_y;
+	bY = posY + sin(mlx_var->rot) * (double)mlx_var->box_size_y;
 
 	dX = bX - posX;
 	dY = bY - posY;
