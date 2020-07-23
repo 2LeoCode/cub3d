@@ -163,7 +163,7 @@ double			ft_abs(double nb)
 	return ((nb < 0) ? -nb : nb);
 }
 
-int				condition_bot_right(double x, double y, double bX, double bY)
+int				condition_bot_right(double aX, double aY, double bX, double bY)
 {
 	return ((aX < bX) || (aY < bY));
 }
