@@ -194,12 +194,12 @@ void			draw_rays(t_mlxvar *mlx_var)
 	double	bY;
 
 	i = 0;
-	while (i <= mlx_var->FOV * 2)
+	while (i <= mlx_var->FOV)
 	{
 		posX = mlx_var->px * (double)mlx_var->box_size_x;
 		posY = mlx_var->py * (double)mlx_var->box_size_y;
-		bX = posX + cos(mlx_var->rot - mlx_var->FOV / 2 + i) * (double)mlx_var->box_size_x;
-		bY = posY + sin(mlx_var->rot - mlx_var->FOV / 2 + i) * (double)mlx_var->box_size_y;
+		bX = posX + cos(mlx_var->rot - mlx_var->FOV + i) * (double)mlx_var->box_size_x;
+		bY = posY + sin(mlx_var->rot - mlx_var->FOV + i) * (double)mlx_var->box_size_y;
 
 		dX = bX - posX;
 		dY = bY - posY;
