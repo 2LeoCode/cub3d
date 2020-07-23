@@ -175,7 +175,7 @@ int				condition_top_left(double aX, double aY, double bX, double bY)
 
 int				condition_bot_left(double aX, double aY, double bX, double bY)
 {
-	return ((aX > bX) && (aY < bY);
+	return ((aX > bX) && (aY < bY));
 }
 
 int				condition_bot_right(double aX, double aY, double bX, double bY)
