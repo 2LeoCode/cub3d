@@ -278,13 +278,13 @@ int				process_key(int key, t_mlxvar *mlx_var)
 	{
 		if (mlx_var->rot < 0)
 			mlx_var->rot = 2 * M_PI;
-		mlx_var->rot -= ONE_DEGREE * 5;
+		mlx_var->rot -= ONE_DEGREE * 3;
 	}
 	if (key == 65363) //right
 	{
 		if (mlx_var->rot > 2 * M_PI)
 			mlx_var->rot = 0;
-		mlx_var->rot += ONE_DEGREE * 5;
+		mlx_var->rot += ONE_DEGREE * 3;
 	}
 	if (key == 65362) //top
 	{
@@ -296,6 +296,10 @@ int				process_key(int key, t_mlxvar *mlx_var)
 		mlx_var->px -= cos(mlx_var->rot) / mlx_var->box_size_x;
 		mlx_var->py -= sin(mlx_var->rot) / mlx_var->box_size_x;
 	}
+	if (mlx_var->rot > 2 * M_PI)
+		mlx_var->rot = 2 * M_PI - mlx_var->rot;
+	if (mlx_var->rot < 0)
+		mlx_var->rot = 2 * M_PI + mlx_var->rot;
 	return (0);
 }
 
