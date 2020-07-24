@@ -326,7 +326,7 @@ int				main(void)
 	mlx_var.rot = 0;
 	mlx_var.FOV = M_PI / 2;
 	mlx_var.FOV_vert = 2 * atan(tan(mlx_var.FOV / 2) * (mlx_var.mapX / mlx_var.mapY));
-	mlx_var.ray_width = (int)(mlx_var.winX / (mlx_var->FOV * 180 / M_PI));
+	mlx_var.ray_width = (int)(mlx_var.winX / (mlx_var.FOV * 180 / M_PI));
 	mlx_var.map = (char**)malloc(sizeof(char*) * (mlx_var.mapX + 1));
 	i = -1;
 	mlx_var.map[0] = ft_strdup("11111111");
