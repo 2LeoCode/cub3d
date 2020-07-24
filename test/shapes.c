@@ -22,60 +22,22 @@ typedef struct			s_coord
 	double				y;
 }						t_coord;
 
-typedef struct			s_coord_3
-{
-	double				x;
-	double				y;
-	double				z;
-}						t_coord_3;
-
-typedef struct			s_screen_coord
-{
-	t_coord				x;
-	t_coord				y;
-	t_coord				z;
-}						t_screen_coord;
-
-typedef struct			s_triangle
-{
-	t_coord_3			A;
-	t_coord_3			B;
-	t_coord_3			C;
-}						t_triangle;
-
-typedef struct			s_screen_triangle
-{
-	t_screen_coord		x;
-	t_screen_coord		y;
-	t_screen_coord		z;
-}						t_screen_triangle;
-
-typedef struct			s_quad
-{
-	t_triangle			top;
-	t_triangle			bot;
-
-	t_screen_triangle	stop;
-	t_screen_triangle	sbot;
-
-}						t_quad;
-
-typedef struct			s_cube
-{
-	t_quad				no;
-	t_quad				ea;
-	t_quad				so;
-	t_quad				we;
-	t_quad				top;
-	t_quad				bot;
-}						t_cube;
-
 typedef struct	s_rgb
 {
 	int		R;
 	int		G;
 	int		B;
 }				t_rgb;
+
+typedef struct	s_raylist
+{
+	double				size;
+	double				line_size;
+	double				angle;
+	int					startX;
+	int					startY;
+	struct s_raylist	*next;
+}				t_raylist;
 
 typedef struct	s_mlxvar
 {
@@ -91,12 +53,16 @@ typedef struct	s_mlxvar
 	double				py;
 	double				rot;
 	double				FOV;
+	double				FOV_vert;
 	int					color_2d_wall;
 	int					color_2d_floor;
 	int					color_2d_player;
 	int					color_2d_ray;
 	int					box_size_x;
 	int					box_size_y;
+	int					box_size_3d;
+	t_raylist			*ray_list;
+	int					ray_width;
 }				t_mlxvar;
 
 size_t			ft_strlen(char *s)
@@ -183,17 +149,30 @@ int				condition_top_right(double aX, double aY, double bX, double bY)
 	return ((aX < bX) || (aY > bY));
 }
 
+t_raylist		*lstpush(double aX, double aY, double bX, double bY, double angle, t_mlxvar	*mlx_var)
+{
+	t_raylist	*new;
+
+	if (!(new = malloc(sizeof(t_raylist))))
+		return (NULL);
+	new->line_size = sqrt((bX - aX) * (bX - aX) + (bY - aY) * (bY - aY));
+	new->angle = angle;
+	new->next = mlx_var->ray_list;
+	mlx_var->ray_list = new;
+}
+
 void			draw_rays(t_mlxvar *mlx_var)
 {
-	double	posX;
-	double	posY;
-	double	i;
-	double	dX;
-	double	dY;
-	double	bX;
-	double	bY;
+	double		posX;
+	double		posY;
+	double		i;
+	double		dX;
+	double		dY;
+	double		bX;
+	double		bY;
 
 	i = 0;
+	mlx_var->ray_list = NULL;
 	while (i <= mlx_var->FOV)
 	{
 		posX = mlx_var->px * (double)mlx_var->box_size_x;
@@ -208,12 +187,15 @@ void			draw_rays(t_mlxvar *mlx_var)
 			dX /= 1.1;
 			dY /= 1.1;
 		}
+		bX = posX;
+		bY = posY;
 		while (mlx_var->map[(int)(posY / mlx_var->box_size_y)][(int)(posX / mlx_var->box_size_x)] == '0')
 		{
 			mlx_pixel_put(mlx_var->id, mlx_var->win, (int)posX, (int)posY, mlx_var->color_2d_ray);
 			posX += dX;
 			posY += dY;
 		}
+		mlx_var->ray_list = lstpush(bX, bY, posX, posY, -mlx_var->FOV / 2 + i, mlx_var);
 		i += ONE_DEGREE;
 	}
 }
@@ -343,7 +325,8 @@ int				main(void)
 	mlx_var.py = 2.5;
 	mlx_var.rot = 0;
 	mlx_var.FOV = M_PI / 2;
-
+	mlx_var.FOV_vert = 2 * atan(tan(mlx_var.FOV / 2) * (mlx_var.mapX / mlx_var.mapY));
+	mlx_var.ray_width = (int)(mlx_var.winX / (mlx_var->FOV * 180 / M_PI));
 	mlx_var.map = (char**)malloc(sizeof(char*) * (mlx_var.mapX + 1));
 	i = -1;
 	mlx_var.map[0] = ft_strdup("11111111");
