@@ -163,7 +163,7 @@ void			lst_clr(t_raylist **lst)
 	*lst = NULL;
 }
 
-t_raylist		*lstpush(double aX, double aY, double bX, double bY, double angle, t_raylist cur)
+t_raylist		*lstpush(double aX, double aY, double bX, double bY, double angle, t_raylist *cur)
 {
 	t_raylist	*new;
 
