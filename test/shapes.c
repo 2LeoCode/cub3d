@@ -62,6 +62,7 @@ typedef struct	s_mlxvar
 	int					box_size_y;
 	int					box_size_3d;
 	t_raylist			*ray_list;
+	double				ray_0;
 	int					ray_width;
 }				t_mlxvar;
 
@@ -149,6 +150,19 @@ int				condition_top_right(double aX, double aY, double bX, double bY)
 	return ((aX < bX) || (aY > bY));
 }
 
+void			lst_clr(t_raylist **lst)
+{
+	t_raylist *head;
+
+	while (*lst)
+	{
+		head = (*lst)->next;
+		free(*lst);
+		*lst = head;
+	}
+	*lst = NULL;
+}
+
 t_raylist		*lstpush(double aX, double aY, double bX, double bY, double angle, t_mlxvar	*mlx_var)
 {
 	t_raylist	*new;
@@ -172,7 +186,7 @@ void			draw_rays(t_mlxvar *mlx_var)
 	double		bY;
 
 	i = 0;
-	mlx_var->ray_list = NULL;
+	lst_clr(&mlx_var->ray_list);
 	while (i <= mlx_var->FOV)
 	{
 		posX = mlx_var->px * (double)mlx_var->box_size_x;
@@ -198,6 +212,27 @@ void			draw_rays(t_mlxvar *mlx_var)
 		mlx_var->ray_list = lstpush(bX, bY, posX, posY, -mlx_var->FOV / 2 + i, mlx_var);
 		i += ONE_DEGREE;
 	}
+	posX = mlx_var->px * (double)mlx_var->box_size_x;
+	posY = mlx_var->py * (double)mlx_var->box_size_y;
+	bX = posX + cos(mlx_var->rot) * (double)mlx_var->box_size_x;
+	bY = posY + sin(mlx_var->rot) * (double)mlx_var->box_size_y;
+
+	dX = bX - posX;
+	dY = bY - posY;
+	while ((ft_abs(dX) > 1) || (ft_abs(dY) > 1))
+	{
+		dX /= 1.1;
+		dY /= 1.1;
+	}
+	bX = posX;
+	bY = posY;
+	while (mlx_var->map[(int)(posY / mlx_var->box_size_y)][(int)(posX / mlx_var->box_size_x)] == '0')
+	{
+		mlx_pixel_put(mlx_var->id, mlx_var->win, (int)posX, (int)posY, mlx_var->color_2d_ray);
+		posX += dX;
+		posY += dY;
+	}
+	mlw_var->ray_0 = sqrt((bX - posX) * (bX - posX) + (bY - posY) * (bY - posY));
 }
 
 int				draw2d_map(t_mlxvar *mlx_var)
@@ -222,6 +257,7 @@ int				draw2d_map(t_mlxvar *mlx_var)
 					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, mlx_var->color_2d_floor);
 			draw_player(mlx_var); 
 			draw_rays(mlx_var);
+			get_3d_line_len(mlx_var);
 		}
 	old_px = mlx_var->px;
 	old_py = mlx_var->py;
@@ -291,7 +327,6 @@ int				main(void)
 	t_rgb		color_2d_wall;
 	t_rgb		color_2d_player;
 	t_rgb		color_2d_ray;
-	int			i;
 
 	mlx_var.id = mlx_init();
 
@@ -320,6 +355,7 @@ int				main(void)
 	mlx_var.color_2d_ray = (int)create_color_int(color_2d_ray);
 	mlx_var.mapX = 8;
 	mlx_var.mapY = 8;
+	mlx_var.ray_list = NULL;
 
 	mlx_var.px = 2.5;
 	mlx_var.py = 2.5;
@@ -328,7 +364,6 @@ int				main(void)
 	mlx_var.FOV_vert = 2 * atan(tan(mlx_var.FOV / 2) * (mlx_var.mapX / mlx_var.mapY));
 	mlx_var.ray_width = (int)(mlx_var.winX / (mlx_var.FOV * 180 / M_PI));
 	mlx_var.map = (char**)malloc(sizeof(char*) * (mlx_var.mapX + 1));
-	i = -1;
 	mlx_var.map[0] = ft_strdup("11111111");
 	mlx_var.map[1] = ft_strdup("10000101");
 	mlx_var.map[2] = ft_strdup("11000101");
