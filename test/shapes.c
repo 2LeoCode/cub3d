@@ -163,7 +163,7 @@ void			lst_clr(t_raylist **lst)
 	*lst = NULL;
 }
 
-t_raylist		*lstpush(double aX, double aY, double bX, double bY, double angle, t_mlxvar	*mlx_var)
+t_raylist		*lstpush(double aX, double aY, double bX, double bY, double angle, t_raylist cur)
 {
 	t_raylist	*new;
 
@@ -171,8 +171,8 @@ t_raylist		*lstpush(double aX, double aY, double bX, double bY, double angle, t_
 		return (NULL);
 	new->line_size = sqrt((bX - aX) * (bX - aX) + (bY - aY) * (bY - aY));
 	new->angle = angle;
-	new->next = mlx_var->ray_list;
-	mlx_var->ray_list = new;
+	new->next = cur;
+	return (new);
 }
 
 void			draw_rays(t_mlxvar *mlx_var)
@@ -209,7 +209,7 @@ void			draw_rays(t_mlxvar *mlx_var)
 			posX += dX;
 			posY += dY;
 		}
-		mlx_var->ray_list = lstpush(bX, bY, posX, posY, -mlx_var->FOV / 2 + i, mlx_var);
+		mlx_var->ray_list = lstpush(bX, bY, posX, posY, -mlx_var->FOV / 2 + i, mlx_var->ray_list);
 		i += ONE_DEGREE;
 	}
 	posX = mlx_var->px * (double)mlx_var->box_size_x;
@@ -232,7 +232,7 @@ void			draw_rays(t_mlxvar *mlx_var)
 		posX += dX;
 		posY += dY;
 	}
-	mlw_var->ray_0 = sqrt((bX - posX) * (bX - posX) + (bY - posY) * (bY - posY));
+	mlx_var->ray_0 = sqrt((bX - posX) * (bX - posX) + (bY - posY) * (bY - posY));
 }
 
 int				draw2d_map(t_mlxvar *mlx_var)
@@ -257,7 +257,6 @@ int				draw2d_map(t_mlxvar *mlx_var)
 					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, mlx_var->color_2d_floor);
 			draw_player(mlx_var); 
 			draw_rays(mlx_var);
-			get_3d_line_len(mlx_var);
 		}
 	old_px = mlx_var->px;
 	old_py = mlx_var->py;
