@@ -100,6 +100,7 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 		printf("%s\n", tmp->line);
 		tmp = tmp->next;
 	}
+	printf("end of list\n");
 	tmp = *lst;
 	while (++i < (size.Y - 1))
 	{
