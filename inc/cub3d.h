@@ -117,7 +117,7 @@ typedef struct		s_set
 	char			*S;
 	int				F;
 	int				C;
-	int				FOV;
+	double			FOV;
 	t_coord			spawn;
 	double			rot_vert;
 	double			rot_hor;
@@ -148,6 +148,7 @@ t_bool				print_wrong(char *map_path, int ac, char **av);
 int					error_wrong_file(char *path);
 int					error_wrong_map(int errnum);
 char				*error_s(int errnum);
+int					error_wrong_fov(void);
 
 void				clear_set(t_set *set);
 

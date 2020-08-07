@@ -37,3 +37,9 @@ t_bool	print_wrong(char *map_path, int ac, char **av)
 		ft_fputs(_stderr, "Use --help for help\n");
 	return (wrong);
 }
+
+int		error_wrong_fov(void)
+{
+	ft_fputs(_stderr, "Cub3D: Wrong FOV\n");
+	return (-1);
+}

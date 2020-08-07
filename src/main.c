@@ -47,7 +47,7 @@ static t_bool	arg_help(int ac, char **av)
 	return (false);
 }
 
-int				arg_fov(int ac, char **av)
+double			arg_fov(int ac, char **av)
 {
 	char	*tmp;
 
@@ -58,9 +58,9 @@ int				arg_fov(int ac, char **av)
 			continue ;
 		if (!ft_strcmp(tmp, "--fov"))
 		{
-			if (!ac || !str_isdigit(av))
+			if (!ac || !str_isdigit(*av))
 				return (-1);
-			return (ft_atoi(tmp));
+			return (ft_atoi(tmp) * M_PI / 180);
 		}
 	} 
 	return (90);
@@ -94,7 +94,10 @@ int				main(int ac, char **av)
 		return (cub3D(&settings, SAVE));
 	}
 	if ((settings->FOV = arg_fov(ac - 1, av + 1)) < 0)
+	{
+		clear_set(&settings);
 		return (error_wrong_fov());
+	}
 	if (arg_bonus(ac - 1, av + 1))
 		return (cub3D(&settings, BONUS));
 	return (cub3D(&settings, NONE));
