@@ -61,7 +61,7 @@ static void		get_line(char **map, int index, char *line, int size)
 	i = 0;
 	map[index][i] = ' ';
 	while (++i < size)
-		if (*line)
+		if (line && *line)
 			map[index][i] = *(line++);
 		else
 			map[index][i] = ' ';
@@ -105,7 +105,7 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 			tmp = tmp->next;
 		}
 		else
-			get_line(set->map, i, "", size.X);
+			get_line(set->map, i, NULL, size.X);
 	return (0);
 }
 
