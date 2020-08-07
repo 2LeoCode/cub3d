@@ -96,11 +96,7 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 	i = 0;
 	tmp = *lst;
 	while (tmp)
-	{
-		printf("%s\n", tmp->line);
 		tmp = tmp->next;
-	}
-	printf("end of list\n");
 	tmp = *lst;
 	while (++i < (size.Y - 1))
 	{
@@ -135,6 +131,12 @@ int				get_map(int fd, t_set *set)
 			lst_line_clr(&tmp);
 			return (ER_DEFLT);
 		}
+	if (lst_line_addback(&tmp, line))
+	{
+		get_next_line_end(fd, &line);
+		lst_line_clr(&tmp);
+		return (ER_DEFLT);
+	}
 	free(line);
 	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
 		return (0);
