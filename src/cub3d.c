@@ -20,7 +20,7 @@ int		cub3D(t_set *set, int flags)
 	int			check;
 
 	save = false;
-	if ((flags == SAVE) || (flags == SAVE | BONUS))
+	if ((flags == SAVE) || (flags == (SAVE | BONUS)))
 		save = true;
 	(void)save;
 	(void)mlxvar;
