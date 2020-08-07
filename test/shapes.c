@@ -340,15 +340,15 @@ int				process_key(int key, t_mlxvar *mlx_var)
 		mlx_var->rot += ONE_DEGREE * 3;
 	}
 	if (key == 65362
-	&& mlx_var->map[(int)(mlx_var->py + (cos(mlx_var->rot) / mlx_var->box_size_y) * 3)]
-	[(int)(mlx_var->px + (sin(mlx_var->rot) / mlx_var->box_size_x) * 3)] == '0') //top
+	&& mlx_var->map[(int)(mlx_var->py + (cos(mlx_var->rot) / mlx_var->box_size_y) * 6)]
+	[(int)(mlx_var->px + (sin(mlx_var->rot) / mlx_var->box_size_x) * 6)] == '0') //top
 	{
 		mlx_var->px += (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
 		mlx_var->py += (sin(mlx_var->rot) / mlx_var->box_size_y) * 3;
 	}
 	if (key == 65364
-	&& mlx_var->map[(int)(mlx_var->py - (cos(mlx_var->rot) / mlx_var->box_size_y) * 3)]
-	[(int)(mlx_var->px - (sin(mlx_var->rot) / mlx_var->box_size_x) * 3)] == '0') //bot
+	&& mlx_var->map[(int)(mlx_var->py - (cos(mlx_var->rot) / mlx_var->box_size_y) * 6)]
+	[(int)(mlx_var->px - (sin(mlx_var->rot) / mlx_var->box_size_x) * 6)] == '0') //bot
 	{
 		mlx_var->px -= (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
 		mlx_var->py -= (sin(mlx_var->rot) / mlx_var->box_size_x) * 3;
