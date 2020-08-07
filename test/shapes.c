@@ -266,6 +266,7 @@ void			draw3d_rays(t_mlxvar *mlx_var)
 		}
 		tmp = tmp->next;
 	}
+	printf("ok\n");
 }
 
 int				draw2d_map(t_mlxvar *mlx_var)
