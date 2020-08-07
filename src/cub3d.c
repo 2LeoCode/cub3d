@@ -16,8 +16,6 @@
 int		cub3D(t_set *set, int flags)
 {
 	t_bool		save;
-	t_mlxvar	cub3d;
-	int			check;
 
 	save = false;
 	if ((flags == SAVE) || (flags == SAVE | BONUS))
