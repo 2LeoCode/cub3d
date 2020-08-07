@@ -99,9 +99,13 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 		tmp = tmp->next;
 	tmp = *lst;
 	while (++i < size.Y)
-	{
-		get_line(set->map, i, tmp->line, size.X);
-		tmp = tmp->next;
+		if (tmp)
+		{
+			get_line(set->map, i, tmp->line, size.X);
+			tmp = tmp->next;
+		}
+		else
+			get_line(set->map, i, "", size.X);
 	}
 	return (0);
 }
