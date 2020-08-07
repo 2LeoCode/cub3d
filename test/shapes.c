@@ -32,10 +32,7 @@ typedef struct	s_rgb
 typedef struct	s_raylist
 {
 	double				size;
-	double				line_size;
 	double				angle;
-	int					startX;
-	int					startY;
 	struct s_raylist	*next;
 }				t_raylist;
 
@@ -58,6 +55,10 @@ typedef struct	s_mlxvar
 	int					color_2d_floor;
 	int					color_2d_player;
 	int					color_2d_ray;
+	int					color_3d_roof;
+	int					color_3d_wallV;
+	int					color_3d_wallH;
+	int					color_3d_floor;
 	int					box_size_x;
 	int					box_size_y;
 	int					box_size_3d;
@@ -239,7 +240,32 @@ void			draw_rays(t_mlxvar *mlx_var)
 
 void			draw3d_rays(t_mlxvar *mlx_var)
 {
-	
+	int			pX;
+	int			pY;
+	int			size;
+	int			countX;
+	t_raylist	*tmp;
+
+	tmp = mlx_var->ray_list;
+	pX = mlx_var->winX;
+	countX = 0;
+	while (tmp)
+	{
+		size = mlx_var->winY / (cos(tmp->angle) * (tmp->size / mlx_var->box_size_x));
+		countX = pX + (mlx_var->winX / mlx_var->FOV);
+		while (pX < countX)
+		{
+			pY = 0;
+			while (pY < (mlx_var->winY / 2) - (size / 2))
+				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_roof);
+			while (pY < (mlx_var->winY / 2) + (size / 2))
+				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_wallH);
+			while (pY < mlx_var->winY)
+				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_floor);
+			pX++;
+		}
+		tmp = tmp->next;
+	}
 }
 
 int				draw2d_map(t_mlxvar *mlx_var)
@@ -339,6 +365,10 @@ int				main(void)
 	t_rgb		color_2d_wall;
 	t_rgb		color_2d_player;
 	t_rgb		color_2d_ray;
+	t_rgb		color_3d_wallH;
+	t_rgb		color_3d_wallV;
+	t_rgb		color_3d_roof;
+	t_rgb		color_3d_floor;
 
 	mlx_var.id = mlx_init();
 
@@ -361,10 +391,30 @@ int				main(void)
 	color_2d_player.G = 255;
 	color_2d_player.B = 0;
 
+	color_3d_floor.R = 150;
+	color_3d_floor.G = 150;
+	color_3d_floor.B = 150;
+
+	color_3d_roof.R = 50;
+	color_3d_roof.G = 50;
+	color_3d_roof.B = 50;
+
+	color_3d_wallH.R = 200;
+	color_3d_wallH.G = 0;
+	color_3d_wallH.B = 0;
+
+	color_3d_wallV.R = 100;
+	color_3d_wallV.G = 0;
+	color_3d_wallV.B = 0;
+
 	mlx_var.color_2d_floor = (int)create_color_int(color_2d_floor);
 	mlx_var.color_2d_wall = (int)create_color_int(color_2d_wall);
 	mlx_var.color_2d_player = (int)create_color_int(color_2d_player);
 	mlx_var.color_2d_ray = (int)create_color_int(color_2d_ray);
+	mlx_var.color_3d_floor = (int)create_color_int(color_3d_floor);
+	mlx_var.color_3d_roof = (int)create_color_int(color_3d_roof);
+	mlx_var.color_3d_wallH = (int)create_color_int(color_3d_wallH);
+	mlx_var.color_3d_wallV = (int)create_color_int(color_3d_wallV);
 	mlx_var.mapX = 8;
 	mlx_var.mapY = 8;
 	mlx_var.ray_list = NULL;
