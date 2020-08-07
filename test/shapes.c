@@ -247,13 +247,12 @@ void			draw3d_rays(t_mlxvar *mlx_var)
 	t_raylist	*tmp;
 
 	tmp = mlx_var->ray_list;
-	pX = mlx_var->winX;
-	countX = 0;
+	pX = mlx_var->winX * 2;
 	while (tmp)
 	{
 		size = mlx_var->winY / (cos(tmp->angle) * (tmp->size / mlx_var->box_size_x));
-		countX = pX + (mlx_var->winX / (mlx_var->FOV * 180 / M_PI));
-		while (pX < countX)
+		countX = pX - (mlx_var->winX / (mlx_var->FOV * 180 / M_PI));
+		while (pX > countX)
 		{
 			pY = -1;
 			while (++pY < (mlx_var->winY / 2) - (size / 2) - 1)
@@ -262,7 +261,7 @@ void			draw3d_rays(t_mlxvar *mlx_var)
 				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_wallH);
 			while (++pY < mlx_var->winY)
 				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_floor);
-			pX++;
+			pX--;
 		}
 		tmp = tmp->next;
 	}
