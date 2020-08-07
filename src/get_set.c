@@ -57,41 +57,6 @@ static int	get_res(char *line, t_set *set, t_bool *check)
 	return (0);
 }
 
-static int	get_single_rgb(char **line, int *col)
-{
-	while (ft_isspace(**line))
-		(*line)++;
-	if (**line && !ft_isdigit(**line))
-		return (-1);
-	*col = ft_atoi(*line);
-	while (ft_isdigit(**line))
-		(*line)++;
-	while (ft_isspace(**line))
-		(*line)++;
-	return (0);
-}
-
-static int	get_rgb(char *line, t_set *set, t_bool *check)
-{
-	t_rgb	*tmp;
-
-	if ((*line == 'F' && check[C_F]) || (*line == 'C' && check[C_C]))
-		return (ER_DOUBL);
-	if (*line == 'F')
-		tmp = &set->F;
-	else if (*line == 'C')
-		tmp = &set->C;
-	line++;
-	if (!ft_isspace(*line))
-		return (ER_UNKNW);
-	if (get_single_rgb(&line, &tmp->R) || (*(line++) - ',')
-	|| get_single_rgb(&line, &tmp->G) || (*(line++) - ',')
-	|| get_single_rgb(&line, &tmp->B) || *line)
-		return (ER_WRRGB);
-	check[((tmp == &set->F) ? C_F : C_C)] = true;
-	return (0);
-}
-
 int			get_set(int fd, t_set *set)
 {
 	int		i;

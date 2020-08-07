@@ -28,6 +28,7 @@ SRC =		main.c\
 			cub3d.c\
 			error.c\
 			get_set.c\
+			get_set_utils.c\
 			help.c\
 			putstr.c\
 			search_str.c\

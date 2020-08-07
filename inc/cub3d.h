@@ -115,8 +115,8 @@ typedef struct		s_set
 	char			*WE;
 	char			*EA;
 	char			*S;
-	t_rgb			F;
-	t_rgb			C;
+	int				F;
+	int				C;
 	int				FOV;
 	t_coord			spawn;
 	double			rot_vert;
@@ -124,35 +124,14 @@ typedef struct		s_set
 	char			**map;
 }					t_set;
 
-# define CUB_WALL 0
-# define CUB_FLOOR 1
-# define CUB_VOID 2
-
-typedef struct		s_xyz
-{
-	int X;
-	int Y;
-	int Z;
-}					t_xyz;
-
-typedef struct		s_lstcub
-{
-	int				type;
-	t_xyz 			pos;
-	struct s_lstcub *next;
-}					t_lstcub;
-
 typedef struct		s_mlxvar
 {
 	void			*key;
 	void			*win;
-	t_xyz			player_pos;
+	void			*win_2d;
 	t_set			*set;
-	const t_xyz		nrm_X;
-	const t_xyz		nrm_Y;
-	const t_xyz		nrm_Z;
-	t_xyz			look;
 }					t_mlxvar;
+
 char				*ft_strstr(char *haystack, char *needle);
 
 char				*search_str(char *needle, char **ar, int size, int how);
@@ -181,6 +160,7 @@ t_bool				are_chunk_lines_null(char **lines);
 int					get_one_chunk(t_set *set, t_line **map);
 int					get_chunks(int fd, t_set *set);
 int					get_path(char *line, t_set *set, t_bool *check);
+int					get_rgb(char *line, t_set *set, t_bool *check);
 int					get_set(int fd, t_set *set);
 
 size_t				ft_strlen(char *s);

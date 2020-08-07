@@ -11,10 +11,10 @@
 #define ONE_DEGREE 0.0174533
 #define degToRad(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
-#define KEY_LEFT
-#define KEY_RIGHT
-#define KEY_UP
-#define KEY_DOWN
+#define KEY_LEFT 65361
+#define KEY_RIGHT 65363
+#define KEY_UP 65362
+#define KEY_DOWN 65364
 
 typedef struct			s_coord
 {
@@ -332,26 +332,26 @@ int				process_key(int key, t_mlxvar *mlx_var)
 
 	dx = (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
 	dy = (sin(mlx_var->rot) / mlx_var->box_size_y) * 3;
-	if (key == 65361) //left
+	if (key == KEY_LEFT) //left
 	{
 		if (mlx_var->rot < 0)
 			mlx_var->rot = 2 * M_PI;
 		mlx_var->rot -= ONE_DEGREE * 3;
 	}
-	if (key == 65363) //right
+	if (key == KEY_RIGHT) //right
 	{
 		if (mlx_var->rot > 2 * M_PI)
 			mlx_var->rot = 0;
 		mlx_var->rot += ONE_DEGREE * 3;
 	}
-	if (key == 65362
+	if (key == KEY_UP
 	&& mlx_var->map[(int)(mlx_var->py + dy)]
 	[(int)(mlx_var->px + dx)] == '0') //top
 	{
 		mlx_var->px += dx;
 		mlx_var->py += dy;
 	}
-	if (key == 65364
+	if (key == KEY_DOWN
 	&& mlx_var->map[(int)(mlx_var->py - dy)]
 	[(int)(mlx_var->px - dx)] == '0') //bot
 	{
