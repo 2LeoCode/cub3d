@@ -61,10 +61,10 @@ static void		get_line(char **map, int index, char *line, int size)
 	i = 0;
 	map[index][i] = ' ';
 	while (++i < size)
-		if (line && *line)
-			map[index][i] = *(line++);
-		else
+		if (!line)
 			map[index][i] = ' ';
+		else if (*line)
+			map[index][i] = *(line++);
 	map[index][i] = 0;
 }
 
