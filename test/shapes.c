@@ -172,7 +172,7 @@ t_raylist		*lstpush(double aX, double aY, double bX, double bY, double angle, t_
 
 	if (!(new = malloc(sizeof(t_raylist))))
 		return (NULL);
-	new->line_size = sqrt((bX - aX) * (bX - aX) + (bY - aY) * (bY - aY));
+	new->size = sqrt((bX - aX) * (bX - aX) + (bY - aY) * (bY - aY));
 	new->angle = angle;
 	new->next = cur;
 	return (new);
