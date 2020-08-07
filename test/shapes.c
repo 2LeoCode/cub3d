@@ -63,6 +63,8 @@ typedef struct	s_mlxvar
 	int					box_size_3d;
 	t_raylist			*ray_list;
 	double				ray_0;
+	int					ray_0_startX;
+	int					ray_0_startY;
 	int					ray_width;
 }				t_mlxvar;
 
@@ -235,6 +237,11 @@ void			draw_rays(t_mlxvar *mlx_var)
 	mlx_var->ray_0 = sqrt((bX - posX) * (bX - posX) + (bY - posY) * (bY - posY));
 }
 
+void			draw3d_rays(t_mlxvar *mlx_var)
+{
+	
+}
+
 int				draw2d_map(t_mlxvar *mlx_var)
 {
 	static double	old_px;
@@ -257,6 +264,7 @@ int				draw2d_map(t_mlxvar *mlx_var)
 					draw_box(mlx_var, i * mlx_var->box_size_x, j * mlx_var->box_size_y, mlx_var->color_2d_floor);
 			draw_player(mlx_var); 
 			draw_rays(mlx_var);
+			draw3d_rays(mlx_var);
 		}
 	old_px = mlx_var->px;
 	old_py = mlx_var->py;
@@ -286,6 +294,11 @@ char			*ft_strdup(char *s)
 
 int				process_key(int key, t_mlxvar *mlx_var)
 {
+	double	dx;
+	double	dy;
+
+	dx = (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
+	dy = (sin(mlx_var->rot) / mlx_var->box_size_x) * 3;
 	if (key == 65361) //left
 	{
 		if (mlx_var->rot < 0)
@@ -299,18 +312,18 @@ int				process_key(int key, t_mlxvar *mlx_var)
 		mlx_var->rot += ONE_DEGREE * 3;
 	}
 	if (key == 65362
-	&& mlx_var->map[(int)(mlx_var->py + (cos(mlx_var->rot) / mlx_var->box_size_y) * 3)]
-	[(int)(mlx_var->px + (sin(mlx_var->rot) / mlx_var->box_size_x) * 3)] == '0') //top
+	&& mlx_var->map[(int)(mlx_var->py + dy + 5)]
+	[(int)(mlx_var->px + dx + 5)] == '0') //top
 	{
-		mlx_var->px += (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
-		mlx_var->py += (sin(mlx_var->rot) / mlx_var->box_size_y) * 3;
+		mlx_var->px += dx;
+		mlx_var->py += dy;
 	}
 	if (key == 65364
-	&& mlx_var->map[(int)(mlx_var->py - (cos(mlx_var->rot) / mlx_var->box_size_y) * 3)]
-	[(int)(mlx_var->px - (sin(mlx_var->rot) / mlx_var->box_size_x) * 3)] == '0') //bot
+	&& mlx_var->map[(int)(mlx_var->py - dy - 5)]
+	[(int)(mlx_var->px - dx - 5)] == '0') //bot
 	{
-		mlx_var->px -= (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
-		mlx_var->py -= (sin(mlx_var->rot) / mlx_var->box_size_x) * 3;
+		mlx_var->px -= dx;
+		mlx_var->py -= dy;
 	}
 	if (mlx_var->rot > 2 * M_PI)
 		mlx_var->rot = mlx_var->rot - 2 * M_PI;
