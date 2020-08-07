@@ -62,7 +62,7 @@ int				check_map(t_set *set)
 	check = false;
 	tmp = set->map;
 	i = -1;
-	display_map(set->map);
+
 	while (tmp[++i])
 	{
 		j = -1;
