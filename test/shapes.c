@@ -345,15 +345,15 @@ int				process_key(int key, t_mlxvar *mlx_var)
 		mlx_var->rot += ONE_DEGREE * 3;
 	}
 	if (key == 65362
-	&& mlx_var->map[(int)(mlx_var->py + dy]
-	[(int)(mlx_var->px + dx] == '0') //top
+	&& mlx_var->map[(int)(mlx_var->py + dy)]
+	[(int)(mlx_var->px + dx)] == '0') //top
 	{
 		mlx_var->px += dx;
 		mlx_var->py += dy;
 	}
 	if (key == 65364
-	&& mlx_var->map[(int)(mlx_var->py - dy]
-	[(int)(mlx_var->px - dx] == '0') //bot
+	&& mlx_var->map[(int)(mlx_var->py - dy)]
+	[(int)(mlx_var->px - dx)] == '0') //bot
 	{
 		mlx_var->px -= dx;
 		mlx_var->py -= dy;
