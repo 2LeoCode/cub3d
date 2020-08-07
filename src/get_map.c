@@ -76,36 +76,32 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 	int			j;
 
 	size.Y = get_map_y(*lst);
-	if (!(set->map = (char**)malloc(sizeof(char*) * (size.Y + 2))))
+	if (!(set->map = (char**)malloc(sizeof(char*) * (size.Y + 1))))
 		return (ER_DEFLT);
 	size.X = get_map_x(*lst);
 	i = -1;
-	while (++i < (size.Y + 2))
+	while (++i < (size.Y + 1))
 		if (!(set->map[i] = (char*)malloc(sizeof(char) * (size.X + 1))))
 			return (ER_DEFLT);
 	set->map[i] = NULL;
-	i = -1;
-	while (++i < size.Y)
-	{
-		j = -1;
-		while (++j < size.X)
-			set->map[i][j] = ' ';
-		set->map[i][j] = 0;
-		i += (size.Y - 1);
-	}
 	i = 0;
+	j = -1;
+	while (++j < size.X)
+		set->map[i][j] = ' ';
+	set->map[i][j] = 0;
+	i += size.Y;
+	j = -1;
+	while (++j < size.X)
+		set->map[i][j] = ' ';
+	set->map[i][j] = 0;
 	tmp = *lst;
+	i = 1;
 	while (tmp)
+	{
+		get_line(set->map, i, tmp->line, size.X);
 		tmp = tmp->next;
-	tmp = *lst;
-	while (++i < (size.Y + 1))
-		if (tmp)
-		{
-			get_line(set->map, i, tmp->line, size.X);
-			tmp = tmp->next;
-		}
-		else
-			get_line(set->map, i, NULL, size.X);
+		i++;
+	}
 	return (0);
 }
 
