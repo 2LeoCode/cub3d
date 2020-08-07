@@ -127,7 +127,7 @@ typedef struct		s_set
 
 typedef struct		s_mlxvar
 {
-	void			*key;
+	void			*id;
 	void			*win;
 	void			*win_2d;
 	int				mapX;
