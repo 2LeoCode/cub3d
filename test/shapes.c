@@ -238,20 +238,27 @@ void			draw_rays(t_mlxvar *mlx_var)
 	mlx_var->ray_0 = sqrt((bX - posX) * (bX - posX) + (bY - posY) * (bY - posY));
 }
 
+size_t			lst_size(t_raylist *lst)
+{
+	return (lst ? 0 : 1 + lst_size(lst->next));
+}
+
 void			draw3d_rays(t_mlxvar *mlx_var)
 {
 	int			pX;
 	int			pY;
 	int			size;
+	int			rayCount;
 	int			countX;
 	t_raylist	*tmp;
 
 	tmp = mlx_var->ray_list;
+	rayCount = lst_size(tmp);
 	pX = mlx_var->winX * 2;
 	while (tmp)
 	{
 		size = mlx_var->winY / (cos(tmp->angle) * (tmp->size / mlx_var->box_size_x));
-		countX = pX - (mlx_var->winX / (mlx_var->FOV * 180 / M_PI));
+		countX = pX - (mlx_var->winX / rayCount);
 		while (pX > countX)
 		{
 			pY = -1;
