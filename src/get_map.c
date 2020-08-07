@@ -66,6 +66,7 @@ static void		get_line(char **map, int index, char *line, int size)
 		else
 			map[index][i] = ' ';
 	map[index][i] = 0;
+	printf("%s\n", map[index]);
 }
 
 static int		get_map_from_list(t_line **lst, t_set *set)
