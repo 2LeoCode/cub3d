@@ -25,5 +25,6 @@ int		cub3D(t_set *set, int flags)
 	(void)save;
 	(void)mlxvar;
 	(void)check;
+	(void)set;
 	return (0);
 }
