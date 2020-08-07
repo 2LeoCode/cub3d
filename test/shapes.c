@@ -318,13 +318,9 @@ char			*ft_strdup(char *s)
 	return (ft_strcpy(n, s));
 }
 
+
 int				process_key(int key, t_mlxvar *mlx_var)
 {
-	double	dx;
-	double	dy;
-
-	dx = (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
-	dy = (sin(mlx_var->rot) / mlx_var->box_size_x) * 3;
 	if (key == 65361) //left
 	{
 		if (mlx_var->rot < 0)
@@ -338,18 +334,18 @@ int				process_key(int key, t_mlxvar *mlx_var)
 		mlx_var->rot += ONE_DEGREE * 3;
 	}
 	if (key == 65362
-	&& mlx_var->map[(int)(mlx_var->py + dy + 5)]
-	[(int)(mlx_var->px + dx + 5)] == '0') //top
+	&& mlx_var->map[(int)(mlx_var->py + (cos(mlx_var->rot) / mlx_var->box_size_y) * 3)]
+	[(int)(mlx_var->px + (sin(mlx_var->rot) / mlx_var->box_size_x) * 3)] == '0') //top
 	{
-		mlx_var->px += dx;
-		mlx_var->py += dy;
+		mlx_var->px += (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
+		mlx_var->py += (sin(mlx_var->rot) / mlx_var->box_size_y) * 3;
 	}
 	if (key == 65364
-	&& mlx_var->map[(int)(mlx_var->py - dy - 5)]
-	[(int)(mlx_var->px - dx - 5)] == '0') //bot
+	&& mlx_var->map[(int)(mlx_var->py - (cos(mlx_var->rot) / mlx_var->box_size_y) * 3)]
+	[(int)(mlx_var->px - (sin(mlx_var->rot) / mlx_var->box_size_x) * 3)] == '0') //bot
 	{
-		mlx_var->px -= dx;
-		mlx_var->py -= dy;
+		mlx_var->px -= (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
+		mlx_var->py -= (sin(mlx_var->rot) / mlx_var->box_size_x) * 3;
 	}
 	if (mlx_var->rot > 2 * M_PI)
 		mlx_var->rot = mlx_var->rot - 2 * M_PI;
