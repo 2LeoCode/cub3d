@@ -98,7 +98,7 @@ $(MAPDIR):
 	@(mkdir $(MAPDIR))
 
 m: all
-	@(sh $(SHDIR)/map.sh .)
+	@(sh $(SHDIR)/map.sh .; sh $(SHDIR)/assets.sh)
 
 clean:
 	@(rm -rf $(OBJDIR); echo '$(RED)Removed [$(BLD)$(RED)$(OBJDIR)$(NRM)$(RED)]$(NRM)')
