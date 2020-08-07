@@ -252,7 +252,7 @@ void			draw3d_rays(t_mlxvar *mlx_var)
 	while (tmp)
 	{
 		size = mlx_var->winY / (cos(tmp->angle) * (tmp->size / mlx_var->box_size_x));
-		countX = pX + ((mlx_var->winX / 2) / mlx_var->FOV);
+		countX = pX + (mlx_var->winX / mlx_var->FOV);
 		while (pX < countX)
 		{
 			pY = -1;
@@ -264,6 +264,7 @@ void			draw3d_rays(t_mlxvar *mlx_var)
 				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_floor);
 			pX++;
 		}
+		printf("lol\n");
 		tmp = tmp->next;
 	}
 	printf("ok\n");
