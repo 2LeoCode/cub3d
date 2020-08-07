@@ -63,6 +63,7 @@ then
 	apt list --installed > temp 2> /dev/null
 	WGET=$(grep -o wget temp)
 	GIT=$(grep -o git temp)
+	UNZIP=$(grep -o unzip temp)
 	rm -f temp
 
 	if [ "$WGET" = "" ]
@@ -76,6 +77,12 @@ then
 		printf $BLU
 		echo "Installing$BLD git$NRM$BLU ..."
 		sudo apt install git > /dev/null 2>&1
+	fi
+	if [ "$UNZIP" = "" ]
+	then
+		printf $BLU
+		echo "Installing$BLD unzip$NRM$BLU ..."
+		sudo apt install unzip > /dev/null 2>&1
 	fi
 	printf $BLU
 	echo "Downloading$BLD MinilibX$NRM$BLU ..."
@@ -93,18 +100,25 @@ fi
 if [ "$OS" = "Darwin" ]
 then
 	WGET=$(brew list | grep wget)
+	GIT=$(brew list | grep git)
+	UNZIP=$(brew list | grep unzip)
 	printf $BLU
 	if [ "$WGET" = "" ]
 	then
 		echo "Installing$BLD wget$NRM$BLU ..."
 		brew install wget > /dev/null 2>&1
 	fi
-	GIT=$(brew list | grep git)
 	if [ "$GIT" = "" ]
 	then
 		printf $BLU
 		echo "Installing$BLD git$NRM$BLU ..."
 		brew apt install git > /dev/null 2>&1
+	fi
+	if [ "$UNZIP" = "" ]
+	then
+		printf $BLU
+		echo "Installing$BLD unzip$NRM$BLU ..."
+		brew apt install unzip > /dev/null 2>&1
 	fi
 	echo "Downloading $BLD$A_TAR$NRM$BLU ..."
 	wget "https://projects.intra.42.fr/uploads/document/document/1753/minilibx_opengl.tgz" > /dev/null 2>&1
@@ -153,11 +167,12 @@ then
 		echo "Successfully imported libraries and includes"
 		if [ "$check3" = "man" ]
 		then
-			echo "Successfully imported MinilibX man$NRM"
+			echo "Successfully imported MinilibX man"
 		else	
 			printf "$YLW$BLD"
 			echo "Warning:$NRM$YLW Missing man pages for MinilibX" >&2
 		fi
+		printf $NRM
 		exit
 	fi
 fi
