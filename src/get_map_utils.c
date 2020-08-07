@@ -62,6 +62,7 @@ int				check_map(t_set *set)
 	check = false;
 	tmp = set->map;
 	i = -1;
+	printf ("ok\n");
 	while (tmp[++i])
 	{
 		j = -1;
@@ -89,6 +90,7 @@ int				check_map(t_set *set)
 			}
 		}
 	}
+	printf ("ok\n");
 	if (!check)
 	{
 		clear_set(set);
