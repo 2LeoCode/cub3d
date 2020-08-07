@@ -98,7 +98,7 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 	while (tmp)
 		tmp = tmp->next;
 	tmp = *lst;
-	while (++i < size.Y)
+	while (++i < (size.Y + 1))
 		if (tmp)
 		{
 			get_line(set->map, i, tmp->line, size.X);
@@ -106,7 +106,6 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 		}
 		else
 			get_line(set->map, i, "", size.X);
-	}
 	return (0);
 }
 
