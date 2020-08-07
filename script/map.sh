@@ -45,7 +45,7 @@ WE ./assets/purplestone.png\n\
 EA ./assets/mossy.png\n\
 S ./assets/barrel.png\n\
 F 220,100,0\n\
-C 225,30,0\n        \
+C 225,30,0\n\n\n\n        \
 1111111111111111111111111\n        \
 1000000000110000000000001\n        \
 1011000001110000002000001\n        \
