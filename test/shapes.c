@@ -255,12 +255,12 @@ void			draw3d_rays(t_mlxvar *mlx_var)
 		countX = pX + (mlx_var->winX / mlx_var->FOV);
 		while (pX < countX)
 		{
-			pY = 0;
-			while (pY < (mlx_var->winY / 2) - (size / 2))
+			pY = -1;
+			while (++pY < (mlx_var->winY / 2) - (size / 2) - 1)
 				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_roof);
-			while (pY < (mlx_var->winY / 2) + (size / 2))
+			while (++pY < (mlx_var->winY / 2) + (size / 2) - 1)
 				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_wallH);
-			while (pY < mlx_var->winY)
+			while (++pY < mlx_var->winY)
 				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_floor);
 			pX++;
 		}
