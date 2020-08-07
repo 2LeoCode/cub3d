@@ -60,6 +60,7 @@ static void		get_line(char **map, int index, char *line, int size)
 
 	i = 0;
 	map[index][i] = ' ';
+	printf("%s\n", line);
 	while (++i < size)
 		if (!line)
 			map[index][i] = ' ';
@@ -76,11 +77,11 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 	int			j;
 
 	size.Y = get_map_y(*lst);
-	if (!(set->map = (char**)malloc(sizeof(char*) * (size.Y + 1))))
+	if (!(set->map = (char**)malloc(sizeof(char*) * (size.Y + 2))))
 		return (ER_DEFLT);
 	size.X = get_map_x(*lst);
 	i = -1;
-	while (++i < size.Y)
+	while (++i < (size.Y + 1))
 		if (!(set->map[i] = (char*)malloc(sizeof(char) * (size.X + 1))))
 			return (ER_DEFLT);
 	set->map[i] = NULL;
