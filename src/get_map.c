@@ -124,13 +124,15 @@ int				get_map(int fd, t_set *set)
 		get_next_line_end(fd, &line);
 		return ((!i || !is_map_wall(line)) ? ER_WRMAP : ER_DEFLT);
 	}
-	while ((i = get_next_line(fd, &line)) - 0)
+	while ((i = get_next_line(fd, &line)) != -1)
 		if (lst_line_addback(&tmp, line))
 		{
 			get_next_line_end(fd, &line);
 			lst_line_clr(&tmp);
 			return (ER_DEFLT);
 		}
+		else if (!i)
+			break ;
 	free(line);
 	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
 	{
