@@ -136,6 +136,7 @@ int				get_map(int fd, t_set *set)
 		}
 	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
 		return (0);
+	display_map(set->map);
 	clear_set(set);
 	lst_line_clr(&tmp);
 	return (i ? i : j);
