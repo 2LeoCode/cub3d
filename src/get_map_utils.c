@@ -62,7 +62,7 @@ int				check_map(t_set *set)
 	check = false;
 	tmp = set->map;
 	i = -1;
-	printf ("ok\n");
+	display_map(tmp);
 	while (tmp[++i])
 	{
 		j = -1;
@@ -80,17 +80,16 @@ int				check_map(t_set *set)
 				set->spawn.X = i;
 				set->spawn.Y = j;
 				if (tmp[i][j] == 'N')
-					set->rot_hor = 0;
+					set->rot_hor = M_PI / 2;
 				if (tmp[i][j] == 'E')
-					set->rot_hor = 90 * M_PI / 180;
+					set->rot_hor = 0;
 				if (tmp[i][j] == 'S')
-					set->rot_hor = M_PI;
+					set->rot_hor = 3 * M_PI / 4;
 				if (tmp[i][j] == 'O')
-					set->rot_hor = 270 * M_PI / 180;
+					set->rot_hor = M_PI;
 			}
 		}
 	}
-	printf ("ok\n");
 	if (!check)
 	{
 		clear_set(set);
