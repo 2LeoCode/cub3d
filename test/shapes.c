@@ -264,10 +264,8 @@ void			draw3d_rays(t_mlxvar *mlx_var)
 				mlx_pixel_put(mlx_var->id, mlx_var->win, pX, pY, mlx_var->color_3d_floor);
 			pX++;
 		}
-		printf("lol\n");
 		tmp = tmp->next;
 	}
-	printf("ok\n");
 }
 
 int				draw2d_map(t_mlxvar *mlx_var)
