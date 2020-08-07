@@ -106,6 +106,7 @@ typedef struct		s_line
 	char			*line;
 	struct s_line	*next;
 }					t_line;
+
 typedef struct		s_set
 {
 	int				X;
@@ -129,6 +130,8 @@ typedef struct		s_mlxvar
 	void			*key;
 	void			*win;
 	void			*win_2d;
+	int				mapX;
+	int				mapY;
 	t_set			*set;
 }					t_mlxvar;
 
