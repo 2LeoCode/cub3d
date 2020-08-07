@@ -254,6 +254,8 @@ void			draw3d_rays(t_mlxvar *mlx_var)
 
 	tmp = mlx_var->ray_list;
 	rayCount = lst_size(tmp);
+	if (!rayCount)
+		printf("0\n");
 	pX = mlx_var->winX * 2;
 	while (tmp)
 	{
