@@ -39,11 +39,11 @@ fi
 
 cd map
 printf "R 800 600\n\
-NO ./assets/default_north_texture.png\n\
-SO ./assets/default_south_texture.png\n\
-WE ./assets/default_west_texture.png\n\
-EA ./assets/default_east_texture.png\n\
-S ./assets/default_sprite_texture.png\n\
+NO ./assets/redbrick.png\n\
+SO ./assets/wood.png\n\
+WE ./assets/purplestone.png\n\
+EA ./assets/mossy.png\n\
+S ./assets/barrel.png\n\
 F 220,100,0\n\
 C 225,30,0\n        \
 1111111111111111111111111\n        \
