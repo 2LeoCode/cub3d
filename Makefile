@@ -53,7 +53,7 @@ LIB =		libmlx.a
 SCRIPT =	ext.sh\
 			fclean.sh
 
-CFLAGS =	-Wall -Wextra -Werror -I $(INCDIR) -L lib -lmlx 
+CFLAGS =	-Wall -Wextra -Werror -I $(INCDIR)
 CFLAGS_2 =	
 
 GRN =		\x1b[32m
@@ -65,11 +65,11 @@ BLD =		\x1b[1m
 NRM =		\x1b[0m
 
 ifeq ("$(OS)", "Darwin")
-	CFLAGS_2 =	-framework OpenGL -framework AppKit
+	CFLAGS_2 =	-L lib -lmlx -framework OpenGL -framework AppKit
 endif
 
 ifeq ("$(OS)", "Linux")
-	CFLAGS_2 =	-lXext -lX11
+	CFLAGS_2 =	-L lib -lmlx -lXext -lX11
 	GRN =		\e[32m
 	RED =		\e[31m
 	L_RED =		\e[91m
@@ -86,10 +86,10 @@ $(addprefix $(LIBDIR)/, $(LIB)): $(addprefix $(EXTDIR)/, $(EXT))
 	@(sh $(SHDIR)/ext.sh .)
 
 $(NAME): $(addprefix $(OBJDIR)/, $(OBJ))
-	@(echo '\n$(BLU)Compiling [$(BLD)$@$(NRM)$(BLU)] ...$(NRM)'; gcc $^ -o $@)
+	@(echo '\n$(BLU)Compiling [$(BLD)$@$(NRM)$(BLU)] ...$(NRM)'; gcc $(CFLAGS) $(CFLAGS_2) $^ -o $@)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(addprefix $(INCDIR)/, $(INC)) | $(OBJDIR)
-	@(printf '\r$(BLU)Compiling'; gcc $(CFLAGS) $(CFLAGS_2) -c $< -o $@; printf ' [ $(BLD)'; ls $(OBJDIR) | wc -w | tr -d ' \n'; printf ' $(NRM)$(BLU)/ $(BLD)'; echo $(SRC) | wc -w | tr -d ' \n'; printf ' $(NRM)$(BLU)]$(NRM)')
+	@(printf '\r$(BLU)Compiling'; gcc $(CFLAGS) -c $< -o $@; printf ' [ $(BLD)'; ls $(OBJDIR) | wc -w | tr -d ' \n'; printf ' $(NRM)$(BLU)/ $(BLD)'; echo $(SRC) | wc -w | tr -d ' \n'; printf ' $(NRM)$(BLU)]$(NRM)')
 
 $(OBJDIR):
 	@(mkdir $(OBJDIR))
