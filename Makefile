@@ -53,7 +53,7 @@ LIB =		libmlx.a
 SCRIPT =	ext.sh\
 			fclean.sh
 
-CFLAGS =	-Wall -Wextra -Werror -I $(INCDIR)
+CFLAGS =	-Wall -Wextra -Werror -I $(INCDIR) -L lib -lmlx 
 CFLAGS_2 =	
 
 GRN =		\x1b[32m
@@ -65,11 +65,11 @@ BLD =		\x1b[1m
 NRM =		\x1b[0m
 
 ifeq ("$(OS)", "Darwin")
-	CFLAGS_2 =	-L lib -lmlx -framework OpenGL -framework AppKit
+	CFLAGS_2 =	-framework OpenGL -framework AppKit
 endif
 
 ifeq ("$(OS)", "Linux")
-	CFLAGS_2 =	-L lib -lmlx -lXext -lX11
+	CFLAGS_2 =	-lXext -lX11
 	GRN =		\e[32m
 	RED =		\e[31m
 	L_RED =		\e[91m

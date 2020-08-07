@@ -12,7 +12,6 @@
 
 #include <cub3d.h>
 
-
 int		cub3D(t_set *set, int flags)
 {
 	t_bool		save;
