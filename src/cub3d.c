@@ -12,6 +12,16 @@
 
 #include <cub3d.h>
 
+int		draw_2d_map(t_mlxvar mlxvar)
+{
+	
+}
+
+int		update_2d(t_mlxvar *mlxvar)
+{
+	return (0);
+}
+
 int		cub3D(t_set *set, int flags)
 {
 	t_bool		save;
@@ -26,11 +36,14 @@ int		cub3D(t_set *set, int flags)
 		mlxvar.mapY++;
 	mlxvar.mapY *= 21;
 	mlxvar.mapX = ft_strlen(*(set->map)) * 21;
-	if (!(mlxvar.id = mlx_init()) || !(mlxvar.win_2d = mlx_new_window(mlxvar.id, mlxvar.mapX, mlxvar.mapY, "Cub3D")))
+	if (!(mlxvar.id = mlx_init()) ||
+	!(mlxvar.win_2d = mlx_new_window(mlxvar.id, mlxvar.mapX, mlxvar.mapY, "Cub3D"))
+	|| draw_2d_map(mlxvar))
 	{
 		clear_set(set);
 		return (ft_fputs(2, "Cub3D: Error while initializing window.\n"));
 	}
+	mlx_hook(mlxvar.win_2d, KeyPress, KeyPressMask, &update_2d, &mlxvar);
 	mlx_loop(mlxvar.id);
 	(void)save;
 	return (0);
