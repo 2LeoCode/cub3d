@@ -330,8 +330,8 @@ int				process_key(int key, t_mlxvar *mlx_var)
 	double	dx;
 	double	dy;
 
-	dx = (cos(mlx_var->rot) / mlx_var->box_size_x) * 3);
-	dy = (sin(mlx_var->rot) / mlx_var->box_size_y) * 3);
+	dx = (cos(mlx_var->rot) / mlx_var->box_size_x) * 3;
+	dy = (sin(mlx_var->rot) / mlx_var->box_size_y) * 3;
 	if (key == 65361) //left
 	{
 		if (mlx_var->rot < 0)
