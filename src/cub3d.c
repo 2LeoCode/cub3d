@@ -22,6 +22,7 @@ int		cub3D(t_set *set, int flags)
 	save = false;
 	if ((flags == SAVE) || (flags == (SAVE | BONUS)))
 		save = true;
+	display_map(set->map);
 	(void)save;
 	(void)mlxvar;
 	(void)check;

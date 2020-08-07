@@ -98,7 +98,7 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 	while (tmp)
 		tmp = tmp->next;
 	tmp = *lst;
-	while (++i < (size.Y - 1))
+	while (++i < size.Y)
 	{
 		get_line(set->map, i, tmp->line, size.X);
 		tmp = tmp->next;
@@ -132,11 +132,7 @@ int				get_map(int fd, t_set *set)
 			return (ER_DEFLT);
 		}
 	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
-	{
-		display_map(set->map);
 		return (0);
-	}
-		display_map(set->map);
 	clear_set(set);
 	lst_line_clr(&tmp);
 	return (i ? i : j);
