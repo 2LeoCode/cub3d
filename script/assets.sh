@@ -11,5 +11,5 @@ mv pics/* .
 rm -rf wolftex.zip pics
 git clone https://github.com/2LeoCode/img_for_cub3d.git > /dev/null 2>&1
 mv img_for_cub3d/* .
-rm *rf img_for_cub3d
+rm -rf img_for_cub3d
 cd ..

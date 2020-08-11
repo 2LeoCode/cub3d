@@ -125,6 +125,15 @@ typedef struct		s_set
 	char			**map;
 }					t_set;
 
+typedef struct		s_mlximg
+{
+	int		bpp;
+	int		line_size;
+	int		endian;
+	void	*img;
+	char	*img_data;
+}					t_mlximg;
+
 typedef struct		s_mlxvar
 {
 	void			*id;
@@ -133,6 +142,8 @@ typedef struct		s_mlxvar
 	int				mapX;
 	int				mapY;
 	t_set			*set;
+	t_mlximg		2d_floor;
+	t_mlximg		2d_wall;
 }					t_mlxvar;
 
 char				*ft_strstr(char *haystack, char *needle);
