@@ -34,10 +34,10 @@ int		main(void)
 	void	*win;
 
 	id = mlx_init();
-	win = mlx_new_window(i, 500, 500);
+	win = mlx_new_window(id, 500, 500);
 	img.surface = mlx_xpm_file_to_image(id, "../assets/2d_floor.xpm", &img.w, &img.h);
 	img.data = (int*)mlx_get_data_addr(img.surface, &img.bpp, &img.linesiz, &img.endian);
 	mlx_put_image_to_window (id, win, img.surface, 10, 10);
-	mlx_loop(mlx.id);
+	mlx_loop(id);
 	return (0);
 }
