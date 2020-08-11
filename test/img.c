@@ -1,6 +1,5 @@
 #define _USE_MATH_DEFINES
 #include "mlx.h"
-#include "mlx_int.h"
 #include <X11/Xlib.h>
 #include <stdio.h>
 #include <math.h>
