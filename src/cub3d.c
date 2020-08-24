@@ -12,7 +12,7 @@
 
 #include <cub3d.h>
 
-void	save_screen(t_img *screen)
+void	save_screen(t_mlximg *screen)
 {
 	(void)screen;
 }
@@ -51,7 +51,6 @@ int		update_screen(t_mlxvar *mlxvar)
 		while (++j < mlxvar->screen.height)
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->F;
 	}
-	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	return (0);
 }
 
@@ -116,7 +115,8 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	}
 	if (!(mlxvar->rays = update_rays(*mlxvar))
 	|| update_screen(mlxvar))
-		return (mlx_exit_failure(mlxvar));
+		return (clear_mlx(mlxvar));
+	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	return (0);
 }
 
@@ -145,10 +145,10 @@ int		cub3D(t_set *set, int flags)
 		clear_mlx(&mlxvar);
 		return (ft_fputs(2, "Cub3D: Error while initializing window.\n"));
 	}
-	display_screen(&mlxvar);
+	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	if (save)
 		save_screen(&mlxvar.screen);
-	mlx_hook(mlxvar.win_2d, KeyPress, KeyPressMask, &updateanddisplay, &mlxvar);
+	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &updateanddisplay, &mlxvar);
 	mlx_loop(mlxvar.id);
 	return (0);
 }
