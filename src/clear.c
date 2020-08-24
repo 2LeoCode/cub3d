@@ -55,7 +55,7 @@ void	clear_paths(t_set *set)
 	set->S = NULL;
 }
 
-void	clear_mlx(t_mlxvar *mlx)
+int		clear_mlx(t_mlxvar *mlx)
 {
 	if (mlx->win)
 		mlx_destroy_window(mlx->id, mlx->win);
@@ -92,5 +92,6 @@ void	clear_mlx(t_mlxvar *mlx)
 	mlx->wallW.img = NULL;
 	if (mlx->wallW.img_data)
 		free(mlx->wallW.img_data);
-	mlx->wallW.img_data = NULL;	
+	mlx->wallW.img_data = NULL;
+	return (-1);
 }

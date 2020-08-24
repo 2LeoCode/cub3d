@@ -115,7 +115,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	}
 	if (!(mlxvar->rays = update_rays(*mlxvar))
 	|| update_screen(mlxvar))
-		return (clear_mlx(&mlxvar));
+		return (clear_mlx(mlxvar));
 	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	return (0);
 }
@@ -150,5 +150,6 @@ int		cub3D(t_set *set, int flags)
 		save_screen(&mlxvar.screen);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &updateanddisplay, &mlxvar);
 	mlx_loop(mlxvar.id);
+	clear_mlx(mlxvar);
 	return (0);
 }
