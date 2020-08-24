@@ -8,7 +8,7 @@
 #ifndef M_PI
 # define M_PI 3.14159265358979323846
 #endif
-#define ONE_DEGREE M_PI / 180
+#define ONE_DEGREE (M_PI / 180)
 #define degToRad(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
 #define KEY_LEFT 65361
