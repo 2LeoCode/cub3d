@@ -66,11 +66,11 @@ BLD =		\x1b[1m
 NRM =		\x1b[0m
 
 ifeq ("$(OS)", "Darwin")
-	CFLAGS_2 =	-L lib -lmlx -framework OpenGL -framework AppKit -lbsd
+	CFLAGS_2 =	-L lib -lmlx -framework OpenGL -framework AppKit -lbsd -lm
 endif
 
 ifeq ("$(OS)", "Linux")
-	CFLAGS_2 =	-L lib -lmlx -lXext -lX11 -lbsd
+	CFLAGS_2 =	-L lib -lmlx -lXext -lX11 -lbsd -lm
 	GRN =		\e[32m
 	RED =		\e[31m
 	L_RED =		\e[91m
