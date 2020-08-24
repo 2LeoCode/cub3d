@@ -115,7 +115,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	}
 	if (!(mlxvar->rays = update_rays(*mlxvar))
 	|| update_screen(mlxvar))
-		return (clear_mlx(mlxvar));
+		return (clear_mlx(&mlxvar));
 	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	return (0);
 }
