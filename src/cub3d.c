@@ -150,6 +150,6 @@ int		cub3D(t_set *set, int flags)
 		save_screen(&mlxvar.screen);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &updateanddisplay, &mlxvar);
 	mlx_loop(mlxvar.id);
-	clear_mlx(mlxvar);
+	clear_mlx(&mlxvar);
 	return (0);
 }
