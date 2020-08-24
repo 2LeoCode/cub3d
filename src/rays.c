@@ -12,7 +12,6 @@
 
 #include <cub3d.h>
 
-
 t_ray	*update_rays(t_mlxvar mlxvar)
 {
 	t_ray	*tmp;
