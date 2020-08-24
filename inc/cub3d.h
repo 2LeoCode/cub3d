@@ -185,6 +185,7 @@ char				*error_s(int errnum);
 
 void				clear_set(t_set *set);
 void				clear_paths(t_set *set);
+void				clear_mlx(t_mlxvar *mlx);
 
 int					help(int show_msg);
 

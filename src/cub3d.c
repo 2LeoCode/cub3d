@@ -44,12 +44,12 @@ int		update_screen(t_mlxvar *mlxvar)
 		size = mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * (mlxvar->rays[i].siz / 50));
 		j = -1;
 		while (++j < (mlxvar->screen.height / 2) - (size / 2) - 1)
-			mlxvar->screen[j * mlxvar->screen.width + i] = mlxvar->set->C;
+			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->C;
 		k = 0;
 		while (++j < (mlxvar->screen.height / 2) + (size / 2) - 1)
-			mlxvar->screen[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[k++ / size * mlxvar->rays[i].texture->height + mlxvar->rays[i].col_pos];
+			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[k++ / size * mlxvar->rays[i].texture->height + mlxvar->rays[i].col_pos];
 		while (++j < mlxvar->screen.height)
-			mlxvar->screen[j * mlxvar->screen.width + i] = mlxvar->set->F;
+			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->F;
 	}
 	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	return (0);
