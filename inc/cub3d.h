@@ -56,6 +56,11 @@
 # define C_C 7
 # define C_S 8
 
+#define KEY_LEFT 65361
+#define KEY_RIGHT 65363
+#define KEY_UP 65362
+#define KEY_DOWN 65364
+
 # define BUFFER_GET_FILE 32
 
 # define _USE_MATH_DEFINES
@@ -125,26 +130,41 @@ typedef struct		s_set
 	char			**map;
 }					t_set;
 
-typedef struct		s_mlximg
+typedef struct		s_img
 {
-	int		bpp;
-	int		line_size;
-	int		endian;
-	void	*img;
-	char	*img_data;
-}					t_mlximg;
+	int				bpp;
+	int				line_size;
+	int				endian;
+	void			*img;
+	int				*img_data;
+	int				width;
+	int				height;
+}					t_img;
+
+typedef struct		s_ray
+{
+	double			siz;
+	double			rot;
+	t_img			*texture;
+	int				col_pos;
+}					t_ray;
 
 typedef struct		s_mlxvar
 {
 	void			*id;
 	void			*win;
-	void			*win_2d;
-	int				mapX;
-	int				mapY;
 	t_set			*set;
-	t_mlximg		2d_floor;
-	t_mlximg		2d_wall;
+	double			posX;
+	double			posY;
+	t_img			screen;
+	t_img			wallN;
+	t_img			wallE;
+	t_img			wallS;
+	t_img			wallW;
+	t_img			sprite;
+	t_ray			*rays;
 }					t_mlxvar;
+
 
 char				*ft_strstr(char *haystack, char *needle);
 
@@ -164,6 +184,7 @@ int					error_wrong_map(int errnum);
 char				*error_s(int errnum);
 
 void				clear_set(t_set *set);
+void				clear_paths(t_set *set);
 
 int					help(int show_msg);
 
@@ -206,6 +227,7 @@ t_bool				is_map_wall(char *line);
 int					check_map(t_set *set);
 int					get_map(int fd, t_set *set);
 
+t_ray				*update_rays(t_mlxvar mlxvar);
 /*
 ** test
 */

@@ -87,6 +87,7 @@ int				main(int ac, char **av)
 	}
 	if (print_wrong(path, ac - 1, av + 1))
 		return (-1);
+	clear_paths(&set);
 	if (arg_save(ac - 1, av + 1))
 	{
 		if (arg_bonus(ac - 1, av + 1))

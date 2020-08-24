@@ -47,7 +47,8 @@ SRC =		main.c\
 			test_functions.c\
 			str_is.c\
 			get_map.c\
-			get_map_utils.c
+			get_map_utils.c\
+			rays.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\
@@ -65,11 +66,11 @@ BLD =		\x1b[1m
 NRM =		\x1b[0m
 
 ifeq ("$(OS)", "Darwin")
-	CFLAGS_2 =	-L lib -lmlx -framework OpenGL -framework AppKit
+	CFLAGS_2 =	-L lib -lmlx -framework OpenGL -framework AppKit -lbsd
 endif
 
 ifeq ("$(OS)", "Linux")
-	CFLAGS_2 =	-L lib -lmlx -lXext -lX11
+	CFLAGS_2 =	-L lib -lmlx -lXext -lX11 -lbsd
 	GRN =		\e[32m
 	RED =		\e[31m
 	L_RED =		\e[91m

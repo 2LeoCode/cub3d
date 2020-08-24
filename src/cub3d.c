@@ -12,13 +12,111 @@
 
 #include <cub3d.h>
 
-int		draw_2d_map(t_mlxvar mlxvar)
+void	save_screen(t_img *screen)
 {
-	
+	(void)screen;
 }
 
-int		update_2d(t_mlxvar *mlxvar)
+int		update_screen(t_mlxvar *mlxvar)
 {
+	int		i;
+	int		j;
+	int		k;
+	int		size;
+
+	if (!mlxvar->screen.img)
+	{
+		mlxvar->screen.img = mlx_new_image(mlxvar->id, mlxvar->set->X, mlxvar->set->Y);
+		mlxvar->screen.img_data = (int*)mlx_get_data_addr(mlxvar->screen.img, &mlxvar->screen.bpp, &mlxvar->screen.line_size, &mlxvar->screen.endian);
+		mlxvar->screen.width = mlxvar->set->X;
+		mlxvar->screen.height = mlxvar->set->Y;
+	}
+	if (!mlxvar->screen.img)
+		return (-1);
+	if (!mlxvar->screen.img_data)
+	{
+		mlx_destroy_image(mlxvar->id, mlxvar->screen.img);
+		return (-1);
+	}
+	i = -1;
+	while (++i < mlxvar->screen.width)
+	{
+		size = mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * (mlxvar->rays[i].siz / 50));
+		j = -1;
+		while (++j < (mlxvar->screen.height / 2) - (size / 2) - 1)
+			mlxvar->screen[j * mlxvar->screen.width + i] = mlxvar->set->C;
+		k = 0;
+		while (++j < (mlxvar->screen.height / 2) + (size / 2) - 1)
+			mlxvar->screen[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[k++ / size * mlxvar->rays[i].texture->height + mlxvar->rays[i].col_pos];
+		while (++j < mlxvar->screen.height)
+			mlxvar->screen[j * mlxvar->screen.width + i] = mlxvar->set->F;
+	}
+	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
+	return (0);
+}
+
+int		init_textures(t_mlxvar *mlxvar)
+{
+	mlxvar->wallN.img = NULL;
+	mlxvar->wallN.img_data = NULL;
+	mlxvar->wallE.img = NULL;
+	mlxvar->wallE.img_data = NULL;
+	mlxvar->wallS.img = NULL;
+	mlxvar->wallS.img_data = NULL;
+	mlxvar->wallW.img = NULL;
+	mlxvar->wallW.img_data = NULL;
+	mlxvar->sprite.img = NULL;
+	mlxvar->sprite.img_data = NULL;
+	mlxvar->wallN.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->NO, &mlxvar->wallN.width, &mlxvar->wallN.height);
+	mlxvar->wallN.img_data = (int*)mlx_get_data_addr(mlxvar->wallN.img, &mlxvar->wallN.bpp, &mlxvar->wallN.line_size, &mlxvar->wallN.endian);
+	mlxvar->wallE.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->EA, &mlxvar->wallE.width, &mlxvar->wallE.height);
+	mlxvar->wallE.img_data = (int*)mlx_get_data_addr(mlxvar->wallE.img, &mlxvar->wallE.bpp, &mlxvar->wallE.line_size, &mlxvar->wallE.endian);
+	mlxvar->wallS.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->SO, &mlxvar->wallS.width, &mlxvar->wallS.height);
+	mlxvar->wallS.img_data = (int*)mlx_get_data_addr(mlxvar->wallS.img, &mlxvar->wallS.bpp, &mlxvar->wallS.line_size, &mlxvar->wallS.endian);
+	mlxvar->wallW.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->WE, &mlxvar->wallW.width, &mlxvar->wallW.height);
+	mlxvar->wallW.img_data = (int*)mlx_get_data_addr(mlxvar->wallW.img, &mlxvar->wallW.bpp, &mlxvar->wallW.line_size, &mlxvar->wallW.endian);
+	mlxvar->sprite.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->S, &mlxvar->sprite.width, &mlxvar->sprite.height);
+	mlxvar->sprite.img_data = (int*)mlx_get_data_addr(mlxvar->sprite.img, &mlxvar->sprite.bpp, &mlxvar->sprite.line_size, &mlxvar->sprite.endian);
+	if (!mlxvar->wallN.img || !mlxvar->wallN.img_data || !mlxvar->wallE.img
+	|| !mlxvar->wallE.img_data || !mlxvar->wallS.img || !mlxvar->wallS.img_data
+	|| !mlxvar->wallW.img || !mlxvar->wallW.img_data || !mlxvar->sprite.img
+	|| !mlxvar->sprite.img_data)
+		return (-1);
+	return (0);
+}
+
+int		updateanddisplay(int key, t_mlxvar *mlxvar)
+{
+	double	dx;
+	double	dy;
+
+	dx = (cos(mlxvar->set->rot_hor) / 50) * 3;
+	dy = (sin(mlxvar->set->rot_hor) / 50) * 3;
+	if (key == KEY_LEFT)
+	{
+		mlxvar->set->rot_hor += M_PI / 180;
+		if (mlxvar->set->rot_hor < 0)
+			mlxvar->set->rot_hor = 2 * M_PI - mlxvar->set->rot_hor;
+	}
+	if (key == KEY_RIGHT)
+	{
+		mlxvar->set->rot_hor -= M_PI / 180;
+		if (mlxvar->set->rot_hor > 2 * M_PI)
+			mlxvar->set->rot_hor = mlxvar->set->rot_hor - 2 * M_PI;
+	}
+	if ((key == KEY_UP) && (mlxvar->set->map[(int)(mlxvar->posY + dy)][(int)(mlxvar->posX + dx)] == '0'))
+	{
+		mlxvar->posX += dx;
+		mlxvar->posY += dy;
+	}
+	if ((key == KEY_DOWN) && (mlxvar->set->map[(int)(mlxvar->posY - dy)][(int)(mlxvar->posX - dx)] == '0'))
+	{
+		mlxvar->posX -= dx;
+		mlxvar->posY -= dy;
+	}
+	if (!(mlxvar->rays = update_rays(*mlxvar))
+	|| update_screen(mlxvar))
+		return (mlx_exit_failure(mlxvar));
 	return (0);
 }
 
@@ -31,20 +129,26 @@ int		cub3D(t_set *set, int flags)
 	if ((flags == SAVE) || (flags == (SAVE | BONUS)))
 		save = true;
 	display_map(set->map);
-	mlxvar.mapY = 0;
-	while (set->map[mlxvar.mapY])
-		mlxvar.mapY++;
-	mlxvar.mapY *= 21;
-	mlxvar.mapX = ft_strlen(*(set->map)) * 21;
-	if (!(mlxvar.id = mlx_init()) ||
-	!(mlxvar.win_2d = mlx_new_window(mlxvar.id, mlxvar.mapX, mlxvar.mapY, "Cub3D"))
-	|| draw_2d_map(mlxvar))
+	mlxvar.set = set;
+	mlxvar.id = NULL;
+	mlxvar.win = NULL;
+	mlxvar.screen.img = NULL;
+	mlxvar.screen.img_data = NULL;
+	mlxvar.rays = NULL;
+	mlxvar.posX = (double)mlxvar.set->spawn.X + 0.5;
+	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
+	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
+	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
+	|| !(mlxvar.rays = update_rays(mlxvar)) || update_screen(&mlxvar))
 	{
 		clear_set(set);
+		clear_mlx(&mlxvar);
 		return (ft_fputs(2, "Cub3D: Error while initializing window.\n"));
 	}
-	mlx_hook(mlxvar.win_2d, KeyPress, KeyPressMask, &update_2d, &mlxvar);
+	display_screen(&mlxvar);
+	if (save)
+		save_screen(&mlxvar.screen);
+	mlx_hook(mlxvar.win_2d, KeyPress, KeyPressMask, &updateanddisplay, &mlxvar);
 	mlx_loop(mlxvar.id);
-	(void)save;
 	return (0);
 }
