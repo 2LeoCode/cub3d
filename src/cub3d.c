@@ -145,7 +145,7 @@ int		cub3D(t_set *set, int flags)
 		clear_mlx(&mlxvar);
 		return (ft_fputs(2, "Cub3D: Error while initializing window.\n"));
 	}
-	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
+	mlx_put_image_to_window(mlxvar.id, mlxvar.win, mlxvar.screen.img, 0, 0);
 	if (save)
 		save_screen(&mlxvar.screen);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &updateanddisplay, &mlxvar);
