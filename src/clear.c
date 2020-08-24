@@ -57,12 +57,9 @@ void	clear_paths(t_set *set)
 
 void	clear_mlx(t_mlxvar *mlx)
 {
-	int		i;
-
 	if (mlx->win);
 		mlx_destroy_window(mlx->id, mlx->win);
 	mlx->win = NULL;
-	i = 0;
 	if (mlx->rays)
 		free(mlx->rays);
 	mlx->rays = NULL;

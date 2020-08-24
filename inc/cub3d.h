@@ -130,7 +130,7 @@ typedef struct		s_set
 	char			**map;
 }					t_set;
 
-typedef struct		s_img
+typedef struct		s_mlximg
 {
 	int				bpp;
 	int				line_size;
@@ -139,13 +139,13 @@ typedef struct		s_img
 	int				*img_data;
 	int				width;
 	int				height;
-}					t_img;
+}					t_mlximg;
 
 typedef struct		s_ray
 {
 	double			siz;
 	double			rot;
-	t_img			*texture;
+	t_mlximg		*texture;
 	int				col_pos;
 }					t_ray;
 
@@ -156,12 +156,12 @@ typedef struct		s_mlxvar
 	t_set			*set;
 	double			posX;
 	double			posY;
-	t_img			screen;
-	t_img			wallN;
-	t_img			wallE;
-	t_img			wallS;
-	t_img			wallW;
-	t_img			sprite;
+	t_mlximg		screen;
+	t_mlximg		wallN;
+	t_mlximg		wallE;
+	t_mlximg		wallS;
+	t_mlximg		wallW;
+	t_mlximg		sprite;
 	t_ray			*rays;
 }					t_mlxvar;
 
