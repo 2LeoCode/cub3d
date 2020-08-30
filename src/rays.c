@@ -30,8 +30,8 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	while (++i < mlxvar.set->X)
 	{
 		tmp[i].rot = r;
-		dx = cos(r) / 50;
-		dy = sin(r) / 50;
+		dx = cos(r) / 30;
+		dy = sin(r) / 30;
 		bx = mlxvar.posX;
 		by = mlxvar.posY;
 		printf("%lf\n%lf\n", dx, dy);
