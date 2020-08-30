@@ -14,13 +14,13 @@
 
 t_ray	*update_rays(t_mlxvar mlxvar)
 {
-	t_ray	*tmp;
-	int		i;
-	int		r;
-	int		bx;
-	int		by;
-	int		dx;
-	int		dy;
+	t_ray		*tmp;
+	int			i;
+	int			r;
+	double		bx;
+	double		by;
+	double		dx;
+	double		dy;
 
 	tmp = mlxvar.rays;
 	if (!tmp && !(tmp = malloc(sizeof(t_ray) * mlxvar.set->X)))
