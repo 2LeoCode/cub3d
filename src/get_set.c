@@ -85,8 +85,6 @@ int			get_set(int fd, t_set *set)
 		if (!total && !i)
 			return (ER_WRMAP);
 	}
-	if (total)
-		return (get_map(fd, set));
-	clear_set(set);
-	return (ER_MISSI);
+	printf("%s\n", set->NO);
+	return (get_map(fd, set));
 }
