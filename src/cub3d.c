@@ -135,6 +135,7 @@ int		cub3D(t_set *set, int flags)
 		save = true;
 	display_map(set->map);
 	mlxvar.set = set;
+	printf("%s\n%s\n", set->NO, mlxvar.set->NO);
 	mlxvar.id = NULL;
 	mlxvar.win = NULL;
 	mlxvar.screen.img = NULL;
