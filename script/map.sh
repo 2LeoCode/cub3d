@@ -39,11 +39,11 @@ fi
 
 cd map
 printf "R 800 600\n\
-NO ./assets/redbrick.png\n\
-SO ./assets/wood.png\n\
-WE ./assets/purplestone.png\n\
-EA ./assets/mossy.png\n\
-S ./assets/barrel.png\n\
+NO ./assets/redbrick.xpm\n\
+SO ./assets/wood.xpm\n\
+WE ./assets/purplestone.xpm\n\
+EA ./assets/mossy.xpm\n\
+S ./assets/barrel.xpm\n\
 F 220,100,0\n\
 C 225,30,0\n        \
 1111111111111111111111111\n        \
