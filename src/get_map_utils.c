@@ -76,8 +76,8 @@ int				check_map(t_set *set)
 			else if (ft_strchr("NOSE", tmp[i][j]))
 			{
 				check = true;
-				set->spawn.X = i;
-				set->spawn.Y = j;
+				set->spawn.X = j;
+				set->spawn.Y = i;
 				if (tmp[i][j] == 'N')
 					set->rot_hor = M_PI / 2;
 				if (tmp[i][j] == 'E')
