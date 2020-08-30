@@ -56,6 +56,7 @@ int		update_screen(t_mlxvar *mlxvar)
 
 int		init_textures(t_mlxvar *mlxvar)
 {
+	printf("OK\n");
 	mlxvar->wallN.img = NULL;
 	mlxvar->wallN.img_data = NULL;
 	mlxvar->wallE.img = NULL;
@@ -66,7 +67,7 @@ int		init_textures(t_mlxvar *mlxvar)
 	mlxvar->wallW.img_data = NULL;
 	mlxvar->sprite.img = NULL;
 	mlxvar->sprite.img_data = NULL;
-	printf("%s\n", mlxvar->set->NO);
+	printf("OK\n");
 	mlxvar->wallN.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->NO, &mlxvar->wallN.width, &mlxvar->wallN.height);
 	mlxvar->wallN.img_data = (int*)mlx_get_data_addr(mlxvar->wallN.img, &mlxvar->wallN.bpp, &mlxvar->wallN.line_size, &mlxvar->wallN.endian);
 	mlxvar->wallE.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->EA, &mlxvar->wallE.width, &mlxvar->wallE.height);
@@ -77,11 +78,13 @@ int		init_textures(t_mlxvar *mlxvar)
 	mlxvar->wallW.img_data = (int*)mlx_get_data_addr(mlxvar->wallW.img, &mlxvar->wallW.bpp, &mlxvar->wallW.line_size, &mlxvar->wallW.endian);
 	mlxvar->sprite.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->S, &mlxvar->sprite.width, &mlxvar->sprite.height);
 	mlxvar->sprite.img_data = (int*)mlx_get_data_addr(mlxvar->sprite.img, &mlxvar->sprite.bpp, &mlxvar->sprite.line_size, &mlxvar->sprite.endian);
+	printf("OK\n");
 	if (!mlxvar->wallN.img || !mlxvar->wallN.img_data || !mlxvar->wallE.img
 	|| !mlxvar->wallE.img_data || !mlxvar->wallS.img || !mlxvar->wallS.img_data
 	|| !mlxvar->wallW.img || !mlxvar->wallW.img_data || !mlxvar->sprite.img
 	|| !mlxvar->sprite.img_data)
-		return (-1 * printf("LOL\n"));
+		return (-1);
+	printf("OK\n");
 	return (0);
 }
 
