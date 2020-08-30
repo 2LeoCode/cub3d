@@ -16,7 +16,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 {
 	t_ray		*tmp;
 	int			i;
-	int			r;
+	double		r;
 	double		bx;
 	double		by;
 	double		dx;
@@ -34,7 +34,6 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		dy = sin(r) / 30;
 		bx = mlxvar.posX;
 		by = mlxvar.posY;
-		printf("%lf\n", r);
 		while (mlxvar.set->map[(int)by][(int)bx] == '0')
 		{
 			bx += dx;
