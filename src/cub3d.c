@@ -66,6 +66,7 @@ int		init_textures(t_mlxvar *mlxvar)
 	mlxvar->wallW.img_data = NULL;
 	mlxvar->sprite.img = NULL;
 	mlxvar->sprite.img_data = NULL;
+	printf("%s\n", mlxvar->set->NO);
 	mlxvar->wallN.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->NO, &mlxvar->wallN.width, &mlxvar->wallN.height);
 	mlxvar->wallN.img_data = (int*)mlx_get_data_addr(mlxvar->wallN.img, &mlxvar->wallN.bpp, &mlxvar->wallN.line_size, &mlxvar->wallN.endian);
 	mlxvar->wallE.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->EA, &mlxvar->wallE.width, &mlxvar->wallE.height);
@@ -80,7 +81,7 @@ int		init_textures(t_mlxvar *mlxvar)
 	|| !mlxvar->wallE.img_data || !mlxvar->wallS.img || !mlxvar->wallS.img_data
 	|| !mlxvar->wallW.img || !mlxvar->wallW.img_data || !mlxvar->sprite.img
 	|| !mlxvar->sprite.img_data)
-		return (-1);
+		return (-1 * printf("LOL\n"));
 	return (0);
 }
 
@@ -137,9 +138,9 @@ int		cub3D(t_set *set, int flags)
 	mlxvar.rays = NULL;
 	mlxvar.posX = (double)mlxvar.set->spawn.X + 0.5;
 	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
-	if (!(mlxvar.id = mlx_init())|| !printf("1\n") || init_textures(&mlxvar)
-	|| !printf("2\n") || !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
-	|| !(mlxvar.rays = update_rays(mlxvar)) || !printf("2\n") || update_screen(&mlxvar))
+	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
+	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
+	|| !(mlxvar.rays = update_rays(mlxvar)) || update_screen(&mlxvar))
 	{
 		clear_set(set);
 		clear_mlx(&mlxvar);
