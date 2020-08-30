@@ -135,7 +135,6 @@ int		cub3D(t_set *set, int flags)
 		save = true;
 	display_map(set->map);
 	mlxvar.set = set;
-	printf("%s\n%s\n", set->NO, mlxvar.set->NO);
 	mlxvar.id = NULL;
 	mlxvar.win = NULL;
 	mlxvar.screen.img = NULL;
@@ -144,8 +143,8 @@ int		cub3D(t_set *set, int flags)
 	mlxvar.posX = (double)mlxvar.set->spawn.X + 0.5;
 	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
 	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
-	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
-	|| !(mlxvar.rays = update_rays(mlxvar)) || update_screen(&mlxvar))
+	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D")) || printf("1\n")
+	|| !(mlxvar.rays = update_rays(mlxvar)) || printf("2\n") || update_screen(&mlxvar))
 	{
 		clear_set(set);
 		clear_mlx(&mlxvar);
