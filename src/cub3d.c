@@ -33,11 +33,13 @@ int		update_screen(t_mlxvar *mlxvar)
 	}
 	if (!mlxvar->screen.img)
 		return (-1);
+	printf("1\n");
 	if (!mlxvar->screen.img_data)
 	{
 		mlx_destroy_image(mlxvar->id, mlxvar->screen.img);
 		return (-1);
 	}
+	printf("2\n");
 	i = -1;
 	while (++i < mlxvar->screen.width)
 	{
@@ -51,6 +53,7 @@ int		update_screen(t_mlxvar *mlxvar)
 		while (++j < mlxvar->screen.height)
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->F;
 	}
+	printf("3\n");
 	return (0);
 }
 
