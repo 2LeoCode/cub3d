@@ -34,13 +34,11 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		dy = sin(r) / 50;
 		bx = mlxvar.posX;
 		by = mlxvar.posY;
-		printf("1\n");
-		while (by > 0 && bx > 0 && mlxvar.set->map[(int)by] && mlxvar.set->map[(int)by][(int)bx] == '0')
+		while (mlxvar.set->map[(int)by][(int)bx] == '0')
 		{
 			bx += dx;
 			by += dy;
 		}
-		printf("2\n");
 		tmp[i].siz = sqrt((bx - mlxvar.posX) * (bx - mlxvar.posX) + (by - mlxvar.posY) * (by - mlxvar.posY));
 		if (mlxvar.set->map[(int)by][(int)(bx - dx)] == '0')
 		{
