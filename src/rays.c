@@ -40,6 +40,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			bx += dx;
 			by += dy;
 		}
+		printf("2\n");
 		tmp[i].siz = sqrt((bx - mlxvar.posX) * (bx - mlxvar.posX) + (by - mlxvar.posY) * (by - mlxvar.posY));
 		if (mlxvar.set->map[(int)by][(int)(bx - dx)] == '0')
 		{
