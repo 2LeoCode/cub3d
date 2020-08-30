@@ -34,7 +34,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		dy = sin(r) / 30;
 		bx = mlxvar.posX;
 		by = mlxvar.posY;
-		printf("%lf\n%ld\n%lf\n", r, dx, dy);
+		printf("%lf\n%lf\n%lf\n", r, dx, dy);
 		while (mlxvar.set->map[(int)by][(int)bx] == '0')
 		{
 			bx += dx;
