@@ -34,7 +34,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		dy = sin(r) / 50;
 		bx = mlxvar.posX;
 		by = mlxvar.posY;
-		printf("%lf\n%lf\n", bx, by);
+
 		while (mlxvar.set->map[(int)by][(int)bx] == '0')
 		{
 			bx += dx;
@@ -53,5 +53,6 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		}
 		r += (mlxvar.set->FOV / mlxvar.set->X);
 	}
+	printf("OK\n");
 	return (tmp);
 }
