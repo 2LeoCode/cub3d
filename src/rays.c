@@ -44,12 +44,13 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		{
 			tmp[i].texture = (((mlxvar.set->rot_hor - r > M_PI) && (mlxvar.set->rot_hor - r < 3 * M_PI / 4)) ? &mlxvar.wallW : &mlxvar.wallE);
 			tmp[i].col_pos = (by - (int)by) * tmp[i].texture->width;
+			printf("VERT: %d\n", tmp[i].texture->width);
 		}
 		else if (mlxvar.set->map[(int)(by - dy)][(int)bx] - '1')
 		{
 			tmp[i].texture = ((mlxvar.set->rot_hor - r < 2 * M_PI) ? &mlxvar.wallN : &mlxvar.wallS);
 			tmp[i].col_pos = (bx - (int)bx) * tmp[i].texture->width;
-			printf("%d\n", tmp[i].texture->width);
+			printf("HOR : %d\n", tmp[i].texture->width);
 		}
 		r += (mlxvar.set->FOV / mlxvar.set->X);
 	}
