@@ -41,7 +41,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	i = -1;
 	while (++i < mlxvar->screen.width)
 	{
-		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * (mlxvar->rays[i].siz / 100));
+		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * (mlxvar->rays[i].siz / CUBSIZ));
 		j = -1;
 		while (++j < (mlxvar->screen.height / 2) - (size / 2) - 1)
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->C;
@@ -97,8 +97,8 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	double	dx;
 	double	dy;
 
-	dx = (cos(mlxvar->set->rot_hor) / 50) * 3;
-	dy = (sin(mlxvar->set->rot_hor) / 50) * 3;
+	dx = (cos(mlxvar->set->rot_hor) / CUBSIZ);
+	dy = (sin(mlxvar->set->rot_hor) / CUBSIZ);
 	if (key == KEY_LEFT)
 	{
 		mlxvar->set->rot_hor += M_PI / 180;
