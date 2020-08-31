@@ -47,7 +47,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		}
 		else if (mlxvar.set->map[(int)(by - dy)][(int)bx] - '1')
 		{
-			tmp[i].texture = ((r < 2 * M_PI) ? &mlxvar.wallN : &mlxvar.wallS);
+			tmp[i].texture = ((mlxvar.set->rot_hor - r < 2 * M_PI) ? &mlxvar.wallN : &mlxvar.wallS);
 			tmp[i].col_pos = (bx - (int)bx) * tmp[i].texture->width;
 		}
 		r += (mlxvar.set->FOV / mlxvar.set->X);
