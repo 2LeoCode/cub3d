@@ -23,10 +23,11 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	double		dy;
 
 	tmp = mlxvar.rays;
+	
 	if (!tmp && !(tmp = malloc(sizeof(t_ray) * mlxvar.set->X)))
 		return (NULL);
 	i = -1;
-	r = mlxvar.set->rot_hor - (mlxvar.set->FOV / 2);
+	r = -(mlxvar.set->FOV / 2);
 	while (++i < mlxvar.set->X)
 	{
 		tmp[i].rot = r;
@@ -43,7 +44,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		tmp[i].siz = sqrt((bx - mlxvar.posX) * (bx - mlxvar.posX) + (by - mlxvar.posY) * (by - mlxvar.posY));
 		if (mlxvar.set->map[(int)by][(int)(bx - dx)] == '0')
 		{
-			tmp[i].texture = (((r > M_PI) && (r < 3 * M_PI / 4)) ? &mlxvar.wallW : &mlxvar.wallE);
+			tmp[i].texture = (((mlxvar.set->rot_hor - r > M_PI) && (mlxvar.set->rot_hor - r < 3 * M_PI / 4)) ? &mlxvar.wallW : &mlxvar.wallE);
 			tmp[i].col_pos = (by - (int)by) * tmp[i].texture->width;
 		}
 		else if (mlxvar.set->map[(int)(by - dy)][(int)bx] == '0')
