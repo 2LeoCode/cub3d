@@ -41,7 +41,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	i = -1;
 	while (++i < mlxvar->screen.width)
 	{
-		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * (mlxvar->rays[i].siz / 50));
+		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * (mlxvar->rays[i].siz / 100));
 		j = -1;
 		while (++j < (mlxvar->screen.height / 2) - (size / 2) - 1)
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->C;
