@@ -52,6 +52,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			tmp[i].col_pos = (bx - (int)bx) * tmp[i].texture->width;
 			printf("HOR : %d\n", tmp[i].texture->width);
 		}
+		else printf ("shoudlnt\n");
 		r += (mlxvar.set->FOV / mlxvar.set->X);
 	}
 	return (tmp);
