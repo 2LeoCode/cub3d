@@ -22,9 +22,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	double		dx;
 	double		dy;
 
-	tmp = mlxvar.rays;
-	
-	if (!tmp && !(tmp = malloc(sizeof(t_ray) * mlxvar.set->X)))
+	if (!(tmp = malloc(sizeof(t_ray) * mlxvar.set->X)))
 		return (NULL);
 	i = -1;
 	r = -(mlxvar.set->FOV / 2);

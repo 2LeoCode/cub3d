@@ -117,6 +117,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 		mlxvar->posX -= dx;
 		mlxvar->posY -= dy;
 	}
+	free(mlxvar->rays);
 	if (!(mlxvar->rays = update_rays(*mlxvar))
 	|| update_screen(mlxvar))
 		return (clear_mlx(mlxvar));
