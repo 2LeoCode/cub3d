@@ -34,19 +34,19 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		bx = mlxvar.posX;
 		by = mlxvar.posY;
 
-		while (mlxvar.set->map[(int)by][(int)bx] == '0')
+		while (mlxvar.set->map[(int)by][(int)bx] - '1')
 		{
 			bx += dx;
 			by += dy;
 		}
 		tmp[i].siz = sqrt((bx - mlxvar.posX) * (bx - mlxvar.posX) + (by - mlxvar.posY) * (by - mlxvar.posY));
 		printf("%lf\n%lf\n%lf\n%lf\n", mlxvar.posX, mlxvar.posY, bx, by);
-		if (mlxvar.set->map[(int)by][(int)(bx - dx)] == '0')
+		if (mlxvar.set->map[(int)by][(int)(bx - dx)] - '1')
 		{
 			tmp[i].texture = (((mlxvar.set->rot_hor - r > M_PI) && (mlxvar.set->rot_hor - r < 3 * M_PI / 4)) ? &mlxvar.wallW : &mlxvar.wallE);
 			tmp[i].col_pos = (by - (int)by) * tmp[i].texture->width;
 		}
-		else if (mlxvar.set->map[(int)(by - dy)][(int)bx] == '0')
+		else if (mlxvar.set->map[(int)(by - dy)][(int)bx] - '1')
 		{
 			tmp[i].texture = ((r < 2 * M_PI) ? &mlxvar.wallN : &mlxvar.wallS);
 			tmp[i].col_pos = (bx - (int)bx) * tmp[i].texture->width;
