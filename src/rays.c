@@ -29,8 +29,8 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	while (++i < mlxvar.set->X)
 	{
 		tmp[i].rot = r;
-		dx = cos(mlxvar.set->rot_hor + r) / 100;
-		dy = sin(mlxvar.set->rot_hor + r) / 100;
+		dx = cos(mlxvar.set->rot_hor + r) / 1000;
+		dy = sin(mlxvar.set->rot_hor + r) / 1000;
 		bx = mlxvar.posX;
 		by = mlxvar.posY;
 
@@ -40,7 +40,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			by += dy;
 		}
 		tmp[i].siz = sqrt((bx - mlxvar.posX) * (bx - mlxvar.posX) + (by - mlxvar.posY) * (by - mlxvar.posY));
-		if ((int)(bx - dx) - (int)bx)
+		if ((double)(bx - (int)bx) < 0.001)
 		{
 			tmp[i].texture = (((mlxvar.set->rot_hor - r > M_PI) && (mlxvar.set->rot_hor - r < 3 * M_PI / 4)) ? &mlxvar.wallW : &mlxvar.wallE);
 			tmp[i].col_pos = (by - (int)by) * tmp[i].texture->width;
