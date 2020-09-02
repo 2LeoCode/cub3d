@@ -44,7 +44,6 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		{
 			tmp[i].texture = (((mlxvar.set->rot_hor - r > M_PI) && (mlxvar.set->rot_hor - r < 3 * M_PI / 4)) ? &mlxvar.wallW : &mlxvar.wallE);
 			tmp[i].col_pos = (by - (int)by) * tmp[i].texture->width;
-			printf("VERT: %d\n", tmp[i].texture->width);
 		}
 		else
 		{
