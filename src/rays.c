@@ -50,7 +50,6 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		{
 			tmp[i].texture = ((mlxvar.set->rot_hor - r < 2 * M_PI) ? &mlxvar.wallN : &mlxvar.wallS);
 			tmp[i].col_pos = (bx - (int)bx) * tmp[i].texture->width;
-			printf("HOR : %d\n", tmp[i].texture->width);
 		}
 		r += (mlxvar.set->FOV / mlxvar.set->X);
 	}
