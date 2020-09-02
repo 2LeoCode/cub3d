@@ -40,7 +40,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			by += dy;
 		}
 		tmp[i].siz = sqrt((bx - mlxvar.posX) * (bx - mlxvar.posX) + (by - mlxvar.posY) * (by - mlxvar.posY));
-		printf("bx %lf : by %lf : bx - dx %lf : by - dy %lf\n");
+		printf("bx %lf : by %lf : bx - dx %lf : by - dy %lf\n", bx, by, bx - dx, by - dy);
 		if (bx)
 		{
 			tmp[i].texture = (((mlxvar.set->rot_hor - r > M_PI) && (mlxvar.set->rot_hor - r < 3 * M_PI / 4)) ? &mlxvar.wallW : &mlxvar.wallE);
