@@ -29,8 +29,8 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	while (++i < mlxvar.set->X)
 	{
 		tmp[i].rot = r;
-		dx = cos(r) / 100;
-		dy = sin(r) / 100;
+		dx = cos(mlxvar.set->rot_hor + r) / 100;
+		dy = sin(mlxvar.set->rot_hor + r) / 100;
 		bx = mlxvar.posX;
 		by = mlxvar.posY;
 
@@ -40,8 +40,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			by += dy;
 		}
 		tmp[i].siz = sqrt((bx - mlxvar.posX) * (bx - mlxvar.posX) + (by - mlxvar.posY) * (by - mlxvar.posY));
-		printf("bx %lf : by %lf : bx - dx %lf : by - dy %lf\n", bx, by, bx - dx, by - dy);
-		if (bx)
+		if ((int)(by - dy) - by)
 		{
 			tmp[i].texture = (((mlxvar.set->rot_hor - r > M_PI) && (mlxvar.set->rot_hor - r < 3 * M_PI / 4)) ? &mlxvar.wallW : &mlxvar.wallE);
 			tmp[i].col_pos = (by - (int)by) * tmp[i].texture->width;
@@ -51,6 +50,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		{
 			tmp[i].texture = ((mlxvar.set->rot_hor - r < 2 * M_PI) ? &mlxvar.wallN : &mlxvar.wallS);
 			tmp[i].col_pos = (bx - (int)bx) * tmp[i].texture->width;
+			printf("HOR: %d\n", tmp[i].texture->width);
 		}
 		r += (mlxvar.set->FOV / mlxvar.set->X);
 	}
