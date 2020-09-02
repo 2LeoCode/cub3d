@@ -21,8 +21,6 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	double		by;
 	double		dx;
 	double		dy;
-	double		diffX;
-	double		diffY;
 
 	if (!(tmp = malloc(sizeof(t_ray) * mlxvar.set->X)))
 		return (NULL);
