@@ -85,11 +85,5 @@ int			get_set(int fd, t_set *set)
 		if (!total && !i)
 			return (ER_WRMAP);
 	}
-	if ((i = get_map(fd, set)))
-		return (i);
-	i = 0;
-	while (map[i])
-		i++;
-	set->mapY = i;
-	i = 0;
+	return (get_map(fd, set));
 }
