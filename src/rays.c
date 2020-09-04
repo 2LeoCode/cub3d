@@ -34,11 +34,13 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			b.y = (int)mlxvar.posY + 1.0001;
 		else
 			b.y = (int)mlxvar.posY - 0.0001;
+		printf("%lf %lf %lf\n", b.x, b.y, d);
 		b.x = mlxvar.posX + ft_dabs(b.y - mlxvar.posY) * tan(mlxvar.set->rot_hor + r);
 		while (mlxvar.set->map[(int)b.y][(int)b.x] - '1')
 		{
 			b.x += d;
 			b.y++;
+			printf("%lf %lf %lf\n", b.x, b.y, d);
 		}
 		length.y = sqrt((b.x - mlxvar.posX) * (b.x - mlxvar.posX) + (b.y - mlxvar.posY) * (b.y - mlxvar.posY));
 		d = 1 / d;
@@ -46,12 +48,12 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			c.x = (int)mlxvar.posX + 1.0001;
 		else
 			c.x = (int)mlxvar.posX - 0.0001;
-		printf("%lf %lf %lf\n", c.x, c.y, d);
+		printf("%lf %lf %lf\n", b.x, c.y, d);
 		while (mlxvar.set->map[(int)c.y][(int)c.x] - '1')
 		{
 			c.y += d;
 			c.x++;
-			printf("%lf %lf %lf\n", c.x, c.y, d);
+			printf("%lf %lf %lf\n", b.x, b.y, d);
 		}
 		exit(EXIT_FAILURE);
 		length.x = sqrt((c.x - mlxvar.posX) * (c.x - mlxvar.posX) + (c.y - mlxvar.posY) * (c.y - mlxvar.posY));
