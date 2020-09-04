@@ -25,6 +25,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	double	size;
 
 	printf("%d\n", mlxvar->rays[0].texture->width);
+	printf("%d\n", mlxvar->rays[1].texture->width);
 	if (!mlxvar->screen.img)
 	{
 		mlxvar->screen.img = mlx_new_image(mlxvar->id, mlxvar->set->X, mlxvar->set->Y);
@@ -33,6 +34,7 @@ int		update_screen(t_mlxvar *mlxvar)
 		mlxvar->screen.height = mlxvar->set->Y;
 	}
 	printf("%d\n", mlxvar->rays[0].texture->width);
+	printf("%d\n", mlxvar->rays[1].texture->width);
 	if (!mlxvar->screen.img)
 		return (-1);
 	if (!mlxvar->screen.img_data)
