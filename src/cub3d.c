@@ -23,7 +23,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	int		j;
 	double	k;
 	double	size;
-
+	printf("%d\n", mlxvar->rays[0].texture->width);
 	if (!mlxvar->screen.img)
 	{
 		mlxvar->screen.img = mlx_new_image(mlxvar->id, mlxvar->set->X, mlxvar->set->Y);
