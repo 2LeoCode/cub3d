@@ -30,17 +30,19 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	{
 		tmp[i].rot = r;
 		d = tan(mlxvar.set->rot_hor + r);
-		printf("%lf\n", d);
+		printf("1\n");
 		if ((mlxvar.set->rot_hor + r) > 0 && (mlxvar.set->rot_hor + r) < M_PI)
 			b.y = (int)mlxvar.posY + 1.0001;
 		else
 			b.y = (int)mlxvar.posY - 0.0001;
 		b.x = mlxvar.posX + ft_dabs(b.y - mlxvar.posY) * d;
+		printf("2\n");
 		while (mlxvar.set->map[(int)b.y][(int)b.x] - '1')
 		{
 			b.x += d;
 			b.y++;
 		}
+		printf("3\n");
 		length.y = sqrt((b.x - mlxvar.posX) * (b.x - mlxvar.posX) + (b.y - mlxvar.posY) * (b.y - mlxvar.posY));
 		d = 1 / d;
 		if (((mlxvar.set->rot_hor + r) > (M_PI / 2)) && ((mlxvar.set->rot_hor + r) < (3 * M_PI / 4)))
@@ -48,11 +50,13 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		else
 			c.x = (int)mlxvar.posX - 0.0001;
 		c.y = mlxvar.posY + ft_dabs(c.x - mlxvar.posX) * tan(mlxvar.set->rot_hor + r);
+		printf("4\n");
 		while (mlxvar.set->map[(int)c.y][(int)c.x] - '1')
 		{
 			c.y += d;
 			c.x++;
 		}
+		printf("5\n");
 		length.x = sqrt((c.x - mlxvar.posX) * (c.x - mlxvar.posX) + (c.y - mlxvar.posY) * (c.y - mlxvar.posY));
 		if (length.y > length.x)
 		{
