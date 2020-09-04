@@ -39,9 +39,9 @@ int		update_screen(t_mlxvar *mlxvar)
 		return (-1);
 	}
 	i = -1;
+		printf("%d %d\n", mlxvar->rays[0].texture->width, i);
 	while (++i < mlxvar->screen.width)
 	{
-		printf("%d %d\n", mlxvar->rays[0].texture->width, i);
 		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * mlxvar->rays[i].siz);
 		j = -1;
 		while (++j < (int)((mlxvar->screen.height / 2) - (size / 2) - 1))
@@ -145,7 +145,7 @@ int		cub3D(t_set *set, int flags)
 	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
 	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
 	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
-	|| !(mlxvar.rays = update_rays(mlxvar)) || !printf ("%d\n", mlxvar.rays[0].texture->width) || update_screen(&mlxvar))
+	|| !(mlxvar.rays = update_rays(mlxvar)) || update_screen(&mlxvar))
 	{
 		clear_set(set);
 		clear_mlx(&mlxvar);
