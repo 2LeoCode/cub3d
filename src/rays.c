@@ -30,7 +30,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	{
 		tmp[i].rot = r;
 		d = tan(mlxvar.set->rot_hor + r);
-		printf("%lf\n", mlxvar.set->rot_hor, 3 * M_PI / 2);
+		printf("%lf\n", d);
 		if ((mlxvar.set->rot_hor + r) > 0 && (mlxvar.set->rot_hor + r) < M_PI)
 			b.y = (int)mlxvar.posY + 1.0001;
 		else
