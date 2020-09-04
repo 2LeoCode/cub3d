@@ -136,6 +136,8 @@ typedef struct		s_set
 	double			rot_vert;
 	double			rot_hor;
 	char			**map;
+	int				mapX;
+	int				mapY;
 }					t_set;
 
 typedef struct		s_mlximg

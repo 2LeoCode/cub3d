@@ -70,35 +70,34 @@ static void		get_line(char **map, int index, char *line, int size)
 
 static int		get_map_from_list(t_line **lst, t_set *set)
 {
-	t_coord		size;
 	t_line		*tmp;
 	int			i;
 	int			j;
 
-	size.Y = get_map_y(*lst);
-	if (!(set->map = (char**)malloc(sizeof(char*) * (size.Y + 1))))
+	set->mapY = get_map_y(*lst);
+	if (!(set->map = (char**)malloc(sizeof(char*) * (set->mapY + 1))))
 		return (ER_DEFLT);
-	size.X = get_map_x(*lst);
+	set->mapX = get_map_x(*lst);
 	i = -1;
-	while (++i < (size.Y + 1))
-		if (!(set->map[i] = (char*)malloc(sizeof(char) * (size.X + 1))))
+	while (++i < (set->mapY + 1))
+		if (!(set->map[i] = (char*)malloc(sizeof(char) * (set->mapX + 1))))
 			return (ER_DEFLT);
 	set->map[i] = NULL;
 	i = 0;
 	j = -1;
-	while (++j < size.X)
+	while (++j < set->mapX)
 		set->map[i][j] = ' ';
 	set->map[i][j] = 0;
-	i += (size.Y - 1);
+	i += (set->mapY - 1);
 	j = -1;
-	while (++j < size.X)
+	while (++j < set->mapX)
 		set->map[i][j] = ' ';
 	set->map[i][j] = 0;
 	tmp = *lst;
 	i = 1;
 	while (tmp)
 	{
-		get_line(set->map, i, tmp->line, size.X);
+		get_line(set->map, i, tmp->line, set->mapX);
 		tmp = tmp->next;
 		i++;
 	}
@@ -132,7 +131,6 @@ int				get_map(int fd, t_set *set)
 		}
 	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
 		return (0);
-	display_map(set->map);
 	clear_set(set);
 	lst_line_clr(&tmp);
 	return (i ? i : j);
