@@ -145,7 +145,7 @@ int		cub3D(t_set *set, int flags)
 	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
 	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
 	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
-	|| !(mlxvar.rays = update_rays(mlxvar)) || update_screen(&mlxvar))
+	|| !(mlxvar.rays = update_rays(mlxvar)) || !printf ("%d\n", tmp[0].texture->width) || update_screen(&mlxvar))
 	{
 		clear_set(set);
 		clear_mlx(&mlxvar);
