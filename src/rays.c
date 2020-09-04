@@ -24,6 +24,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 
 	if (!(tmp = malloc(sizeof(t_ray) * mlxvar.set->X)))
 		return (NULL);
+	printf("%lf\n", mlxvar.set->rot_hor);
 	i = -1;
 	r = -(mlxvar.set->FOV / 2);
 	while (++i < mlxvar.set->X)
@@ -35,12 +36,10 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		else
 			b.y = (int)mlxvar.posY - 0.0001;
 		b.x = mlxvar.posX + ft_dabs(b.y - mlxvar.posY) * tan(mlxvar.set->rot_hor + r);
-		printf("%lf %lf %lf\n", b.x, b.y, d);
 		while (mlxvar.set->map[(int)b.y][(int)b.x] - '1')
 		{
 			b.x += d;
 			b.y++;
-			printf("%lf %lf %lf\n", b.x, b.y, d);
 		}
 		length.y = sqrt((b.x - mlxvar.posX) * (b.x - mlxvar.posX) + (b.y - mlxvar.posY) * (b.y - mlxvar.posY));
 		d = 1 / d;
@@ -49,12 +48,10 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		else
 			c.x = (int)mlxvar.posX - 0.0001;
 		c.y = mlxvar.posY + ft_dabs(c.x - mlxvar.posX) * tan(mlxvar.set->rot_hor + r);
-		printf("%lf %lf %lf\n", b.x, b.y, d);
 		while (mlxvar.set->map[(int)c.y][(int)c.x] - '1')
 		{
 			c.y += d;
 			c.x++;
-			printf("%lf %lf %lf\n", b.x, b.y, d);
 		}
 		length.x = sqrt((c.x - mlxvar.posX) * (c.x - mlxvar.posX) + (c.y - mlxvar.posY) * (c.y - mlxvar.posY));
 		if (length.y > length.x)
@@ -62,6 +59,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			tmp[i].siz = length.y;
 			tmp[i].texture = (((mlxvar.set->rot_hor + r > 0) && (mlxvar.set->rot_hor + r < M_PI)) ? &mlxvar.wallS : &mlxvar.wallN);
 			tmp[i].col_pos = (double)(b.x - (int)b.x) * tmp[i].texture->width;
+			printf("%lf %lf %d\n", b.x, b.y, tmp[i].col_pos);
 		}
 		else
 		{
