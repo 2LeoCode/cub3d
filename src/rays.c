@@ -50,7 +50,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		else
 			c.x = (int)mlxvar.posX - 0.0001;
 		c.y = mlxvar.posY + ft_dabs(c.x - mlxvar.posX) * tan(mlxvar.set->rot_hor + r);
-		printf("4\n");
+		printf("%lf %lf\n", c.x, c.y);
 		while (mlxvar.set->map[(int)c.y][(int)c.x] - '1')
 		{
 			c.y += d;
