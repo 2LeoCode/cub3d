@@ -79,7 +79,7 @@ int				check_map(t_set *set)
 				set->spawn.X = j;
 				set->spawn.Y = i;
 				if (tmp[i][j] == 'N')
-					set->rot_hor = 3 * M_PI / 4;
+					set->rot_hor = (3 * M_PI) / 2;
 				if (tmp[i][j] == 'E')
 					set->rot_hor = 0;
 				if (tmp[i][j] == 'S')
