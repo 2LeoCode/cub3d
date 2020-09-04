@@ -102,6 +102,12 @@ typedef struct		s_rgb
 	int				B;
 }					t_rgb;
 
+typedef struct		s_point
+{
+	double			x;
+	double			y;
+}					t_point;
+
 typedef struct		s_coord
 {
 	int				X;
@@ -231,6 +237,8 @@ int					check_map(t_set *set);
 int					get_map(int fd, t_set *set);
 
 t_ray				*update_rays(t_mlxvar mlxvar);
+
+double				ft_dabs(double n);
 /*
 ** test
 */
