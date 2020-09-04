@@ -41,6 +41,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	i = -1;
 	while (++i < mlxvar->screen.width)
 	{
+		printf("%d %d\n", mlxvar->rays[0].texture->width, i);
 		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * mlxvar->rays[i].siz);
 		j = -1;
 		while (++j < (int)((mlxvar->screen.height / 2) - (size / 2) - 1))
@@ -49,7 +50,6 @@ int		update_screen(t_mlxvar *mlxvar)
 		k = 0;
 		while (++j < (mlxvar->screen.height / 2) + (size / 2) - 1)
 		{
-			printf("%d %d\n", mlxvar->rays[0].texture->width, i);
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
 			k += (size / mlxvar->screen.height);
 		}
