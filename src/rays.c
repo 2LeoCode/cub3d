@@ -46,6 +46,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			c.x = (int)mlxvar.posX + 1.0001;
 		else
 			c.x = (int)mlxvar.posX - 0.0001;
+		printf("%lf %lf %lf\n", c.x, c.y, d);
 		while (mlxvar.set->map[(int)c.y][(int)c.x] - '1')
 		{
 			c.y += d;
