@@ -50,6 +50,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		{
 			c.y += d;
 			c.x++;
+			printf("%lf %lf %lf\n", c.x, c.y, d);
 		}
 		length.x = sqrt((c.x - mlxvar.posX) * (c.x - mlxvar.posX) + (c.y - mlxvar.posY) * (c.y - mlxvar.posY));
 		if (length.y > length.x)
@@ -57,14 +58,12 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			tmp[i].siz = length.y;
 			tmp[i].texture = (((mlxvar.set->rot_hor + r > 0) && (mlxvar.set->rot_hor + r < M_PI)) ? &mlxvar.wallS : &mlxvar.wallN);
 			tmp[i].col_pos = (double)(b.x - (int)b.x) * tmp[i].texture->width;
-			printf("Y %lf %lf %d\n", b.x, b.y, tmp[i].col_pos);
 		}
 		else
 		{
 			tmp[i].siz = length.x;
 			tmp[i].texture = (((mlxvar.set->rot_hor + r > (M_PI / 2)) && (mlxvar.set->rot_hor + r < (3 * M_PI / 4))) ? &mlxvar.wallW : &mlxvar.wallE);
 			tmp[i].col_pos = (double)(c.y - (int)c.y) * tmp[i].texture->width;
-			printf("X %lf %lf %d\n", c.x, c.y, tmp[i].col_pos);
 		}
 		r += (mlxvar.set->FOV / mlxvar.set->X);
 	}
