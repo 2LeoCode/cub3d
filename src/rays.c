@@ -48,12 +48,14 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			c.x = (int)mlxvar.posX + 1.0001;
 		else
 			c.x = (int)mlxvar.posX - 0.0001;
+		c.y = mlxvar.posY + ft_dabs(c.x - mlxvar.posX) * tan(mlxvar.set->rot_hor + r)
+		printf("%lf %lf %lf\n", b.x, b.y, d);
 		while (mlxvar.set->map[(int)c.y][(int)c.x] - '1')
 		{
 			c.y += d;
 			c.x++;
+			printf("%lf %lf %lf\n", b.x, b.y, d);
 		}
-		exit(EXIT_FAILURE);
 		length.x = sqrt((c.x - mlxvar.posX) * (c.x - mlxvar.posX) + (c.y - mlxvar.posY) * (c.y - mlxvar.posY));
 		if (length.y > length.x)
 		{
