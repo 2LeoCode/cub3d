@@ -50,13 +50,14 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		else
 			c.x = (int)mlxvar.posX - 0.0001;
 		c.y = mlxvar.posY + ft_dabs(c.x - mlxvar.posX) * tan(mlxvar.set->rot_hor + r);
+		printf("3\n");
 		while (mlxvar.set->map[(int)c.y][(int)c.x] - '1')
 		{
 			c.y += d;
 			c.x++;
 		}
-		printf("3\n");
 		length.x = sqrt((c.x - mlxvar.posX) * (c.x - mlxvar.posX) + (c.y - mlxvar.posY) * (c.y - mlxvar.posY));
+		printf("4\n");
 		if (length.y > length.x)
 		{
 			tmp[i].siz = length.y;
@@ -64,7 +65,6 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			tmp[i].col_pos = (double)(b.x - (int)b.x) * tmp[i].texture->width;
 			printf("%lf %lf %d\n", b.x, b.y, tmp[i].col_pos);
 		}
-		printf("4\n");
 		else
 		{
 			tmp[i].siz = length.x;
