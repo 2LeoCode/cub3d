@@ -41,6 +41,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		{
 			b.x += d;
 			b.y++;
+			printf("%lf %lf\n", b.x, b.y);
 		}
 		printf("3\n");
 		length.y = sqrt((b.x - mlxvar.posX) * (b.x - mlxvar.posX) + (b.y - mlxvar.posY) * (b.y - mlxvar.posY));
