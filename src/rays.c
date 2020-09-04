@@ -55,13 +55,13 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		if (length.y > length.x)
 		{
 			tmp[i].siz = length.y;
-			tmp[i].texture = (((mlxvar.set->rot_hor + r > 0) && (mlxvar.set->rot_hor + r < M_PI)) ? mlxvar.wallS : mlxvar.wallN);
+			tmp[i].texture = (((mlxvar.set->rot_hor + r > 0) && (mlxvar.set->rot_hor + r < M_PI)) ? &mlxvar.wallS : &mlxvar.wallN);
 			tmp[i].col_pos = (double)(b.x - (int)b.x) * tmp[i].texture->width;
 		}
 		else
 		{
 			tmp[i].siz = length.x;
-			tmp[i].texture = (((mlxvar.set->rot_hor + r > (M_PI / 2)) && (mlxvar.set->rot_hor + r < (3 * M_PI / 4))) ? mlxvar.wallW : mlxvar.wallE);
+			tmp[i].texture = (((mlxvar.set->rot_hor + r > (M_PI / 2)) && (mlxvar.set->rot_hor + r < (3 * M_PI / 4))) ? &mlxvar.wallW : &mlxvar.wallE);
 			tmp[i].col_pos = (double)(c.y - (int)c.y) * tmp[i].texture->width;
 		}
 	}
