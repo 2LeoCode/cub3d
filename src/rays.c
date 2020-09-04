@@ -35,13 +35,14 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		else
 			b.y = (int)mlxvar.posY - 0.0001;
 		b.x = mlxvar.posX + ft_dabs(b.y - mlxvar.posY) * tan(mlxvar.set->rot_hor + r);
+		printf("%lf : %lf -->%lf\n", b.x, b.y, d);
 		while (mlxvar.set->map[(int)b.y][(int)b.x] - '1')
 		{
 			b.x += d;
 			b.y++;
 		}
 		length.y = sqrt((b.x - mlxvar.posX) * (b.x - mlxvar.posX) + (b.y - mlxvar.posY) * (b.y - mlxvar.posY));
-		d = 1 / tan(mlxvar.set->rot_hor + r);
+		d = 1 / d;
 		if (((mlxvar.set->rot_hor + r) > (M_PI / 2)) && ((mlxvar.set->rot_hor + r) < (3 * M_PI / 4)))
 			c.x = (int)mlxvar.posX + 1.0001;
 		else
