@@ -52,6 +52,7 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 			c.x++;
 			printf("%lf %lf %lf\n", c.x, c.y, d);
 		}
+		exit(EXIT_FAILURE);
 		length.x = sqrt((c.x - mlxvar.posX) * (c.x - mlxvar.posX) + (c.y - mlxvar.posY) * (c.y - mlxvar.posY));
 		if (length.y > length.x)
 		{
