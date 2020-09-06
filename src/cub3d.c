@@ -27,8 +27,8 @@ int		update_screen(t_mlxvar *mlxvar)
 	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
 		return (clear_mlx(mlxvar));
 	//printf("w %d\n", mlxvar->rays[0].texture->width);
-	i = -1;
-	while (++i < mlxvar->screen.width)
+	i = mlxvar->screen.width;
+	while (--i >= 0)
 	{
 		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * mlxvar->rays[i].siz);
 		if (size < 100)
