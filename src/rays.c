@@ -52,7 +52,7 @@ int		update_rays(t_mlxvar *mlxvar)
 			c.x++;
 		}
 		length.x = sqrt((c.x - mlxvar->posX) * (c.x - mlxvar->posX) + (c.y - mlxvar->posY) * (c.y - mlxvar->posY));
-		if (length.y > length.x)
+		if (length.y < length.x)
 		{
 			mlxvar->rays[i].siz = length.y;
 			mlxvar->rays[i].texture = (((mlxvar->set->rot_hor + r > 0) && (mlxvar->set->rot_hor + r < M_PI)) ? &mlxvar->wallS : &mlxvar->wallN);
