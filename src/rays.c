@@ -12,9 +12,8 @@
 
 #include <cub3d.h>
 
-t_ray	*update_rays(t_mlxvar mlxvar)
+int		update_rays(t_mlxvar *mlxvar)
 {
-	t_ray		*tmp;
 	int			i;
 	double		r;
 	t_point		b;
@@ -22,13 +21,13 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 	t_point		length;
 	double		d;
 
-	if (!(tmp = malloc(sizeof(t_ray) * mlxvar.set->X)))
-		return (NULL);
+	if (!mlxvar->rays && !(mlxvar->rays = malloc(sizeof(t_ray) * mlxvar.set->X)))
+		return (-1);
 	i = -1;
 	r = -(mlxvar.set->FOV / 2);
 	while (++i < mlxvar.set->X)
 	{
-		tmp[i].rot = r;
+		mlxvar->rays[i].rot = r;
 		d = tan(mlxvar.set->rot_hor + r);
 		if ((mlxvar.set->rot_hor + r) > 0 && (mlxvar.set->rot_hor + r) < M_PI)
 			b.y = (int)mlxvar.posY + 1.0001;
@@ -55,19 +54,17 @@ t_ray	*update_rays(t_mlxvar mlxvar)
 		length.x = sqrt((c.x - mlxvar.posX) * (c.x - mlxvar.posX) + (c.y - mlxvar.posY) * (c.y - mlxvar.posY));
 		if (length.y > length.x)
 		{
-			tmp[i].siz = length.y;
-			tmp[i].texture = (((mlxvar.set->rot_hor + r > 0) && (mlxvar.set->rot_hor + r < M_PI)) ? &mlxvar.wallS : &mlxvar.wallN);
-			tmp[i].col_pos = (double)(b.x - (int)b.x) * tmp[i].texture->width;
+			mlxvar->rays[i].siz = length.y;
+			mlxvar->rays[i].texture = (((mlxvar.set->rot_hor + r > 0) && (mlxvar.set->rot_hor + r < M_PI)) ? &mlxvar.wallS : &mlxvar.wallN);
+			mlxvar->rays[i].col_pos = (double)(b.x - (int)b.x) * mlxvar->rays[i].texture->width;
 		}
 		else
 		{
-			tmp[i].siz = length.x;
-			tmp[i].texture = (((mlxvar.set->rot_hor + r > (M_PI / 2)) && (mlxvar.set->rot_hor + r < (3 * M_PI / 4))) ? &mlxvar.wallW : &mlxvar.wallE);
-			tmp[i].col_pos = (double)(c.y - (int)c.y) * tmp[i].texture->width;
+			mlxvar->rays[i].siz = length.x;
+			mlxvar->rays[i].texture = (((mlxvar.set->rot_hor + r > (M_PI / 2)) && (mlxvar.set->rot_hor + r < (3 * M_PI / 4))) ? &mlxvar.wallW : &mlxvar.wallE);
+			mlxvar->rays[i].col_pos = (double)(c.y - (int)c.y) * mlxvar->rays[i].texture->width;
 		}
-		if (i < 100)
-			printf("%d %d\n", i, tmp[i].texture->width);
 		r += (mlxvar.set->FOV / mlxvar.set->X);
 	}
-	return (tmp);
+	return (0);
 }

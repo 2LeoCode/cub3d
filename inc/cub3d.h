@@ -238,7 +238,7 @@ t_bool				is_map_wall(char *line);
 int					check_map(t_set *set);
 int					get_map(int fd, t_set *set);
 
-t_ray				*update_rays(t_mlxvar mlxvar);
+int					update_rays(t_mlxvar *mlxvar);
 
 double				ft_dabs(double n);
 /*
