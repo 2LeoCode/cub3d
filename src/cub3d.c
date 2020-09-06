@@ -92,8 +92,8 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	double	dx;
 	double	dy;
 
-	dx = (cos(mlxvar->set->rot_hor) / CUBSIZ);
-	dy = (sin(mlxvar->set->rot_hor) / CUBSIZ);
+	dx = (cos(mlxvar->set->rot_hor) / CUBSIZ) / 2;
+	dy = (sin(mlxvar->set->rot_hor) / CUBSIZ) / 2;
 	if (key == KEY_LEFT)
 	{
 		mlxvar->set->rot_hor += M_PI / 180;
