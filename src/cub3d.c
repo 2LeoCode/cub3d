@@ -106,12 +106,12 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 		if (mlxvar->set->rot_hor > 2 * M_PI)
 			mlxvar->set->rot_hor = mlxvar->set->rot_hor - 2 * M_PI;
 	}
-	if ((key == KEY_UP) && (mlxvar->set->map[(int)(mlxvar->posY + dy)][(int)(mlxvar->posX + dx)] == '0'))
+	if ((key == KEY_UP) && (mlxvar->set->map[(int)(mlxvar->posY + dy)][(int)(mlxvar->posX + dx)] - '1'))
 	{
 		mlxvar->posX += dx;
 		mlxvar->posY += dy;
 	}
-	if ((key == KEY_DOWN) && (mlxvar->set->map[(int)(mlxvar->posY - dy)][(int)(mlxvar->posX - dx)] == '0'))
+	if ((key == KEY_DOWN) && (mlxvar->set->map[(int)(mlxvar->posY - dy)][(int)(mlxvar->posX - dx)] - '1'))
 	{
 		mlxvar->posX -= dx;
 		mlxvar->posY -= dy;
