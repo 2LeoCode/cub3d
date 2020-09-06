@@ -26,23 +26,11 @@ int		update_screen(t_mlxvar *mlxvar)
 
 	printf("%d\n", mlxvar->rays[0].texture->width);
 	printf("%d\n", mlxvar->rays[1].texture->width);
-	if (!mlxvar->screen.img)
-	{
-		mlxvar->screen.img = mlx_new_image(mlxvar->id, mlxvar->set->X, mlxvar->set->Y);
-		mlxvar->screen.img_data = (int*)mlx_get_data_addr(mlxvar->screen.img, &mlxvar->screen.bpp, &mlxvar->screen.line_size, &mlxvar->screen.endian);
-		mlxvar->screen.width = mlxvar->set->X;
-		mlxvar->screen.height = mlxvar->set->Y;
-	}
+	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
+		return (clear_mlx(mlxvar));
+	i = -1;
 	printf("%d\n", mlxvar->rays[0].texture->width);
 	printf("%d\n", mlxvar->rays[1].texture->width);
-	if (!mlxvar->screen.img)
-		return (-1);
-	if (!mlxvar->screen.img_data)
-	{
-		mlx_destroy_image(mlxvar->id, mlxvar->screen.img);
-		return (-1);
-	}
-	i = -1;
 	while (++i < mlxvar->screen.width)
 	{
 		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * mlxvar->rays[i].siz);
@@ -73,6 +61,12 @@ int		init_textures(t_mlxvar *mlxvar)
 	mlxvar->wallW.img_data = NULL;
 	mlxvar->sprite.img = NULL;
 	mlxvar->sprite.img_data = NULL;
+	mlxvar->screen.img = NULL;
+	mlxvar->wallN.img_data = NULL;
+	mlxvar->screen.img = mlx_new_image(mlxvar->id, mlxvar->set->X, mlxvar->set->Y);
+	mlxvar->screen.img_data = (int*)mlx_get_data_addr(mlxvar->screen.img, &mlxvar->screen.bpp, &mlxvar->screen.line_size, &mlxvar->screen.endian);
+	mlxvar->screen.width = mlxvar->set->X;
+	mlxvar->screen.height = mlxvar->set->Y;
 	mlxvar->wallN.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->NO, &mlxvar->wallN.width, &mlxvar->wallN.height);
 	mlxvar->wallN.img_data = (int*)mlx_get_data_addr(mlxvar->wallN.img, &mlxvar->wallN.bpp, &mlxvar->wallN.line_size, &mlxvar->wallN.endian);
 	mlxvar->wallE.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->EA, &mlxvar->wallE.width, &mlxvar->wallE.height);
@@ -86,7 +80,7 @@ int		init_textures(t_mlxvar *mlxvar)
 	if (!mlxvar->wallN.img || !mlxvar->wallN.img_data || !mlxvar->wallE.img
 	|| !mlxvar->wallE.img_data || !mlxvar->wallS.img || !mlxvar->wallS.img_data
 	|| !mlxvar->wallW.img || !mlxvar->wallW.img_data || !mlxvar->sprite.img
-	|| !mlxvar->sprite.img_data)
+	|| !mlxvar->sprite.img_data	|| !mlxvar->screen.img || !mlxvar->screen.img_data)
 		return (-1);
 	return (0);
 }
