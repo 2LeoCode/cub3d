@@ -33,6 +33,7 @@ int		update_rays(t_mlxvar *mlxvar)
 			a = 2 * M_PI + ((a > (2 * M_PI)) ? a : -a);
 		mlxvar->rays[i].rot = r;
 		d = 1 / (tan(a) + 0.0001);
+		printf("%lf %lf %lf\n", d);
 		if (a > M_PI / 2 && a < (3 * M_PI / 2))
 			d = -d;
 		if (a <= M_PI)
@@ -45,7 +46,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
 			b.x += d;
-			printf("%.10lf %lf %lf\n", d, b.x, b.y);
 			if (a < M_PI)
 				b.y++;
 			else if ((a > M_PI) && (a < M_PI / 2))
