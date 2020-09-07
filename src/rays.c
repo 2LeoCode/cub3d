@@ -52,7 +52,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		length.y = sqrt((b.x - mlxvar->posX) * (b.x - mlxvar->posX) + (b.y - mlxvar->posY) * (b.y - mlxvar->posY));
 		d = 1 / d;
-		printf("%lf", d);
+		printf("%lf\n", d);
 		if (a <= M_PI / 2)
 			b.y = (int)mlxvar->posY + 1.0001;
 		else if (a == (M_PI / 2) || a == (3 * M_PI / 2))
