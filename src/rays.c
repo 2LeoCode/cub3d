@@ -45,7 +45,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
 			b.x += d;
-			printf("%lf %lf\n", b.x, b.y);
+			printf("%lf %lf\n", d);
 			if (a < M_PI)
 				b.y++;
 			else if ((a > M_PI) && (a < M_PI / 2))
