@@ -32,7 +32,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		if (a < 0)
 			a = 2 * M_PI + ((a > (2 * M_PI)) ? a : -a);
 		mlxvar->rays[i].rot = r;
-		d = -1 / (tan(7 * M_PI / 8) + 0.0001);
+		d = -1 / (tan(7 * M_PI / 4) + 0.0001);
 		if (a <= M_PI)
 			b.y = (int)mlxvar->posY + 1.0001;
 		else if (!a || a == M_PI)
