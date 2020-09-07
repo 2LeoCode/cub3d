@@ -16,6 +16,7 @@ int		update_rays(t_mlxvar *mlxvar)
 {
 	int			i;
 	double		r;
+	double		a;
 	t_point		b;
 	t_point		c;
 	t_point		length;
@@ -27,10 +28,17 @@ int		update_rays(t_mlxvar *mlxvar)
 	r = -(mlxvar->set->FOV / 2);
 	while (++i < mlxvar->set->X)
 	{
+		a = mlxvar->set->rot_hor + r;
+		if (a < 0)
+			a = 2 * M_PI + a;
+		if (a > (2 * M_PI))
+			a = 2 * M_PI - a;
 		mlxvar->rays[i].rot = r;
 		d = tan(mlxvar->set->rot_hor + r);
-		if ((mlxvar->set->rot_hor + r) > 0 && (mlxvar->set->rot_hor + r) < M_PI)
+		if (a < M_PI)
 			b.y = (int)mlxvar->posY + 1.0001;
+		else if (!a || (mlxvar->set->rot_hor + r) == M_PI)
+			b.y = mlxvar->posY;
 		else
 			b.y = (int)mlxvar->posY - 0.0001;
 		b.x = mlxvar->posX + ft_dabs(b.y - mlxvar->posY) * d;
@@ -43,7 +51,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		d = 1 / d;
 		if (((mlxvar->set->rot_hor + r) > (M_PI / 2)) && ((mlxvar->set->rot_hor + r) < (3 * M_PI / 4)))
 			c.x = (int)mlxvar->posX + 1.0001;
-		else
+		else if ((mlxvar->set->rot_hor + r) == (M_PI / 2) || (mlxvar->set->rot_hor + r) == (3 * M_PI / 4))
 			c.x = (int)mlxvar->posX - 0.0001;
 		c.y = mlxvar->posY + ft_dabs(c.x - mlxvar->posX) * d;
 		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
@@ -52,7 +60,6 @@ int		update_rays(t_mlxvar *mlxvar)
 			c.x++;
 		}
 		length.x = sqrt((c.x - mlxvar->posX) * (c.x - mlxvar->posX) + (c.y - mlxvar->posY) * (c.y - mlxvar->posY));
-		printf("x %lf y %lf\n", length.x, length.y);
 		if (length.y < length.x)
 		{
 			mlxvar->rays[i].siz = length.y;
