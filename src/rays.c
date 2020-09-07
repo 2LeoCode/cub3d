@@ -52,7 +52,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		length.y = sqrt((b.x - mlxvar->posX) * (b.x - mlxvar->posX) + (b.y - mlxvar->posY) * (b.y - mlxvar->posY));
 		d = 1 / d;
-		printf("%lf\n", d);
 		if (a <= M_PI / 2)
 			b.y = (int)mlxvar->posY + 1.0001;
 		else if (a == (M_PI / 2) || a == (3 * M_PI / 2))
@@ -62,6 +61,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		c.y = mlxvar->posY + ft_dabs(c.x - mlxvar->posX) * d;
 		while ((c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
+			printf("%lf %lf\n", c.x, c.y);
 			c.y += d;
 			if (a < (M_PI / 2) || a > (3 * M_PI / 2))
 				c.x++;
