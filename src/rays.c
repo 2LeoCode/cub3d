@@ -42,9 +42,9 @@ int		update_rays(t_mlxvar *mlxvar)
 		else
 			b.y = (int)mlxvar->posY - 0.0001;
 		b.x = mlxvar->posX + ft_dabs(b.y - mlxvar->posY) * d;
-		printf("%lf %lf %lf %lf %lf\n", a, d, mlxvar->posX, b.x, b.y);
 		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
+			printf("%lf %lf %lf %lf %lf\n", a, d, mlxvar->posX, b.x, b.y);
 			b.x += d;
 			if (a < M_PI)
 				b.y++;
