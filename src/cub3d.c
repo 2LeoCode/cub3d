@@ -33,7 +33,7 @@ int		update_screen(t_mlxvar *mlxvar)
 		j = -1;
 		if ((int)size > mlxvar->screen.height)
 		{
-			k = mlxvar->rays[i].texture->height * (mlxvar->screen.height - size) / mlxvar->screen.height;
+			k = mlxvar->rays[i].texture->height * (mlxvar->screen.height - size) / size;
 			while (++j < mlxvar->screen.height)
 			{
 				mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)((k / size * mlxvar->rays[i].texture->width) * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos)];
