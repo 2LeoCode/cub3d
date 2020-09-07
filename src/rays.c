@@ -52,7 +52,7 @@ int		update_rays(t_mlxvar *mlxvar)
 				b.y--;
 		}
 		length.y = sqrt((b.x - mlxvar->posX) * (b.x - mlxvar->posX) + (b.y - mlxvar->posY) * (b.y - mlxvar->posY));
-		d = 1 / d;
+		d = tan(a);
 		if (a < M_PI)
 			c.y = (int)mlxvar->posY + 1.0001;
 		else if (!a || a == M_PI)
