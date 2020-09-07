@@ -26,26 +26,30 @@ int		update_screen(t_mlxvar *mlxvar)
 
 	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
 		return (clear_mlx(mlxvar));
-	//printf("w %d\n", mlxvar->rays[0].texture->width);
 	i = mlxvar->screen.width;
 	while (--i >= 0)
 	{
-		if (mlxvar->rays[i].siz > 4)
-			printf("%lf\n", mlxvar->rays[i].siz);
 		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * mlxvar->rays[i].siz);
 		j = -1;
 		k = 0;
 		if ((int)size > mlxvar->screen.height)
+		{
 			k = mlxvar->rays[i].texture->width * (size / 2 - mlxvar->screen.height / 2) / mlxvar->screen.height;
+			while (++j < mlxvar->screen.height)
+			{
+				mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
+				k += mlxvar->rays[i].texture->width / size;
+			}
+			continue ;
+		}
 		while (++j < (int)((mlxvar->screen.height / 2) - (size / 2) - 1))
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->C;
-		//printf("1\n");
-		while (++j < ((size > mlxvar->screen.height) ? mlxvar->screen.height : ((mlxvar->screen.height / 2) + (size / 2) - 1)))
+		while (++j < (mlxvar->screen.height / 2) + (size / 2) - 1)
 		{
 			//printf("%d\n", mlxvar->wallE.width);
 			//printf("i %d\nj %d\nmlxvar->screen.width %d\nmlxvar->rays[%d].texture->width %d\nmlxvar->rays[%d].col_pos %d\n", i, j, mlxvar->screen.width, i, mlxvar->rays[i].texture->width, i, mlxvar->rays[i].col_pos);
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
-			k += mlxvar->rays[i].texture->width * (size / (double)mlxvar->screen.height) / size;
+			k += mlxvar->rays[i].texture->width / size;
 		}
 		while (++j < mlxvar->screen.height)
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->F;
@@ -99,13 +103,13 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	dy = sin(mlxvar->set->rot_hor) / 20;
 	if (key == KEY_LEFT)
 	{
-		mlxvar->set->rot_hor += M_PI / 180;
+		mlxvar->set->rot_hor -= M_PI / 180;
 		if (mlxvar->set->rot_hor < 0)
 			mlxvar->set->rot_hor = 2 * M_PI - mlxvar->set->rot_hor;
 	}
 	if (key == KEY_RIGHT)
 	{
-		mlxvar->set->rot_hor -= M_PI / 180;
+		mlxvar->set->rot_hor += M_PI / 180;
 		if (mlxvar->set->rot_hor > 2 * M_PI)
 			mlxvar->set->rot_hor = mlxvar->set->rot_hor - 2 * M_PI;
 	}
