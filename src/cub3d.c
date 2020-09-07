@@ -21,7 +21,7 @@ int		update_screen(t_mlxvar *mlxvar)
 {
 	int		i;
 	int		j;
-	int		k;
+	double	k;
 	double	size;
 
 	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
