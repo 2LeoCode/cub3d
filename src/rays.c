@@ -48,7 +48,7 @@ int		update_rays(t_mlxvar *mlxvar)
 			b.x += d;
 			if (a < M_PI)
 				b.y++;
-			else if ((a > M_PI) && (a < M_PI / 2))
+			else if ((a > M_PI) && (a < 2 * M_PI))
 				b.y--;
 		}
 		length.y = sqrt((b.x - mlxvar->posX) * (b.x - mlxvar->posX) + (b.y - mlxvar->posY) * (b.y - mlxvar->posY));
