@@ -42,7 +42,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		else
 			b.y = (int)mlxvar->posY - 0.0001;
 		b.x = mlxvar->posX + ft_dabs(b.y - mlxvar->posY) * d;
-		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
+		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
 			printf("%lf %lf %lf %lf %lf\n", a, d, mlxvar->posX, b.x, b.y);
 			b.x += d;
@@ -59,7 +59,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		else
 			b.y = (int)mlxvar->posY - 0.0001;
 		c.y = mlxvar->posY + ft_dabs(c.x - mlxvar->posX) * d;
-		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
+		while ((c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
 			c.y += d;
 			if (a < (M_PI / 2) || a > (3 * M_PI / 2))
