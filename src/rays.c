@@ -52,6 +52,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		length.y = sqrt((b.x - mlxvar->posX) * (b.x - mlxvar->posX) + (b.y - mlxvar->posY) * (b.y - mlxvar->posY));
 		d = 1 / d;
+		printf("%lf", d);
 		if (a <= M_PI / 2)
 			b.y = (int)mlxvar->posY + 1.0001;
 		else if (a == (M_PI / 2) || a == (3 * M_PI / 2))
@@ -68,7 +69,6 @@ int		update_rays(t_mlxvar *mlxvar)
 				c.x--;
 		}
 		length.x = sqrt((c.x - mlxvar->posX) * (c.x - mlxvar->posX) + (c.y - mlxvar->posY) * (c.y - mlxvar->posY));
-		printf("%lf %lf\n", length.x, length.y);
 		if (length.y < length.x)
 		{
 			mlxvar->rays[i].siz = length.y;
