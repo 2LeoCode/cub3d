@@ -63,7 +63,7 @@ double			arg_fov(int ac, char **av)
 			return (ft_atoi(tmp) * M_PI / 180);
 		}
 	} 
-	return (M_PI / 2);
+	return (1,0472);
 }
 
 int				main(int ac, char **av)
