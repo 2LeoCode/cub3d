@@ -39,7 +39,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		t = -1 / (tan(a) + (0.0001 * (!a || a == M_PI)));
 		if (a < M_PI)
 		{
-			b.y = (int)mlxvar->posX + 1.0001;
+			b.y = (int)mlxvar->posY + 1.0001;
 			d.y = 1;
 		}
 		else if (!a || a == M_PI)
