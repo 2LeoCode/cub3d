@@ -44,10 +44,13 @@ int		update_rays(t_mlxvar *mlxvar)
 		else if (!a || a == M_PI)
 		{
 			b.y = mlxvar->posY;
-			d.y = -1;
+			d.y = 0;
 		}
 		else
+		{
 			b.y = (int)mlxvar->posY - 0.0001;
+			d.y = -1;
+		}
 		b.x = mlxvar->posX + (mlxvar->posY - b.y) * t;
 		d.x = -d.y * t;
 		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
@@ -64,7 +67,10 @@ int		update_rays(t_mlxvar *mlxvar)
 			d.x = 1;
 		}
 		else if (a == (M_PI / 2) || a == (3 * M_PI / 2))
+		{
 			c.x = mlxvar->posY;
+			d.x = 0;
+		}
 		else
 		{
 			c.x = (int)mlxvar->posY - 0.0001;
