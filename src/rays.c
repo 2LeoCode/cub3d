@@ -27,7 +27,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		return (-1);
 	i = -1;
 	r = -(mlxvar->set->FOV / 2);
-	printf("%f\n", mlxvar->set->rot_hor);
 	while (++i < mlxvar->set->X)
 	{
 		a = mlxvar->set->rot_hor + r;
@@ -37,6 +36,7 @@ int		update_rays(t_mlxvar *mlxvar)
 			a = 2 * M_PI - a;
 		mlxvar->rays[i].rot = r;
 		t = -1 / (tan(a) + (0.0001 * (!a || a == M_PI)));
+		printf("%f\n", a);
 		if (a < M_PI)
 		{
 			b.y = (int)mlxvar->posY + 1.0001;
