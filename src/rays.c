@@ -92,7 +92,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		else
 		{
 			mlxvar->rays[i].siz = length.x;
-			mlxvar->rays[i].texture = (((a > (M_PI / 2)) && (a < (3 * M_PI / 4))) ? &mlxvar->wallW : &mlxvar->wallE);
+			mlxvar->rays[i].texture = (((a > (M_PI / 2)) && (a < (3 * M_PI / 2))) ? &mlxvar->wallW : &mlxvar->wallE);
 			mlxvar->rays[i].col_pos = (double)(c.y - (int)c.y) * mlxvar->rays[i].texture->width;
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
