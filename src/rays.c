@@ -29,6 +29,7 @@ int		update_rays(t_mlxvar *mlxvar)
 	r = -(mlxvar->set->FOV / 2);
 	while (++i < mlxvar->set->X)
 	{
+		printf("%d\n", i, )
 		a = mlxvar->set->rot_hor + r;
 		if (a < 0)
 			a = 2 * M_PI + a;
@@ -85,16 +86,12 @@ int		update_rays(t_mlxvar *mlxvar)
 		length.x = sqrt((c.x - mlxvar->posX) * (c.x - mlxvar->posX) + (c.y - mlxvar->posY) * (c.y - mlxvar->posY));
 		if (length.y < length.x)
 		{
-			if (length.y > 10)
-			printf("%lf\n", length.y);
 			mlxvar->rays[i].siz = length.y;
 			mlxvar->rays[i].texture = ((a < M_PI) ? &mlxvar->wallS : &mlxvar->wallN);
 			mlxvar->rays[i].col_pos = (double)(b.x - (int)b.x) * mlxvar->rays[i].texture->width;
 		}
 		else
 		{
-			if (length.x > 10)
-			printf("%lf\n", length.x);
 			mlxvar->rays[i].siz = length.x;
 			mlxvar->rays[i].texture = (((a > (M_PI / 2)) && (a < (3 * M_PI / 4))) ? &mlxvar->wallW : &mlxvar->wallE);
 			mlxvar->rays[i].col_pos = (double)(c.y - (int)c.y) * mlxvar->rays[i].texture->width;
