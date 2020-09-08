@@ -53,9 +53,9 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		b.x = mlxvar->posX + (mlxvar->posY - b.y) * t;
 		d.x = -d.y * t;
-		printf("%lf %lf %lf %lf %lf\n", b.x, b.y, d.x, d.y, t);
 		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
+			printf("%lf %lf %lf %lf %lf\n", b.x, b.y, d.x, d.y, t);
 			b.x += d.x;
 			b.y += d.y;
 		}
