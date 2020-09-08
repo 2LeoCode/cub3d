@@ -27,7 +27,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		return (-1);
 	i = -1;
 	r = -(mlxvar->set->FOV / 2);
-	printf(mlxvar->set->rot_hor);
+	printf("%f\n", mlxvar->set->rot_hor);
 	while (++i < mlxvar->set->X)
 	{
 		a = mlxvar->set->rot_hor + r;
