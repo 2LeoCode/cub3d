@@ -36,7 +36,6 @@ int		update_rays(t_mlxvar *mlxvar)
 			a = 2 * M_PI - a;
 		mlxvar->rays[i].rot = r;
 		t = -1 / (tan(a) + (0.0001 * (!a || a == M_PI)));
-		printf("%f\n", a);
 		if (a < M_PI)
 		{
 			b.y = (int)mlxvar->posY + 1.0001;
