@@ -92,6 +92,5 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
 	}
-	printf("2\n");
 	return (0);
 }
