@@ -29,7 +29,6 @@ int		update_rays(t_mlxvar *mlxvar)
 	r = -(mlxvar->set->FOV / 2);
 	while (++i < mlxvar->set->X)
 	{
-		printf("%d\n", i );
 		a = mlxvar->set->rot_hor + r;
 		if (a < 0)
 			a = 2 * M_PI + a;
@@ -54,6 +53,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		b.x = mlxvar->posX + (mlxvar->posY - b.y) * t;
 		d.x = -d.y * t;
+		printf("%lf %lf %lf %lf %lf\n", b.x, b.y, d.x, d.y, t);
 		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
 			b.x += d.x;
