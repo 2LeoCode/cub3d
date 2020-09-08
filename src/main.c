@@ -89,7 +89,8 @@ int				main(int ac, char **av)
 			return (cub3D(&settings, SAVE | BONUS));
 		return (cub3D(&settings, SAVE));
 	}
-	settings.FOV = arg_fov(ac - 1, av + 1);
+	if ((settings.FOV = arg_fov(ac - 1, av + 1)) < 0)
+		return (error_wrong_map(ER_DEFLT));
 	if (arg_bonus(ac - 1, av + 1))
 		return (cub3D(&settings, BONUS));
 	return (cub3D(&settings, NONE));
