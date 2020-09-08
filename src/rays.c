@@ -85,12 +85,14 @@ int		update_rays(t_mlxvar *mlxvar)
 		length.x = sqrt((c.x - mlxvar->posX) * (c.x - mlxvar->posX) + (c.y - mlxvar->posY) * (c.y - mlxvar->posY));
 		if (length.y < length.x)
 		{
+			printf("%lf\n", length.y);
 			mlxvar->rays[i].siz = length.y;
 			mlxvar->rays[i].texture = ((a < M_PI) ? &mlxvar->wallS : &mlxvar->wallN);
 			mlxvar->rays[i].col_pos = (double)(b.x - (int)b.x) * mlxvar->rays[i].texture->width;
 		}
 		else
 		{
+			printf("%lf\n", length.x);
 			mlxvar->rays[i].siz = length.x;
 			mlxvar->rays[i].texture = (((a > (M_PI / 2)) && (a < (3 * M_PI / 4))) ? &mlxvar->wallW : &mlxvar->wallE);
 			mlxvar->rays[i].col_pos = (double)(c.y - (int)c.y) * mlxvar->rays[i].texture->width;
