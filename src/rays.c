@@ -55,7 +55,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.x = -d.y * t;
 		while ((b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
-			printf("%f %f %f %f\n", b.x, b.y, d.x, d.y);
 			b.x += d.x;
 			b.y += d.y;
 		}
@@ -98,6 +97,5 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
 	}
-	printf("2\n");
 	return (0);
 }
