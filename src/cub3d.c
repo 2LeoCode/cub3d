@@ -23,6 +23,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	int		j;
 	double	k;
 	double	size;
+	int		l;
 
 	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
 		return (clear_mlx(mlxvar));
@@ -30,32 +31,19 @@ int		update_screen(t_mlxvar *mlxvar)
 	while (--i >= 0)
 	{
 		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * mlxvar->rays[i].siz);
-		printf("%lf\n", size);
 		j = -1;
-		if ((int)size > mlxvar->screen.height)
-		{
-			k = mlxvar->rays[i].texture->height * (mlxvar->screen.height - size) / size;
-			while (++j < mlxvar->screen.height)
-			{
-				mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
-				k += mlxvar->rays[i].texture->height / size;
-			}
-			continue ;
-		}
-		k = -1;
-		while (++j < (int)((mlxvar->screen.height / 2) - (size / 2) - 1))
+		while (++j < (int)(mlxvar->screen.height / 2))
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->C;
-		printf("a\n");
-		while (++j < (int)((mlxvar->screen.height / 2) + (size / 2) - 1))
-		{
-			printf("a\n");
-			//printf("%d\n", mlxvar->wallE.width);
-			//printf("i %d\nj %d\nmlxvar->screen.width %d\nmlxvar->rays[%d].texture->width %d\nmlxvar->rays[%d].col_pos %d\n", i, j, mlxvar->screen.width, i, mlxvar->rays[i].texture->width, i, mlxvar->rays[i].col_pos);
-			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
-			k += mlxvar->rays[i].texture->height / size;
-		}
 		while (++j < mlxvar->screen.height)
 			mlxvar->screen.img_data[j * mlxvar->screen.width + i] = mlxvar->set->F;
+		j = -1;
+		l = (size > mlxvar->screen.height) ? 0 : (int)(mlxvar->screen.height / 2) - (size / 2);
+		k = (size < mlxvar->screen.height) ? 0 : ((size / 2) - (mlxvar->screen.height / 2) / size) * mlxvar->rays[i].texture->height;
+		while (++j < (int)size)
+		{
+			mlxvar->screen.img_data[(l + j) * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
+			k += mlxvar->rays[i].texture->height / size;
+		}
 	}
 	return (0);
 }
