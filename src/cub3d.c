@@ -30,6 +30,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	while (--i >= 0)
 	{
 		size = (double)mlxvar->screen.height / (cos(mlxvar->rays[i].rot) * mlxvar->rays[i].siz);
+		printf("%lf\n", mlxvar->rays[i].siz);
 		j = -1;
 		if ((int)size > mlxvar->screen.height)
 		{
