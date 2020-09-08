@@ -73,7 +73,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		else
 		{
-			c.x = (int)mlxvar->posY - 0.0001;
+			c.x = (int)mlxvar->posX - 0.0001;
 			d.x = -1;
 		}
 		c.y = mlxvar->posY + (mlxvar->posX - c.x) * t;
