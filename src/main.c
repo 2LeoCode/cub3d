@@ -49,8 +49,6 @@ static t_bool	arg_help(int ac, char **av)
 
 double			arg_fov(int ac, char **av)
 {
-	char	*tmp;
-
 	while (ac--)
 	{
 		av++;
