@@ -67,7 +67,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		else if (a == (M_PI / 2) || a == (3 * M_PI / 2))
 		{
-			c.x = mlxvar->posY;
+			c.x = mlxvar->posX;
 			d.x = 0;
 		}
 		else
