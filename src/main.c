@@ -56,10 +56,10 @@ double			arg_fov(int ac, char **av)
 		{
 			if (!ac || !str_isdigit(*av))
 				return (-1);
-			printf("nope\n");
 			return (ft_atoi(*av) * M_PI / 180);
 		}
-	} 
+	}
+	printf("nope\n");
 	return (1.0472);
 }
 
