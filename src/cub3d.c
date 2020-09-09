@@ -89,20 +89,22 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 {
 	double	dx;
 	double	dy;
+	double	dr;
 
-	dx = cos(mlxvar->set->rot_hor) / 20;
-	dy = sin(mlxvar->set->rot_hor) / 20;
+	dx = (cos(mlxvar->set->rot_hor) / 20) * 4;
+	dy = (sin(mlxvar->set->rot_hor) / 20) * 4;
+	dr = (M_PI / 180) * 3;
 	if (key == KEY_LEFT)
 	{
-		mlxvar->set->rot_hor -= M_PI / 180;
+		mlxvar->set->rot_hor -= dr;
 		if (mlxvar->set->rot_hor < 0)
-			mlxvar->set->rot_hor = 2 * M_PI - mlxvar->set->rot_hor;
+			mlxvar->set->rot_hor = 2 * M_PI + mlxvar->set->rot_hor;
 	}
 	if (key == KEY_RIGHT)
 	{
-		mlxvar->set->rot_hor += M_PI / 180;
+		mlxvar->set->rot_hor += dr;
 		if (mlxvar->set->rot_hor > 2 * M_PI)
-			mlxvar->set->rot_hor = mlxvar->set->rot_hor - 2 * M_PI;
+			mlxvar->set->rot_hor = 2 * M_PI - mlxvar->set->rot_hor;
 	}
 	if ((key == KEY_UP) && (mlxvar->set->map[(int)(mlxvar->posY + dy)][(int)(mlxvar->posX + dx)] - '1'))
 	{
