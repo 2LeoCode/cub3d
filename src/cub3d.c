@@ -22,7 +22,7 @@ int		save_screen(t_mlximg *screen)
 	unsigned char			*img;
 
 	img = (unsigned char*)screen->img_data;
-	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXO)) < 0)
+	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, 777)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	ft_memcpy(&bfh.bitmap_type, "BM", 2);
 	printf("%c%c\n", bfh.bitmap_type[0], bfh.bitmap_type[1]);
