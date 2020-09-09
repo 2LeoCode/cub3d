@@ -37,7 +37,7 @@ int		save_screen(t_mlximg *screen)
 	bih.bit_count = 24;
 	bih.compression = 0;
 	bih.image_size = bfh.file_size;
-	bih.ppm_x = 300 * 39.375;
+	bih.ppm_x = 96 * 39.375;
 	bih.ppm_y = bih.ppm_x ;
 	bih.clr_used = 0;
 	bih.clr_important = 0;
