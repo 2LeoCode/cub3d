@@ -67,11 +67,11 @@ The map must be surrounded by '1'\n\n  Example:\n  \
 <n>: arbitrary number of new lines\n\n\
 Example: default map file: [default.cub]\n\
 R 800 600\n\
-NO ./assets/default_north_texture.png\n\
-SO ./assets/default_south_texture.png\n\
-WE ./assets/default_west_texture.png\n\
-EA ./assets/default_east_texture.png\n\
-S ./assets/default_sprite_texture.png\n\
+NO ./assets/default_north_texture.xpm\n\
+SO ./assets/default_south_texture.xpm\n\
+WE ./assets/default_west_texture.xpm\n\
+EA ./assets/default_east_texture.xpm\n\
+S ./assets/default_sprite_texture.xpm\n\
 F 220,100,0\n\
 C 225,30,0\n        \
 1111111111111111111111111\n        \
@@ -88,6 +88,7 @@ C 225,30,0\n        \
 11000001110101011111011110N0111  \n\
 11110111 1110101 101111010001    \n\
 11111111 1111111 111111111111    \n\n\
+Note: Images have to be in .xpm format.\n\
 The order of the parameters at the beggining does not matter,\n\
 for example this is a valid .cub file configuration:\n\
 S ./path_to_sprite_texture\n\
