@@ -22,7 +22,7 @@ int		save_screen(t_mlximg *screen)
 	unsigned char			*img;
 
 	img = (unsigned char*)screen->img_data;
-	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC | O_APPEND)) < 0)
+	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC | O_APPEND, S_IRWXO)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	ft_memcpy(&bfh.bitmap_type, "BM", 2);
 	bfh.file_size = screen->height * screen->width * 4 + 54;
