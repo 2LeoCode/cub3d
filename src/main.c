@@ -54,7 +54,6 @@ double			arg_fov(int ac, char **av)
 		av++;
 		if (!ft_strcmp(*(av - 1), "--fov"))
 		{
-			printf("nope\n");
 			if (!ac || !str_isdigit(*av))
 				return (-1);
 			return (ft_atoi(*av) * M_PI / 180);
@@ -84,14 +83,14 @@ int				main(int ac, char **av)
 	}
 	if (print_wrong(path, ac - 1, av + 1))
 		return (-1);
+	if ((settings.FOV = arg_fov(ac - 1, av + 1)) < 0)
+		return (error_wrong_map(ER_DEFLT));
 	if (arg_save(ac - 1, av + 1))
 	{
 		if (arg_bonus(ac - 1, av + 1))
 			return (cub3D(&settings, SAVE | BONUS));
 		return (cub3D(&settings, SAVE));
 	}
-	if ((settings.FOV = arg_fov(ac - 1, av + 1)) < 0)
-		return (error_wrong_map(ER_DEFLT));
 	if (arg_bonus(ac - 1, av + 1))
 		return (cub3D(&settings, BONUS));
 	return (cub3D(&settings, NONE));
