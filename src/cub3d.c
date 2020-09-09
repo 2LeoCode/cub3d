@@ -16,11 +16,10 @@ int		save_screen(t_mlximg *screen)
 {
 	t_bitmap_file_header	bfh;
 	t_bitmap_image_header	bih;
-	t_rgb					rgb;
 	unsigned char			color[3];
 	int						fd;
 	int						i;
-	char					*img;
+	unsigned char			*img;
 
 	img = (unsigned char*)screen->img_data;
 	if ((fd = open("save.bmp", O_CREAT | O_RDWR)) < 0)
