@@ -34,7 +34,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		if (a < 0)
 			a = 2 * M_PI + a;
 		if (a >= (2 * M_PI))
-			a = 2 * M_PI - a;
+			a = a - 2 * M_PI;
 		mlxvar->rays[i].rot = r;
 		t = -1 / (tan(a) + (0.0001 * (!a || a == M_PI)));
 		if (a < M_PI)

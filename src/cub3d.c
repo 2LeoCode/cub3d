@@ -104,7 +104,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	{
 		mlxvar->set->rot_hor += dr;
 		if (mlxvar->set->rot_hor > 2 * M_PI)
-			mlxvar->set->rot_hor = 2 * M_PI - mlxvar->set->rot_hor;
+			mlxvar->set->rot_hor = mlxvar->set->rot_hor - 2 * M_PI;
 	}
 	if ((key == KEY_UP) && (mlxvar->set->map[(int)(mlxvar->posY + dy)][(int)(mlxvar->posX + dx)] - '1'))
 	{
