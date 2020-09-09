@@ -22,7 +22,7 @@ int		save_screen(t_mlximg *screen)
 	unsigned char			*img;
 
 	img = (unsigned char*)screen->img_data;
-	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC | O_APPEND, S_IRWXO)) < 0)
+	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXO)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	ft_memcpy(&bfh.bitmap_type, "BM", 2);
 	bfh.file_size = screen->height * screen->width * 4 + 54;
@@ -37,18 +37,18 @@ int		save_screen(t_mlximg *screen)
 	bih.bit_count = 24;
 	bih.compression = 0;
 	bih.image_size = bfh.file_size;
-	bih.ppm_x = 96 * 39.375;
-	bih.ppm_y = bih.ppm_x ;
+	bih.ppm_x = 300 * 39.375;
+	bih.ppm_y = bih.ppm_x;
 	bih.clr_used = 0;
 	bih.clr_important = 0;
 	if ((write(fd, &bfh, 14) < 0) || (write(fd, &bih, 40) < 0))
 		return (error_wrong_map(ER_DEFLT));
-	i = -1;
-	while (++i < bfh.file_size)
+	i = 0;
+	while (i < bfh.file_size)
 	{
-		color[2] = img[i++];
-		color[1] = img[i++];
-		color[0] = img[i++];
+		color[2] = img[++i];
+		color[1] = img[++i];
+		color[0] = img[++i];
 		if (write(fd, &color, sizeof(color)) < 0)
 			return (error_wrong_map(ER_DEFLT));
 	}
