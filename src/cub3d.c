@@ -12,9 +12,49 @@
 
 #include <cub3d.h>
 
-void	save_screen(t_mlximg *screen)
+int		save_screen(t_mlximg *screen)
 {
-	(void)screen;
+	t_bitmap_file_header	bfh;
+	t_bitmap_image_header	bih;
+	t_rgb					rgb;
+	unsigned char			color[3];
+	int						fd;
+	int						i;
+	char					*img;
+
+	img = (unsigned char*)screen->img_data;
+	if ((fd = open("save.bmp", O_CREAT | O_RDWR)) < 0)
+		return (error_wrong_map(ER_DEFLT));
+	ft_memcpy(&bfh.bitmap_type, "BM", 2);
+	bfh.file_size = screen->height * screen->width * 4 + 54;
+	bfh.reserved1 = 0;
+	bfh.reserved2 = 0;
+	bfh.offset_bits = 0;
+
+	bih.size_header = 14;
+	bih.width = screen->width;
+	bih.height = screen->height;
+	bih.planes = 1;
+	bih.bit_count = 24;
+	bih.compression = 0;
+	bih.image_size = bfh.file_size;
+	bih.ppm_x = 300 * 39.375;
+	bih.ppm_y = bih.ppm_x ;
+	bih.clr_used = 0;
+	bih.clr_important = 0;
+	if ((write(fd, &bfh, 14) < 0) || (write(fd, &bih, 40) < 0))
+		return (error_wrong_map(ER_DEFLT));
+	i = -1;
+	while (++i < bfh.file_size)
+	{
+		color[2] = img[i++];
+		color[1] = img[i++];
+		color[0] = img[i++];
+		if (write(fd, &color, sizeof(color)) < 0)
+			return (error_wrong_map(ER_DEFLT));
+	}
+	close(fd);
+	return (0);
 }
 
 int		update_screen(t_mlxvar *mlxvar)
@@ -24,7 +64,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	double	k;
 	double	size;
 	int		l;
-
+	
 	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
 		return (clear_mlx(mlxvar));
 	i = mlxvar->screen.width;

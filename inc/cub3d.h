@@ -82,6 +82,38 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
+# define _2PI (2 * M_PI)
+# define PI2 (M_PI / 2)
+# define _3PI2 (3 * M_PI / 2)
+
+typedef struct		s_rgb_data{
+    float			r;
+	float			g;
+	float			b;
+}					t_rgb_data;
+
+typedef struct		s_bitmap_file_header{
+    unsigned char   bitmap_type[2];
+    int             file_size;
+    short           reserved1;
+    short           reserved2;
+    unsigned int    offset_bits;
+}					t_bitmap_file_header;
+
+typedef struct		s_bitmap_image_header {
+    unsigned int    size_header;
+    unsigned int    width;
+    unsigned int    height;
+    short int       planes;
+    short int       bit_count;
+    unsigned int    compression;
+    unsigned int    image_size;
+    unsigned int    ppm_x;
+    unsigned int    ppm_y;
+    unsigned int    clr_used;
+    unsigned int    clr_important;
+}					t_bitmap_image_header;
+
 typedef enum		e_bool
 {
 	false,
@@ -241,6 +273,8 @@ int					get_map(int fd, t_set *set);
 int					update_rays(t_mlxvar *mlxvar);
 
 double				ft_dabs(double n);
+
+void				*ft_memcpy(void *d, void *s, size_t n);
 /*
 ** test
 */
