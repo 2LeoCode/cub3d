@@ -31,9 +31,9 @@ int		update_rays(t_mlxvar *mlxvar)
 	{
 		a = mlxvar->set->rot_hor + r;
 		if (a < 0)
-			a = 2 * M_PI + a;
-		if (a >= (2 * M_PI))
-			a = a - 2 * M_PI;
+			a = _2PI + a;
+		if (a >= _2PI)
+			a = a - _2PI;
 		mlxvar->rays[i].rot = r;
 		t = -1 / (tan(a) + (0.0001 * (!a || a == M_PI)));
 		if (a < M_PI)
@@ -60,12 +60,12 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		length.y = sqrt((b.x - mlxvar->posX) * (b.x - mlxvar->posX) + (b.y - mlxvar->posY) * (b.y - mlxvar->posY));
 		t = -tan(a);
-		if (a < (M_PI / 2) || a > (3 * M_PI / 2))
+		if (a < PI2 || a > _3PI2)
 		{
 			c.x = (int)mlxvar->posX + 1;
 			d.x = 1;
 		}
-		else if (a == (M_PI / 2) || a == (3 * M_PI / 2))
+		else if (a == PI2 || a == _3PI2)
 		{
 			c.x = mlxvar->posX;
 			d.x = 0;
@@ -77,7 +77,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		c.y = mlxvar->posY + (mlxvar->posX - c.x) * t;
 		d.y = -d.x * t;
-		while ((a - (M_PI / 2)) && (a - (3 * M_PI / 2)) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
+		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
 			c.y += d.y;
 			c.x += d.x;
@@ -92,7 +92,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		else
 		{
 			mlxvar->rays[i].siz = length.x;
-			mlxvar->rays[i].texture = (((a > (M_PI / 2)) && (a < (3 * M_PI / 2))) ? &mlxvar->wallW : &mlxvar->wallE);
+			mlxvar->rays[i].texture = (((a > PI2) && (a < _3PI2)) ? &mlxvar->wallW : &mlxvar->wallE);
 			mlxvar->rays[i].col_pos = (double)(c.y - (int)c.y) * mlxvar->rays[i].texture->width;
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
