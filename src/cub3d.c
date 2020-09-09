@@ -22,7 +22,7 @@ int		save_screen(t_mlximg *screen)
 	unsigned char			*img;
 
 	img = (unsigned char*)screen->img_data;
-	if ((fd = open("save.bmp", O_CREAT | O_RDWR)) < 0)
+	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC | O_APPEND)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	ft_memcpy(&bfh.bitmap_type, "BM", 2);
 	bfh.file_size = screen->height * screen->width * 4 + 54;
@@ -137,13 +137,13 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	{
 		mlxvar->set->rot_hor -= dr;
 		if (mlxvar->set->rot_hor < 0)
-			mlxvar->set->rot_hor = 2 * M_PI + mlxvar->set->rot_hor;
+			mlxvar->set->rot_hor = _2PI + mlxvar->set->rot_hor;
 	}
 	if (key == KEY_RIGHT)
 	{
 		mlxvar->set->rot_hor += dr;
-		if (mlxvar->set->rot_hor > 2 * M_PI)
-			mlxvar->set->rot_hor = mlxvar->set->rot_hor - 2 * M_PI;
+		if (mlxvar->set->rot_hor > _2PI)
+			mlxvar->set->rot_hor = mlxvar->set->rot_hor - _2PI;
 	}
 	if ((key == KEY_UP) && (mlxvar->set->map[(int)(mlxvar->posY + dy)][(int)(mlxvar->posX + dx)] - '1'))
 	{
@@ -172,6 +172,7 @@ int		cub3D(t_set *set, int flags)
 		save = true;
 	mlxvar.set = set;
 	display_map(mlxvar.set->map);
+	printf("%f", mlxvar.set->FOV);
 	mlxvar.id = NULL;
 	mlxvar.win = NULL;
 	mlxvar.screen.img = NULL;
