@@ -12,11 +12,31 @@
 
 #include <cub3d.h>
 
+int		write_header(t_bitmap_file_header bfh, t_bitmap_image_header bih, int fd)
+{
+	write(fd, &bfh.file_size, 4);
+	write(fd, &bfh.reserved1, 2);
+	write(fd, &bfh.reserved2, 2);
+	write(fd, &bfh.offset_bits, 4);
+	write(fd, &bih.size_header, 4);
+	write(fd, &bih.width, 4);
+	write(fd, &bih.height, 4);
+	write(fd, &bih.planes, 2);
+	write(fd, &bih.bit_count, 2);
+	write(fd, &bih.compression, 4);
+	write(fd, &bih.image_size, 4);
+	write(fd, &bih.ppm_x, 4);
+	write(fd, &bih.ppm_y, 4);
+	write(fd, &bih.clr_used, 4);
+	write(fd, &bih.clr_important, 4);
+	return (0);
+}
+
 int		save_screen(t_mlximg *screen)
 {
 	t_bitmap_file_header	bfh;
 	t_bitmap_image_header	bih;
-	unsigned char			color[4];
+	unsigned char			color[3];
 	int						fd;
 	int						i;
 	unsigned char			*img;
@@ -25,7 +45,6 @@ int		save_screen(t_mlximg *screen)
 	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	ft_memcpy(&bfh.bitmap_type, "BM", 2);
-	printf("%c%c\n", bfh.bitmap_type[0], bfh.bitmap_type[1]);
 	bfh.file_size = screen->height * screen->width * 4 + 54;
 	bfh.reserved1 = 0;
 	bfh.reserved2 = 0;
@@ -42,7 +61,7 @@ int		save_screen(t_mlximg *screen)
 	bih.ppm_y = bih.ppm_x;
 	bih.clr_used = 0;
 	bih.clr_important = 0;
-	if ((write(fd, &bfh, 14) < 0) || (write(fd, &bih, 40) < 0))
+	if (write_header(bfh, bih, fd))
 		return (error_wrong_map(ER_DEFLT));
 	i = 0;
 	while (i < bfh.file_size)
@@ -50,8 +69,7 @@ int		save_screen(t_mlximg *screen)
 		color[3] = img[++i];
 		color[2] = img[++i];
 		color[1] = img[++i];
-		color[0] = img[i - 3];
-		if (write(fd, &color, 4 * sizeof(char)) < 0)
+		if (write(fd, &color, sizeof(color)) < 0)
 			return (error_wrong_map(ER_DEFLT));
 	}
 	close(fd);
