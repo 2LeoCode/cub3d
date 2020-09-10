@@ -16,7 +16,7 @@ int		save_screen(t_mlximg *screen)
 {
 	t_bitmap_file_header	bfh;
 	t_bitmap_image_header	bih;
-	unsigned char			color[3];
+	unsigned char			color[4];
 	int						fd;
 	int						i;
 	unsigned char			*img;
@@ -47,10 +47,11 @@ int		save_screen(t_mlximg *screen)
 	i = 0;
 	while (i < bfh.file_size)
 	{
+		color[3] = img[++i];
 		color[2] = img[++i];
 		color[1] = img[++i];
-		color[0] = img[++i];
-		if (write(fd, &color, sizeof(color)) < 0)
+		color[0] = img[i - 3];
+		if (write(fd, &color, 4 * sizeof(char)) < 0)
 			return (error_wrong_map(ER_DEFLT));
 	}
 	close(fd);
