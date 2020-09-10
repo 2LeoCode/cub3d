@@ -14,6 +14,7 @@
 
 int		write_header(t_bitmap_file_header bfh, t_bitmap_image_header bih, int fd)
 {
+	write(fd, &bfh.bitmap_type, 2);
 	write(fd, &bfh.file_size, 4);
 	write(fd, &bfh.reserved1, 2);
 	write(fd, &bfh.reserved2, 2);
