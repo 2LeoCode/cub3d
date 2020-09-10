@@ -275,11 +275,11 @@ int					update_rays(t_mlxvar *mlxvar);
 double				ft_dabs(double n);
 
 void				*ft_memcpy(void *d, void *s, size_t n);
+void				*ft_bzero(void *m, size_t n);
 /*
 ** test
 */
 
 # include <stdio.h>
-
 void				display_map(char **map);
 #endif

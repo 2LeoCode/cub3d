@@ -12,24 +12,161 @@
 
 #include <cub3d.h>
 
+/*
+const int BYTES_PER_PIXEL = 3; /// red, green, & blue
+const int FILE_HEADER_SIZE = 14;
+const int INFO_HEADER_SIZE = 40;
+
+void generateBitmapImage(unsigned char* image, int height, int width, char* imageFileName);
+unsigned char* createBitmapFileHeader(int height, int stride);
+unsigned char* createBitmapInfoHeader(int height, int width);
+
+
+int main ()
+{
+    int height = 361;
+    int width = 867;
+    unsigned char image[height][width][BYTES_PER_PIXEL];
+    char* imageFileName = (char*) "bitmapImage.bmp";
+
+    int i, j;
+    for (i = 0; i < height; i++) {
+        for (j = 0; j < width; j++) {
+            image[i][j][2] = (unsigned char) ( i * 255 / height );             ///red
+            image[i][j][1] = (unsigned char) ( j * 255 / width );              ///green
+            image[i][j][0] = (unsigned char) ( (i+j) * 255 / (height+width) ); ///blue
+        }
+    }
+
+    generateBitmapImage((unsigned char*) image, height, width, imageFileName);
+    printf("Image generated!!");
+}
+
+
+void generateBitmapImage (unsigned char* image, int height, int width, char* imageFileName)
+{
+    int widthInBytes = width * BYTES_PER_PIXEL;
+
+    unsigned char padding[3] = {0, 0, 0};
+    int paddingSize = (4 - (widthInBytes) % 4) % 4;
+
+    int stride = (widthInBytes) + paddingSize;
+
+    FILE* imageFile = fopen(imageFileName, "wb");
+
+    unsigned char* fileHeader = createBitmapFileHeader(height, stride);
+    fwrite(fileHeader, 1, FILE_HEADER_SIZE, imageFile);
+
+    unsigned char* infoHeader = createBitmapInfoHeader(height, width);
+    fwrite(infoHeader, 1, INFO_HEADER_SIZE, imageFile);
+
+    int i;
+    for (i = 0; i < height; i++) {
+        fwrite(image + (i*widthInBytes), BYTES_PER_PIXEL, width, imageFile);
+        fwrite(padding, 1, paddingSize, imageFile);
+    }
+
+    fclose(imageFile);
+}
+
+unsigned char* createBitmapFileHeader (int height, int stride)
+{
+    int fileSize = FILE_HEADER_SIZE + INFO_HEADER_SIZE + (stride * height);
+
+    static unsigned char fileHeader[] = {
+        0,0,     /// signature
+        0,0,0,0, /// image file size in bytes
+        0,0,0,0, /// reserved
+        0,0,0,0, /// start of pixel array
+    };
+
+    fileHeader[ 0] = (unsigned char)('B');
+    fileHeader[ 1] = (unsigned char)('M');
+    fileHeader[ 2] = (unsigned char)(fileSize      );
+    fileHeader[ 3] = (unsigned char)(fileSize >>  8);
+    fileHeader[ 4] = (unsigned char)(fileSize >> 16);
+    fileHeader[ 5] = (unsigned char)(fileSize >> 24);
+    fileHeader[10] = (unsigned char)(FILE_HEADER_SIZE + INFO_HEADER_SIZE);
+
+    return fileHeader;
+}
+
+unsigned char* createBitmapInfoHeader (int height, int width)
+{
+    static unsigned char infoHeader[] = {
+        0,0,0,0, /// header size
+        0,0,0,0, /// image width
+        0,0,0,0, /// image height
+        0,0,     /// number of color planes
+        0,0,     /// bits per pixel
+        0,0,0,0, /// compression
+        0,0,0,0, /// image size
+        0,0,0,0, /// horizontal resolution
+        0,0,0,0, /// vertical resolution
+        0,0,0,0, /// colors in color table
+        0,0,0,0, /// important color count
+    };
+
+    infoHeader[ 0] = (unsigned char)(INFO_HEADER_SIZE);
+    infoHeader[ 4] = (unsigned char)(width      );
+    infoHeader[ 5] = (unsigned char)(width >>  8);
+    infoHeader[ 6] = (unsigned char)(width >> 16);
+    infoHeader[ 7] = (unsigned char)(width >> 24);
+    infoHeader[ 8] = (unsigned char)(height      );
+    infoHeader[ 9] = (unsigned char)(height >>  8);
+    infoHeader[10] = (unsigned char)(height >> 16);
+    infoHeader[11] = (unsigned char)(height >> 24);
+    infoHeader[12] = (unsigned char)(1);
+    infoHeader[14] = (unsigned char)(BYTES_PER_PIXEL*8);
+
+    return infoHeader;
+}
+
+*/
 int		write_header(t_bitmap_file_header bfh, t_bitmap_image_header bih, int fd)
 {
-	write(fd, (unsigned char*)&bfh.bitmap_type, 2);
-	write(fd, (unsigned char*)&bfh.file_size, 4);
-	write(fd, (unsigned char*)&bfh.reserved1, 2);
-	write(fd, (unsigned char*)&bfh.reserved2, 2);
-	write(fd, (unsigned char*)&bfh.offset_bits, 4);
-	write(fd, (unsigned char*)&bih.size_header, 4);
-	write(fd, (unsigned char*)&bih.width, 4);
-	write(fd, (unsigned char*)&bih.height, 4);
-	write(fd, (unsigned char*)&bih.planes, 2);
-	write(fd, (unsigned char*)&bih.bit_count, 2);
-	write(fd, (unsigned char*)&bih.compression, 4);
-	write(fd, (unsigned char*)&bih.image_size, 4);
-	write(fd, (unsigned char*)&bih.ppm_x, 4);
-	write(fd, (unsigned char*)&bih.ppm_y, 4);
-	write(fd, (unsigned char*)&bih.clr_used, 4);
-	write(fd, (unsigned char*)&bih.clr_important, 4);
+	unsigned char	file_size[4];
+	unsigned char	width[4];
+	unsigned char	height[4];
+	unsigned char	image_size[4];
+	unsigned char	ppm[4];
+
+	file_size[0] = bfh.file_size;
+	file_size[1] = (bfh.file_size >> 8);
+	file_size[2] = (bfh.file_size >> 16);
+	file_size[3] = (bfh.file_size >> 24);
+	width[0] = bih.width;
+	width[1] = (bih.width >> 8);
+	width[2] = (bih.width >> 16);
+	width[3] = (bih.width >> 24);
+	height[0] = bih.height;
+	height[1] = (bih.height >> 8);
+	height[2] = (bih.height >> 16);
+	height[3] = (bih.height >> 24);
+	image_size[0] = bih.image_size;
+	image_size[1] = (bih.image_size >> 8);
+	image_size[2] = (bih.image_size >> 16);
+	image_size[3] = (bih.image_size >> 24);
+	ppm[0] = bih.ppm_x;
+	ppm[1] = (bih.ppm_x >> 8);
+	ppm[2] = (bih.ppm_x >> 16);
+	ppm[3] = (bih.ppm_x >> 24);
+	write(fd, bfh.bitmap_type, 2);
+	write(fd, file_size, 4);
+	write(fd, "\0\0\0\0", 4);
+	write(fd, "\x54", 1);
+	write(fd, "\0\0\0", 3);
+	write(fd, "\x14", 1);
+	write(fd, "\0\0\0", 3);
+	write(fd, width, 4);
+	write(fd, height, 4);
+	write(fd, "\x01\0", 2);
+	write(fd, "\x24", 1);
+	write(fd, "\0\0\0\0\0", 5);
+	write(fd, image_size, 4);
+	write(fd, ppm, 4);
+	write(fd, ppm, 4);
+	write(fd, "\0\0\0\0\0\0\0\0", 8);
 	return (0);
 }
 
@@ -49,7 +186,7 @@ int		save_screen(t_mlximg *screen)
 	bfh.file_size = screen->height * screen->width * 4 + 54;
 	bfh.reserved1 = 0;
 	bfh.reserved2 = 0;
-	bfh.offset_bits = 0;
+	bfh.offset_bits = 54;
 
 	bih.size_header = 14;
 	bih.width = screen->width;
@@ -67,9 +204,9 @@ int		save_screen(t_mlximg *screen)
 	i = 0;
 	while (i < bfh.file_size)
 	{
-		color[3] = img[++i];
 		color[2] = img[++i];
 		color[1] = img[++i];
+		color[0] = img[++i];
 		if (write(fd, &color, sizeof(color)) < 0)
 			return (error_wrong_map(ER_DEFLT));
 	}

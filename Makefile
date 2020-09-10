@@ -50,7 +50,8 @@ SRC =		main.c\
 			get_map_utils.c\
 			rays.c\
 			abs.c\
-			memcpy.c
+			memcpy.c\
+			bzero.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\
