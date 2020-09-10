@@ -14,22 +14,22 @@
 
 int		write_header(t_bitmap_file_header bfh, t_bitmap_image_header bih, int fd)
 {
-	write(fd, &bfh.bitmap_type, 2);
-	write(fd, &bfh.file_size, 4);
-	write(fd, &bfh.reserved1, 2);
-	write(fd, &bfh.reserved2, 2);
-	write(fd, &bfh.offset_bits, 4);
-	write(fd, &bih.size_header, 4);
-	write(fd, &bih.width, 4);
-	write(fd, &bih.height, 4);
-	write(fd, &bih.planes, 2);
-	write(fd, &bih.bit_count, 2);
-	write(fd, &bih.compression, 4);
-	write(fd, &bih.image_size, 4);
-	write(fd, &bih.ppm_x, 4);
-	write(fd, &bih.ppm_y, 4);
-	write(fd, &bih.clr_used, 4);
-	write(fd, &bih.clr_important, 4);
+	write(fd, (unsigned char*)&bfh.bitmap_type, 2);
+	write(fd, (unsigned char*)&bfh.file_size, 4);
+	write(fd, (unsigned char*)&bfh.reserved1, 2);
+	write(fd, (unsigned char*)&bfh.reserved2, 2);
+	write(fd, (unsigned char*)&bfh.offset_bits, 4);
+	write(fd, (unsigned char*)&bih.size_header, 4);
+	write(fd, (unsigned char*)&bih.width, 4);
+	write(fd, (unsigned char*)&bih.height, 4);
+	write(fd, (unsigned char*)&bih.planes, 2);
+	write(fd, (unsigned char*)&bih.bit_count, 2);
+	write(fd, (unsigned char*)&bih.compression, 4);
+	write(fd, (unsigned char*)&bih.image_size, 4);
+	write(fd, (unsigned char*)&bih.ppm_x, 4);
+	write(fd, (unsigned char*)&bih.ppm_y, 4);
+	write(fd, (unsigned char*)&bih.clr_used, 4);
+	write(fd, (unsigned char*)&bih.clr_important, 4);
 	return (0);
 }
 
