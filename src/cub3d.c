@@ -239,7 +239,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	int		j;
 	double	k;
 	double	size;
-	double	l;
+	int		l;
 	
 	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
 		return (clear_mlx(mlxvar));
@@ -257,7 +257,7 @@ int		update_screen(t_mlxvar *mlxvar)
 		k = (size < mlxvar->screen.height) ? 0 : (((size / 2) - (mlxvar->screen.height / 2)) / size) * mlxvar->rays[i].texture->height;
 		while (++j < (((int)size > mlxvar->screen.height) ? mlxvar->screen.height : (int)size))
 		{
-			mlxvar->screen.img_data[(int)((l + j) * mlxvar->screen.width + i)] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
+			mlxvar->screen.img_data[(l + j) * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
 			k += mlxvar->rays[i].texture->height / size;
 		}
 	}
