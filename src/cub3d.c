@@ -131,20 +131,21 @@ unsigned char	*getCharArray(t_mlximg *screen)
 
 	size = screen->width * screen->height;
 	img = (unsigned char*)malloc(sizeof(unsigned char) * size * 3);
-	i = 0;
-	while (i < size)
+	i = -1;
+	while (++i < size)
 	{
 		img[i * 3] = screen->img_data[i];
 		img[i * 3 + 1] = (screen->img_data[i] >> 8);
-		img[i * 3 + 2] = (screen->img_data[i++] >> 16);
+		img[i * 3 + 2] = (screen->img_data[i] >> 16);
 	}
 	return (img);
 }
 
 unsigned char	*createBitmapInfoHeader(t_mlximg *screen)
 {
-	unsigned char	infoHeader[40];
+	unsigned char	*infoHeader;
 
+	infoHeader = (unsigned char*)malloc(sizeof(unsigned char) * 40);
 	ft_bzero(infoHeader, 40);
 	infoHeader[0] = 14;
 	infoHeader[4] = screen->width;
@@ -162,9 +163,10 @@ unsigned char	*createBitmapInfoHeader(t_mlximg *screen)
 
 unsigned char	*createBitmapFileHeader(t_mlximg *screen)
 {
-	char	fileHeader[14];
+	char	*fileHeader;
 	int		fileSize;
 
+	fileHeader = (unsigned char*)malloc(sizeof(unsigned char) * 14);
 	ft_bzero(fileHeader, 14);
 	fileSize = screen->height * screen->width * 3 + 54;
 	fileHeader[0] = 'B';
