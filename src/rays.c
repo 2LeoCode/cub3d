@@ -12,6 +12,51 @@
 
 #include <cub3d.h>
 
+t_sprite	*raylist_add(int mx, int my, int px, int r, t_sprite *lst)
+{
+	t_sprite	*tmp;
+
+	if (!(tmp = malloc(sizeof(t_sprite))))
+		return (NULL);
+	tmp->mapX = mx;
+	tmp->mapY = my;
+	tmp->posX = px;
+	tmp->rot = r;
+	tmp->next = lst;
+	return (tmp);
+}
+
+void		lst_sort_siz(t_sprite **lst)
+{
+	t_sprite *prev;
+	t_sprite *tmp;
+	t_sprite *cur;
+	t_sprite *head;
+
+	if (!lst || !*lst)
+		return ;
+	cur = *lst;
+	head = cur->next;
+	prev = NULL;
+	while (cur)
+	{
+		while (head)
+		{
+			if (head->siz > cur->siz)
+			{
+				if (prev)
+					prev->next = head;
+				tmp = head->next;
+				head->next = cur->next;
+				cur->next = tmp;
+			}
+			head = head->next;
+		}
+		prev = cur;
+		cur = cur->next;
+	}
+}
+
 int		update_rays(t_mlxvar *mlxvar)
 {
 	int			i;
@@ -27,6 +72,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		return (-1);
 	i = -1;
 	r = -(mlxvar->set->FOV / 2);
+	raylist_clear(&mlxvar->sprites);
 	while (++i < mlxvar->set->X)
 	{
 		a = mlxvar->set->rot_hor + r;
@@ -55,6 +101,9 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.x = -d.y * t;
 		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
+			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
+				if (mlxvar->sprites && ((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX) && !(mlxvar->sprites = raylist_add(b.x, b.y, i, r, mlxvar->sprites)))
+					return (-1);
 			b.x += d.x;
 			b.y += d.y;
 		}
@@ -79,6 +128,9 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.y = -d.x * t;
 		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
+			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
+				if (mlxvar->sprites && ((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX) && !(mlxvar->sprites = raylist_add(b.x, b.y, i, mlxvar->sprites)))
+					return (-1);
 			c.y += d.y;
 			c.x += d.x;
 		}
@@ -97,5 +149,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
 	}
+	lst_sort_siz(&mlxvar->sprites);
 	return (0);
 }

@@ -55,6 +55,15 @@ void	clear_paths(t_set *set)
 	set->S = NULL;
 }
 
+void	raylist_clear(t_sprite **lst)
+{
+	while (*lst)
+	{
+		free(*lst);
+		*lst = (*lst)->next;
+	}
+}
+
 int		clear_mlx(t_mlxvar *mlx)
 {
 	if (mlx->win)

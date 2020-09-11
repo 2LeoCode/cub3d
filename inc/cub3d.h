@@ -86,6 +86,16 @@
 # define PI2 (M_PI / 2)
 # define _3PI2 (3 * M_PI / 2)
 
+typedef struct		s_sprite
+{
+	int				mapX;
+	int				mapY;
+	double			siz;
+	double			rot;
+	int				posX;
+	struct s_sprite	*next;
+}					t_sprite;
+
 typedef struct		s_rgb_data{
     float			r;
 	float			g;
@@ -176,6 +186,7 @@ typedef struct		s_mlxvar
 	t_set			*set;
 	double			posX;
 	double			posY;
+	t_sprite		*sprites;
 	t_mlximg		screen;
 	t_mlximg		wallN;
 	t_mlximg		wallE;
@@ -206,6 +217,7 @@ char				*error_s(int errnum);
 void				clear_set(t_set *set);
 void				clear_paths(t_set *set);
 int					clear_mlx(t_mlxvar *mlx);
+void				raylist_clear(t_sprite **lst);
 
 int					help(int show_msg);
 
