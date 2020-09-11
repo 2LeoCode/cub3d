@@ -143,9 +143,8 @@ unsigned char	*getCharArray(t_mlximg *screen)
 
 unsigned char	*createBitmapInfoHeader(t_mlximg *screen)
 {
-	unsigned char	*infoHeader;
+	unsigned char	infoHeader[40];
 
-	infoHeader = (unsigned char*)malloc(sizeof(unsigned char) * 40);
 	ft_bzero(infoHeader, 40);
 	infoHeader[0] = 14;
 	infoHeader[4] = screen->width;
@@ -163,10 +162,9 @@ unsigned char	*createBitmapInfoHeader(t_mlximg *screen)
 
 unsigned char	*createBitmapFileHeader(t_mlximg *screen)
 {
-	char	*fileHeader;
-	int		fileSize;
+	unsigned char	fileHeader[14];
+	int				fileSize;
 
-	fileHeader = (unsigned char*)malloc(sizeof(unsigned char) * 14);
 	ft_bzero(fileHeader, 14);
 	fileSize = screen->height * screen->width * 3 + 54;
 	fileHeader[0] = 'B';
@@ -184,6 +182,7 @@ int		save_screen(t_mlximg *screen)
 	unsigned char	*bfh;
 	unsigned char	*bih;
 	unsigned char	*img;
+	int fd;
 
 	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
 		return (error_wrong_map(ER_DEFLT));
