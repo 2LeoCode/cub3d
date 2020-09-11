@@ -224,7 +224,7 @@ void	draw_sprites(t_mlxvar *mlxvar)
 			{
 				if (i > 0 && i < mlxvar->screen.width && mlxvar->sprite.img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos])
 				{
-					mlxvar->screen.img_data[(l + j) * mlxvar->screen.width + i] = mlxvar->sprite.img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
+					mlxvar->screen.img_data[(int)((l + j) * mlxvar->screen.width + i)] = mlxvar->sprite.img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
 					k += mlxvar->sprite.height / lineSize;
 				}
 			}
@@ -256,7 +256,7 @@ int		update_screen(t_mlxvar *mlxvar)
 		k = (size < mlxvar->screen.height) ? 0 : (((size / 2) - (mlxvar->screen.height / 2)) / size) * mlxvar->rays[i].texture->height;
 		while (++j < (((int)size > mlxvar->screen.height) ? mlxvar->screen.height : (int)size))
 		{
-			mlxvar->screen.img_data[(l + j) * mlxvar->screen.width + i] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
+			mlxvar->screen.img_data[(int)((l + j) * mlxvar->screen.width + i)] = mlxvar->rays[i].texture->img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
 			k += mlxvar->rays[i].texture->height / size;
 		}
 	}
