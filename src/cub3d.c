@@ -194,6 +194,8 @@ int		save_screen(t_mlximg *screen)
 	write(fd, bih, 40);
 	write(fd, img, screen->width * screen->height * 3);
 	free(img);
+	free(bfh);
+	free(bih);
 	close(fd);
 	return (0);
 }
