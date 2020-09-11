@@ -356,6 +356,7 @@ int		cub3D(t_set *set, int flags)
 	mlxvar.screen.img = NULL;
 	mlxvar.screen.img_data = NULL;
 	mlxvar.rays = NULL;
+	mlxvar->sprites = NULL;
 	mlxvar.posX = (double)mlxvar.set->spawn.X + 0.5;
 	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
 	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
