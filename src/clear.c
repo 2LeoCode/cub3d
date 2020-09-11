@@ -57,7 +57,7 @@ void	clear_paths(t_set *set)
 
 void	raylist_clear(t_sprite **lst)
 {
-	while (*lst)
+	while (lst && *lst)
 	{
 		free(*lst);
 		*lst = (*lst)->next;

@@ -72,8 +72,8 @@ int		update_rays(t_mlxvar *mlxvar)
 		return (-1);
 	i = -1;
 	r = -(mlxvar->set->FOV / 2);
-	mlxvar->sprites = NULL;
-	raylist_clear(&mlxvar->sprites);
+	if (mlxvar->sprites)
+		raylist_clear(&mlxvar->sprites);
 	while (++i < mlxvar->set->X)
 	{
 		a = mlxvar->set->rot_hor + r;
