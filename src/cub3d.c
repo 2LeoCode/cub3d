@@ -336,7 +336,6 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	|| update_screen(mlxvar))
 		return (clear_mlx(mlxvar));
 	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
-	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->sprite.img, -32, -32);
 	return (0);
 }
 
@@ -350,7 +349,6 @@ int		cub3D(t_set *set, int flags)
 		save = true;
 	mlxvar.set = set;
 	display_map(mlxvar.set->map);
-	printf("%f", mlxvar.set->FOV);
 	mlxvar.id = NULL;
 	mlxvar.win = NULL;
 	mlxvar.screen.img = NULL;
