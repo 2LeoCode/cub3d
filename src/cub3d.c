@@ -211,7 +211,7 @@ void	draw_sprites(t_mlxvar *mlxvar)
 	t_sprite	*lst;
 
 	lst = mlxvar->sprites;
-	while (lst)
+	/*while (lst)
 	{
 		lineSize = (double)mlxvar->screen.height / (cos(lst->rot) * lst->siz);
 		l = (lineSize > mlxvar->screen.height) ? 0 : (int)(mlxvar->screen.height / 2) - (lineSize / 2);
@@ -229,7 +229,7 @@ void	draw_sprites(t_mlxvar *mlxvar)
 				}
 			}
 		}
-	}
+	}*/
 }
 
 int		update_screen(t_mlxvar *mlxvar)
