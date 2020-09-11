@@ -123,93 +123,74 @@ unsigned char* createBitmapInfoHeader (int height, int width)
 }
 
 */
-int		write_header(t_bitmap_file_header bfh, t_bitmap_image_header bih, int fd)
+unsigned char	*getCharArray(t_mlximg *screen)
 {
-	unsigned char	file_size[4];
-	unsigned char	width[4];
-	unsigned char	height[4];
-	unsigned char	image_size[4];
-	unsigned char	ppm[4];
+	unsigned char	*img;
+	int 			size;
+	int				i;
 
-	file_size[0] = bfh.file_size;
-	file_size[1] = (bfh.file_size >> 8);
-	file_size[2] = (bfh.file_size >> 16);
-	file_size[3] = (bfh.file_size >> 24);
-	width[0] = bih.width;
-	width[1] = (bih.width >> 8);
-	width[2] = (bih.width >> 16);
-	width[3] = (bih.width >> 24);
-	height[0] = bih.height;
-	height[1] = (bih.height >> 8);
-	height[2] = (bih.height >> 16);
-	height[3] = (bih.height >> 24);
-	image_size[0] = bih.image_size;
-	image_size[1] = (bih.image_size >> 8);
-	image_size[2] = (bih.image_size >> 16);
-	image_size[3] = (bih.image_size >> 24);
-	ppm[0] = bih.ppm_x;
-	ppm[1] = (bih.ppm_x >> 8);
-	ppm[2] = (bih.ppm_x >> 16);
-	ppm[3] = (bih.ppm_x >> 24);
-	write(fd, bfh.bitmap_type, 2);
-	write(fd, file_size, 4);
-	write(fd, "\0\0\0\0", 4);
-	write(fd, "\x54", 1);
-	write(fd, "\0\0\0", 3);
-	write(fd, "\x14", 1);
-	write(fd, "\0\0\0", 3);
-	write(fd, width, 4);
-	write(fd, height, 4);
-	write(fd, "\x01\0", 2);
-	write(fd, "\x24", 1);
-	write(fd, "\0\0\0\0\0", 5);
-	write(fd, image_size, 4);
-	write(fd, ppm, 4);
-	write(fd, ppm, 4);
-	write(fd, "\0\0\0\0\0\0\0\0", 8);
-	return (0);
+	size = screen->width * screen->height;
+	img = (unsigned char*)malloc(sizeof(unsigned char) * size * 3);
+	i = 0;
+	while (i < size)
+	{
+		img[i * 3] = screen->img_data;
+		img[i * 3 + 1] = (screen->img_data[i] >> 8);
+		img[i++ * 3 + 2] = (screen->img_data[i] >> 16);
+	}
+	return (img);
+}
+
+unsigned char	*createBitmapInfoHeader(t_mlximg *screen)
+{
+	unsigned char	infoHeader[40];
+
+	ft_bzero(infoHeader, 40);
+	infoHeader[0] = 14;
+	infoHeader[4] = screen->width;
+	infoHeader[5] = (screen->width >> 8);
+	infoHeader[6] = (screen->width >> 16);
+	infoHeader[7] = (screen->width >> 24);
+	infoHeader[8] = screen->height;
+	infoHeader[9] = (screen->height >> 8);
+	infoHeader[10] = (screen->height >> 16);
+	infoHeader[11] = (screen->height >> 24);
+	infoHeader[12] = 1;
+	infoHeader[14] = 24;
+}
+
+unsigned char	*createBitmapFileHeader(t_mlximg *screen)
+{
+	char	fileHeader[14];
+	int		fileSize;
+
+	ft_bzero(fileHeader, 14);
+	fileSize = screen->height * screen->width * 3 + 54;
+	fileHeader[0] = 'B';
+	fileHeader[1] = 'M';
+	fileHeader[2] = fileSize;
+	fileHeader[3] = (fileSize >> 8);
+	fileHeader[4] = (fileSize >> 16);
+	fileHeader[5] = (fileSize >> 24);
+	fileHeader[10] = 54;
+	return (fileHeader);
 }
 
 int		save_screen(t_mlximg *screen)
 {
-	t_bitmap_file_header	bfh;
-	t_bitmap_image_header	bih;
-	unsigned char			color[3];
-	int						fd;
-	int						i;
-	unsigned char			*img;
+	unsigned char	*bfh;
+	unsigned char	*bih;
+	unsigned char	*img;
 
-	img = (unsigned char*)screen->img_data;
 	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
 		return (error_wrong_map(ER_DEFLT));
-	ft_memcpy(bfh.bitmap_type, "BM", 2);
-	bfh.file_size = screen->height * screen->width * 4 + 54;
-	bfh.reserved1 = 0;
-	bfh.reserved2 = 0;
-	bfh.offset_bits = 54;
-
-	bih.size_header = 14;
-	bih.width = screen->width;
-	bih.height = screen->height;
-	bih.planes = 1;
-	bih.bit_count = 24;
-	bih.compression = 0;
-	bih.image_size = bfh.file_size;
-	bih.ppm_x = 300 * 39.375;
-	bih.ppm_y = bih.ppm_x;
-	bih.clr_used = 0;
-	bih.clr_important = 0;
-	if (write_header(bfh, bih, fd))
-		return (error_wrong_map(ER_DEFLT));
-	i = 0;
-	while (i < bfh.file_size)
-	{
-		color[2] = img[++i];
-		color[1] = img[++i];
-		color[0] = img[++i];
-		if (write(fd, &color, sizeof(color)) < 0)
-			return (error_wrong_map(ER_DEFLT));
-	}
+	img = getCharArray(screen);
+	bfh = createBitmapFileHeader(screen);
+	bih = createBitmapInfoHeader(screen);
+	write(fd, bfh, 14);
+	write(fd, bih, 40);
+	write(fd, img, screen->width * screen->height * 3);
+	free(img);
 	close(fd);
 	return (0);
 }
