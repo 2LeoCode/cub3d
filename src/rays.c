@@ -12,16 +12,17 @@
 
 #include <cub3d.h>
 
-t_sprite	*raylist_add(int mx, int my, int px, int r, t_sprite *lst)
+t_sprite	*raylist_add(t_mlxvar *mlx, t_point m, int px, int r, t_sprite *lst)
 {
 	t_sprite	*tmp;
 
 	if (!(tmp = malloc(sizeof(t_sprite))))
 		return (NULL);
-	tmp->mapX = mx;
-	tmp->mapY = my;
+	tmp->mapX = (int)m.x;
+	tmp->mapY = (int)m.y;
 	tmp->posX = px;
 	tmp->rot = r;
+	tmp->siz = sqrt((tmp->mapX + 0.5 - mlx->posX) * (tmp->mapX + 0.5 - mlx->posX) + (tmp->mapY + 0.5 - mlx->posY) * (tmp->mapY + 0.5 - mlx->posY));
 	tmp->next = lst;
 	return (tmp);
 }
@@ -103,7 +104,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
 			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
-				if (mlxvar->sprites && ((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX) && !(mlxvar->sprites = raylist_add(b.x, b.y, i, r, mlxvar->sprites)))
+				if ((!mlxvar->sprites || (((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX))) && !(mlxvar->sprites = raylist_add(mlxvar, b, i, r, mlxvar->sprites)))
 					return (-1);
 			b.x += d.x;
 			b.y += d.y;
@@ -130,7 +131,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
 			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
-				if (mlxvar->sprites && ((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX) && !(mlxvar->sprites = raylist_add(b.x, b.y, i, r, mlxvar->sprites)))
+				if ((!mlxvar->sprites || (((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX))) && !(mlxvar->sprites = raylist_add(mlxvar, b, i, r, mlxvar->sprites)))
 					return (-1);
 			c.y += d.y;
 			c.x += d.x;
