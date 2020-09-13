@@ -304,12 +304,8 @@ int		init_textures(t_mlxvar *mlxvar)
 
 int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 {
-	int		px;
-	int		py;
 	int		r;
 
-	px = mlx->posX;
-	py = mlx->posY;
 	r = (playerSize / 2);
 	return ((mlx->set->map[(int)(py - r)][(int)(px - r)] == '1')
 	|| (mlx->set->map[(int)(py - r)][(int)(px + r)] == '1')
