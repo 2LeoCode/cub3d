@@ -101,12 +101,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.x = -d.y * t;
 		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
-			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
-			{
-				printf("OK\n");
-				if ((!mlxvar->sprites || !printf("OK\n") || (((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX))) && printf("OK\n") && !(mlxvar->sprites = raylist_add(mlxvar, b, i, r, mlxvar->sprites)))
-					return (-1);
-			}
 			b.x += d.x;
 			b.y += d.y;
 		}
@@ -131,12 +125,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.y = -d.x * t;
 		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
-			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
-			{
-				printf("OK\n");
-				if ((!mlxvar->sprites || !printf("OK\n") || (((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX))) && printf("OK\n") && !(mlxvar->sprites = raylist_add(mlxvar, b, i, r, mlxvar->sprites)))
-					return (-1);
-			}
 			c.y += d.y;
 			c.x += d.x;
 		}
