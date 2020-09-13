@@ -143,6 +143,5 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
 	}
-	lst_sort_siz(&mlxvar->sprites);
 	return (0);
 }
