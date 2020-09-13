@@ -73,8 +73,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		return (-1);
 	i = -1;
 	r = -(mlxvar->set->FOV / 2);
-	if (mlxvar->sprites)
-		raylist_clear(&mlxvar->sprites);
 	while (++i < mlxvar->set->X)
 	{
 		a = mlxvar->set->rot_hor + r;
@@ -104,8 +102,11 @@ int		update_rays(t_mlxvar *mlxvar)
 		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
 			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
-				if ((!mlxvar->sprites || (((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX))) && !(mlxvar->sprites = raylist_add(mlxvar, b, i, r, mlxvar->sprites)))
+			{
+				printf("OK\n");
+				if ((!mlxvar->sprites || !printf("OK\n") || (((int)b.y - mlxvar->sprites->mapY) && ((int)b.x - mlxvar->sprites->mapX))) && printf("OK\n") && !(mlxvar->sprites = raylist_add(mlxvar, b, i, r, mlxvar->sprites)))
 					return (-1);
+			}
 			b.x += d.x;
 			b.y += d.y;
 		}
