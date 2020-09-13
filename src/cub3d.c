@@ -307,8 +307,6 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	double	dx;
 	double	dy;
 	double	dr;
-	double	dcolX;
-	double	dcolY;
 
 
 	dx = (cos(mlxvar->set->rot_hor) / 20) * 4;
