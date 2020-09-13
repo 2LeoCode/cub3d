@@ -307,6 +307,9 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	double	dx;
 	double	dy;
 	double	dr;
+	double	dcolX;
+	double	dcolY;
+
 
 	dx = (cos(mlxvar->set->rot_hor) / 20) * 4;
 	dy = (sin(mlxvar->set->rot_hor) / 20) * 4;
@@ -323,12 +326,12 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 		if (mlxvar->set->rot_hor > _2PI)
 			mlxvar->set->rot_hor = mlxvar->set->rot_hor - _2PI;
 	}
-	if ((key == KEY_UP) && (mlxvar->set->map[(int)(mlxvar->posY + dy)][(int)(mlxvar->posX + dx)] - '1'))
+	if ((key == KEY_UP) && (mlxvar->set->map[(int)(mlxvar->posY + 2 * dy)][(int)(mlxvar->posX + 2 * dx)] - '1'))
 	{
 		mlxvar->posX += dx;
 		mlxvar->posY += dy;
 	}
-	if ((key == KEY_DOWN) && (mlxvar->set->map[(int)(mlxvar->posY - dy)][(int)(mlxvar->posX - dx)] - '1'))
+	if ((key == KEY_DOWN) && (mlxvar->set->map[(int)(mlxvar->posY - 2 * dy)][(int)(mlxvar->posX - 2 * dx)] - '1'))
 	{
 		mlxvar->posX -= dx;
 		mlxvar->posY -= dy;
