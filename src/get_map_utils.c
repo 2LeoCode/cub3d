@@ -67,13 +67,13 @@ int				check_map(t_set *set)
 		j = -1;
 		while (tmp[i][++j])
 		{
-			if (!ft_strchr("NOSE012 ", tmp[i][j])
+			if (!ft_strchr("NWSE012 ", tmp[i][j])
 			|| ((tmp[i][j] == '0') && !check_case(tmp, i, j)))
 			{
 				clear_set(set);
 				return (ER_WRMAP);
 			}
-			else if (ft_strchr("NOSE", tmp[i][j]))
+			else if (ft_strchr("NWSE", tmp[i][j]))
 			{
 				check = true;
 				set->spawn.X = j;
@@ -84,7 +84,7 @@ int				check_map(t_set *set)
 					set->rot_hor = 0;
 				if (tmp[i][j] == 'S')
 					set->rot_hor = M_PI / 2;
-				if (tmp[i][j] == 'O')
+				if (tmp[i][j] == 'W')
 					set->rot_hor = M_PI;
 			}
 		}
