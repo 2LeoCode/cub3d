@@ -59,6 +59,7 @@ int				check_map(t_set *set)
 	int		i;
 	int		j;
 
+	display_map(set->map);
 	check = false;
 	tmp = set->map;
 	i = -1;
@@ -70,7 +71,6 @@ int				check_map(t_set *set)
 			if (!ft_strchr("NWSE012 ", tmp[i][j])
 			|| ((tmp[i][j] == '0') && !check_case(tmp, i, j)))
 			{
-				printf("error: %c %d %d\n", tmp[i][j], j, i);
 				clear_set(set);
 				return (ER_WRMAP);
 			}
