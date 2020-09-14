@@ -43,7 +43,7 @@
 # define CHUNK_SIZE 4
 
 # define ANY_START -1
-# define MAP_CHRST "012NOSE"
+# define MAP_CHRST "012NWSE"
 
 # define NB_PARAMS 9
 # define C_X 0
