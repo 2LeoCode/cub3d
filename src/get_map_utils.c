@@ -16,6 +16,8 @@ t_bool			is_map_wall(char *line)
 {
 	while (ft_isspace(*line))
 		line++;
+	if (!*line)
+		return (false);
 	while (*line)
 	{
 		if (*line - '1')
