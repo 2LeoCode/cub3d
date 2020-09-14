@@ -313,7 +313,7 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 	{
 		if (mlx->set->map[(int)(py + r * sin(i))][(int)(px + r * cos(i))] == '1')
 			return (1);
-		i += (M_PI / 180);
+		i += (M_PI / 4);
 	}
 	return (0);
 }
