@@ -16,7 +16,6 @@ t_bool			is_map_wall(char *line)
 {
 	while (ft_isspace(*line))
 		line++;
-	printf("ok\n");
 	while (*line)
 	{
 		if (*line - '1')
