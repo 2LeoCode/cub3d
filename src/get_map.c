@@ -124,7 +124,7 @@ int				get_map(int fd, t_set *set)
 	}
 	tmp = lst_line_new(line);
 	printf("%s\n", line);
-	while ((i = get_next_line(fd, &line)) != 1 && is_map_wall(line) && printf("%s\n", line))
+	while (((i = get_next_line(fd, &line)) != -1) && is_map_wall(line) && printf("%s\n", line))
 		if (lst_line_addback(&tmp, line))
 		{
 			get_next_line_end(fd, &line);
