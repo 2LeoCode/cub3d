@@ -78,6 +78,7 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 	if (!(set->map = (char**)malloc(sizeof(char*) * (set->mapY + 1))))
 		return (ER_DEFLT);
 	set->mapX = get_map_x(*lst);
+	printf("%d %d\n", set->mapX, set->mapY);
 	i = -1;
 	while (++i < (set->mapY + 1))
 		if (!(set->map[i] = (char*)malloc(sizeof(char) * (set->mapX + 1))))
