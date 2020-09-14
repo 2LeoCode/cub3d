@@ -39,11 +39,11 @@ static t_bool	check_case(char **map, int y, int x)
 	int		i;
 	int		j;
 
-	i = (y - 2);
-	while (++i < (y + 2))
+	i = (y - 1);
+	while (++i < (y + 1))
 	{
-		j = x - 2;
-		while (++j < (x + 2))
+		j = x - 1;
+		while (++j < (x + 1))
 		{
 			if (map[i][j] == ' ')
 				return (false);
