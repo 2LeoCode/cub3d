@@ -304,13 +304,18 @@ int		init_textures(t_mlxvar *mlxvar)
 
 int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 {
-	int		r;
+	double	r;
+	double	i;
 
 	r = (playerSize / 2);
-	return ((mlx->set->map[(int)(py - r)][(int)(px - r)] == '1')
-	|| (mlx->set->map[(int)(py - r)][(int)(px + r)] == '1')
-	|| (mlx->set->map[(int)(py + r)][(int)(px - r)] == '1')
-	|| (mlx->set->map[(int)(py + r)][(int)(px + r)] == '1'));
+	i = 0;
+	while (i < _2PI)
+	{
+		if (mlx->set->map[(int)(py + r * sin(i))][(int)(px + r * cos(i))] == '1')
+			return (1);
+		i += (M_PI / 180);
+	}
+	return (0);
 }
 
 int		updateanddisplay(int key, t_mlxvar *mlxvar)
@@ -320,7 +325,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	double	dr;
 	double	cSize;
 
-	cSize = 0.4;
+	cSize = 0.5;
 	dx = (cos(mlxvar->set->rot_hor) / 10) * 2;
 	dy = (sin(mlxvar->set->rot_hor) / 10) * 2;
 	dr = (M_PI / 180) * 3;
@@ -341,7 +346,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 		mlxvar->posX += dx;
 		mlxvar->posY += dy;
 	}
-	if ((key == KEY_DOWN) && !isCollide(mlxvar, mlxvar->posX + dx, mlxvar->posY + dy, cSize))
+	if ((key == KEY_DOWN) && !isCollide(mlxvar, mlxvar->posX - dx, mlxvar->posY - dy, cSize))
 	{
 		mlxvar->posX -= dx;
 		mlxvar->posY -= dy;
