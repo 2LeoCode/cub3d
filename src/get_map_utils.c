@@ -16,17 +16,14 @@ t_bool			is_map_wall(char *line)
 {
 	while (ft_isspace(*line))
 		line++;
-	if (*line - '1')
-		return (false);
 	while (*line)
 	{
-		if (*line - '1')
+		if (*line - '1' && printf("lol\n"))
 			return (false);
 		while (*line && *(line + 1) && ft_strchr(MAP_CHRST, *(line + 1)))
 			line++;
-		if (*line - '1')
+		if (*(line++) - '1' && printf("lol2\n"))
 			return (false);
-		line++;
 		while (ft_isspace(*line))
 			line++;
 	}
