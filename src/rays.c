@@ -74,7 +74,6 @@ void	sprite_swap(t_sprite *a, t_sprite *b)
 void	sort_sprites(t_sprite *sprites)
 {
 	t_sprite	*head;
-	t_sprite	tmp;
 
 	while (!sprites->isLast)
 	{
