@@ -54,7 +54,7 @@ void	sprite_swap(t_sprite *a, t_sprite *b)
 	c.pos.x = a->pos.x;
 	c.pos.y = a->pos.y;
 	c.screenX = a->screenX;
-	c.size = q->size;
+	c.size = a->size;
 
 	a->a = b->a;
 	a->inSight = b->inSight;
