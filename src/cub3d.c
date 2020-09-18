@@ -388,7 +388,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 		mlxvar->posY -= dy;
 	}
 	if (update_rays(mlxvar)
-	|| update_screen(mlxvar) || draw_sprites(&mlxvar))
+	|| update_screen(mlxvar) || draw_sprites(mlxvar))
 		return (clear_mlx(mlxvar));
 	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	return (0);
