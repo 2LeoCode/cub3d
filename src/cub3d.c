@@ -352,6 +352,7 @@ int		draw_sprites(t_mlxvar *mlx)
 		}
 		tmp++;
 	}
+	return (0);
 }
 
 int		updateanddisplay(int key, t_mlxvar *mlxvar)
