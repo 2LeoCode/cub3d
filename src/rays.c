@@ -155,7 +155,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
 			if (mlxvar->set->map[(int)c.y][(int)c.x] == '2')
-				update_sprites(mlxvar, c.x + d.x / 2, c.y + d.y / 2, r, i);
+				update_sprites(mlxvar, c, r, i);
 			c.y += d.y;
 			c.x += d.x;
 		}
