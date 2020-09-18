@@ -86,6 +86,12 @@
 # define PI2 (M_PI / 2)
 # define _3PI2 (3 * M_PI / 2)
 
+typedef struct		s_point
+{
+	double			x;
+	double			y;
+}					t_point;
+
 typedef struct		s_sprite
 {
 	t_point			pos;
@@ -120,12 +126,6 @@ typedef struct		s_rgb
 	int 			G;
 	int				B;
 }					t_rgb;
-
-typedef struct		s_point
-{
-	double			x;
-	double			y;
-}					t_point;
 
 typedef struct		s_coord
 {
