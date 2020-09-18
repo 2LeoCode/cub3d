@@ -12,17 +12,17 @@
 
 #include <cub3d.h>
 
-int		update_sprites(t_mlxvar *mlx, double bx, double by, double a, int i)
+int		update_sprites(t_mlxvar *mlx, t_point b, double a, int i)
 {
 	t_sprite	*tmp;
 
 	tmp = mlx->set->sprites;
 	while (!tmp->isLast)
 	{
-		if (((int)bx == (int)tmp->pos.x) && ((int)by == (int)tmp->pos.y))
+		if (((int)b.x == (int)tmp->pos.x) && ((int)b.y == (int)tmp->pos.y))
 		{
 			tmp->a = a;
-			tmp->size = sqrt((bx - mlx->posX) * (bx - mlx->posX) + (by - mlx->posY) * (by - mlx->posY));
+			tmp->size = sqrt(((int)b.x + 0.5 - mlx->posX) * ((int)b.x + 0.5 - mlx->posX) + ((int)b.y + 0.5 - mlx->posY) * ((int)b.y + 0.5 - mlx->posY));
 			tmp->screenX = i;
 			tmp->inSight = 0;
 		}
@@ -129,7 +129,7 @@ int		update_rays(t_mlxvar *mlxvar)
 		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
 			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
-				update_sprites(mlxvar, b.x + d.x / 2, b.y + d.y / 2, r, i);
+				update_sprites(mlxvar, b, r, i);
 			b.x += d.x;
 			b.y += d.y;
 		}

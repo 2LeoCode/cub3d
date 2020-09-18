@@ -321,33 +321,40 @@ int		draw_sprites(t_mlxvar *mlx)
 {
 	t_sprite	*tmp;
 	double		size;
-	int			i;
-	int			j;
-	double		k;
-	double		l;
-	double		d;
+	t_coord		a;
+	t_coord		b;
+	t_point		texture;
+	t_point		d;
 
 	tmp = mlx->set->sprites;
 	while (!tmp->isLast)
 	{
 		if (tmp->inSight)
 		{
-			size = (double)mlx->screen.height / (cos(tmp->a) * tmp->size);
-			i = (int)(tmp->screenX - size / 2) - 1;
-			d = mlx->sprite.width / size;
-			while (++i < (int)(tmp->screenX + size / 2))
-				if ((i >= 0) && (i < mlx->screen.width))
+			size = (double)mlxvar->screen.height / (cos(tmp->a) * tmp->size);
+			a.X = tmp->screenX - (size / 2) - 1;
+			a.Y = (mlx->screen.height / 2) - (size / 2) - 1;
+			b.X = tmp->screenX + (size / 2);
+			b.Y = (mlx->screen.height / 2) + (size / 2);
+			d.x = mlx->sprite.width / size;
+			d.y = mlx->sprite.height / size;
+			texture.x = 0;
+			while (++a.X < b.X)
+			{
+				if ((a.X >= 0 >= 0) && (a.X < mlx->screen.width))
 				{
-					j = (int)(mlx->screen.height / 2) - (size / 2);
-					k = mlx->sprite.width * (i - (tmp->screenX - size / 2)) / size;
-					l = mlx->sprite.height * ((j--) - (mlx->screen.height / 2 - size / 2)) / size;
-					while (++j < (int)(mlx->screen.height / 2 + size / 2))
+					texture.y = 0;
+					a.Y = (mlx->screen.height / 2) - (size / 2) - 1;
+					b.Y = (mlx->screen.height / 2) + (size / 2);
+					while (++a.Y < b.Y)
 					{
-						if ((j >= 0) && (j < mlx->screen.height) && mlx->sprite.img_data[(int)(l * mlx->sprite.width + k)])
-							mlx->screen.img_data[j * mlx->screen.width + i] = mlx->sprite.img_data[(int)(l * mlx->sprite.width + k)];
-						l += d;
+						if ((a.Y >= 0) && (a.Y < mlx->screen.height) && mlx->sprite.img_data[texture.y * mlx->sprite.width + texture.x])
+							mlx->screen.img_data[a.Y * mlx->screen.width + a.X] = mlx->sprite.img_data[texture.y * mlx->sprite.width + texture.x];
+						texture.y += d.y;
 					}
 				}
+				texture.x += d.x;
+			}
 		}
 		tmp++;
 	}
