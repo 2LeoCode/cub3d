@@ -318,6 +318,42 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 	return (0);
 }
 
+int		draw_sprites(t_mlxvar *mlx)
+{
+	t_sprite	*tmp;
+	double		size;
+	int			i;
+	int			j;
+	double		k;
+	double		l;
+	double		d;
+
+	tmp = mlx->set->sprites;
+	while (tmp)
+	{
+		if (tmp->inSight)
+		{
+			size = (double)mlx->screen.height / (cos(tmp->a) * tmp->size);
+			i = (int)(tmp->screenX - size / 2) - 1;
+			d = mlx->sprite.width / size;
+			while (++i < (int)(tmp->screenX + size / 2))
+				if ((i >= 0) && (i < mlx->screen.width))
+				{
+					j = (int)(mlxvar->screen.height / 2) - (size / 2);
+					k = mlx->sprite.width * (i - (tmp->screenX - size / 2)) / size;
+					l = mlx->sprite.height * ((j--) - (mlx->screen.height / 2 - size / 2)) / size;
+					while (++j < (int)(mlxvar->screen.height / 2 + size / 2))
+					{
+						if ((j >= 0) && (j < mlx->screen.height) && mlx->sprite[l * mlx->sprite.width + k])
+							mlx->screen.img_data[j * mlx->screen.width + i] = mlx->sprite[l * mlx->sprite.width + k];
+						l += d;
+					}
+				}
+		}
+		tmp++;
+	}
+}
+
 int		updateanddisplay(int key, t_mlxvar *mlxvar)
 {
 	double	dx;
