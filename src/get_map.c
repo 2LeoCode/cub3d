@@ -101,6 +101,8 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 		tmp = tmp->next;
 		i++;
 	}
+	if (!(set->sprites = get_sprites(set->map)))
+		return (ER_DEFLT);
 	return (0);
 }
 

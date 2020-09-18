@@ -352,7 +352,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 		mlxvar->posY -= dy;
 	}
 	if (update_rays(mlxvar)
-	|| update_screen(mlxvar))
+	|| update_screen(mlxvar) || draw_sprites(&mlxvar))
 		return (clear_mlx(mlxvar));
 	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	return (0);
@@ -378,7 +378,7 @@ int		cub3D(t_set *set, int flags)
 	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
 	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
 	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
-	|| update_rays(&mlxvar) || update_screen(&mlxvar))
+	|| update_rays(&mlxvar) || update_screen(&mlxvar) || draw_sprites(&mlxvar))
 	{
 		clear_set(set);
 		clear_mlx(&mlxvar);

@@ -88,12 +88,11 @@
 
 typedef struct		s_sprite
 {
-	int				mapX;
-	int				mapY;
-	double			siz;
-	double			rot;
-	int				posX;
-	struct s_sprite	*next;
+	t_point			pos;
+	int				inSight;
+	double			a;
+	double			size;
+	int				screenX;
 }					t_sprite;
 
 typedef struct		s_rgb_data{
@@ -153,6 +152,7 @@ typedef struct		s_set
 	int				C;
 	double			FOV;
 	t_coord			spawn;
+	t_sprite		*sprites;
 	double			rot_vert;
 	double			rot_hor;
 	char			**map;
@@ -186,7 +186,6 @@ typedef struct		s_mlxvar
 	t_set			*set;
 	double			posX;
 	double			posY;
-	t_sprite		*sprites;
 	t_mlximg		screen;
 	t_mlximg		wallN;
 	t_mlximg		wallE;
@@ -259,6 +258,7 @@ void				get_next_line_end(int fd, char **line);
 t_bool				is_map_wall(char *line);
 int					check_map(t_set *set);
 int					get_map(int fd, t_set *set);
+t_sprite			*get_sprites(char **map);
 
 int					update_rays(t_mlxvar *mlxvar);
 

@@ -97,3 +97,41 @@ int				check_map(t_set *set)
 	set->rot_vert = 0;
 	return (0);
 }
+
+t_sprite	*get_sprites(char **map)
+{
+	int			count;
+	int			i;
+	int			j;
+	t_sprite	*tmp;
+
+	count = 0;
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+			if (map[i][j] == '2')
+				count++;
+	}
+	if (!(tmp = malloc(sizeof(t_sprite) * (count + 1))))
+		return (NULL);
+	tmp[count] = NULL;
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+			if (map[i][j] == '2')
+			{
+				tmp->pos.x = j + 0.5;
+				tmp->pos.y = i + 0.5;
+				tmp->inSight = 0;
+				tmp->a = 0;
+				tmp->screenX = -1;
+				(tmp++)->size = 0;
+			}
+	}
+	tmp -= count;
+	return (tmp);
+}

@@ -12,49 +12,77 @@
 
 #include <cub3d.h>
 
-t_sprite	*raylist_add(t_mlxvar *mlx, t_point m, int px, int r, t_sprite *lst)
+int		update_sprites(t_mlxvar *mlx, double bx, double by, double a, int i)
 {
 	t_sprite	*tmp;
 
-	if (!(tmp = malloc(sizeof(t_sprite))))
-		return (NULL);
-	tmp->mapX = (int)m.x;
-	tmp->mapY = (int)m.y;
-	tmp->posX = px;
-	tmp->rot = r;
-	tmp->siz = sqrt((tmp->mapX + 0.5 - mlx->posX) * (tmp->mapX + 0.5 - mlx->posX) + (tmp->mapY + 0.5 - mlx->posY) * (tmp->mapY + 0.5 - mlx->posY));
-	tmp->next = lst;
-	return (tmp);
+	tmp = mlx->set->sprites;
+	while (tmp)
+	{
+		if (((int)bx == (int)tmp->pos.x) && ((int)by == (int)tmp->pos.y))
+		{
+			tmp->a = a;
+			tmp->size = sqrt((bx - mlx->posX) * (bx - mlx->posX) + (by - mlx->posY) * (by - mlx->posY));
+			tmp->screenX = i;
+			tmp->inSight = 0;
+		}
+		tmp++;
+	}
+	return (0);
 }
 
-void		lst_sort_siz(t_sprite **lst)
+int		check_visible(t_mlxvar *mlx, double len, int i)
 {
-	t_sprite *prev;
-	t_sprite *tmp;
-	t_sprite *cur;
-	t_sprite *head;
+	t_sprite	*tmp;
 
-	if (!lst || !*lst)
-		return ;
-	cur = *lst;
-	head = cur->next;
-	prev = NULL;
-	while (cur)
+	tmp = mlx->set->sprites;
+	while (tmp)
 	{
-		while (head)
-		{
-			if (head->siz > cur->siz)
-			{
-				if (prev)
-					prev->next = head;
-				tmp = head->next;
-				head->next = cur->next;
-				cur->next = tmp;
-			}
-			head = head->next;
-		}
-		prev = cur;
-		cur = cur->next;
+		if ((tmp->screenX == i) && (tmp->size < len))
+			tmp->inSight = 1;
+		tmp++;
+	}
+	return (0);
+}
+
+void	sprite_swap(t_sprite *a, t_sprite *b)
+{
+	t_sprite	c;
+
+	c.a = a->a;
+	c.inSight = a->inSight;
+	c.pos.x = a->pos.x;
+	c.pos.y = a->pos.y;
+	c.screenX = a->screenX;
+	c.size = q->size;
+
+	a->a = b->a;
+	a->inSight = b->inSight;
+	a->pos.x = b->pos.x;
+	a->pos.y = b->pos.y;
+	a->screenX = b->screenX;
+	a->size = b->size;
+
+	b->a = c.a;
+	b->inSight = c.inSight;
+	b->pos.x = c.pos.x;
+	b->pos.y = c.pos.y;
+	b->screenX = c.screenX;
+	b->size = c.size;
+}
+
+void	sort_sprites(t_sprite *sprites)
+{
+	t_sprite	*head;
+	t_sprite	tmp;
+
+	while (sprites)
+	{
+		head = sprites;
+		while (++head)
+			if (head->size < sprites->size)
+				sprite_swap(head, sprites);
+		sprites++;
 	}
 }
 
@@ -69,7 +97,7 @@ int		update_rays(t_mlxvar *mlxvar)
 	t_point		length;
 	t_point		d;
 
-	if (!mlxvar->rays && !(mlxvar->rays = malloc(sizeof(t_ray) * mlxvar->set->X)))
+	if (!mlxvar->rays && !(mlxvar->rays = malloc(sizeof(t_ray) * mlxvar->set->X))))
 		return (-1);
 	i = -1;
 	r = -(mlxvar->set->FOV / 2);
@@ -101,6 +129,8 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.x = -d.y * t;
 		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
+			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
+				update_sprites(mlxvar, b.x + d.x / 2, b.y + d.y / 2, r, i);
 			b.x += d.x;
 			b.y += d.y;
 		}
@@ -125,23 +155,28 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.y = -d.x * t;
 		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
+			if (mlxvar->set->map[(int)c.y][(int)c.x] == '2')
+				update_sprites(mlxvar, c.x + d.x / 2, c.y + d.y / 2, r, i);
 			c.y += d.y;
 			c.x += d.x;
 		}
 		length.x = sqrt((c.x - mlxvar->posX) * (c.x - mlxvar->posX) + (c.y - mlxvar->posY) * (c.y - mlxvar->posY));
 		if (length.y < length.x)
 		{
+			check_visible(mlxvar, length.y, i);
 			mlxvar->rays[i].siz = length.y;
 			mlxvar->rays[i].texture = ((a < M_PI) ? &mlxvar->wallS : &mlxvar->wallN);
 			mlxvar->rays[i].col_pos = (double)(b.x - (int)b.x) * mlxvar->rays[i].texture->width;
 		}
 		else
 		{
+			check_visible(mlxvar, length.x, i);
 			mlxvar->rays[i].siz = length.x;
 			mlxvar->rays[i].texture = (((a > PI2) && (a < _3PI2)) ? &mlxvar->wallW : &mlxvar->wallE);
 			mlxvar->rays[i].col_pos = (double)(c.y - (int)c.y) * mlxvar->rays[i].texture->width;
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
 	}
+	sort_sprites(mlxvar->set->sprites);
 	return (0);
 }
