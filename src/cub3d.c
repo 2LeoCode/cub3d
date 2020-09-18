@@ -348,7 +348,7 @@ int		draw_sprites(t_mlxvar *mlx)
 					b.Y = (mlx->screen.height / 2) + (size / 2);
 					while (++a.Y < b.Y)
 					{
-						if ((a.Y >= 0) && (a.Y < mlx->screen.height) && mlx->sprite.img_data[texture.y * mlx->sprite.width + texture.x])
+						if ((a.Y >= 0) && (a.Y < mlx->screen.height) && mlx->sprite.img_data[(int)(texture.y * mlx->sprite.width + texture.x)])
 							mlx->screen.img_data[(int)(a.Y * mlx->screen.width + a.X)] = mlx->sprite.img_data[(int)(texture.y * mlx->sprite.width + texture.x)];
 						texture.y += d.y;
 					}
