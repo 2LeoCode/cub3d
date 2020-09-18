@@ -17,7 +17,7 @@ int		update_sprites(t_mlxvar *mlx, double bx, double by, double a, int i)
 	t_sprite	*tmp;
 
 	tmp = mlx->set->sprites;
-	while (tmp)
+	while (!tmp->isLast)
 	{
 		if (((int)bx == (int)tmp->pos.x) && ((int)by == (int)tmp->pos.y))
 		{
@@ -36,7 +36,7 @@ int		check_visible(t_mlxvar *mlx, double len, int i)
 	t_sprite	*tmp;
 
 	tmp = mlx->set->sprites;
-	while (tmp)
+	while (!tmp->isLast)
 	{
 		if ((tmp->screenX == i) && (tmp->size < len))
 			tmp->inSight = 1;
@@ -76,10 +76,10 @@ void	sort_sprites(t_sprite *sprites)
 	t_sprite	*head;
 	t_sprite	tmp;
 
-	while (sprites)
+	while (!sprites->isLast)
 	{
 		head = sprites;
-		while (++head)
+		while (!((++head)->isLast))
 			if (head->size < sprites->size)
 				sprite_swap(head, sprites);
 		sprites++;

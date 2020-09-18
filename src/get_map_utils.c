@@ -116,7 +116,7 @@ t_sprite	*get_sprites(char **map)
 	}
 	if (!(tmp = malloc(sizeof(t_sprite) * (count + 1))))
 		return (NULL);
-	tmp[count] = NULL;
+	tmp[count]->isLast = 1;
 	i = -1;
 	while (map[++i])
 	{
@@ -129,6 +129,7 @@ t_sprite	*get_sprites(char **map)
 				tmp->inSight = 0;
 				tmp->a = 0;
 				tmp->screenX = -1;
+				tmp->isLast = 0;
 				(tmp++)->size = 0;
 			}
 	}

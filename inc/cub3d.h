@@ -99,6 +99,7 @@ typedef struct		s_sprite
 	double			a;
 	double			size;
 	int				screenX;
+	int				isLast;
 }					t_sprite;
 
 typedef struct		s_rgb_data{
