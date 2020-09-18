@@ -331,7 +331,7 @@ int		draw_sprites(t_mlxvar *mlx)
 	{
 		if (tmp->inSight)
 		{
-			size = (double)mlxvar->screen.height / (cos(tmp->a) * tmp->size);
+			size = (double)mlx->screen.height / (cos(tmp->a) * tmp->size);
 			a.X = tmp->screenX - (size / 2) - 1;
 			a.Y = (mlx->screen.height / 2) - (size / 2) - 1;
 			b.X = tmp->screenX + (size / 2);
@@ -341,7 +341,7 @@ int		draw_sprites(t_mlxvar *mlx)
 			texture.x = 0;
 			while (++a.X < b.X)
 			{
-				if ((a.X >= 0 >= 0) && (a.X < mlx->screen.width))
+				if ((a.X >= 0) && (a.X < mlx->screen.width))
 				{
 					texture.y = 0;
 					a.Y = (mlx->screen.height / 2) - (size / 2) - 1;
