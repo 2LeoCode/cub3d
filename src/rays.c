@@ -96,7 +96,7 @@ int		update_rays(t_mlxvar *mlxvar)
 	t_point		length;
 	t_point		d;
 
-	if (!mlxvar->rays && !(mlxvar->rays = malloc(sizeof(t_ray) * mlxvar->set->X))))
+	if (!mlxvar->rays && !(mlxvar->rays = malloc(sizeof(t_ray) * mlxvar->set->X)))
 		return (-1);
 	i = -1;
 	r = -(mlxvar->set->FOV / 2);
