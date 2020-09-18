@@ -338,7 +338,7 @@ int		draw_sprites(t_mlxvar *mlx)
 			while (++i < (int)(tmp->screenX + size / 2))
 				if ((i >= 0) && (i < mlx->screen.width))
 				{
-					j = (int)(mlx=->screen.height / 2) - (size / 2);
+					j = (int)(mlx->screen.height / 2) - (size / 2);
 					k = mlx->sprite.width * (i - (tmp->screenX - size / 2)) / size;
 					l = mlx->sprite.height * ((j--) - (mlx->screen.height / 2 - size / 2)) / size;
 					while (++j < (int)(mlx->screen.height / 2 + size / 2))
