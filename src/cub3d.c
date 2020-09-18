@@ -261,7 +261,6 @@ int		update_screen(t_mlxvar *mlxvar)
 			k += mlxvar->rays[i].texture->height / size;
 		}
 	}
-	draw_sprites(mlxvar);
 	return (0);
 }
 
