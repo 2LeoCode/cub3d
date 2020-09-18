@@ -201,10 +201,10 @@ int		save_screen(t_mlximg *screen)
 	return (0);
 }
 
-void	draw_sprites(t_mlxvar *mlxvar)
+/*void	draw_sprites(t_mlxvar *mlxvar)
 {
 	(void)mlxvar;
-	/*int			i;
+	int			i;
 	int			j;
 	double		k;
 	double		l;
@@ -230,8 +230,8 @@ void	draw_sprites(t_mlxvar *mlxvar)
 				}
 			}
 		}
-	}*/
-}
+	}
+}*/
 
 int		update_screen(t_mlxvar *mlxvar)
 {
