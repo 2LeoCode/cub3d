@@ -437,6 +437,7 @@ int		keyIsPressed(int key, t_mlxvar *mlxvar)
 
 int		keyIsReleased(int key, t_mlxvar *mlxvar)
 {
+	(void)key;
 	mlxvar->isKeyPressed = 0;
 	return (0);
 }
