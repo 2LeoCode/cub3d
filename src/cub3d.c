@@ -177,16 +177,17 @@ t_bfh			createBitmapFileHeader(t_mlximg *screen)
 
 int				save_screen(t_mlximg *screen)
 {
-	t_bfh	fileHeader;
-	t_bih	infoHeader;
+	t_bfh			fileHeader;
+	t_bih			infoHeader;
+	unsigned char	*img;
 
 	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	img = getCharArray(screen);
-	bfh = createBitmapFileHeader(screen);
-	bih = createBitmapInfoHeader(screen);
-	write(fd, &bfh, 14);
-	write(fd, &bih, 40);
+	fileHeader = createBitmapFileHeader(screen);
+	infoHeader = createBitmapInfoHeader(screen);
+	write(fd, &fileHeader, 14);
+	write(fd, &infoHeader, 40);
 	write(fd, img, screen->width * screen->height * 3);
 	free(img);
 	free(bfh);
