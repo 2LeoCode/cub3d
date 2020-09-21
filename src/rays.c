@@ -12,7 +12,7 @@
 
 #include <cub3d.h>
 
-int		update_sprites(t_mlxvar *mlx, t_point b, double a, int i)
+int		update_sprites(t_mlxvar *mlx)
 {
 	t_sprite	*tmp;
 
