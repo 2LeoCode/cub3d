@@ -472,7 +472,7 @@ int		cub3D(t_set *set, int flags)
 	mlx_put_image_to_window(mlxvar.id, mlxvar.win, mlxvar.screen.img, 0, 0);
 	if (save)
 		save_screen(&mlxvar.screen);
-	mlx_loop_hook(mlxvar.win, &updateanddisplay, &mlxvar);
+	mlx_loop_hook(mlxvar.id, &updateanddisplay, &mlxvar);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &keyIsPressed, &mlxvar);
 	mlx_hook(mlxvar.win, KeyRelease, KeyReleaseMask, &keyIsReleased, &mlxvar);
 	mlx_loop(mlxvar.id);
