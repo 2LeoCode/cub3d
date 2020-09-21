@@ -401,8 +401,8 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	double	cSize;
 
 	cSize = 0.3;
-	dx = (cos(mlxvar->set->rot_hor) / 10) * 2;
-	dy = (sin(mlxvar->set->rot_hor) / 10) * 2;
+	dx = (cos(mlxvar->set->rot_hor) / 10) * 4;
+	dy = (sin(mlxvar->set->rot_hor) / 10) * 4;
 	dr = (M_PI / 180) * 3;
 	if (key == KEY_LEFT)
 	{
