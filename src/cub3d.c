@@ -146,7 +146,7 @@ t_bih			createBitmapInfoHeader(t_mlximg *screen)
 	t_bih	infoHeader;
 	int		ppm;
 
-	ppm = 96 * 39.375;
+	ppm = 200 * 39.375;
 	infoHeader.size_header = 40;
 	infoHeader.width = screen->width;
 	infoHeader.height = screen->height;
