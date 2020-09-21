@@ -355,6 +355,7 @@ int		draw_sprites(t_mlxvar *mlx)
 				}
 				texture.x += d.x;
 			}
+			tmp->inSight = 0;
 		}
 		tmp++;
 	}
