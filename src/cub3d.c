@@ -423,7 +423,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	return (0);
 }
 
-int		test(XMotionEvent *event, void *param)
+int		test(XEvent *event, void *param)
 {
 	(void)param;
 	printf("%d %d\n", event->x, event->y);
