@@ -458,8 +458,7 @@ int		cub3D(t_set *set, int flags)
 	mlx_put_image_to_window(mlxvar.id, mlxvar.win, mlxvar.screen.img, 0, 0);
 	if (save)
 		save_screen(&mlxvar.screen);
-	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &updateanddisplay, &mlxvar);
-	mlx_hook(mlxvar.win, MotionNotify, PointerMotionMask, &test, (void*)0);
+	mlx_hook(mlxvar.win, ButtonPress, ButtonMotionMask, &updateanddisplay, &mlxvar);
 	mlx_loop(mlxvar.id);
 	clear_mlx(&mlxvar);
 	return (0);
