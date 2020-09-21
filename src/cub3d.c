@@ -438,6 +438,7 @@ int		keyIsPressed(int key, t_mlxvar *mlxvar)
 int		keyIsReleased(t_mlxvar *mlxvar)
 {
 	mlxvar->isKeyPressed = 0;
+	return (0);
 }
 
 int		cub3D(t_set *set, int flags)
