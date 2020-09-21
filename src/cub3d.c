@@ -207,7 +207,7 @@ char			*getFileName(char *baseName, char *ext)
 	while ((fdTest = open(fileName, O_RDONLY)) > 0)
 	{
 		close(fdTest);
-		updateName(fileName);
+		updateName(fileName, bLen);
 		if (fileName[bLen] == '0' && fileName[bLen + 1] == '0')
 			return (fileName);
 	}
