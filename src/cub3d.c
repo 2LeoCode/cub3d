@@ -404,18 +404,8 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	dx = (cos(mlxvar->set->rot_hor) / 10) * 4;
 	dy = (sin(mlxvar->set->rot_hor) / 10) * 4;
 	dr = (M_PI / 180) * 3;
-	if (key == KEY_LEFT)
-	{
-		mlxvar->set->rot_hor -= dr;
-		if (mlxvar->set->rot_hor < 0)
-			mlxvar->set->rot_hor = _2PI + mlxvar->set->rot_hor;
-	}
-	if (key == KEY_RIGHT)
-	{
-		mlxvar->set->rot_hor += dr;
-		if (mlxvar->set->rot_hor > _2PI)
-			mlxvar->set->rot_hor = mlxvar->set->rot_hor - _2PI;
-	}
+	mlxvar->set->rot_hor -= (dr - _2PI * (mlxvar->set->rot_hor - dr < 0)) * (key == KEY_LEFT);
+	mlxvar->set->rot_hor += (dr - _2PI * (mlxvar->set->rot_hor + dr > _2PI)) * (key == KEY_RIGHT);
 	if ((key == KEY_UP) && !isCollide(mlxvar, mlxvar->posX + dx, mlxvar->posY + dy, cSize))
 	{
 		mlxvar->posX += dx;
@@ -430,6 +420,13 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	|| update_screen(mlxvar) || draw_sprites(mlxvar))
 		return (clear_mlx(mlxvar));
 	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
+	return (0);
+}
+
+int		test(XMotionEvent *event, t_mlxvar *param)
+{
+	event->x = param->screen.width / 2;
+	event->y = param->screen.height / 2;
 	return (0);
 }
 
@@ -462,6 +459,7 @@ int		cub3D(t_set *set, int flags)
 	if (save)
 		save_screen(&mlxvar.screen);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &updateanddisplay, &mlxvar);
+	mlx_hook(mlxvar.win, MotionNotify, PointerMotionMask, &test, (void*)0);
 	mlx_loop(mlxvar.id);
 	clear_mlx(&mlxvar);
 	return (0);
