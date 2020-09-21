@@ -141,58 +141,52 @@ unsigned char	*getCharArray(t_mlximg *screen)
 	return (img);
 }
 
-unsigned char	*createBitmapInfoHeader(t_mlximg *screen)
+t_bih			createBitmapInfoHeader(t_mlximg *screen)
 {
-	unsigned char	*infoHeader;
+	t_bih	infoHeader;
+	int		ppm;
 
-	infoHeader = (unsigned char*)malloc(sizeof(unsigned char) * 40);
-	ft_bzero(infoHeader, 40);
-	infoHeader[0] = 14;
-	infoHeader[4] = screen->width;
-	infoHeader[5] = (screen->width >> 8);
-	infoHeader[6] = (screen->width >> 16);
-	infoHeader[7] = (screen->width >> 24);
-	infoHeader[8] = screen->height;
-	infoHeader[9] = (screen->height >> 8);
-	infoHeader[10] = (screen->height >> 16);
-	infoHeader[11] = (screen->height >> 24);
-	infoHeader[12] = 1;
-	infoHeader[14] = 24;
+	ppm = 96 * 39.375;
+	infoHeader.size_header = 40;
+	infoHeader.width = screen->width;
+	infoHeader.height = screen->height;
+	infoHeader.planes = 1;
+	infoHeader.bit_count = 24;
+	infoHeader.compression = 0;
+	infoHeader.image_size = infoHeader.width * infoHeader.height;
+	infoHeader.ppm_x = ppm;
+	infoHeader.ppm_y = ppm;
+	infoHeader.clr_used = 0;
+	infoHeader.clr_important = 0;
 	return (infoHeader);
 }
 
-unsigned char	*createBitmapFileHeader(t_mlximg *screen)
+t_bfh			createBitmapFileHeader(t_mlximg *screen)
 {
-	unsigned char	*fileHeader;
-	int				fileSize;
+	t_bfh	fileHeader;
+	int		fileSize;
 
-	fileHeader = (unsigned char*)malloc(sizeof(unsigned char) * 14);
-	ft_bzero(fileHeader, 14);
-	fileSize = screen->height * screen->width * 3 + 54;
-	fileHeader[0] = 'B';
-	fileHeader[1] = 'M';
-	fileHeader[2] = fileSize;
-	fileHeader[3] = (fileSize >> 8);
-	fileHeader[4] = (fileSize >> 16);
-	fileHeader[5] = (fileSize >> 24);
-	fileHeader[10] = 54;
+	fileHeader.bitmap_type[0] = 'B';
+	fileHeader.bitmap_type[1] = 'M';
+	fileHeader.file_size = 54 + 3 * screen->width * screen->height;
+	fileHeader.reserved1 = 0;
+	fileHeader.reserved2 = 0;
+	fileHeader.offset_bits = 0;
 	return (fileHeader);
 }
 
-int		save_screen(t_mlximg *screen)
+int				save_screen(t_mlximg *screen)
 {
-	unsigned char	*bfh;
-	unsigned char	*bih;
-	unsigned char	*img;
-	int fd;
+	t_bfh	fileHeader;
+	t_bih	infoHeader;
 
 	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	img = getCharArray(screen);
 	bfh = createBitmapFileHeader(screen);
 	bih = createBitmapInfoHeader(screen);
-	write(fd, bfh, 14);
-	write(fd, bih, 40);
+	write(fd, &bfh, 14);
+	write(fd, &bih, 40);
 	write(fd, img, screen->width * screen->height * 3);
 	free(img);
 	free(bfh);

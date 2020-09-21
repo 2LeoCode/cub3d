@@ -86,6 +86,30 @@
 # define PI2 (M_PI / 2)
 # define _3PI2 (3 * M_PI / 2)
 
+typedef struct		s_bfh
+{
+	unsigned char	bitmap_type[2];
+	int				file_size;
+	short			reserved1;
+	short			reserved2;
+	unsigned int	offset_bits;
+}					t_bfh;
+
+typedef struct		s_bih
+{
+	unsigned int	size_header;
+	unsigned int	width;
+	unsigned int	height;
+	short			planes;
+	short			bit_count;
+	unsigned int	compression;
+	unsigned int	image_size;
+	unsigned int	ppm_x;
+	unsigned int	ppm_y;
+	unsigned int	clr_used;
+	unsigned int	clr_important;
+}					t_bih;
+
 typedef struct		s_point
 {
 	double			x;
