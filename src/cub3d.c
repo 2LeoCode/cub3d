@@ -130,7 +130,8 @@ unsigned char	*getCharArray(t_mlximg *screen)
 	int				i;
 
 	size = screen->width * screen->height;
-	img = (unsigned char*)malloc(sizeof(unsigned char) * size * 3);
+	if (!(img = (unsigned char*)malloc(sizeof(unsigned char) * size * 3)))
+		return (NULL);
 	i = -1;
 	while (++i < size)
 	{
@@ -174,16 +175,59 @@ t_bfh			createBitmapFileHeader(t_mlximg *screen)
 	return (fileHeader);
 }
 
+void			updateName(char *fName, size_t bLen)
+{
+	if (fName[bLen + 1] == '9')
+	{
+		if (fName[bLen] == '9')
+			fName[bLen] = '0';
+		else
+			fName[bLen]++;
+		fName[bLen + 1] = '0';
+	}
+	else
+		fName[bLen + 1]++;
+}
+
+char			*getFileName(char *baseName, char *ext)
+{
+	size_t	bLen;
+	size_t	eLen;
+	char	*fileName;
+	int		fdTest;
+
+	bLen = ft_strlen(baseName);
+	eLen = ft_strlen(baseName);
+	if (!(fileName = malloc(sizeof(char) * (bLen + eLen + 3))))
+		return (NULL);
+	ft_memcpy(fileName, baseName, bLen);
+	ft_memcpy(fileName + bLen, "00", 2);
+	ft_memcpy(fileName + bLen + 2, ext, eLen + 1);
+	printf("%s\n", fileName);
+	while ((fdTest = open(fileName, O_RDONLY)) > 0)
+	{
+		close(fdTest);
+		updateName(fileName);
+		if (fileName[bLen] == '0' && fileName[bLen + 1] == '0')
+			return (fileName);
+	}
+	close(fdTest);
+	return (fileName);
+}
+
 int				save_screen(t_mlximg *screen)
 {
 	t_bfh			fileHeader;
 	t_bih			infoHeader;
 	int				fd;
 	unsigned char	*img;
+	char			*fileName;
 
-	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
+	if (!(fileName = getFileName("save", "bmp"))
+	|| ((fd = open(fileName, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
+	|| !(img = getCharArray(screen)))
 		return (error_wrong_map(ER_DEFLT));
-	img = getCharArray(screen);
+	free(fileName);
 	fileHeader = createBitmapFileHeader(screen);
 	infoHeader = createBitmapInfoHeader(screen);
 	write(fd, &fileHeader, 14);
