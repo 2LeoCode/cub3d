@@ -406,8 +406,8 @@ int		updateanddisplay(t_mlxvar *mlxvar)
 		return (0);
 	key = mlxvar->lastKey;
 	cSize = 0.3;
-	dx = (cos(mlxvar->set->rot_hor) / 10) * 4;
-	dy = (sin(mlxvar->set->rot_hor) / 10) * 4;
+	dx = (cos(mlxvar->set->rot_hor) / 20);
+	dy = (sin(mlxvar->set->rot_hor) / 20);
 	dr = (M_PI / 180) * 3;
 	mlxvar->set->rot_hor -= (dr - _2PI * (mlxvar->set->rot_hor - dr < 0)) * (key == KEY_LEFT);
 	mlxvar->set->rot_hor += (dr - _2PI * (mlxvar->set->rot_hor + dr > _2PI)) * (key == KEY_RIGHT);
