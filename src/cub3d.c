@@ -405,7 +405,6 @@ int		updateanddisplay(t_mlxvar *mlxvar)
 	if (!mlxvar->isKeyPressed)
 		return (0);
 	key = mlxvar->lastKey;
-	printf("%d\n", key);
 	cSize = 0.3;
 	dx = (cos(mlxvar->set->rot_hor) / 10) * 4;
 	dy = (sin(mlxvar->set->rot_hor) / 10) * 4;
@@ -436,7 +435,7 @@ int		keyIsPressed(int key, t_mlxvar *mlxvar)
 	return (0);
 }
 
-int		keyIsReleased(t_mlxvar *mlxvar)
+int		keyIsReleased(int key, t_mlxvar *mlxvar)
 {
 	mlxvar->isKeyPressed = 0;
 	return (0);
