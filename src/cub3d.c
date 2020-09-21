@@ -347,7 +347,7 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 	{
 		if (mlx->set->map[(int)(py + r * sin(i))][(int)(px + r * cos(i))] == '1')
 			return (1);
-		i += (M_PI / 4);
+		i += (M_PI / 10);
 	}
 	return (0);
 }
@@ -400,7 +400,7 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	double	dr;
 	double	cSize;
 
-	cSize = 0.5;
+	cSize = 0.3;
 	dx = (cos(mlxvar->set->rot_hor) / 10) * 2;
 	dy = (sin(mlxvar->set->rot_hor) / 10) * 2;
 	dr = (M_PI / 180) * 3;
