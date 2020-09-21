@@ -198,11 +198,11 @@ char			*getFileName(char *baseName, char *ext)
 
 	bLen = ft_strlen(baseName);
 	eLen = ft_strlen(baseName);
-	if (!(fileName = malloc(sizeof(char) * (bLen + eLen + 3))))
+	if (!(fileName = malloc(sizeof(char) * (bLen + eLen + 4))))
 		return (NULL);
 	ft_memcpy(fileName, baseName, bLen);
-	ft_memcpy(fileName + bLen, "00", 2);
-	ft_memcpy(fileName + bLen + 2, ext, eLen + 1);
+	ft_memcpy(fileName + bLen, "00.", 3);
+	ft_memcpy(fileName + bLen + 3, ext, eLen + 1);
 	printf("%s\n", fileName);
 	while ((fdTest = open(fileName, O_RDONLY)) > 0)
 	{
