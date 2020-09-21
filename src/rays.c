@@ -21,7 +21,7 @@ int		update_sprites(t_mlxvar *mlx)
 	{
 		tmp->size = sqrt((tmp->pos.x - mlx->posX) * (tmp->pos.x - mlx->posX) + (tmp->pos.y - mlx->posY) * (tmp->pos.y - mlx->posY));
 		tmp->a = mlx->set->FOV / 2 + acos((tmp->pos.x - mlx->posX) / tmp->size);
-		tmp->screenX = mlx->screen.width / 2 + (mlx->screen.width / 2) * a / (mlx->set->FOV / 2);
+		tmp->screenX = mlx->screen.width / 2 + (mlx->screen.width / 2) * tmp->a / (mlx->set->FOV / 2);
 		tmp++;
 	}
 	return (0);
