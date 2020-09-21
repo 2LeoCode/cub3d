@@ -164,7 +164,6 @@ t_bih			createBitmapInfoHeader(t_mlximg *screen)
 t_bfh			createBitmapFileHeader(t_mlximg *screen)
 {
 	t_bfh	fileHeader;
-	int		fileSize;
 
 	fileHeader.bitmap_type[0] = 'B';
 	fileHeader.bitmap_type[1] = 'M';
