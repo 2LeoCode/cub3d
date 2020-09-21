@@ -203,7 +203,6 @@ char			*getFileName(char *baseName, char *ext)
 	ft_memcpy(fileName, baseName, bLen);
 	ft_memcpy(fileName + bLen, "00.", 3);
 	ft_memcpy(fileName + bLen + 3, ext, eLen + 1);
-	printf("%s\n", fileName);
 	while ((fdTest = open(fileName, O_RDONLY)) > 0)
 	{
 		close(fdTest);
