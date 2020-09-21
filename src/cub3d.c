@@ -179,6 +179,7 @@ int				save_screen(t_mlximg *screen)
 {
 	t_bfh			fileHeader;
 	t_bih			infoHeader;
+	int				fd;
 	unsigned char	*img;
 
 	if ((fd = open("save.bmp", O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
@@ -190,9 +191,6 @@ int				save_screen(t_mlximg *screen)
 	write(fd, &infoHeader, 40);
 	write(fd, img, screen->width * screen->height * 3);
 	free(img);
-	free(bfh);
-	free(bih);
-	close(fd);
 	return (0);
 }
 
