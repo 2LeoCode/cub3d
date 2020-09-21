@@ -19,13 +19,9 @@ int		update_sprites(t_mlxvar *mlx, t_point b, double a, int i)
 	tmp = mlx->set->sprites;
 	while (!tmp->isLast)
 	{
-		if (((int)b.x == (int)tmp->pos.x) && ((int)b.y == (int)tmp->pos.y))
-		{
-			tmp->a = a;
-			tmp->size = sqrt(((int)b.x + 0.5 - mlx->posX) * ((int)b.x + 0.5 - mlx->posX) + ((int)b.y + 0.5 - mlx->posY) * ((int)b.y + 0.5 - mlx->posY));
-			tmp->screenX = i;
-			tmp->inSight = 0;
-		}
+		tmp->size = sqrt((tmp->pos.x - mlx->posX) * (tmp->pos.x - mlx->posX) + (tmp->pos.y - mlx->posY) * (tmp->pos.y - mlx->posY));
+		tmp->a = mlx->set->FOV / 2 + acos((tmp->pos.x - mlx->posX) / tmp->size);
+		tmp->screenX = mlx->screen.width / 2 + (mlx->screen.width / 2) * a / (mlx->set->FOV / 2);
 		tmp++;
 	}
 	return (0);
@@ -128,8 +124,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.x = -d.y * t;
 		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
-			if (mlxvar->set->map[(int)b.y][(int)b.x] == '2')
-				update_sprites(mlxvar, b, r, i);
 			b.x += d.x;
 			b.y += d.y;
 		}
@@ -154,28 +148,25 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.y = -d.x * t;
 		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
-			if (mlxvar->set->map[(int)c.y][(int)c.x] == '2')
-				update_sprites(mlxvar, c, r, i);
 			c.y += d.y;
 			c.x += d.x;
 		}
 		length.x = sqrt((c.x - mlxvar->posX) * (c.x - mlxvar->posX) + (c.y - mlxvar->posY) * (c.y - mlxvar->posY));
 		if (length.y < length.x)
 		{
-			check_visible(mlxvar, length.y, i);
 			mlxvar->rays[i].siz = length.y;
 			mlxvar->rays[i].texture = ((a < M_PI) ? &mlxvar->wallS : &mlxvar->wallN);
 			mlxvar->rays[i].col_pos = (double)(b.x - (int)b.x) * mlxvar->rays[i].texture->width;
 		}
 		else
 		{
-			check_visible(mlxvar, length.x, i);
 			mlxvar->rays[i].siz = length.x;
 			mlxvar->rays[i].texture = (((a > PI2) && (a < _3PI2)) ? &mlxvar->wallW : &mlxvar->wallE);
 			mlxvar->rays[i].col_pos = (double)(c.y - (int)c.y) * mlxvar->rays[i].texture->width;
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
 	}
+	update_sprites(mlxvar);
 	sort_sprites(mlxvar->set->sprites);
 	return (0);
 }
