@@ -123,6 +123,7 @@ unsigned char* createBitmapInfoHeader (int height, int width)
 }
 
 */
+
 unsigned char	*getCharArray(t_mlximg *screen)
 {
 	unsigned char	*img;
@@ -393,13 +394,17 @@ int		draw_sprites(t_mlxvar *mlx)
 	return (0);
 }
 
-int		updateanddisplay(int key, t_mlxvar *mlxvar)
+int		updateanddisplay(t_mlxvar *mlxvar)
 {
-	double	dx;
-	double	dy;
-	double	dr;
-	double	cSize;
+	int			key;
+	double		dx;
+	double		dy;
+	double		dr;
+	double		cSize;
 
+	key = mlxvar->lastKey;
+	if (key < 0 || !mlxvar->isKeyPressed)
+		return (0);
 	cSize = 0.3;
 	dx = (cos(mlxvar->set->rot_hor) / 10) * 4;
 	dy = (sin(mlxvar->set->rot_hor) / 10) * 4;
@@ -423,11 +428,16 @@ int		updateanddisplay(int key, t_mlxvar *mlxvar)
 	return (0);
 }
 
-int		test(XPointerMovedEvent *event, void *param)
+int		keyIsPressed(int key, t_mlxvar *mlxvar)
 {
-	(void)param;
-	printf("%d %d\n", event->x, event->y);
+	mlxvar->isKeyPressed = 1;
+	mlxvar->lastKey = key;
 	return (0);
+}
+
+int		keyIsReleased(t_mlxvar *mlxvar)
+{
+	mlxvar->isKeyPressed = 0;
 }
 
 int		cub3D(t_set *set, int flags)
@@ -447,6 +457,8 @@ int		cub3D(t_set *set, int flags)
 	mlxvar.rays = NULL;
 	mlxvar.posX = (double)mlxvar.set->spawn.X + 0.5;
 	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
+	mlxvar.lastKey = -1;
+	mlxvar.isKeyPressed = 0;
 	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
 	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
 	|| update_rays(&mlxvar) || update_screen(&mlxvar) || draw_sprites(&mlxvar))
@@ -458,7 +470,9 @@ int		cub3D(t_set *set, int flags)
 	mlx_put_image_to_window(mlxvar.id, mlxvar.win, mlxvar.screen.img, 0, 0);
 	if (save)
 		save_screen(&mlxvar.screen);
-	mlx_hook(mlxvar.win, ButtonPress, ButtonMotionMask, &updateanddisplay, &mlxvar);
+	mlx_loop_hook(mlxvar.win, &updateanddisplay, &mlxvar);
+	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &keyIsPressed, &mlxvar);
+	mlx_hook(mlxvar.win, KeyRelease, KeyReleaseMask, &keyIsReleased, &mlxvar);
 	mlx_loop(mlxvar.id);
 	clear_mlx(&mlxvar);
 	return (0);

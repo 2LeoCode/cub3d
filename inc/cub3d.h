@@ -218,6 +218,8 @@ typedef struct		s_mlxvar
 	t_mlximg		wallW;
 	t_mlximg		sprite;
 	t_ray			*rays;
+	int				lastKey;
+	int				isKeyPressed;
 }					t_mlxvar;
 
 
