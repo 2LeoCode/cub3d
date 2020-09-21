@@ -402,9 +402,12 @@ int		updateanddisplay(t_mlxvar *mlxvar)
 	double		dr;
 	double		cSize;
 
-	key = mlxvar->lastKey;
-	if (key < 0 || !mlxvar->isKeyPressed)
+	if (!mlxvar->isKeyPressed)
+	{
+		printf("OK");
 		return (0);
+	}
+	key = mlxvar->lastKey;
 	cSize = 0.3;
 	dx = (cos(mlxvar->set->rot_hor) / 10) * 4;
 	dy = (sin(mlxvar->set->rot_hor) / 10) * 4;
