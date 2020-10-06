@@ -248,6 +248,7 @@ int		draw_sprites(t_mlxvar *mlx)
 		}
 		lst = lst->next;
 	}
+	freeSpList(&lst);
 	return (0);
 }
 
