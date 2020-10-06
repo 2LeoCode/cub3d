@@ -280,6 +280,7 @@ int						check_map(t_set *set);
 int						get_map(int fd, t_set *set);
 
 int						update_rays(t_mlxvar *mlxvar);
+void					freeSpList(t_spList **lst);
 
 double					ft_dabs(double n);
 

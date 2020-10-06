@@ -216,43 +216,37 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 
 int		draw_sprites(t_mlxvar *mlx)
 {
-	t_sprite	*tmp;
 	double		size;
-	t_coord		a;
-	t_coord		b;
-	t_point		texture;
-	t_point		d;
+	int			screenCol;
+	t_spList	*lst;
+	double		a;
+	int			i;
+	int			j;
+	int			*px;
 
-	tmp = mlx->set->sprites;
-	while (!tmp->isLast)
+	px = mlx->screen.img_data;
+	lst = mlx->spList;
+	while (lst)
 	{
-		size = (double)mlx->screen.height / (cos(tmp->a) * tmp->size);
-		a.X = tmp->screenX - (size / 2) - 1;
-		a.Y = (mlx->screen.height / 2) - (size / 2) - 1;
-		b.X = tmp->screenX + (size / 2);
-		b.Y = (mlx->screen.height / 2) + (size / 2);
-		d.x = mlx->sprite.width / size;
-		d.y = mlx->sprite.height / size;
-		texture.x = 0;
-		while (++a.X < b.X)
+		a = lst->a - mlx->set->rot_hor;
+		screenCol = (a / mlx->set->FOV) * mlx->screen.width;
+		size = (double)mlx->screen.height / (cos(a) * lst->len);
+		i = (int)(screenCol - (size / 2));
+		while (i < 0)
+			i++;
+		while ((i < mlx->screen.width) && (i < (int)(screenCol + (size / 2))))
 		{
-			if ((a.X >= 0) && (a.X < mlx->screen.width))
+			j = (int)(mlx->screen.height / 2 - (size / 2));
+			while (j < 0)
+				j++;
+			while ((j < mlx->screen.height) && (j < (int)(mlx->screen.height / 2 + (size / 2))))
 			{
-				texture.y = 0;
-				a.Y = (mlx->screen.height / 2) - (size / 2) - 1;
-				b.Y = (mlx->screen.height / 2) + (size / 2);
-				while (++a.Y < b.Y)
-				{
-					if ((a.Y >= 0) && (a.Y < mlx->screen.height) && mlx->sprite.img_data[(int)(texture.y * mlx->sprite.width + texture.x)])
-						mlx->screen.img_data[(int)(a.Y * mlx->screen.width + a.X)] = mlx->sprite.img_data[(int)(texture.y * mlx->sprite.width + texture.x)];
-					texture.y += d.y;
-				}
+				mlx->screen[j * mlx->screen.width + i] = 0;
+				j++;
 			}
-			texture.x += d.x;
+			i++;
 		}
-		tmp++;
 	}
-	return (0);
 }
 
 int		updateanddisplay(t_mlxvar *mlxvar)
