@@ -49,12 +49,6 @@ void	sortSpList(t_spList **lst)
 	}
 }
 
-int		freeSpFail(t_spList **lst)
-{
-	freeSpList(lst);
-	return (-1);
-}
-
 void	freeSpList(t_spList **lst)
 {
 	t_spList	*head;
@@ -65,6 +59,12 @@ void	freeSpList(t_spList **lst)
 		free(*lst);
 		*lst = head;
 	}
+}
+
+int		freeSpFail(t_spList **lst)
+{
+	freeSpList(lst);
+	return (-1);
 }
 
 t_spList	*spListAddFront(int px, int py, t_spList *lst, double x, double y)
