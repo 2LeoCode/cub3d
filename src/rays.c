@@ -105,7 +105,7 @@ int		update_rays(t_mlxvar *mlx)
 	t_point		d;
 
 	mlx->spList = NULL;
-	if (!mlx->rays && !(mlxvar->rays = malloc(sizeof(t_ray) * mlx->set->X)))
+	if (!mlx->rays && !(mlx->rays = malloc(sizeof(t_ray) * mlx->set->X)))
 		return (-1);
 	i = -1;
 	r = -(mlx->set->FOV / 2);
