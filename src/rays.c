@@ -26,8 +26,8 @@ void	spListSwap(t_spList *a, t_spList *b)
 	a->y = b->y;
 	b->a = tmp.a;
 	b->len = tmp.len;
-	b->x = tmp->x;
-	b->y = tmp->y;
+	b->x = tmp.x;
+	b->y = tmp.y;
 }
 
 void	sortSpList(t_spList **lst)
