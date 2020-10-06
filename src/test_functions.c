@@ -23,4 +23,5 @@ void	display_map(char **map)
 		ft_putstr(map[i]);
 		ft_putchar('\n');
 	}
+	printf("ok\n");
 }
