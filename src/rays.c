@@ -90,16 +90,16 @@ t_spList	*spListAddFront(int px, int py, t_spList *lst, double x, double y)
 	tmp->len = sqrt(deltaX * deltaX + deltaY * deltaY);
 	tmp->a = atan2(deltaY, deltaX);
 	if (tmp->a < 0)
-		tmp->a = _2PI + tmp->a;
+		tmp->a += _2PI;
 	tmp->next = lst;
 	return (tmp);
 }
 
-void	displaySpList(t_spList *lst)
+void	displaySpList(t_mlxvar *mlx, t_spList *lst)
 {
 	while (lst)
 	{
-		printf("angle: %lf\nsize: %lf\nx: %lf, y: %lf\n", lst->a, lst->len, lst->x, lst->y);
+		printf("angle: %lf\nsize: %lf\nx: %lf, y: %lf\n", lst->a - mlx->rot_hor, lst->len, lst->x, lst->y);
 		lst = lst->next;
 	}
 }
@@ -197,6 +197,6 @@ int		update_rays(t_mlxvar *mlx)
 		r += (mlx->set->FOV / mlx->set->X);
 	}
 	sortSpList(&mlx->spList);
-	displaySpList(mlx->spList);
+	displaySpList(mlx, mlx->spList);
 	return (0);
 }
