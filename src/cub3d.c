@@ -232,6 +232,7 @@ int		draw_sprites(t_mlxvar *mlx)
 		screenCol = (a / mlx->set->FOV) * mlx->screen.width;
 		size = (double)mlx->screen.height / (cos(a) * lst->len);
 		i = (int)(screenCol - (size / 2));
+		printf("%d\n%lf\n%d %d\n", screenCol, size, i, j);
 		while (i < 0)
 			i++;
 		while ((i < mlx->screen.width) && (i < (int)(screenCol + (size / 2))))
