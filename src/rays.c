@@ -12,73 +12,86 @@
 
 #include <cub3d.h>
 
-int		update_sprites(t_mlxvar *mlx)
+void	spListSwap(t_spList *a, t_spList *b)
 {
-	t_sprite	*tmp;
+	t_spList	tmp;
 
-	tmp = mlx->set->sprites;
-	while (!tmp->isLast)
-	{
-		tmp->size = sqrt((tmp->pos.x - mlx->posX) * (tmp->pos.x - mlx->posX) + (tmp->pos.y - mlx->posY) * (tmp->pos.y - mlx->posY));
-		tmp->a = mlx->set->FOV / 2 + acos((tmp->pos.x - mlx->posX) / tmp->size);
-		tmp->screenX = mlx->screen.width / 2 + (mlx->screen.width / 2) * tmp->a / (mlx->set->FOV / 2);
-		tmp++;
-	}
-	return (0);
-}
-
-int		check_visible(t_mlxvar *mlx, double len, int i)
-{
-	t_sprite	*tmp;
-
-	tmp = mlx->set->sprites;
-	while (!tmp->isLast)
-	{
-		if ((tmp->screenX == i) && (tmp->size < len))
-			tmp->inSight = 1;
-		tmp++;
-	}
-	return (0);
-}
-
-void	sprite_swap(t_sprite *a, t_sprite *b)
-{
-	t_sprite	c;
-
-	c.a = a->a;
-	c.inSight = a->inSight;
-	c.pos.x = a->pos.x;
-	c.pos.y = a->pos.y;
-	c.screenX = a->screenX;
-	c.size = a->size;
-
+	tmp.a = a->a;
+	tmp.len = a->len;
+	tmp.x = a->x;
+	tmp.y = a->y;
 	a->a = b->a;
-	a->inSight = b->inSight;
-	a->pos.x = b->pos.x;
-	a->pos.y = b->pos.y;
-	a->screenX = b->screenX;
-	a->size = b->size;
-
-	b->a = c.a;
-	b->inSight = c.inSight;
-	b->pos.x = c.pos.x;
-	b->pos.y = c.pos.y;
-	b->screenX = c.screenX;
-	b->size = c.size;
+	a->len = b->len;
+	a->x = b->x;
+	a->y = b->y;
+	b->a = tmp.a;
+	b->len = tmp.len;
+	b->x = tmp->x;
+	b->y = tmp->y;
 }
 
-void	sort_sprites(t_sprite *sprites)
+void	sortSpList(t_spList **lst)
 {
-	t_sprite	*head;
+	t_spList	*cur;
+	t_spList	*head;
 
-	while (!sprites->isLast)
+	cur = *lst;
+	while (cur)
 	{
-		head = sprites;
-		while (!((++head)->isLast))
-			if (head->size < sprites->size)
-				sprite_swap(head, sprites);
-		sprites++;
+		head = cur->next;
+		while (head)
+		{
+			if (cur->len < head->len)
+				spListSwap(cur, head);
+			head = head->next;
+		}
+		cur = cur->next;
 	}
+}
+
+int		freeSpFail(t_spList **lst)
+{
+	freeSpList(lst);
+	return (-1);
+}
+
+void	freeSpList(t_spList **lst)
+{
+	t_spList	*head;
+
+	while (*lst)
+	{
+		head = (*lst)->next;
+		free(*lst);
+		*lst = head;
+	}
+}
+
+t_spList	*spListAddFront(int px, int py, t_spList *lst, double x, double y)
+{
+	t_spList	*tmp;
+	t_spList	*check;
+	double		a;
+	double		deltaX;
+	double		deltaY;
+
+	deltaX = x - px;
+	deltaY = y - py;
+	check = lst;
+	while (check)
+	{
+		if (((int)x == (int)check->x) && ((int)y == (int)check->y))
+			return (lst);
+		check = check->next;
+	}
+	if (!(tmp = malloc(sizeof(t_spList))))
+		return (NULL);
+	tmp->x = x;
+	tmp->y = y;
+	tmp->len = sqrt(deltaX * deltaX + deltaY * deltaY);
+	tmp->a = atan2(deltaY, deltaX);
+	tmp->next = lst;
+	return (tmp);
 }
 
 int		update_rays(t_mlxvar *mlxvar)
@@ -91,7 +104,9 @@ int		update_rays(t_mlxvar *mlxvar)
 	t_point		c;
 	t_point		length;
 	t_point		d;
+	t_spList	*spList;
 
+	spList = NULL;
 	if (!mlxvar->rays && !(mlxvar->rays = malloc(sizeof(t_ray) * mlxvar->set->X)))
 		return (-1);
 	i = -1;
@@ -124,6 +139,9 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.x = -d.y * t;
 		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlxvar->set->mapX) && (b.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)b.y][(int)b.x] - '1'))
 		{
+			if ((mlxvar->set->map[(int)b.y][(int)b.x] == '2')
+			&& !(spList = spListAddFront(mlxvar->posX, mlxvar->posY, spList, (double)((int)b.x + 0.5), (double)((int)b.y + 0.5))))
+				return (freeSpFail(&spList));
 			b.x += d.x;
 			b.y += d.y;
 		}
@@ -148,6 +166,9 @@ int		update_rays(t_mlxvar *mlxvar)
 		d.y = -d.x * t;
 		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlxvar->set->mapX) && (c.y < mlxvar->set->mapY) && (mlxvar->set->map[(int)c.y][(int)c.x] - '1'))
 		{
+			if ((mlxvar->set->map[(int)c.y][(int)c.x] == '2')
+			&& !(spList = spListAddFront(mlxvar->posX, mlxvar->posY, spList, (double)((int)b.x + 0.5), (double)((int)b.y + 0.5))))
+				return (freeSpFail(&spList));
 			c.y += d.y;
 			c.x += d.x;
 		}
@@ -166,7 +187,6 @@ int		update_rays(t_mlxvar *mlxvar)
 		}
 		r += (mlxvar->set->FOV / mlxvar->set->X);
 	}
-	update_sprites(mlxvar);
-	sort_sprites(mlxvar->set->sprites);
+	sortSpList(&spList);
 	return (0);
 }

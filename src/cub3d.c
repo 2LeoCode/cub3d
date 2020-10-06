@@ -12,118 +12,6 @@
 
 #include <cub3d.h>
 
-/*
-const int BYTES_PER_PIXEL = 3; /// red, green, & blue
-const int FILE_HEADER_SIZE = 14;
-const int INFO_HEADER_SIZE = 40;
-
-void generateBitmapImage(unsigned char* image, int height, int width, char* imageFileName);
-unsigned char* createBitmapFileHeader(int height, int stride);
-unsigned char* createBitmapInfoHeader(int height, int width);
-
-
-int main ()
-{
-    int height = 361;
-    int width = 867;
-    unsigned char image[height][width][BYTES_PER_PIXEL];
-    char* imageFileName = (char*) "bitmapImage.bmp";
-
-    int i, j;
-    for (i = 0; i < height; i++) {
-        for (j = 0; j < width; j++) {
-            image[i][j][2] = (unsigned char) ( i * 255 / height );             ///red
-            image[i][j][1] = (unsigned char) ( j * 255 / width );              ///green
-            image[i][j][0] = (unsigned char) ( (i+j) * 255 / (height+width) ); ///blue
-        }
-    }
-
-    generateBitmapImage((unsigned char*) image, height, width, imageFileName);
-    printf("Image generated!!");
-}
-
-
-void generateBitmapImage (unsigned char* image, int height, int width, char* imageFileName)
-{
-    int widthInBytes = width * BYTES_PER_PIXEL;
-
-    unsigned char padding[3] = {0, 0, 0};
-    int paddingSize = (4 - (widthInBytes) % 4) % 4;
-
-    int stride = (widthInBytes) + paddingSize;
-
-    FILE* imageFile = fopen(imageFileName, "wb");
-
-    unsigned char* fileHeader = createBitmapFileHeader(height, stride);
-    fwrite(fileHeader, 1, FILE_HEADER_SIZE, imageFile);
-
-    unsigned char* infoHeader = createBitmapInfoHeader(height, width);
-    fwrite(infoHeader, 1, INFO_HEADER_SIZE, imageFile);
-
-    int i;
-    for (i = 0; i < height; i++) {
-        fwrite(image + (i*widthInBytes), BYTES_PER_PIXEL, width, imageFile);
-        fwrite(padding, 1, paddingSize, imageFile);
-    }
-
-    fclose(imageFile);
-}
-
-unsigned char* createBitmapFileHeader (int height, int stride)
-{
-    int fileSize = FILE_HEADER_SIZE + INFO_HEADER_SIZE + (stride * height);
-
-    static unsigned char fileHeader[] = {
-        0,0,     /// signature
-        0,0,0,0, /// image file size in bytes
-        0,0,0,0, /// reserved
-        0,0,0,0, /// start of pixel array
-    };
-
-    fileHeader[ 0] = (unsigned char)('B');
-    fileHeader[ 1] = (unsigned char)('M');
-    fileHeader[ 2] = (unsigned char)(fileSize      );
-    fileHeader[ 3] = (unsigned char)(fileSize >>  8);
-    fileHeader[ 4] = (unsigned char)(fileSize >> 16);
-    fileHeader[ 5] = (unsigned char)(fileSize >> 24);
-    fileHeader[10] = (unsigned char)(FILE_HEADER_SIZE + INFO_HEADER_SIZE);
-
-    return fileHeader;
-}
-
-unsigned char* createBitmapInfoHeader (int height, int width)
-{
-    static unsigned char infoHeader[] = {
-        0,0,0,0, /// header size
-        0,0,0,0, /// image width
-        0,0,0,0, /// image height
-        0,0,     /// number of color planes
-        0,0,     /// bits per pixel
-        0,0,0,0, /// compression
-        0,0,0,0, /// image size
-        0,0,0,0, /// horizontal resolution
-        0,0,0,0, /// vertical resolution
-        0,0,0,0, /// colors in color table
-        0,0,0,0, /// important color count
-    };
-
-    infoHeader[ 0] = (unsigned char)(INFO_HEADER_SIZE);
-    infoHeader[ 4] = (unsigned char)(width      );
-    infoHeader[ 5] = (unsigned char)(width >>  8);
-    infoHeader[ 6] = (unsigned char)(width >> 16);
-    infoHeader[ 7] = (unsigned char)(width >> 24);
-    infoHeader[ 8] = (unsigned char)(height      );
-    infoHeader[ 9] = (unsigned char)(height >>  8);
-    infoHeader[10] = (unsigned char)(height >> 16);
-    infoHeader[11] = (unsigned char)(height >> 24);
-    infoHeader[12] = (unsigned char)(1);
-    infoHeader[14] = (unsigned char)(BYTES_PER_PIXEL*8);
-
-    return infoHeader;
-}
-
-*/
-
 unsigned char	*getCharArray(t_mlximg *screen)
 {
 	unsigned char	*img;
@@ -237,38 +125,6 @@ int				save_screen(t_mlximg *screen)
 	return (0);
 }
 
-/*void	draw_sprites(t_mlxvar *mlxvar)
-{
-	(void)mlxvar;
-	int			i;
-	int			j;
-	double		k;
-	double		l;
-	double		lineSize;
-	t_sprite	*lst;
-
-	lst = mlxvar->sprites;
-	while (lst)
-	{
-		lineSize = (double)mlxvar->screen.height / (cos(lst->rot) * lst->siz);
-		l = (lineSize > mlxvar->screen.height) ? 0 : (int)(mlxvar->screen.height / 2) - (lineSize / 2);
-		k = (lineSize < mlxvar->screen.height) ? 0 : (((lineSize / 2) - (mlxvar->screen.height / 2)) / lineSize) * mlxvar->sprite.height;
-		i = (int)((double)lst->posX - (lineSize / 2) - 2);
-		while (++i < (double)lst->posX + (lineSize / 2))
-		{
-			j = -1;
-			while (++j < (((int)lineSize > mlxvar->screen.height) ? mlxvar->screen.height : (int)lineSize))
-			{
-				if (i > 0 && i < mlxvar->screen.width && mlxvar->sprite.img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos])
-				{
-					mlxvar->screen.img_data[(int)((l + j) * mlxvar->screen.width + i)] = mlxvar->sprite.img_data[(int)k * mlxvar->rays[i].texture->width + mlxvar->rays[i].col_pos];
-					k += mlxvar->sprite.height / lineSize;
-				}
-			}
-		}
-	}
-}*/
-
 int		update_screen(t_mlxvar *mlxvar)
 {
 	int		i;
@@ -341,12 +197,17 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 {
 	double	r;
 	double	i;
+	double	y;
+	double	x;
 
 	r = (playerSize / 2);
 	i = 0;
 	while (i < _2PI)
 	{
-		if (mlx->set->map[(int)(py + r * sin(i))][(int)(px + r * cos(i))] == '1')
+		y = py + r * sin(i);
+		x = px + r * cos(i);
+		if (mlx->set->map[(int)y][(int)x] == '1'
+		|| mlx->set->map[(int)y][(int)x] == '2')
 			return (1);
 		i += (M_PI / 10);
 	}
