@@ -247,6 +247,7 @@ int		draw_sprites(t_mlxvar *mlx)
 			i++;
 		}
 	}
+	return (0);
 }
 
 int		updateanddisplay(t_mlxvar *mlxvar)
