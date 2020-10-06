@@ -71,7 +71,6 @@ t_spList	*spListAddFront(int px, int py, t_spList *lst, double x, double y)
 {
 	t_spList	*tmp;
 	t_spList	*check;
-	double		a;
 	double		deltaX;
 	double		deltaY;
 
