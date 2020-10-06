@@ -97,7 +97,7 @@ void	displaySpList(t_spList *lst)
 {
 	while (lst)
 	{
-		printf("angle: %lf\nsize: %lf\nx: %lf, y: %lf", lst->a, lst->len, lst->x, lst->y);
+		printf("angle: %lf\nsize: %lf\nx: %lf, y: %lf\n", lst->a, lst->len, lst->x, lst->y);
 		lst = lst->next;
 	}
 	while (1);

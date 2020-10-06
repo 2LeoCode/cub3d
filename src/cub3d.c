@@ -308,7 +308,6 @@ int		cub3D(t_set *set, int flags)
 	if ((flags == SAVE) || (flags == (SAVE | BONUS)))
 		save = true;
 	mlxvar.set = set;
-	display_map(mlxvar.set->map);
 	mlxvar.id = NULL;
 	mlxvar.win = NULL;
 	mlxvar.screen.img = NULL;
