@@ -164,7 +164,7 @@ int		update_rays(t_mlxvar *mlx)
 		d.y = -d.x * t;
 		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlx->set->mapX) && (c.y < mlx->set->mapY) && (mlx->set->map[(int)c.y][(int)c.x] - '1'))
 		{
-			if ((mlxvar->set->map[(int)c.y][(int)c.x] == '2')
+			if ((mlx->set->map[(int)c.y][(int)c.x] == '2')
 			&& !(mlx->spList = spListAddFront(mlx->posX, mlx->posY, mlx->spList, (double)((int)b.x + 0.5), (double)((int)b.y + 0.5))))
 				return (freeSpFail(&mlx->spList));
 			c.y += d.y;
