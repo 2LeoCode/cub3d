@@ -229,6 +229,8 @@ int		draw_sprites(t_mlxvar *mlx)
 	while (lst)
 	{
 		a = lst->a - mlx->set->rot_hor;
+		if (mlx->set->rot_hor > _3PI2)
+			a = -a - _2PI;
 		size = (double)mlx->screen.height / (cos(a) * lst->len);
 		screenC.X = ((a + (mlx->set->FOV / 2) / mlx->set->FOV) * mlx->screen.width) - (size / 2);
 		printf("lst->a: %lf, rot_hor: %lf, a: %lf, screenX: %d\n", lst->a, mlx->set->rot_hor, a, screenC.X);
