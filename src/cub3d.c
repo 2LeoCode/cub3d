@@ -219,6 +219,7 @@ int		draw_sprites(t_mlxvar *mlx)
 	double		size;
 	double		a;
 	t_coord		end;
+	t_coord		d;
 	t_spList	*lst;
 	t_coord		screenC;
 	t_point		textC;
