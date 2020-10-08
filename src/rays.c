@@ -67,7 +67,7 @@ int		freeSpFail(t_spList **lst)
 	return (-1);
 }
 
-t_spList	*spListAddFront(int px, int py, t_spList *lst, double x, double y)
+t_spList	*spListAddFront(double px, double py, t_spList *lst, double x, double y)
 {
 	t_spList	*tmp;
 	t_spList	*check;
