@@ -88,7 +88,7 @@ t_spList	*spListAddFront(double px, double py, t_spList *lst, double x, double y
 	tmp->x = x;
 	tmp->y = y;
 	tmp->len = sqrt(deltaX * deltaX + deltaY * deltaY);
-	tmp->a = atan2(deltaY, deltaX);
+	tmp->a = atan2(deltaY, deltaX) + M_PI;
 	if (tmp->a < 0)
 		tmp->a += _2PI;
 	tmp->next = lst;
