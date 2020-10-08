@@ -246,7 +246,7 @@ int		draw_sprites(t_mlxvar *mlx)
 			textC.y = (d.Y / size) * mlx->sprite.width;
 			while (screenC.Y < end.Y)
 			{
-				if (mlx->sprite.img_data[(int)textC.y * mlx->sprite.width + (int)textC.x])
+				if (mlx->sprite.img_data[(int)textC.y * mlx->sprite.width + (int)textC.x] && (mlx->rays[screenC.X].siz > lst->len))
 					mlx->screen.img_data[screenC.Y * mlx->screen.width + screenC.X] = mlx->sprite.img_data[(int)textC.y * mlx->sprite.width + (int)textC.x];
 				screenC.Y++;
 				textC.y += rap.y;
