@@ -97,6 +97,9 @@ t_spList	*spListAddFront(double px, double py, t_spList *lst, double x, double y
 
 void	displaySpList(t_mlxvar *mlx, t_spList *lst)
 {
+	static int i = 0;
+	i++;
+	printf("%d\n", i);
 	while (lst)
 	{
 		printf("angle: %lf\nsize: %lf\nx: %lf, y: %lf\n", lst->a - mlx->set->rot_hor, lst->len, lst->x, lst->y);
