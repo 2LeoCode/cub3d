@@ -232,7 +232,7 @@ int		draw_sprites(t_mlxvar *mlx)
 		if (a < 0)
 		{
 			if (a < -M_PI)
-				a = _2PI - (_2PI + a);
+				a += _2PI * 2;
 			else
 				a += _2PI;
 		}
