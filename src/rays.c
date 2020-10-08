@@ -197,5 +197,6 @@ int		update_rays(t_mlxvar *mlx)
 		r += (mlx->set->FOV / mlx->set->X);
 	}
 	sortSpList(&mlx->spList);
+	displaySpList(mlx->spList);
 	return (0);
 }
