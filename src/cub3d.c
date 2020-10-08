@@ -228,7 +228,7 @@ int		draw_sprites(t_mlxvar *mlx)
 	lst = mlx->spList;
 	while (lst)
 	{
-		if (mlx->set->rot_hor > M_PI)
+		if (mlx->set->rot_hor < M_PI || mlx->set->rot_hor > _3PI2)
 			a = lst->a + mlx->set->rot_hor;
 		else
 			a = lst->a - mlx->set->rot_hor;
