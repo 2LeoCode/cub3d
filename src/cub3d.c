@@ -226,8 +226,6 @@ int		draw_sprites(t_mlxvar *mlx)
 	t_point		rap;
 
 	lst = mlx->spList;
-	textCoord.x = 0;
-	textCoord.y = 0;
 	while (lst)
 	{
 		a = lst->a - mlx->set->rot_hor;
@@ -236,19 +234,17 @@ int		draw_sprites(t_mlxvar *mlx)
 		i = (int)(screenCol - (size / 2));
 		rap.x = (1 / size) * mlx->sprite.width;
 		rap.y = (1 / size) * mlx->sprite.height;
+		textCoord.x = i;
 		while (i < 0)
-		{
-			textCoord.x += rap.x;
 			i++;
-		}
+		textCoord.x = ((i - textCoord.x) / size) * mlx->sprite.width;
 		while ((i < mlx->screen.width) && (i < (int)(screenCol + (size / 2))))
 		{
 			j = (int)(mlx->screen.height / 2 - (size / 2));
+			textCoord.y = j;
 			while (j < 0)
-			{
-				textCoord.y += rap.y;
 				j++;
-			}
+			textCoord.y = ((j - textCoord.y) / size) * mlx->sprite.height;
 			while ((j < mlx->screen.height) && (j < (int)(mlx->screen.height / 2 + (size / 2))))
 			{
 				mlx->screen.img_data[j * mlx->screen.width + i] = mlx->sprite.img_data[(int)(textCoord.y * mlx->sprite.width + textCoord.x)];
