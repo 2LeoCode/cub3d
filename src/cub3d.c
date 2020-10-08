@@ -217,46 +217,44 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 int		draw_sprites(t_mlxvar *mlx)
 {
 	double		size;
-	int			screenCol;
-	t_spList	*lst;
 	double		a;
-	int			i;
-	int			j;
-	t_point		textCoord;
+	t_coord		end;
+	t_spList	*lst;
+	t_coord		screenC;
+	t_point		textC;
 	t_point		rap;
 
 	lst = mlx->spList;
 	while (lst)
 	{
 		a = lst->a - mlx->set->rot_hor;
-		screenCol = (a + (mlx->set->FOV / 2) / mlx->set->FOV) * mlx->screen.width;
 		size = (double)mlx->screen.height / (cos(a) * lst->len);
-		i = (int)(screenCol - (size / 2));
+		screenC.X = ((a + (mlx->set->FOV / 2) / mlx->set->FOV) * mlx->screen.width) - (size / 2);
+		end.X = ((screenC.X + size) < mlx->screen.width) ? (screenC.X + size) : mlx->screen.width;
+		d.X = -screenC.X * (screenC.X < 0);
+		screenC.X += d.X;
+		textC.x = (d.X / size) * mlx->sprite.width;
 		rap.x = (1 / size) * mlx->sprite.width;
 		rap.y = (1 / size) * mlx->sprite.height;
-		textCoord.x = i;
-		while (i < 0)
-			i++;
-		textCoord.x = ((i - textCoord.x) / size) * mlx->sprite.width;
-		while ((i < mlx->screen.width) && (i < (int)(screenCol + (size / 2))))
+		while (screenC.X < end.X)
 		{
-			j = (int)(mlx->screen.height / 2 - (size / 2));
-			textCoord.y = j;
-			while (j < 0)
-				j++;
-			textCoord.y = ((j - textCoord.y) / size) * mlx->sprite.height;
-			while ((j < mlx->screen.height) && (j < (int)(mlx->screen.height / 2 + (size / 2))))
+			screenC.Y = (mlx->screen.height / 2) - (size / 2);
+			end.Y = ((screenC.Y + size) < mlx->screen.height) ? (screenC.Y + size) : mlx->screen.height;
+			d.Y = -screenC.Y * (screenC.Y < 0);
+			screenC.Y += d.Y;
+			textC.y = (d.Y / size) * mlx->sprite.width;
+			while (screenC.Y < end.Y)
 			{
-				mlx->screen.img_data[j * mlx->screen.width + i] = 0;
-				textCoord.y += rap.y;
-				j++;
+				mlx->screen.img_data[screenC.Y * mlx->screen.width + screenC.X] = mlx->sprite.img_data[(int)textC.x * mlx->sprite.width + (int)textC.y];
+				screenC.Y++;
+				textC.y += rap.y;
 			}
-			textCoord.x += rap.x;
-			i++;
+			screenC.X++;
+			textC.x += rap.x;
 		}
 		lst = lst->next;
 	}
-	freeSpList(&lst);
+	freeSpList(&mlx->spList);
 	return (0);
 }
 
