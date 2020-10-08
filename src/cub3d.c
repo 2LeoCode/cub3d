@@ -290,7 +290,7 @@ int		updateanddisplay(t_mlxvar *mlxvar)
 	}
 	if (update_rays(mlxvar)
 	|| update_screen(mlxvar) || draw_sprites(mlxvar))
-		return (clear_mlx(mlxvar));
+		return (clear_mlx_err(mlxvar));
 	mlx_put_image_to_window(mlxvar->id, mlxvar->win, mlxvar->screen.img, 0, 0);
 	return (0);
 }
@@ -332,7 +332,7 @@ int		cub3D(t_set *set, int flags)
 	|| update_rays(&mlxvar) || update_screen(&mlxvar) || draw_sprites(&mlxvar))
 	{
 		clear_set(set);
-		clear_mlx(&mlxvar);
+		clear_mlx_err(&mlxvar);
 		return (ft_fputs(2, "Cub3D: Error while initializing window.\n"));
 	}
 	mlx_put_image_to_window(mlxvar.id, mlxvar.win, mlxvar.screen.img, 0, 0);
@@ -341,7 +341,7 @@ int		cub3D(t_set *set, int flags)
 	mlx_loop_hook(mlxvar.id, &updateanddisplay, &mlxvar);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &keyIsPressed, &mlxvar);
 	mlx_hook(mlxvar.win, KeyRelease, KeyReleaseMask, &keyIsReleased, &mlxvar);
+	mlx_hook(mlxvar.win, DestroyNotify, StructureNotifyMask, &clear_mlx, &mlxvar);
 	mlx_loop(mlxvar.id);
-	clear_mlx(&mlxvar);
-	return (0);
+	return (clear_mlx(&mlxvar));
 }

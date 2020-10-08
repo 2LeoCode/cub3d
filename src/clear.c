@@ -64,6 +64,12 @@ void	raylist_clear(t_sprite **lst)
 	}
 }
 
+int		clear_mlx_err(t_mlxvar *mlx)
+{
+	clear_mlx(mlx);
+	return (-1);
+}
+
 int		clear_mlx(t_mlxvar *mlx)
 {
 	if (mlx->win)
@@ -102,5 +108,5 @@ int		clear_mlx(t_mlxvar *mlx)
 	if (mlx->wallW.img_data)
 		free(mlx->wallW.img_data);
 	mlx->wallW.img_data = NULL;
-	return (-1);
+	return (0);
 }
