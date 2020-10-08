@@ -90,7 +90,7 @@ t_spList	*spListAddFront(int px, int py, t_spList *lst, double x, double y)
 	tmp->len = sqrt(deltaX * deltaX + deltaY * deltaY);
 	tmp->a = atan2(deltaY, deltaX);
 	if (tmp->a < 0)
-		tmp->a += _2PI;
+		tmp->a += PI2;
 	tmp->next = lst;
 	return (tmp);
 }
