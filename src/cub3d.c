@@ -222,28 +222,40 @@ int		draw_sprites(t_mlxvar *mlx)
 	double		a;
 	int			i;
 	int			j;
-	int			*px;
+	t_point		textCoord;
+	t_point		rap;
 
-	px = mlx->screen.img_data;
 	lst = mlx->spList;
+	textCoord.x = 0;
+	textCoord.y = 0;
 	while (lst)
 	{
 		a = lst->a - mlx->set->rot_hor;
 		screenCol = (a + (mlx->set->FOV / 2) / mlx->set->FOV) * mlx->screen.width;
 		size = (double)mlx->screen.height / (cos(a) * lst->len);
 		i = (int)(screenCol - (size / 2));
+		rap.x = (1 / size) * mlx->sprite.width;
+		rap.y = (1 / size) * mlx->sprite.height;
 		while (i < 0)
+		{
+			textCoord.x += rap.x;
 			i++;
+		}
 		while ((i < mlx->screen.width) && (i < (int)(screenCol + (size / 2))))
 		{
 			j = (int)(mlx->screen.height / 2 - (size / 2));
 			while (j < 0)
-				j++;
-			while ((j < mlx->screen.height) && (j < (int)(mlx->screen.height / 2 + (size / 2))))
 			{
-				px[j * mlx->screen.width + i] = 0;
+				textCoord.y += rap.y;
 				j++;
 			}
+			while ((j < mlx->screen.height) && (j < (int)(mlx->screen.height / 2 + (size / 2))))
+			{
+				mlx->screen.img_data[j * mlx->screen.width + i] = mlx->sprite.img_data[textCoord.y * mlx->sprite.width + textCoord.x];
+				textCoord.y += rap.y;
+				j++;
+			}
+			textCoord.x += rap.x;
 			i++;
 		}
 		lst = lst->next;
