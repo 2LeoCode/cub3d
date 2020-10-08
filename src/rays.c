@@ -102,7 +102,7 @@ void	displaySpList(t_mlxvar *mlx, t_spList *lst)
 	printf("%d\n", i);
 	while (lst)
 	{
-		printf("angle: %lf\nsize: %lf\nx: %lf, y: %lf\n", lst->a - mlx->set->rot_hor, lst->len, lst->x, lst->y);
+		printf("angle: %lf\nrot_hor: %lf\nsize: %lf\nx: %lf, y: %lf\n", lst->a, mlx->set->rot_hor, lst->len, lst->x, lst->y);
 		lst = lst->next;
 	}
 }
