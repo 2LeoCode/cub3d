@@ -55,4 +55,4 @@ C 85,55,0\n\
 11111111111111" > default.cub
 cd ..
 printf $GRN$BLD
-echo "Cub3D$NRM$GRN: Generated default map"
+echo "Cub3D$NRM$GRN: Generated default map$NRM"
