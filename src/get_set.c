@@ -56,7 +56,7 @@ int			get_set(int fd, t_set *set)
 		v.check[v.i] = 0;
 	if ((v.i = get_next_line(fd, &v.line)) < 0)
 		return (ER_READF);
-	if (v.i = getSet2(fd, &v, set))
+	if ((v.i = getSet2(fd, &v, set)))
 		return (v.i);
 	return (get_map(fd, set));
 }

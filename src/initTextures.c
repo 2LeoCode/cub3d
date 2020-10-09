@@ -82,5 +82,6 @@ t_mlxvar		initMlx(t_set *set, int flags, t_bool *save)
 	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
 	mlxvar.lastKey = -1;
 	mlxvar.isKeyPressed = 0;
+	return (mlxvar);
 }
 
