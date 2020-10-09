@@ -22,8 +22,9 @@ fi
 if [ "$(ls | grep assets)" = "" ]
 then
 	printf $BLU
-	echo "Downloading$BLD assets$NRM$BLU ...$NRM"
+	echo "Downloading$BLD default assets$NRM$BLU ...$NRM"
 	git clone https://github.com/2LeoCode/cub3dAssets.git assets > /dev/null 2>&1
+	echo "Successfully downloaded [$BLD\default assets$NRM$GRN]"
 else
 	cd assets
 	git pull > /dev/null 2>&1
