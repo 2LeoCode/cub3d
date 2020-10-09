@@ -23,8 +23,8 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 	i = 0;
 	while (i < _2PI)
 	{
-		y = py + r * sin(i);
-		x = px + r * cos(i);
+		y = py + sin(i) / 2;
+		x = px + cos(i) / 2;
 		if (mlx->set->map[(int)y][(int)x] == '1'
 		|| mlx->set->map[(int)y][(int)x] == '2')
 			return (1);
