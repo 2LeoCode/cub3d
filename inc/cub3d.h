@@ -223,11 +223,11 @@ typedef struct			s_mlxvar
 
 typedef struct			s_updateVar
 {
-	int		i;
-	int		j;
-	double	k;
-	double	size;
-	int		l;
+	int					i;
+	int					j;
+	double				k;
+	double				size;
+	int					l;
 }						t_updateVar;
 
 typedef struct			s_spriteVar
@@ -352,7 +352,7 @@ unsigned char			*getCharArray(t_mlximg *screen);
 int						init_textures(t_mlxvar *mlxvar);
 t_mlxvar				initMlx(t_set *set, int flags, t_bool *save);
 
-void					checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize);
+void					checkKeys(t_mlxvar *mlxvar, int key, t_dVar d);
 int						keyIsPressed(int key, t_mlxvar *mlxvar);
 int						keyIsReleased(int key, t_mlxvar *mlxvar);
 

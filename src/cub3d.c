@@ -53,15 +53,13 @@ int		update_screen(t_mlxvar *mlxvar)
 int		updateanddisplay(t_mlxvar *mlxvar)
 {
 	int			key;
-	double		cSize;
 	t_dVar		d;
 
 	if (!mlxvar->isKeyPressed)
 		return (0);
 	key = mlxvar->lastKey;
-	cSize = 0.6;
 	d.r = (M_PI / 180);
-	checkKeys(mlxvar, key, d, cSize);
+	checkKeys(mlxvar, key, d);
 	if (update_rays(mlxvar)
 	|| update_screen(mlxvar) || draw_sprites(mlxvar))
 		return (clear_mlx_err(mlxvar));

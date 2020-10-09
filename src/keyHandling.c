@@ -12,20 +12,17 @@
 
 #include <cub3d.h>
 
-int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
+int		isCollide(t_mlxvar *mlx, double px, double py)
 {
-	double	r;
 	double	i;
 	double	y;
 	double	x;
 
-	r = (playerSize / 2);
 	i = 0;
-	(void)r;
 	while (i < _2PI)
 	{
-		y = py + sin(i) / 2;
-		x = px + cos(i) / 2;
+		y = py + sin(i) / 3;
+		x = px + cos(i) / 3;
 		if (mlx->set->map[(int)y][(int)x] == '1'
 		|| mlx->set->map[(int)y][(int)x] == '2')
 			return (1);
@@ -34,7 +31,7 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 	return (0);
 }
 
-void	checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize)
+void	checkKeys(t_mlxvar *mlxvar, int key, t_dVar d)
 {
 	mlxvar->set->rot_hor -= (d.r - _2PI * (mlxvar->set->rot_hor - d.r < 0)) * (key == KEY_LEFT);
 	mlxvar->set->rot_hor += (d.r - _2PI * (mlxvar->set->rot_hor + d.r > _2PI)) * (key == KEY_RIGHT);
@@ -48,12 +45,12 @@ void	checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize)
 		d.x = (cos(mlxvar->set->rot_hor + PI2) / 25);
 		d.y = (sin(mlxvar->set->rot_hor + PI2) / 25);
 	}
-	if (((key == KEY_W) || (key == KEY_D)) && !isCollide(mlxvar, mlxvar->posX + d.x, mlxvar->posY + d.y, cSize))
+	if (((key == KEY_W) || (key == KEY_D)) && !isCollide(mlxvar, mlxvar->posX + d.x, mlxvar->posY + d.y))
 	{
 		mlxvar->posX += d.x;
 		mlxvar->posY += d.y;
 	}
-	if (((key == KEY_S) || (key == KEY_A)) && !isCollide(mlxvar, mlxvar->posX - d.x, mlxvar->posY - d.y, cSize))
+	if (((key == KEY_S) || (key == KEY_A)) && !isCollide(mlxvar, mlxvar->posX - d.x, mlxvar->posY - d.y))
 	{
 		mlxvar->posX -= d.x;
 		mlxvar->posY -= d.y;
