@@ -60,8 +60,6 @@ int		updateanddisplay(t_mlxvar *mlxvar)
 		return (0);
 	key = mlxvar->lastKey;
 	cSize = 0.3;
-	d.x = (cos(mlxvar->set->rot_hor) / 20);
-	d.y = (sin(mlxvar->set->rot_hor) / 20);
 	d.r = (M_PI / 180);
 	checkKeys(mlxvar, key, d, cSize);
 	if (update_rays(mlxvar)

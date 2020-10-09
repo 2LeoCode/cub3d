@@ -37,12 +37,22 @@ void	checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize)
 {
 	mlxvar->set->rot_hor -= (d.r - _2PI * (mlxvar->set->rot_hor - d.r < 0)) * (key == KEY_LEFT);
 	mlxvar->set->rot_hor += (d.r - _2PI * (mlxvar->set->rot_hor + d.r > _2PI)) * (key == KEY_RIGHT);
-	if ((key == KEY_UP) && !isCollide(mlxvar, mlxvar->posX + d.x, mlxvar->posY + d.y, cSize))
+	if ((key == KEY_S) || (key == KEY_W))
+	{
+		d.x = (cos(mlxvar->set->rot_hor) / 20);
+		d.y = (sin(mlxvar->set->rot_hor) / 20);
+	}
+	else if ((key == KEY_A) || (key == KEY_D))
+	{
+		d.x = (cos(mlxvar->set->rot_hor + PI2) / 20);
+		d.y = (sin(mlxvar->set->rot_hor + PI2) / 20);
+	}
+	if ((key == KEY_W) || (key == KEY_A) && !isCollide(mlxvar, mlxvar->posX + d.x, mlxvar->posY + d.y, cSize))
 	{
 		mlxvar->posX += d.x;
 		mlxvar->posY += d.y;
 	}
-	if ((key == KEY_DOWN) && !isCollide(mlxvar, mlxvar->posX - d.x, mlxvar->posY - d.y, cSize))
+	if ((key == KEY_S) || (key == KEY_D) && !isCollide(mlxvar, mlxvar->posX - d.x, mlxvar->posY - d.y, cSize))
 	{
 		mlxvar->posX -= d.x;
 		mlxvar->posY -= d.y;
@@ -51,7 +61,6 @@ void	checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize)
 
 int		keyIsPressed(int key, t_mlxvar *mlxvar)
 {
-	printf("%d\n", key);
 	if (key == KEY_ESC)
 		return (clear_mlx(mlxvar));
 	mlxvar->isKeyPressed = 1;
