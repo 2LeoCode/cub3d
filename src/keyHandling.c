@@ -12,6 +12,27 @@
 
 #include <cub3d.h>
 
+int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
+{
+	double	r;
+	double	i;
+	double	y;
+	double	x;
+
+	r = (playerSize / 2);
+	i = 0;
+	while (i < _2PI)
+	{
+		y = py + r * sin(i);
+		x = px + r * cos(i);
+		if (mlx->set->map[(int)y][(int)x] == '1'
+		|| mlx->set->map[(int)y][(int)x] == '2')
+			return (1);
+		i += (M_PI / 10);
+	}
+	return (0);
+}
+
 void	checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize)
 {
 	mlxvar->set->rot_hor -= (d.r - _2PI * (mlxvar->set->rot_hor - d.r < 0)) * (key == KEY_LEFT);

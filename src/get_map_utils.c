@@ -65,7 +65,7 @@ void			setSpawn(t_set *set, int i, int j, char c)
 		set->rot_hor = M_PI;
 }
 
-void			workCase(char **tmp, int i, t_bool *check, t_set *set)
+int				workCase(char **tmp, int i, t_bool *check, t_set *set)
 {
 	int j;
 
@@ -84,6 +84,7 @@ void			workCase(char **tmp, int i, t_bool *check, t_set *set)
 			setSpawn(set, i, j, tmp[i][j]);
 		}
 	}
+	return (0);
 }
 
 int				check_map(t_set *set)
@@ -91,12 +92,14 @@ int				check_map(t_set *set)
 	char	**tmp;
 	t_bool	check;
 	int		i;
+	int		ret;
 
 	check = false;
 	tmp = set->map;
 	i = -1;
 	while (tmp[++i])
-		workCase(tmp, i, &check, set);
+		if ((ret = workCase(tmp, i, &check, set)))
+			return (ret);
 	if (!check)
 	{
 		clear_set(set);

@@ -29,14 +29,6 @@ static t_bool	arg_bonus(int ac, char **av)
 	return (false);
 }
 
-static t_bool	arg_help(int ac, char **av)
-{
-	if (search_str("--help", av, ac, ALL)
-	|| search_str("-h", av, ac, ALL))
-		return (true);
-	return (false);
-}
-
 double			arg_fov(int ac, char **av)
 {
 	while (ac--)
@@ -58,7 +50,7 @@ int				main(int ac, char **av)
 	t_set	settings;
 
 	init_set(&settings);
-	if (ret = getSettings(ac, av, &settings))
+	if ((ret = getSettings(ac, av, &settings)))
 		return (error_wrong_map(ret));
 	if ((settings.FOV = arg_fov(ac - 1, av + 1)) < 0)
 		return (error_wrong_map(ER_DEFLT));

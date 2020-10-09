@@ -23,14 +23,14 @@ static t_bool	is_check(t_bool *check)
 	return (true);
 }
 
-int			getSet2(int fd, t_getSetVar *v, t_set *set)
+int				getSet2(int fd, t_getSetVar *v, t_set *set)
 {
 	while (!v->total)
 	{
 		v->i = 0;
 		while (ft_isspace(v->line[v->i]))
 			v->i++;
-		if (((v->line[v->i] == 'R') && (v->i = get_res(&line[v->i], set, v->check)))
+		if (((v->line[v->i] == 'R') && (v->i = get_res(&v->line[v->i], set, v->check)))
 		|| ((v->line[v->i] && ft_strchr("FC", v->line[v->i]))
 		&& (v->i = get_rgb(&v->line[v->i], set, v->check)))
 		|| (!ft_strchr("RFC", v->line[v->i])
@@ -73,13 +73,14 @@ int			getSettings(int ac, char **av, t_set *settings)
 		return (error_wrong_map(ER_WPATH));
 	if ((fd = open(path, O_RDONLY)) < 0)
 		return (error_wrong_map(ER_OPENF));
-	if ((ret = get_set(fd, &settings)) - 0)
+	if ((ret = get_set(fd, settings)) - 0)
 	{
-		clear_set(&settings);
+		clear_set(settings);
 		return (ret);
 	}
 	if (print_wrong(path, ac - 1, av + 1))
 		return (ER_DEFLT);
+	return (0);
 }
 
 void		init_set(t_set *set)

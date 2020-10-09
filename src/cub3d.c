@@ -34,7 +34,7 @@ int		update_screen(t_mlxvar *mlxvar)
 	while (--up.i >= 0)
 	{
 		up.size = (double)mlxvar->screen.height
-		/ (cos(mlxvar->rays[i].rot) * mlxvar->rays[i].siz);
+		/ (cos(mlxvar->rays[up.i].rot) * mlxvar->rays[up.i].siz);
 		up.j = -1;
 		while (++up.j < (int)(mlxvar->screen.height / 2))
 			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i] = mlxvar->set->C;
@@ -46,27 +46,6 @@ int		update_screen(t_mlxvar *mlxvar)
 		up.k = (up.size < mlxvar->screen.height) ? 0 : ((((up.size / 2)
 		- (mlxvar->screen.height / 2)) / up.size) * mlxvar->rays[up.i].texture->height);
 		drawCols(mlxvar, &up);
-	}
-	return (0);
-}
-
-int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
-{
-	double	r;
-	double	i;
-	double	y;
-	double	x;
-
-	r = (playerSize / 2);
-	i = 0;
-	while (i < _2PI)
-	{
-		y = py + r * sin(i);
-		x = px + r * cos(i);
-		if (mlx->set->map[(int)y][(int)x] == '1'
-		|| mlx->set->map[(int)y][(int)x] == '2')
-			return (1);
-		i += (M_PI / 10);
 	}
 	return (0);
 }

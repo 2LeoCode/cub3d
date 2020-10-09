@@ -292,6 +292,7 @@ int						clear_mlx(t_mlxvar *mlx);
 int						clear_mlx_err(t_mlxvar *mlx);
 
 int						help(int show_msg);
+t_bool					arg_help(int ac, char **av);
 
 int						cub3D(t_set *set, int flags);
 
@@ -349,7 +350,7 @@ t_bih					createBitmapInfoHeader(t_mlximg *screen);
 unsigned char			*getCharArray(t_mlximg *screen);
 
 int						init_textures(t_mlxvar *mlxvar);
-t_mlxvar				initMlx(t_set *set, int flags, t_bool &save);
+t_mlxvar				initMlx(t_set *set, int flags, t_bool *save);
 
 void					checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize);
 int						keyIsPressed(int key, t_mlxvar *mlxvar);

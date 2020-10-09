@@ -28,3 +28,11 @@ int		help(int show_msg)
 	}
 	return (0);
 }
+
+t_bool	arg_help(int ac, char **av)
+{
+	if (search_str("--help", av, ac, ALL)
+	|| search_str("-h", av, ac, ALL))
+		return (true);
+	return (false);
+}

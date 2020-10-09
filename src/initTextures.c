@@ -65,7 +65,7 @@ int				init_textures(t_mlxvar *mlxvar)
 	return (0);
 }
 
-t_mlxvar		initMlx(t_set *set, int flags, t_bool &save)
+t_mlxvar		initMlx(t_set *set, int flags, t_bool *save)
 {
 	t_mlxvar	mlxvar;
 

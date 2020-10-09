@@ -164,7 +164,7 @@ void	getTextCoord(t_rayVar *ur, t_mlxvar *mlx)
 	}
 }
 
-void	shootRayVert(t_rayVar *ur, t_mlxvar *mlx)
+int		shootRayVert(t_rayVar *ur, t_mlxvar *mlx)
 {
 	while (ur->a && (ur->a - M_PI) && (ur->b.x > 0) && (ur->b.y > 0)
 	 && (ur->b.x < mlx->set->mapX) && (ur->b.y < mlx->set->mapY)
@@ -173,15 +173,16 @@ void	shootRayVert(t_rayVar *ur, t_mlxvar *mlx)
 		if ((mlx->set->map[(int)ur->b.y][(int)ur->b.x] == '2')
 		&& !(mlx->spList = spListAddFront(mlx->posX, mlx->posY, mlx->spList,
 		(double)((int)ur->b.x + 0.5), (double)((int)ur->b.y + 0.5))))
-			return (freeSpFail(&mlx->spList));
+			return (-1);
 		ur->b.x += ur->d.x;
 		ur->b.y += ur->d.y;
 	}
 	ur->length.y = sqrt((ur->b.x - mlx->posX) * (ur->b.x - mlx->posX)
 	+ (ur->b.y - mlx->posY) * (ur->b.y - mlx->posY));
+	return (0);
 }
 
-void	shootRayHor(t_rayVar *ur, t_mlxvar *mlx)
+int		shootRayHor(t_rayVar *ur, t_mlxvar *mlx)
 {
 	while ((ur->a - PI2) && (ur->a - _3PI2) && (ur->c.x > 0) && (ur->c.y > 0)
 	&& (ur->c.x < mlx->set->mapX) && (ur->c.y < mlx->set->mapY)
@@ -190,12 +191,13 @@ void	shootRayHor(t_rayVar *ur, t_mlxvar *mlx)
 		if ((mlx->set->map[(int)ur->c.y][(int)ur->c.x] == '2')
 		&& !(mlx->spList = spListAddFront(mlx->posX, mlx->posY, mlx->spList,
 		(double)((int)ur->c.x + 0.5), (double)((int)ur->c.y + 0.5))))
-			return (freeSpFail(&mlx->spList));
+			return (-1);
 		ur->c.y += ur->d.y;
 		ur->c.x += ur->d.x;
 	}
 	ur->length.x = sqrt((ur->c.x - mlx->posX) * (ur->c.x - mlx->posX)
 	+ (ur->c.y - mlx->posY) * (ur->c.y - mlx->posY));
+	return (0);
 }
 
 int		update_rays(t_mlxvar *mlx)
@@ -210,9 +212,11 @@ int		update_rays(t_mlxvar *mlx)
 	while (++ur.i < mlx->set->X)
 	{
 		initRayVert(&ur, mlx);
-		shootRayVert(&ur, mlx);
+		if (shootRayVert(&ur, mlx))
+			return (freeSpFail(&mlx->spList));
 		initRayHor(&ur, mlx);
-		shootRayHor(&ur, mlx);
+		if (shootRayHor(&ur, mlx))
+			return (freeSpFail(&mlx->spList));
 		getTextCoord(&ur, mlx);
 		ur.r += (mlx->set->FOV / mlx->set->X);
 	}
