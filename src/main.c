@@ -12,16 +12,6 @@
 
 #include <cub3d.h>
 
-static void		init_set(t_set *set)
-{
-	set->map = NULL;
-	set->NO = NULL;
-	set->SO = NULL;
-	set->WE = NULL;
-	set->EA = NULL;
-	set->S = NULL;
-}
-
 static t_bool	arg_save(int ac, char **av)
 {
 	if (search_str("-save", av, ac, ALL)
@@ -64,25 +54,12 @@ double			arg_fov(int ac, char **av)
 
 int				main(int ac, char **av)
 {
-	char	*path;
-	int		fd;
 	int		ret;
 	t_set	settings;
 
 	init_set(&settings);
-	if ((ac < 2) || arg_help(ac - 1, av + 1))
-		return (help((ac < 2) ? H_NOARG : H_HELP));
-	if (!(path = search_str(".cub", av + 1, ac - 1, END)))
-		return (error_wrong_map(ER_WPATH));
-	if ((fd = open(path, O_RDONLY)) < 0)
-		return (error_wrong_map(ER_OPENF));
-	if ((ret = get_set(fd, &settings)) - 0)
-	{
-		clear_set(&settings);
+	if (ret = getSettings(ac, av, &settings))
 		return (error_wrong_map(ret));
-	}
-	if (print_wrong(path, ac - 1, av + 1))
-		return (-1);
 	if ((settings.FOV = arg_fov(ac - 1, av + 1)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	if (arg_save(ac - 1, av + 1))

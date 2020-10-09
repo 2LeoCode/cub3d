@@ -12,11 +12,11 @@
 
 #include <cub3d.h>
 
-void	clear_set(t_set *set)
+void		clear_set(t_set *set)
 {
 	int		i;
 
-	i = -1;	
+	i = -1;
 	if (set->NO)
 		free(set->NO);
 	set->NO = NULL;
@@ -41,7 +41,7 @@ void	clear_set(t_set *set)
 	set->map = NULL;
 }
 
-void	clear_paths(t_set *set)
+void		clear_paths(t_set *set)
 {
 	free(set->NO);
 	set->NO = NULL;
@@ -55,22 +55,34 @@ void	clear_paths(t_set *set)
 	set->S = NULL;
 }
 
-void	raylist_clear(t_spList **lst)
-{
-	while (lst && *lst)
-	{
-		free(*lst);
-		*lst = (*lst)->next;
-	}
-}
-
-int		clear_mlx_err(t_mlxvar *mlx)
+int			clear_mlx_err(t_mlxvar *mlx)
 {
 	clear_mlx(mlx);
 	return (-1);
 }
 
-int		clear_mlx(t_mlxvar *mlx)
+static int	clear_mlx2(t_mlxvar *mlx)
+{
+	if (mlx->wallE.img_data)
+		free(mlx->wallE.img_data);
+	mlx->wallE.img_data = NULL;
+	if (mlx->wallS.img)
+		mlx_destroy_image(mlx->id, mlx->wallS.img);
+	mlx->wallS.img = NULL;
+	if (mlx->wallS.img_data)
+		free(mlx->wallS.img_data);
+	mlx->wallS.img_data = NULL;
+	if (mlx->wallW.img)
+		mlx_destroy_image(mlx->id, mlx->wallW.img);
+	mlx->wallW.img = NULL;
+	if (mlx->wallW.img_data)
+		free(mlx->wallW.img_data);
+	mlx->wallW.img_data = NULL;
+	clear_set(mlx->set);
+	return (0);
+}
+
+int			clear_mlx(t_mlxvar *mlx)
 {
 	if (mlx->win)
 		mlx_destroy_window(mlx->id, mlx->win);
@@ -93,20 +105,5 @@ int		clear_mlx(t_mlxvar *mlx)
 	if (mlx->wallE.img)
 		mlx_destroy_image(mlx->id, mlx->wallE.img);
 	mlx->wallE.img = NULL;
-	if (mlx->wallE.img_data)
-		free(mlx->wallE.img_data);
-	mlx->wallE.img_data = NULL;
-	if (mlx->wallS.img)
-		mlx_destroy_image(mlx->id, mlx->wallS.img);
-	mlx->wallS.img = NULL;
-	if (mlx->wallS.img_data)
-		free(mlx->wallS.img_data);
-	mlx->wallS.img_data = NULL;
-	if (mlx->wallW.img)
-		mlx_destroy_image(mlx->id, mlx->wallW.img);
-	mlx->wallW.img = NULL;
-	if (mlx->wallW.img_data)
-		free(mlx->wallW.img_data);
-	mlx->wallW.img_data = NULL;
-	return (0);
+	return (clear_mlx2(mlx));
 }

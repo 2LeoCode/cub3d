@@ -54,3 +54,43 @@ int				get_rgb(char *line, t_set *set, t_bool *check)
 	check[((col == &set->F) ? C_F : C_C)] = true;
 	return (0);
 }
+
+
+static int	getRes2(char *line, t_set *set, t_bool *check)
+{
+	if (*line)
+		return (ER_WRRES);
+	check[C_Y] = true;
+	if ((set->X < 50) || (set->Y < 50) || (set->X > 1980) || (set->Y > 1080))
+	{
+		error_wrong_map(ER_WRRES | WARNING);
+		set->X = 800;
+		set->Y = 600;
+	}
+	return (0);
+}
+
+int			get_res(char *line, t_set *set, t_bool *check)
+{
+	if (check[C_X] || check[C_Y])
+		return (ER_DOUBL);
+	line++;
+	if (*line && !ft_isspace(*line))
+		return (ER_WRRES);
+	while (ft_isspace(*line))
+		line++;
+	set->X = ft_atoi(line);
+	check[C_X] = true;
+	while (ft_isdigit(*line))
+		line++;
+	if (*line && !ft_isspace(*line))
+		return (ER_WRRES);
+	while (ft_isspace(*line))
+		line++;
+	set->Y = ft_atoi(line);
+	while (ft_isdigit(*line))
+		line++;
+	while (ft_isspace(*line))
+		line++;
+	return (getRes2(line, set, check));
+}

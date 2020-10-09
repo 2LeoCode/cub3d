@@ -38,6 +38,30 @@ int				error_wrong_file(char *path)
 	return (-1);
 }
 
+int				errorWrongMap2(int errnum)
+{
+	if (errnum == ER_WRRGB)
+		ft_fputs(_stderr, "Wrong RGB input in map file\n\
+Use --help for more information\n");
+	else if (errnum == ER_WRMAP)
+		ft_fputs(_stderr, "Minimap in map file is not valid\n\
+Use --help for more information\n");
+	else if (errnum == ER_DEFLT)
+	{
+		ft_fputs(_stderr, strerror(errno));
+		ft_fputc(_stderr, '\n');
+	}
+	else if (errnum == ER_WPIMG)
+		ft_fputs(_stderr, "Wrong img file path in map file\n\
+Use --help for more information\n");
+	else if (errnum == ER_NOSPW)
+		ft_fputs(_stderr, "No spawn point set in map file\n\
+Use --help for more information\n");
+	else
+		ft_fputs(_stderr, "An unknown error occured\n");
+	return (-1);
+}
+
 int				error_wrong_map(int errnum)
 {
 	ft_fputs(_stderr, (is_warning(errnum) ? "Warning\n" : "Error\n"));
@@ -64,24 +88,5 @@ Use --help for more information\n");
 	else if (errnum == ER_UNKNW)
 		ft_fputs(_stderr, "Unknown parameter in map file\n\
 Use --help for more information\n");
-	else if (errnum == ER_WRRGB)
-		ft_fputs(_stderr, "Wrong RGB input in map file\n\
-Use --help for more information\n");
-	else if (errnum == ER_WRMAP)
-		ft_fputs(_stderr, "Minimap in map file is not valid\n\
-Use --help for more information\n");
-	else if (errnum == ER_DEFLT)
-	{
-		ft_fputs(_stderr, strerror(errno));
-		ft_fputc(_stderr, '\n');
-	}
-	else if (errnum == ER_WPIMG)
-		ft_fputs(_stderr, "Wrong img file path in map file\n\
-Use --help for more information\n");
-	else if (errnum == ER_NOSPW)
-		ft_fputs(_stderr, "No spawn point set in map file\n\
-Use --help for more information\n");
-	else
-		ft_fputs(_stderr, "An unknown error occured\n");
-	return (-1);
+	return (errorWrongMap2(errnum));
 }

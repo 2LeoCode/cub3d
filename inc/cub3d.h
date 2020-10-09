@@ -60,6 +60,11 @@
 #define KEY_RIGHT 65363
 #define KEY_UP 65362
 #define KEY_DOWN 65364
+#define KEY_ESC 65000
+#define KEY_W
+#define KEY_A
+#define KEY_S
+#define KEY_D
 
 # define BUFFER_GET_FILE 32
 
@@ -216,6 +221,53 @@ typedef struct			s_mlxvar
 	t_spList			*spList;
 }						t_mlxvar;
 
+typedef struct			s_updateVar
+{
+	int		i;
+	int		j;
+	double	k;
+	double	size;
+	int		l;
+}						t_updateVar;
+
+typedef struct			s_spriteVar
+{
+	double				size;
+	double				a;
+	t_coord				end;
+	t_coord				d;
+	t_spList			*lst;
+	t_coord				screenC;
+	t_point				textC;
+	t_point				rap;
+}						t_spriteVar;
+
+typedef struct			s_dVar
+{
+	double				x;
+	double				y;
+	double				r;
+}						t_dVar;
+
+typedef struct			s_getSetVar
+{
+	int					i;
+	t_bool				check[NB_PARAMS];
+	char				*line;
+	t_bool				total;
+}						t_getSetVar;
+
+typedef struct			s_rayVar
+{
+	int					i;
+	double				r;
+	double				a;
+	double				t;
+	t_point				b;
+	t_point				c;
+	t_point				length;
+	t_point				d;
+}						t_rayVar;
 
 char					*ft_strstr(char *haystack, char *needle);
 
@@ -250,6 +302,9 @@ int						get_chunks(int fd, t_set *set);
 int						get_path(char *line, t_set *set, t_bool *check);
 int						get_rgb(char *line, t_set *set, t_bool *check);
 int						get_set(int fd, t_set *set);
+int						get_res(char *line, t_set *set, t_bool *check);
+int						getSettings(int ac, char **av, t_set *settings);
+void					init_set(t_set *set);
 
 size_t					ft_strlen(char *s);
 
@@ -287,10 +342,19 @@ double					ft_dabs(double n);
 
 void					*ft_memcpy(void *d, void *s, size_t n);
 void					*ft_bzero(void *m, size_t n);
-/*
-** test
-*/
 
-# include <stdio.h>
-void					display_map(char **map);
+int						save_screen(t_mlximg *screen);
+t_bfh					createBitmapFileHeader(t_mlximg *screen);
+t_bih					createBitmapInfoHeader(t_mlximg *screen);
+unsigned char			*getCharArray(t_mlximg *screen);
+
+int						init_textures(t_mlxvar *mlxvar);
+t_mlxvar				initMlx(t_set *set, int flags, t_bool &save);
+
+void					checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize);
+int						keyIsPressed(int key, t_mlxvar *mlxvar);
+int						keyIsReleased(int key, t_mlxvar *mlxvar);
+
+int						draw_sprites(t_mlxvar *mlx);
+
 #endif

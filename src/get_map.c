@@ -68,21 +68,12 @@ static void		get_line(char **map, int index, char *line, int size)
 	map[index][i] = 0;
 }
 
-static int		get_map_from_list(t_line **lst, t_set *set)
+static int		getMapFromList2(t_line **lst, t_set *set)
 {
-	t_line		*tmp;
-	int			i;
-	int			j;
+	int		i;
+	int		j;
+	t_line	*tmp;
 
-	set->mapY = get_map_y(*lst);
-	if (!(set->map = (char**)malloc(sizeof(char*) * (set->mapY + 1))))
-		return (ER_DEFLT);
-	set->mapX = get_map_x(*lst);
-	i = -1;
-	while (++i < set->mapY)
-		if (!(set->map[i] = (char*)malloc(sizeof(char) * (set->mapX + 1))))
-			return (ER_DEFLT);
-	set->map[i] = NULL;
 	i = 0;
 	j = -1;
 	while (++j < set->mapX)
@@ -101,6 +92,36 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 		tmp = tmp->next;
 		i++;
 	}
+	return (0);
+}
+
+static int		get_map_from_list(t_line **lst, t_set *set)
+{
+	int			i;
+
+	set->mapY = get_map_y(*lst);
+	if (!(set->map = (char**)malloc(sizeof(char*) * (set->mapY + 1))))
+		return (ER_DEFLT);
+	set->mapX = get_map_x(*lst);
+	i = -1;
+	while (++i < set->mapY)
+		if (!(set->map[i] = (char*)malloc(sizeof(char) * (set->mapX + 1))))
+			return (ER_DEFLT);
+	set->map[i] = NULL;
+	return (getMapFromList2(lst, set));
+}
+
+int				getMapToList(int fd, char **line, t_line **lst)
+{
+	int		ret;
+
+	while (((ret = get_next_line(fd, line)) != -1) && is_map_wall(*line))
+		if (lst_line_addback(lst, *line))
+		{
+			get_next_line_end(fd, line);
+			lst_line_clr(lst);
+			return (ER_DEFLT);
+		}
 	return (0);
 }
 
@@ -123,13 +144,8 @@ int				get_map(int fd, t_set *set)
 		return ((!i || !is_map_wall(line)) ? ER_WRMAP : ER_DEFLT);
 	}
 	tmp = lst_line_new(line);
-	while (((i = get_next_line(fd, &line)) != -1) && is_map_wall(line))
-		if (lst_line_addback(&tmp, line))
-		{
-			get_next_line_end(fd, &line);
-			lst_line_clr(&tmp);
-			return (ER_DEFLT);
-		}
+	if (getMapToList(fd, &line))
+		return (ER_DEFLT);
 	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
 		return (0);
 	clear_set(set);

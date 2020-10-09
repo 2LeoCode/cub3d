@@ -44,14 +44,18 @@ SRC =		main.c\
 			error_2.c\
 			strdup.c\
 			lst_line.c\
-			test_functions.c\
 			str_is.c\
 			get_map.c\
 			get_map_utils.c\
 			rays.c\
 			abs.c\
 			memcpy.c\
-			bzero.c
+			bzero.c\
+			save_screen.c\
+			save_screen2.c\
+			initTextures.c\
+			keyHandling.c\
+			drawSprites.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\

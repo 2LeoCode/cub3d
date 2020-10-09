@@ -95,109 +95,126 @@ t_spList	*spListAddFront(double px, double py, t_spList *lst, double x, double y
 	return (tmp);
 }
 
-void	displaySpList(t_mlxvar *mlx, t_spList *lst)
+void	initRayVert(t_rayVar *ur, t_mlxvar *mlx)
 {
-	static int i = 0;
-	i++;
-	printf("%d\n", i);
-	while (lst)
+	ur->a = mlx->set->rot_hor + ur->r;
+	if (ur->a < 0)
+		ur->a = _2PI + ur->a;
+	if (ur->a >= _2PI)
+		ur->a = ur->a - _2PI;
+	mlx->rays[ur->i].rot = ur->r;
+	ur->t = -1 / (tan(ur->a) + (0.0001 * (!ur->a || ur->a == M_PI)));
+	if (ur->a < M_PI)
 	{
-		printf("angle: %lf\nrot_hor: %lf\nsize: %lf\nx: %lf, y: %lf\n", lst->a, mlx->set->rot_hor, lst->len, lst->x, lst->y);
-		lst = lst->next;
+		ur->b.y = (int)mlx->posY + 1;
+		ur->d.y = 1;
 	}
+	else if (!ur->a || ur->a == M_PI)
+	{
+		ur->b.y = mlx->posY;
+		ur->d.y = 0;
+	}
+	else
+	{
+		ur->b.y = (int)mlx->posY - 0.0001;
+		ur->d.y = -1;
+	}
+	ur->b.x = mlx->posX + (mlx->posY - ur->b.y) * ur->t;
+	ur->d.x = -ur->d.y * ur->t;
+}
+
+void	initRayHor(t_rayVar *ur, t_mlxvar *mlx)
+{
+	ur->t = -tan(ur->a);
+	if (ur->a < PI2 || ur->a > _3PI2)
+	{
+		ur->c.x = (int)mlx->posX + 1;
+		ur->d.x = 1;
+	}
+	else if (ur->a == PI2 || ur->a == _3PI2)
+	{
+		ur->c.x = mlx->posX;
+		ur->d.x = 0;
+	}
+	else
+	{
+		ur->c.x = (int)mlx->posX - 0.0001;
+		ur->d.x = -1;
+	}
+	ur->c.y = mlx->posY + (mlx->posX - ur->c.x) * ur->t;
+	ur->d.y = -ur->d.x * ur->t;
+}
+
+void	getTextCoord(t_rayVar *ur, t_mlxvar *mlx)
+{
+	if (ur->length.y < ur->length.x)
+	{
+		mlx->rays[ur->i].siz = ur->length.y;
+		mlx->rays[ur->i].texture = ((ur->a < M_PI) ? &mlx->wallS : &mlx->wallN);
+		mlx->rays[ur->i].col_pos = (double)(ur->b.x - (int)ur->b.x)
+		* mlx->rays[ur->i].texture->width;
+	}
+	else
+	{
+		mlx->rays[ur->i].siz = ur->length.x;
+		mlx->rays[ur->i].texture = (((ur->a > PI2) && (ur->a < _3PI2)) ?
+		&mlx->wallW : &mlx->wallE);
+		mlx->rays[ur->i].col_pos = (double)(ur->c.y - (int)ur->c.y)
+		* mlx->rays[ur->i].texture->width;
+	}
+}
+
+void	shootRayVert(t_rayVar *ur, t_mlxvar *mlx)
+{
+	while (ur->a && (ur->a - M_PI) && (ur->b.x > 0) && (ur->b.y > 0)
+	 && (ur->b.x < mlx->set->mapX) && (ur->b.y < mlx->set->mapY)
+	 && (mlx->set->map[(int)ur->b.y][(int)ur->b.x] - '1'))
+	{
+		if ((mlx->set->map[(int)ur->b.y][(int)ur->b.x] == '2')
+		&& !(mlx->spList = spListAddFront(mlx->posX, mlx->posY, mlx->spList,
+		(double)((int)ur->b.x + 0.5), (double)((int)ur->b.y + 0.5))))
+			return (freeSpFail(&mlx->spList));
+		ur->b.x += ur->d.x;
+		ur->b.y += ur->d.y;
+	}
+	ur->length.y = sqrt((ur->b.x - mlx->posX) * (ur->b.x - mlx->posX)
+	+ (ur->b.y - mlx->posY) * (ur->b.y - mlx->posY));
+}
+
+void	shootRayHor(t_rayVar *ur, t_mlxvar *mlx)
+{
+	while ((ur->a - PI2) && (ur->a - _3PI2) && (ur->c.x > 0) && (ur->c.y > 0)
+	&& (ur->c.x < mlx->set->mapX) && (ur->c.y < mlx->set->mapY)
+	&& (mlx->set->map[(int)ur->c.y][(int)ur->c.x] - '1'))
+	{
+		if ((mlx->set->map[(int)ur->c.y][(int)ur->c.x] == '2')
+		&& !(mlx->spList = spListAddFront(mlx->posX, mlx->posY, mlx->spList,
+		(double)((int)ur->c.x + 0.5), (double)((int)ur->c.y + 0.5))))
+			return (freeSpFail(&mlx->spList));
+		ur->c.y += ur->d.y;
+		ur->c.x += ur->d.x;
+	}
+	ur->length.x = sqrt((ur->c.x - mlx->posX) * (ur->c.x - mlx->posX)
+	+ (ur->c.y - mlx->posY) * (ur->c.y - mlx->posY));
 }
 
 int		update_rays(t_mlxvar *mlx)
 {
-	int			i;
-	double		r;
-	double		a;
-	double		t;
-	t_point		b;
-	t_point		c;
-	t_point		length;
-	t_point		d;
+	t_rayVar	ur;
 
 	mlx->spList = NULL;
 	if (!mlx->rays && !(mlx->rays = malloc(sizeof(t_ray) * mlx->set->X)))
 		return (-1);
-	i = -1;
-	r = -(mlx->set->FOV / 2);
-	while (++i < mlx->set->X)
+	ur.i = -1;
+	ur.r = -(mlx->set->FOV / 2);
+	while (++ur.i < mlx->set->X)
 	{
-		a = mlx->set->rot_hor + r;
-		if (a < 0)
-			a = _2PI + a;
-		if (a >= _2PI)
-			a = a - _2PI;
-		mlx->rays[i].rot = r;
-		t = -1 / (tan(a) + (0.0001 * (!a || a == M_PI)));
-		if (a < M_PI)
-		{
-			b.y = (int)mlx->posY + 1;
-			d.y = 1;
-		}
-		else if (!a || a == M_PI)
-		{
-			b.y = mlx->posY;
-			d.y = 0;
-		}
-		else
-		{
-			b.y = (int)mlx->posY - 0.0001;
-			d.y = -1;
-		}
-		b.x = mlx->posX + (mlx->posY - b.y) * t;
-		d.x = -d.y * t;
-		while (a && (a - M_PI) && (b.x > 0) && (b.y > 0) && (b.x < mlx->set->mapX) && (b.y < mlx->set->mapY) && (mlx->set->map[(int)b.y][(int)b.x] - '1'))
-		{
-			if ((mlx->set->map[(int)b.y][(int)b.x] == '2')
-			&& !(mlx->spList = spListAddFront(mlx->posX, mlx->posY, mlx->spList, (double)((int)b.x + 0.5), (double)((int)b.y + 0.5))))
-				return (freeSpFail(&mlx->spList));
-			b.x += d.x;
-			b.y += d.y;
-		}
-		length.y = sqrt((b.x - mlx->posX) * (b.x - mlx->posX) + (b.y - mlx->posY) * (b.y - mlx->posY));
-		t = -tan(a);
-		if (a < PI2 || a > _3PI2)
-		{
-			c.x = (int)mlx->posX + 1;
-			d.x = 1;
-		}
-		else if (a == PI2 || a == _3PI2)
-		{
-			c.x = mlx->posX;
-			d.x = 0;
-		}
-		else
-		{
-			c.x = (int)mlx->posX - 0.0001;
-			d.x = -1;
-		}
-		c.y = mlx->posY + (mlx->posX - c.x) * t;
-		d.y = -d.x * t;
-		while ((a - PI2) && (a - _3PI2) && (c.x > 0) && (c.y > 0) && (c.x < mlx->set->mapX) && (c.y < mlx->set->mapY) && (mlx->set->map[(int)c.y][(int)c.x] - '1'))
-		{
-			if ((mlx->set->map[(int)c.y][(int)c.x] == '2')
-			&& !(mlx->spList = spListAddFront(mlx->posX, mlx->posY, mlx->spList, (double)((int)c.x + 0.5), (double)((int)c.y + 0.5))))
-				return (freeSpFail(&mlx->spList));
-			c.y += d.y;
-			c.x += d.x;
-		}
-		length.x = sqrt((c.x - mlx->posX) * (c.x - mlx->posX) + (c.y - mlx->posY) * (c.y - mlx->posY));
-		if (length.y < length.x)
-		{
-			mlx->rays[i].siz = length.y;
-			mlx->rays[i].texture = ((a < M_PI) ? &mlx->wallS : &mlx->wallN);
-			mlx->rays[i].col_pos = (double)(b.x - (int)b.x) * mlx->rays[i].texture->width;
-		}
-		else
-		{
-			mlx->rays[i].siz = length.x;
-			mlx->rays[i].texture = (((a > PI2) && (a < _3PI2)) ? &mlx->wallW : &mlx->wallE);
-			mlx->rays[i].col_pos = (double)(c.y - (int)c.y) * mlx->rays[i].texture->width;
-		}
-		r += (mlx->set->FOV / mlx->set->X);
+		initRayVert(&ur, mlx);
+		shootRayVert(&ur, mlx);
+		initRayHor(&ur, mlx);
+		shootRayHor(&ur, mlx);
+		getTextCoord(&ur, mlx);
+		ur.r += (mlx->set->FOV / mlx->set->X);
 	}
 	sortSpList(&mlx->spList);
 	return (0);

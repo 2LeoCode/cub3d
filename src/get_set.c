@@ -23,67 +23,71 @@ static t_bool	is_check(t_bool *check)
 	return (true);
 }
 
-static int	get_res(char *line, t_set *set, t_bool *check)
+int			getSet2(int fd, t_getSetVar *v, t_set *set)
 {
-	if (check[C_X] || check[C_Y])
-		return (ER_DOUBL);
-	line++;
-	if (*line && !ft_isspace(*line))
-		return (ER_WRRES);
-	while (ft_isspace(*line))
-		line++;
-	set->X = ft_atoi(line);
-	check[C_X] = true;
-	while (ft_isdigit(*line))
-		line++;
-	if (*line && !ft_isspace(*line))
-		return (ER_WRRES);
-	while (ft_isspace(*line))
-		line++;
-	set->Y = ft_atoi(line);
-	while (ft_isdigit(*line))
-		line++;
-	while (ft_isspace(*line))
-		line++;
-	if (*line)
-		return (ER_WRRES);
-	check[C_Y] = true;
-	if ((set->X < 50) || (set->Y < 50) || (set->X > 1980) || (set->Y > 1080))
+	while (!v->total)
 	{
-		error_wrong_map(ER_WRRES | WARNING);
-		set->X = 800;
-		set->Y = 600;
+		v->i = 0;
+		while (ft_isspace(v->line[v->i]))
+			v->i++;
+		if (((v->line[v->i] == 'R') && (v->i = get_res(&line[v->i], set, v->check)))
+		|| ((v->line[v->i] && ft_strchr("FC", v->line[v->i]))
+		&& (v->i = get_rgb(&v->line[v->i], set, v->check)))
+		|| (!ft_strchr("RFC", v->line[v->i])
+		&& (v->i = get_path(&v->line[v->i], set, v->check))))
+			return (v->i);
+		free(v->line);
+		if (!(v->total = is_check(v->check))
+		&& ((v->i = get_next_line(fd, &v->line)) < 0))
+			return (ER_READF);
+		if (!v->total && !v->i)
+			return (ER_WRMAP);
 	}
 	return (0);
 }
 
 int			get_set(int fd, t_set *set)
 {
-	int		i;
-	t_bool	check[NB_PARAMS];
-	char	*line;
-	t_bool	total;
+	t_getSetVar		v;
 
-	i = -1;
-	total = false;
-	while (++i < NB_PARAMS)
-		check[i] = 0;
-	if ((i = get_next_line(fd, &line)) < 0)
+	v.i = -1;
+	v.total = false;
+	while (++v.i < NB_PARAMS)
+		v.check[v.i] = 0;
+	if ((v.i = get_next_line(fd, &v.line)) < 0)
 		return (ER_READF);
-	while (!total)
-	{
-		i = 0;
-		while (ft_isspace(line[i]))
-			i++;
-		if (((line[i] == 'R') && (i = get_res(&line[i], set, check)))
-		|| ((line[i] && ft_strchr("FC", line[i])) && (i = get_rgb(&line[i], set, check)))
-		|| (!ft_strchr("RFC", line[i]) && (i = get_path(&line[i], set, check))))
-			return (i);
-		free(line);
-		if (!(total = is_check(check)) && ((i = get_next_line(fd, &line)) < 0))
-			return (ER_READF);
-		if (!total && !i)
-			return (ER_WRMAP);
-	}
+	if (v.i = getSet2(fd, &v, set))
+		return (v.i);
 	return (get_map(fd, set));
+}
+
+int			getSettings(int ac, char **av, t_set *settings)
+{
+	int		fd;
+	int		ret;
+	char	*path;
+
+	if ((ac < 2) || arg_help(ac - 1, av + 1))
+		return (help((ac < 2) ? H_NOARG : H_HELP));
+	if (!(path = search_str(".cub", av + 1, ac - 1, END)))
+		return (error_wrong_map(ER_WPATH));
+	if ((fd = open(path, O_RDONLY)) < 0)
+		return (error_wrong_map(ER_OPENF));
+	if ((ret = get_set(fd, &settings)) - 0)
+	{
+		clear_set(&settings);
+		return (ret);
+	}
+	if (print_wrong(path, ac - 1, av + 1))
+		return (ER_DEFLT);
+}
+
+void		init_set(t_set *set)
+{
+	set->map = NULL;
+	set->NO = NULL;
+	set->SO = NULL;
+	set->WE = NULL;
+	set->EA = NULL;
+	set->S = NULL;
 }

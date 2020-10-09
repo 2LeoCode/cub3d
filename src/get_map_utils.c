@@ -51,44 +51,52 @@ static t_bool	check_case(char **map, int y, int x)
 	return (true);
 }
 
+void			setSpawn(t_set *set, int i, int j, char c)
+{
+	set->spawn.X = j;
+	set->spawn.Y = i;
+	if (c == 'N')
+		set->rot_hor = (3 * M_PI) / 2;
+	if (c == 'E')
+		set->rot_hor = 0;
+	if (c == 'S')
+		set->rot_hor = M_PI / 2;
+	if (c == 'W')
+		set->rot_hor = M_PI;
+}
+
+void			workCase(char **tmp, int i, t_bool *check, t_set *set)
+{
+	int j;
+
+	j = -1;
+	while (tmp[i][++j])
+	{
+		if (!ft_strchr("NWSE012 ", tmp[i][j])
+		|| ((tmp[i][j] == '0') && !check_case(tmp, i, j)))
+		{
+			clear_set(set);
+			return (ER_WRMAP);
+		}
+		else if (ft_strchr("NWSE", tmp[i][j]))
+		{
+			*check = true;
+			setSpawn(set, i, j, tmp[i][j]);
+		}
+	}
+}
+
 int				check_map(t_set *set)
 {
 	char	**tmp;
 	t_bool	check;
 	int		i;
-	int		j;
 
-	display_map(set->map);
 	check = false;
 	tmp = set->map;
 	i = -1;
 	while (tmp[++i])
-	{
-		j = -1;
-		while (tmp[i][++j])
-		{
-			if (!ft_strchr("NWSE012 ", tmp[i][j])
-			|| ((tmp[i][j] == '0') && !check_case(tmp, i, j)))
-			{
-				clear_set(set);
-				return (ER_WRMAP);
-			}
-			else if (ft_strchr("NWSE", tmp[i][j]))
-			{
-				check = true;
-				set->spawn.X = j;
-				set->spawn.Y = i;
-				if (tmp[i][j] == 'N')
-					set->rot_hor = (3 * M_PI) / 2;
-				if (tmp[i][j] == 'E')
-					set->rot_hor = 0;
-				if (tmp[i][j] == 'S')
-					set->rot_hor = M_PI / 2;
-				if (tmp[i][j] == 'W')
-					set->rot_hor = M_PI;
-			}
-		}
-	}
+		workCase(tmp, i, &check, set);
 	if (!check)
 	{
 		clear_set(set);
