@@ -21,6 +21,7 @@ int		isCollide(t_mlxvar *mlx, double px, double py, double playerSize)
 
 	r = (playerSize / 2);
 	i = 0;
+	(void)r;
 	while (i < _2PI)
 	{
 		y = py + sin(i) / 2;
