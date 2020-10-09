@@ -21,8 +21,8 @@ int		isCollide(t_mlxvar *mlx, double px, double py)
 	i = 0;
 	while (i < _2PI)
 	{
-		y = py + sin(i) / 3;
-		x = px + cos(i) / 3;
+		y = py + sin(i) / 4;
+		x = px + cos(i) / 4;
 		if (mlx->set->map[(int)y][(int)x] == '1'
 		|| mlx->set->map[(int)y][(int)x] == '2')
 			return (1);
