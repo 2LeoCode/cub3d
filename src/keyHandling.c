@@ -39,13 +39,13 @@ void	checkKeys(t_mlxvar *mlxvar, int key, t_dVar d, int cSize)
 	mlxvar->set->rot_hor += (d.r - _2PI * (mlxvar->set->rot_hor + d.r > _2PI)) * (key == KEY_RIGHT);
 	if ((key == KEY_S) || (key == KEY_W))
 	{
-		d.x = (cos(mlxvar->set->rot_hor) / 20);
-		d.y = (sin(mlxvar->set->rot_hor) / 20);
+		d.x = (cos(mlxvar->set->rot_hor) / 25);
+		d.y = (sin(mlxvar->set->rot_hor) / 25);
 	}
 	else if ((key == KEY_A) || (key == KEY_D))
 	{
-		d.x = (cos(mlxvar->set->rot_hor + PI2) / 20);
-		d.y = (sin(mlxvar->set->rot_hor + PI2) / 20);
+		d.x = (cos(mlxvar->set->rot_hor + PI2) / 25);
+		d.y = (sin(mlxvar->set->rot_hor + PI2) / 25);
 	}
 	if (((key == KEY_W) || (key == KEY_D)) && !isCollide(mlxvar, mlxvar->posX + d.x, mlxvar->posY + d.y, cSize))
 	{
