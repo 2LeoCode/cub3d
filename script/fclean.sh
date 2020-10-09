@@ -2,7 +2,7 @@
 
 OS=$(uname)
 
-if [ $OS = "Darwin" ]
+if [ "$OS" = "Darwin" ]
 then
 	GRN='\x1b[32m'
 	RED='\x1b[31m'
