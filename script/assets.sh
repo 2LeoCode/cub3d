@@ -18,4 +18,3 @@ if [ "$(ls | grep screenshots)" = "" ]
 then
 	mkdir screenshots
 fi
-
