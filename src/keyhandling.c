@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:40:43 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:32:50 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:33:49 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,18 @@ void	checkkeys(t_mlxvar *mlxvar, int key, t_dvar d)
 	}
 	else if ((key == KEY_A) || (key == KEY_D))
 	{
-		printf("LOL\n");
 		d.x = (cos(mlxvar->set->rot_hor + PI2) / 25);
 		d.y = (sin(mlxvar->set->rot_hor + PI2) / 25);
 	}
 	if (keycond1(mlxvar, key, d))
 	{
+		printf("LOL1\n");
 		mlxvar->posx += d.x;
 		mlxvar->posy += d.y;
 	}
 	if (keycond2(mlxvar, key, d))
 	{
+		printf("LOL2\n");
 		mlxvar->posx -= d.x;
 		mlxvar->posy -= d.y;
 	}
