@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 14:06:54 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 14:40:20 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:58:57 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ char	*get_file(char *path)
 	int		fd;
 	char	*tmp;
 
-	if (((fd = open(path, O_RDONLY)) < 0) || ((len = file_size(path)) < 0)
-	|| !(tmp = (char*)malloc(sizeof(char) * (len + 1))))
+	fd = open(path, O_RDONLY);
+	if ((fd < 0) || ((len = file_size(path)) < 0)
+|| !(tmp = (char*)malloc(sizeof(char) * (len + 1))))
 		return (error_s(errno));
 	read(fd, tmp, len);
 	close(fd);

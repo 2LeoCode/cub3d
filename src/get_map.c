@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 22:39:21 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 14:42:41 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:05:01 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,49 +68,6 @@ static void		get_line(char **map, int index, char *line, int size)
 	map[index][i] = 0;
 }
 
-static int		getmapfromlist2(t_line **lst, t_set *set)
-{
-	int		i;
-	int		j;
-	t_line	*tmp;
-
-	i = 0;
-	j = -1;
-	while (++j < set->mapx)
-		set->map[i][j] = ' ';
-	set->map[i][j] = 0;
-	i += (set->mapy - 1);
-	j = -1;
-	while (++j < set->mapx)
-		set->map[i][j] = ' ';
-	set->map[i][j] = 0;
-	tmp = *lst;
-	i = 1;
-	while (tmp)
-	{
-		get_line(set->map, i, tmp->line, set->mapx);
-		tmp = tmp->next;
-		i++;
-	}
-	return (0);
-}
-
-static int		get_map_from_list(t_line **lst, t_set *set)
-{
-	int			i;
-
-	set->mapy = get_map_y(*lst);
-	if (!(set->map = (char**)malloc(sizeof(char*) * (set->mapy + 1))))
-		return (ER_DEFLT);
-	set->mapx = get_map_x(*lst);
-	i = -1;
-	while (++i < set->mapy)
-		if (!(set->map[i] = (char*)malloc(sizeof(char) * (set->mapx + 1))))
-			return (ER_DEFLT);
-	set->map[i] = NULL;
-	return (getmapfromlist2(lst, set));
-}
-
 int				getmaptolist(int fd, char **line, t_line **lst)
 {
 	int		ret;
@@ -146,7 +103,8 @@ int				get_map(int fd, t_set *set)
 	tmp = lst_line_new(line);
 	if (getmaptolist(fd, &line, &tmp))
 		return (ER_DEFLT);
-	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
+	if (!(i = get_map_from_list(&tmp, set))
+&& !(j = check_map(set)))
 		return (0);
 	clear_set(set);
 	lst_line_clr(&tmp);

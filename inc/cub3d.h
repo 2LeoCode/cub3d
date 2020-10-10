@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 16:01:49 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:30:46 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:02:29 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +307,8 @@ int						get_res(char *line, t_set *set, t_bool *check);
 int						getsettings(int ac, char **av, t_set *settings);
 void					init_set(t_set *set);
 
+int						get_map_from_list(t_line **lst, t_set *set);
+
 size_t					ft_strlen(char *s);
 
 t_bool					str_isspace(char *s);
@@ -337,7 +339,8 @@ int						check_map(t_set *set);
 int						get_map(int fd, t_set *set);
 
 int						update_rays(t_mlxvar *mlxvar);
-void					freesplist(t_splist **lst);
+void					initrayvert(t_rayvar *ur, t_mlxvar *mlx);
+void					initrayhor(t_rayvar *ur, t_mlxvar *mlx);
 
 void					*ft_memcpy(void *d, void *s, size_t n);
 void					*ft_bzero(void *m, size_t n);
@@ -357,5 +360,12 @@ int						keycond1(t_mlxvar *mlxvar, int key, t_dvar d);
 int						keycond2(t_mlxvar *mlxvar, int key, t_dvar d);
 
 int						draw_sprites(t_mlxvar *mlx);
+void					splistswap(t_splist *a, t_splist *b);
+void					sortsplist(t_splist **lst);
+void					freesplist(t_splist **lst);
+int						freespfail(t_splist **lst);
+t_splist				*splistaddfront(double px, double py, t_splist *lst,
+double x, double y);
+
 
 #endif

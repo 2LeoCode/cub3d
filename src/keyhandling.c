@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:40:43 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:35:24 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:40:43 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 void	checkkeys(t_mlxvar *mlxvar, int key, t_dvar d)
 {
 	mlxvar->set->rot_hor -= (d.r - _2PI * (mlxvar->set->rot_hor - d.r < 0)
-	) * (key == KEY_LEFT);
+) * (key == KEY_LEFT);
 	mlxvar->set->rot_hor += (d.r - _2PI * (mlxvar->set->rot_hor + d.r > _2PI)
-	) * (key == KEY_RIGHT);
+) * (key == KEY_RIGHT);
 	if ((key == KEY_S) || (key == KEY_W))
 	{
 		d.x = (cos(mlxvar->set->rot_hor) / 25);

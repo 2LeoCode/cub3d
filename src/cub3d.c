@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:22:47 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 21:57:28 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:06:25 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	drawcols(t_mlxvar *mlxvar, t_updatevar *up)
 	while (++up->j < (((int)up->size > mlxvar->screen.height) ?
 	mlxvar->screen.height : (int)up->size))
 	{
-		mlxvar->screen.img_data[(up->l + up->j) * mlxvar->screen.width + up->i]
-		= mlxvar->rays[up->i].texture->img_data
-		[(int)up->k * mlxvar->rays[up->i].texture->width
-		+ mlxvar->rays[up->i].col_pos];
+		mlxvar->screen.img_data[(up->l + up->j) * mlxvar->screen.width + up->i
+] = mlxvar->rays[up->i].texture->img_data
+[(int)up->k * mlxvar->rays[up->i].texture->width
++ mlxvar->rays[up->i].col_pos];
 		up->k += mlxvar->rays[up->i].texture->height / up->size;
 	}
 }
@@ -28,7 +28,7 @@ void	drawcols(t_mlxvar *mlxvar, t_updatevar *up)
 int		update_screen(t_mlxvar *mlxvar)
 {
 	t_updatevar		up;
-	
+
 	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
 		return (clear_mlx(mlxvar));
 	up.i = mlxvar->screen.width;
@@ -39,16 +39,16 @@ int		update_screen(t_mlxvar *mlxvar)
 		up.j = -1;
 		while (++up.j < (int)(mlxvar->screen.height / 2))
 			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i
-			] = mlxvar->set->c;
+] = mlxvar->set->c;
 		while (++up.j < mlxvar->screen.height)
 			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i
-			] = mlxvar->set->f;
+] = mlxvar->set->f;
 		up.j = -1;
 		up.l = ((up.size > mlxvar->screen.height) ? 0 : (
 		(int)(mlxvar->screen.height / 2) - (up.size / 2)));
 		up.k = (up.size < mlxvar->screen.height) ? 0 : ((((up.size / 2
-		) - (mlxvar->screen.height / 2)) / up.size
-		) * mlxvar->rays[up.i].texture->height);
+) - (mlxvar->screen.height / 2)) / up.size
+) * mlxvar->rays[up.i].texture->height);
 		drawcols(mlxvar, &up);
 	}
 	return (0);

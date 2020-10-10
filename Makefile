@@ -6,7 +6,7 @@
 #    By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/12 12:30:52 by lsuardi           #+#    #+#              #
-#    Updated: 2020/10/10 15:30:25 by lsuardi          ###   ########.fr        #
+#    Updated: 2020/10/10 23:03:47 by lsuardi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,11 @@ SRC =		main.c\
 			lst_line.c\
 			str_is.c\
 			get_map.c\
+			get_map_from_list.c\
 			get_map_utils.c\
 			rays.c\
+			rays2.c\
+			splist.c\
 			memcpy.c\
 			bzero.c\
 			save_screen.c\

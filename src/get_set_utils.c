@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 18:24:32 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:15:34 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:52:40 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ int				get_rgb(char *line, t_set *set, t_bool *check)
 	return (0);
 }
 
-
-static int	getres2(char *line, t_set *set, t_bool *check)
+static int		getres2(char *line, t_set *set, t_bool *check)
 {
 	if (*line)
 		return (ER_WRRES);
@@ -70,7 +69,7 @@ static int	getres2(char *line, t_set *set, t_bool *check)
 	return (0);
 }
 
-int			get_res(char *line, t_set *set, t_bool *check)
+int				get_res(char *line, t_set *set, t_bool *check)
 {
 	if (check[C_X] || check[C_Y])
 		return (ER_DOUBL);

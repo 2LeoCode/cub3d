@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:30:36 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 15:18:48 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:57:56 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 unsigned char	*getchararray(t_mlximg *screen)
 {
 	unsigned char	*img;
-	int 			size;
+	int				size;
 	int				i;
 
 	size = screen->width * screen->height;

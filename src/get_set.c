@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:53:38 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:15:17 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:41:05 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int				getset2(int fd, t_getsetvar *v, t_set *set)
 	return (0);
 }
 
-int			get_set(int fd, t_set *set)
+int				get_set(int fd, t_set *set)
 {
 	t_getsetvar		v;
 
@@ -61,7 +61,7 @@ int			get_set(int fd, t_set *set)
 	return (get_map(fd, set));
 }
 
-int			getsettings(int ac, char **av, t_set *settings)
+int				getsettings(int ac, char **av, t_set *settings)
 {
 	int		fd;
 	int		ret;

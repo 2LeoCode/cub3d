@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/20 23:22:59 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:07:32 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:00:27 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_bool			is_map_wall(char *line)
 	}
 	return (true);
 }
-
 
 static t_bool	check_case(char **map, int y, int x)
 {
