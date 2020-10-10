@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 16:01:49 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:13:23 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:18:39 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -367,7 +367,7 @@ void					splistswap(t_splist *a, t_splist *b);
 void					sortsplist(t_splist **lst);
 void					freesplist(t_splist **lst);
 int						freespfail(t_splist **lst);
-t_splist				*splistaddfront(double px, double py, t_splist *lst,
+t_splist				*splistaddfront(t_mlxvar *mlx, t_splist *lst,
 double x, double y);
 
 

@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 22:42:41 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:49:01 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:18:23 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			freespfail(t_splist **lst)
 	return (-1);
 }
 
-t_splist	*splistaddfront(double px, double py, t_splist *lst, double x,
+t_splist	*splistaddfront(t_mlxvar *mlx, t_splist *lst, double x,
 double y)
 {
 	t_splist	*tmp;
@@ -75,8 +75,8 @@ double y)
 	double		deltax;
 	double		deltay;
 
-	deltax = x - px;
-	deltay = y - py;
+	deltax = x - mlx->posx;
+	deltay = y - mlx->posy;
 	check = lst;
 	while (check)
 	{
