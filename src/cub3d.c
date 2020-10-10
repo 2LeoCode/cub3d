@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:22:47 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 15:20:41 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 21:57:28 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,21 @@ int		update_screen(t_mlxvar *mlxvar)
 	up.i = mlxvar->screen.width;
 	while (--up.i >= 0)
 	{
-		up.size = (double)mlxvar->screen.height
-		/ (cos(mlxvar->rays[up.i].rot) * mlxvar->rays[up.i].siz);
+		up.size = (double)mlxvar->screen.height / (
+		cos(mlxvar->rays[up.i].rot) * mlxvar->rays[up.i].siz);
 		up.j = -1;
 		while (++up.j < (int)(mlxvar->screen.height / 2))
-			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i]
-			= mlxvar->set->c;
+			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i
+			] = mlxvar->set->c;
 		while (++up.j < mlxvar->screen.height)
-			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i]
-			= mlxvar->set->f;
+			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i
+			] = mlxvar->set->f;
 		up.j = -1;
-		up.l = ((up.size > mlxvar->screen.height) ?
-		0 : ((int)(mlxvar->screen.height / 2) - (up.size / 2)));
-		up.k = (up.size < mlxvar->screen.height) ? 0 : ((((up.size / 2)
-		- (mlxvar->screen.height / 2)) / up.size)
-		* mlxvar->rays[up.i].texture->height);
+		up.l = ((up.size > mlxvar->screen.height) ? 0 : (
+		(int)(mlxvar->screen.height / 2) - (up.size / 2)));
+		up.k = (up.size < mlxvar->screen.height) ? 0 : ((((up.size / 2
+		) - (mlxvar->screen.height / 2)) / up.size
+		) * mlxvar->rays[up.i].texture->height);
 		drawcols(mlxvar, &up);
 	}
 	return (0);
@@ -62,7 +62,7 @@ int		updateanddisplay(t_mlxvar *mlxvar)
 	if (!mlxvar->iskeypressed)
 		return (0);
 	key = mlxvar->lastkey;
-	d.r = (m_pi / 180);
+	d.r = (M_PI / 180);
 	checkkeys(mlxvar, key, d);
 	if (update_rays(mlxvar)
 	|| update_screen(mlxvar) || draw_sprites(mlxvar))

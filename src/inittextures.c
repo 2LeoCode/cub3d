@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:38:57 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 15:24:16 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:09:46 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int				init_textures(t_mlxvar *mlxvar)
 	mlxvar->screen.img = NULL;
 	mlxvar->walln.img_data = NULL;
 	mlxvar->rays = NULL;
-	mlxvar->screen.img
-	= mlx_new_image(mlxvar->id, mlxvar->set->x, mlxvar->set->y);
+	mlxvar->screen.img = mlx_new_image(
+	mlxvar->id, mlxvar->set->x, mlxvar->set->y);
 	alloctextures(mlxvar);
 	if (!mlxvar->walln.img || !mlxvar->walln.img_data || !mlxvar->walle.img
 	|| !mlxvar->walle.img_data || !mlxvar->walls.img || !mlxvar->walls.img_data
@@ -72,7 +72,7 @@ t_mlxvar		initmlx(t_set *set, int flags, t_bool *save)
 	t_mlxvar	mlxvar;
 
 	*save = false;
-	if ((flags == SAVE) || (flags == (SAVE | BONUS))
+	if ((flags == SAVE) || (flags == (SAVE | BONUS)))
 		*save = true;
 	mlxvar.set = set;
 	mlxvar.id = NULL;

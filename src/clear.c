@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 22:43:31 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 21:54:14 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:07:04 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	clear_mlx2(t_mlxvar *mlx)
 		free(mlx->wallw.img_data);
 	mlx->wallw.img_data = NULL;
 	clear_set(mlx->set);
-	exit(exit_success);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 21:54:36 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 15:14:13 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 21:55:40 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ int				main(int ac, char **av)
 	init_set(&settings);
 	if ((ret = getsettings(ac, av, &settings)))
 		return (error_wrong_map(ret));
-	if ((settings.FOV = arg_fov(ac - 1, av + 1)) < 0)
+	if ((settings.fov = arg_fov(ac - 1, av + 1)) < 0)
 		return (error_wrong_map(ER_DEFLT));
 	if (arg_save(ac - 1, av + 1))
 	{
 		if (arg_bonus(ac - 1, av + 1))
-			return (cub3D(&settings, SAVE | BONUS));
-		return (cub3D(&settings, SAVE));
+			return (cub3d(&settings, SAVE | BONUS));
+		return (cub3d(&settings, SAVE));
 	}
 	if (arg_bonus(ac - 1, av + 1))
-		return (cub3D(&settings, BONUS));
-	return (cub3D(&settings, NONE));
+		return (cub3d(&settings, BONUS));
+	return (cub3d(&settings, NONE));
 }

@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:43:34 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 15:21:18 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:11:51 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,19 @@ static void		drawcurrentsprite(t_mlxvar *mlx, t_spritevar *sv)
 	while (sv->screenc.x < sv->end.x)
 	{
 		sv->screenc.x = (mlx->screen.height / 2) - (sv->size / 2);
-		sv->end.x = (((sv->screenx.x + sv->size) < mlx->screen.height) ?
+		sv->end.x = (((sv->screenc.x + sv->size) < mlx->screen.height) ?
 		(sv->screenx.x + sv->size) : mlx->screen.height);
 		sv->d.y = -sv->screenc.y * (sv->screenc.y < 0);
 		sv->screenc.y += sv->d.y;
 		sv->textc.y = (sv->d.y / sv->size) * mlx->sprite.width;
 		while (sv->screenc.y < sv->end.y)
 		{
-			if (mlx->sprite.img_data[(int)sv->textc.y * mlx->sprite.width
-			+ (int)sv->textc.x] && (mlx->rays[sv->screenc.x].siz
-			> sv->lst->len))
-				mlx->screen.img_data[sv->screenc.y * mlx->screen.width
-				+ sv->screenc.x] = mlx->sprite.img_data
+			if (mlx->sprite.img_data[(int)sv->textc.y * mlx->sprite.width + (
+			int)sv->textc.x] && (mlx->rays[sv->screenc.x
+			].siz > sv->lst->len))
+				mlx->screen.img_data
+				[sv->screenc.y * mlx->screen.width + sv->screenc.x
+				] = mlx->sprite.img_data
 				[(int)sv->textc.y * mlx->sprite.width + (int)sv->textc.x];
 			sv->screenc.y++;
 			sv->textc.y += sv->rap.y;
@@ -51,8 +52,8 @@ int				draw_sprites(t_mlxvar *mlx)
 		if (sv.a > _3PI2)
 			sv.a -= _2PI;
 		sv.size = (double)mlx->screen.height / (cos(sv.a) * sv.lst->len);
-		sv.screenc.x = ((sv.a + (mlx->set->fov / 2) / mlx->set->fov)
-		* mlx->screen.width) - (sv.size / 2);
+		sv.screenc.x = ((sv.a + (mlx->set->fov / 2) / mlx->set->fov
+		) * mlx->screen.width) - (sv.size / 2);
 		sv.end.x = (((sv.screenc.x + sv.size) < mlx->screen.width) ?
 		(sv.screenc.x + sv.size) : mlx->screen.width);
 		sv.d.x = -sv.screenc.x * (sv.screenc.x < 0);

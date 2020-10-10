@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:30:08 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 15:18:17 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:08:33 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char		*getfilename(char *basename, char *ext)
 	ft_memcpy(filename, basename, blen);
 	ft_memcpy(filename + blen, "00.", 3);
 	ft_memcpy(filename + blen + 3, ext, elen + 1);
-	while ((fdtest = open(filename, o_rdonly)) > 0)
+	while ((fdtest = open(filename, O_RDONLY)) > 0)
 	{
 		close(fdtest);
 		updatename(filename, blen);

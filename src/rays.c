@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 21:56:43 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 15:30:57 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:08:11 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,22 +152,22 @@ void	gettextcoord(t_rayvar *ur, t_mlxvar *mlx)
 	{
 		mlx->rays[ur->i].siz = ur->length.y;
 		mlx->rays[ur->i].texture = ((ur->a < M_PI) ? &mlx->walls : &mlx->walln);
-		mlx->rays[ur->i].col_pos = (double)(ur->b.x - (int)ur->b.x)
-		* mlx->rays[ur->i].texture->width;
+		mlx->rays[ur->i].col_pos = (double)(ur->b.x - (int)ur->b.x
+		) * mlx->rays[ur->i].texture->width;
 	}
 	else
 	{
 		mlx->rays[ur->i].siz = ur->length.x;
 		mlx->rays[ur->i].texture = (((ur->a > PI2) && (ur->a < _3PI2)) ?
 		&mlx->wallw : &mlx->walle);
-		mlx->rays[ur->i].col_pos = (double)(ur->c.y - (int)ur->c.y)
-		* mlx->rays[ur->i].texture->width;
+		mlx->rays[ur->i].col_pos = (double)(ur->c.y - (int)ur->c.y
+		) * mlx->rays[ur->i].texture->width;
 	}
 }
 
 int		shootrayvert(t_rayvar *ur, t_mlxvar *mlx)
 {
-	while (ur->a && (ur->a - m_pi) && (ur->b.x > 0) && (ur->b.y > 0)
+	while (ur->a && (ur->a - M_PI) && (ur->b.x > 0) && (ur->b.y > 0)
 	 && (ur->b.x < mlx->set->mapx) && (ur->b.y < mlx->set->mapy)
 	 && (mlx->set->map[(int)ur->b.y][(int)ur->b.x] - '1'))
 	{
@@ -178,8 +178,8 @@ int		shootrayvert(t_rayvar *ur, t_mlxvar *mlx)
 		ur->b.x += ur->d.x;
 		ur->b.y += ur->d.y;
 	}
-	ur->length.y = sqrt((ur->b.x - mlx->posx) * (ur->b.x - mlx->posx)
-	+ (ur->b.y - mlx->posy) * (ur->b.y - mlx->posy));
+	ur->length.y = sqrt((ur->b.x - mlx->posx) * (ur->b.x - mlx->posx
+	) + (ur->b.y - mlx->posy) * (ur->b.y - mlx->posy));
 	return (0);
 }
 
@@ -196,8 +196,8 @@ int		shootrayhor(t_rayvar *ur, t_mlxvar *mlx)
 		ur->c.y += ur->d.y;
 		ur->c.x += ur->d.x;
 	}
-	ur->length.x = sqrt((ur->c.x - mlx->posx) * (ur->c.x - mlx->posx)
-	+ (ur->c.y - mlx->posy) * (ur->c.y - mlx->posy));
+	ur->length.x = sqrt((ur->c.x - mlx->posx) * (ur->c.x - mlx->posx
+	) + (ur->c.y - mlx->posy) * (ur->c.y - mlx->posy));
 	return (0);
 }
 
