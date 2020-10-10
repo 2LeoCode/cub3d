@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 16:01:49 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:25:48 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:30:46 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,17 +230,17 @@ typedef struct			s_updatevar
 	int					l;
 }						t_updatevar;
 
-typedef struct			s_spriteVar
+typedef struct			s_spritevar
 {
 	double				size;
 	double				a;
 	t_coord				end;
 	t_coord				d;
 	t_splist			*lst;
-	t_coord				screenC;
-	t_point				textC;
+	t_coord				screenc;
+	t_point				textc;
 	t_point				rap;
-}						t_spriteVar;
+}						t_spritevar;
 
 typedef struct			s_dvar
 {
