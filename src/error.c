@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 22:36:00 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 14:40:01 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:14:39 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ use --help for more information\n");
 int				error_wrong_map(int errnum)
 {
 	ft_fputs(_stderr, (is_warning(errnum) ? "Warning\n" : "Error\n"));
-	ft_fputs(_stderr, "cub3d: ");
+	ft_fputs(_stderr, "Cub3d: ");
 	if (errnum == ER_WPATH)
 		ft_fputs(_stderr, "No input file or wrong file format \
 (has to be .cub)\nUsage: ./cub3d [--save] [--bonus] [path_to_map.cub]\n");
@@ -78,9 +78,9 @@ Use --help for more information\n");
 	else if (errnum == ER_READF)
 		ft_fputs(_stderr, "Failed to read map file\n");
 	else if (errnum == ER_DOUBL)
-		ft_fputs(_stderr, "a parameter is declared 2 times in map file\n");
+		ft_fputs(_stderr, "A parameter is declared 2 times in map file\n");
 	else if (errnum == ER_WRRES)
-		ft_fputs(_stderr, "wrong resolution\n\
+		ft_fputs(_stderr, "Wrong resolution\n\
 Use --help for more information\n");
 	else if (errnum == (ER_WRRES | WARNING))
 		ft_fputs(_stderr, "Too low/high resolution (must be between \

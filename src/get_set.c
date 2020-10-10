@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:53:38 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 15:22:27 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:15:17 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int				getset2(int fd, t_getsetvar *v, t_set *set)
 		v->i = 0;
 		while (ft_isspace(v->line[v->i]))
 			v->i++;
-		if (((v->line[v->i] == 'r') && (v->i = get_res(&v->line[v->i],
-		set, v->check))) || ((v->line[v->i] && ft_strchr("fc", v->line[v->i]))
+		if (((v->line[v->i] == 'R') && (v->i = get_res(&v->line[v->i],
+		set, v->check))) || ((v->line[v->i] && ft_strchr("FC", v->line[v->i]))
 		&& (v->i = get_rgb(&v->line[v->i], set, v->check)))
-		|| (!ft_strchr("rfc", v->line[v->i])
+		|| (!ft_strchr("RFC", v->line[v->i])
 		&& (v->i = get_path(&v->line[v->i], set, v->check))))
 			return (v->i);
 		free(v->line);

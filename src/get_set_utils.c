@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 18:24:32 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:06:34 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:15:34 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int				get_rgb(char *line, t_set *set, t_bool *check)
 	t_rgb	tmp;
 	int		*col;
 
-	if ((*line == 'f' && check[C_F]) || (*line == 'c' && check[C_C]))
+	if ((*line == 'F' && check[C_F]) || (*line == 'C' && check[C_C]))
 		return (ER_DOUBL);
-	if (*line == 'f')
+	if (*line == 'F')
 		col = &set->f;
-	else if (*line == 'c')
+	else if (*line == 'C')
 		col = &set->c;
 	line++;
 	if (!ft_isspace(*line))
