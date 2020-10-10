@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:43:34 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:19:32 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:20:37 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,15 @@ static void		drawcurrentsprite(t_mlxvar *mlx, t_spritevar *sv)
 		sv->d.y = -sv->screenc.y * (sv->screenc.y < 0);
 		sv->screenc.y += sv->d.y;
 		sv->textc.y = (sv->d.y / sv->size) * mlx->sprite.width;
+		printf("OK\n");
 		while (sv->screenc.y < sv->end.y)
 		{
-			if (mlx->sprite.img_data[(int)sv->textc.y * mlx->sprite.width + (int)sv->textc.x] && (mlx->rays[sv->screenc.x].siz > sv->lst->len))
+			if (mlx->sprite.img_data[(int)sv->textc.y * mlx->sprite.width + (
+			int)sv->textc.x] && (mlx->rays[sv->screenc.x
+			].siz > sv->lst->len))
 				mlx->screen.img_data
-				[sv->screenc.y * mlx->screen.width + sv->screenc.x] = mlx->sprite.img_data
+				[sv->screenc.y * mlx->screen.width + sv->screenc.x
+				] = mlx->sprite.img_data
 				[(int)sv->textc.y * mlx->sprite.width + (int)sv->textc.x];
 			sv->screenc.y++;
 			sv->textc.y += sv->rap.y;
