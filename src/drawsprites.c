@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:43:34 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:26:00 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:27:00 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 static void		drawCurrentSprite(t_mlxvar *mlx, t_spriteVar *sv)
 {
-	while (sv->screenC.X < sv->end.X)
+	while (sv->screenC.x < sv->end.x)
 	{
-		sv->screenC.Y = (mlx->screen.height / 2) - (sv->size / 2);
-		sv->end.Y = (((sv->screenC.Y + sv->size) < mlx->screen.height) ?
-		(sv->screenC.Y + sv->size) : mlx->screen.height);
-		sv->d.Y = -sv->screenC.Y * (sv->screenC.Y < 0);
-		sv->screenC.Y += sv->d.Y;
-		sv->textC.y = (sv->d.Y / sv->size) * mlx->sprite.width;
-		while (sv->screenC.Y < sv->end.Y)
+		sv->screenC.y = (mlx->screen.height / 2) - (sv->size / 2);
+		sv->end.y = (((sv->screenC.y + sv->size) < mlx->screen.height) ?
+		(sv->screenC.y + sv->size) : mlx->screen.height);
+		sv->d.y = -sv->screenC.y * (sv->screenC.y < 0);
+		sv->screenC.y += sv->d.y;
+		sv->textC.y = (sv->d.y / sv->size) * mlx->sprite.width;
+		while (sv->screenC.y < sv->end.y)
 		{
 			if (mlx->sprite.img_data[(int)sv->textC.y * mlx->sprite.width
-			+ (int)sv->textC.x] && (mlx->rays[sv->screenC.X].siz > sv->lst->len))
-				mlx->screen.img_data[sv->screenC.Y * mlx->screen.width + sv->screenC.X]
+			+ (int)sv->textC.x] && (mlx->rays[sv->screenC.x].siz > sv->lst->len))
+				mlx->screen.img_data[sv->screenC.y * mlx->screen.width + sv->screenC.x]
 				= mlx->sprite.img_data
 				[(int)sv->textC.y * mlx->sprite.width + (int)sv->textC.x];
-			sv->screenC.Y++;
+			sv->screenC.y++;
 			sv->textC.y += sv->rap.y;
 		}
-		sv->screenC.X++;
+		sv->screenC.x++;
 		sv->textC.x += sv->rap.x;
 	}
 }
@@ -50,18 +50,18 @@ int				draw_sprites(t_mlxvar *mlx)
 		if (sv.a > _3PI2)
 			sv.a -= _2PI;
 		sv.size = (double)mlx->screen.height / (cos(sv.a) * sv.lst->len);
-		sv.screenC.X = ((sv.a + (mlx->set->FOV / 2) / mlx->set->FOV) * mlx->screen.width)
+		sv.screenC.x = ((sv.a + (mlx->set->FOV / 2) / mlx->set->FOV) * mlx->screen.width)
 		- (sv.size / 2);
-		sv.end.X = (((sv.screenC.X + sv.size) < mlx->screen.width) ?
-		(sv.screenC.X + sv.size) : mlx->screen.width);
-		sv.d.X = -sv.screenC.X * (sv.screenC.X < 0);
-		sv.screenC.X += sv.d.X;
-		sv.textC.x = (sv.d.X / sv.size) * mlx->sprite.width;
+		sv.end.x = (((sv.screenC.x + sv.size) < mlx->screen.width) ?
+		(sv.screenC.x + sv.size) : mlx->screen.width);
+		sv.d.x = -sv.screenC.x * (sv.screenC.x < 0);
+		sv.screenC.x += sv.d.x;
+		sv.textC.x = (sv.d.x / sv.size) * mlx->sprite.width;
 		sv.rap.x = (1 / sv.size) * mlx->sprite.width;
 		sv.rap.y = (1 / sv.size) * mlx->sprite.height;
 		drawCurrentSprite(mlx, &sv);
 		sv.lst = sv.lst->next;
 	}
-	freeSpList(&mlx->spList);
+	freesplist(&mlx->spList);
 	return (0);
 }
