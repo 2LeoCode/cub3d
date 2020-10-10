@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 21:54:36 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/14 21:54:36 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:14:13 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				main(int ac, char **av)
 	t_set	settings;
 
 	init_set(&settings);
-	if ((ret = getSettings(ac, av, &settings)))
+	if ((ret = getsettings(ac, av, &settings)))
 		return (error_wrong_map(ret));
 	if ((settings.FOV = arg_fov(ac - 1, av + 1)) < 0)
 		return (error_wrong_map(ER_DEFLT));

@@ -6,7 +6,7 @@
 #    By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/12 12:30:52 by lsuardi           #+#    #+#              #
-#    Updated: 2020/06/13 14:57:50 by lsuardi          ###   ########.fr        #
+#    Updated: 2020/10/10 15:30:25 by lsuardi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,14 +48,14 @@ SRC =		main.c\
 			get_map.c\
 			get_map_utils.c\
 			rays.c\
-			abs.c\
 			memcpy.c\
 			bzero.c\
 			save_screen.c\
 			save_screen2.c\
-			initTextures.c\
-			keyHandling.c\
-			drawSprites.c
+			inittextures.c\
+			keyhandling.c\
+			keyhandlingutils.c\
+			drawsprites.c
 OBJ =		$(SRC:.c=.o)
 LIB =		libmlx.a
 SCRIPT =	ext.sh\

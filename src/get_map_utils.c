@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/20 23:22:59 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/20 23:22:59 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 14:40:55 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_bool	check_case(char **map, int y, int x)
 	return (true);
 }
 
-void			setSpawn(t_set *set, int i, int j, char c)
+void			setspawn(t_set *set, int i, int j, char c)
 {
 	set->spawn.X = j;
 	set->spawn.Y = i;
@@ -65,7 +65,7 @@ void			setSpawn(t_set *set, int i, int j, char c)
 		set->rot_hor = M_PI;
 }
 
-int				workCase(char **tmp, int i, t_bool *check, t_set *set)
+int				workcase(char **tmp, int i, t_bool *check, t_set *set)
 {
 	int j;
 
@@ -81,7 +81,7 @@ int				workCase(char **tmp, int i, t_bool *check, t_set *set)
 		else if (ft_strchr("NWSE", tmp[i][j]))
 		{
 			*check = true;
-			setSpawn(set, i, j, tmp[i][j]);
+			setspawn(set, i, j, tmp[i][j]);
 		}
 	}
 	return (0);
@@ -98,7 +98,7 @@ int				check_map(t_set *set)
 	tmp = set->map;
 	i = -1;
 	while (tmp[++i])
-		if ((ret = workCase(tmp, i, &check, set)))
+		if ((ret = workcase(tmp, i, &check, set)))
 			return (ret);
 	if (!check)
 	{

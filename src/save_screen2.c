@@ -6,13 +6,13 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:30:36 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/09 16:30:36 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:18:48 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-unsigned char	*getCharArray(t_mlximg *screen)
+unsigned char	*getchararray(t_mlximg *screen)
 {
 	unsigned char	*img;
 	int 			size;
@@ -31,35 +31,35 @@ unsigned char	*getCharArray(t_mlximg *screen)
 	return (img);
 }
 
-t_bih			createBitmapInfoHeader(t_mlximg *screen)
+t_bih			createbitmapinfoheader(t_mlximg *screen)
 {
-	t_bih	infoHeader;
+	t_bih	infoheader;
 	int		ppm;
 
 	ppm = 200 * 39.375;
-	infoHeader.size_header = 40;
-	infoHeader.width = screen->width;
-	infoHeader.height = screen->height;
-	infoHeader.planes = 1;
-	infoHeader.bit_count = 24;
-	infoHeader.compression = 0;
-	infoHeader.image_size = infoHeader.width * infoHeader.height;
-	infoHeader.ppm_x = ppm;
-	infoHeader.ppm_y = ppm;
-	infoHeader.clr_used = 0;
-	infoHeader.clr_important = 0;
-	return (infoHeader);
+	infoheader.size_header = 40;
+	infoheader.width = screen->width;
+	infoheader.height = screen->height;
+	infoheader.planes = 1;
+	infoheader.bit_count = 24;
+	infoheader.compression = 0;
+	infoheader.image_size = infoheader.width * infoheader.height;
+	infoheader.ppm_x = ppm;
+	infoheader.ppm_y = ppm;
+	infoheader.clr_used = 0;
+	infoheader.clr_important = 0;
+	return (infoheader);
 }
 
-t_bfh			createBitmapFileHeader(t_mlximg *screen)
+t_bfh			createbitmapfileheader(t_mlximg *screen)
 {
-	t_bfh	fileHeader;
+	t_bfh	fileheader;
 
-	fileHeader.bitmap_type[0] = 'B';
-	fileHeader.bitmap_type[1] = 'M';
-	fileHeader.file_size = 54 + 3 * screen->width * screen->height;
-	fileHeader.reserved1 = 0;
-	fileHeader.reserved2 = 0;
-	fileHeader.offset_bits = 0;
-	return (fileHeader);
+	fileheader.bitmap_type[0] = 'B';
+	fileheader.bitmap_type[1] = 'M';
+	fileheader.file_size = 54 + 3 * screen->width * screen->height;
+	fileheader.reserved1 = 0;
+	fileheader.reserved2 = 0;
+	fileheader.offset_bits = 0;
+	return (fileheader);
 }

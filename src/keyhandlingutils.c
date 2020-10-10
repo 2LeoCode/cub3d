@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   abs.c                                              :+:      :+:    :+:   */
+/*   keyhandlingutils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/04 17:14:52 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/09/04 17:14:52 by lsuardi          ###   ########.fr       */
+/*   Created: 2020/10/10 15:26:42 by lsuardi           #+#    #+#             */
+/*   Updated: 2020/10/10 15:31:22 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-double	ft_dabs(double n)
+int		keycond1(t_mlxvar *mlxvar, int key, t_dvar d)
 {
-	return ((n < 0) ? -n : n);
+	return (((key == KEY_W) || (key == KEY_A))
+	&& !iscollide(mlxvar, mlxvar->posx + d.x, mlxvar->posy + d.y));
+}
+
+int		keycond2(t_mlxvar *mlxvar, int key, t_dvar d)
+{
+	return (((key == KEY_S) || (key == KEY_A))
+	&& !iscollide(mlxvar, mlxvar->posx - d.x, mlxvar->posy - d.y));
 }

@@ -6,68 +6,68 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:30:08 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/09 16:30:08 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:18:17 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void		updateName(char *fName, size_t bLen)
+static void		updatename(char *fname, size_t blen)
 {
-	if (fName[bLen + 1] == '9')
+	if (fname[blen + 1] == '9')
 	{
-		if (fName[bLen] == '9')
-			fName[bLen] = '0';
+		if (fname[blen] == '9')
+			fname[blen] = '0';
 		else
-			fName[bLen]++;
-		fName[bLen + 1] = '0';
+			fname[blen]++;
+		fname[blen + 1] = '0';
 	}
 	else
-		fName[bLen + 1]++;
+		fname[blen + 1]++;
 }
 
-static char		*getFileName(char *baseName, char *ext)
+static char		*getfilename(char *basename, char *ext)
 {
-	size_t	bLen;
-	size_t	eLen;
-	char	*fileName;
-	int		fdTest;
+	size_t	blen;
+	size_t	elen;
+	char	*filename;
+	int		fdtest;
 
-	bLen = ft_strlen(baseName);
-	eLen = ft_strlen(baseName);
-	if (!(fileName = malloc(sizeof(char) * (bLen + eLen + 4))))
+	blen = ft_strlen(basename);
+	elen = ft_strlen(basename);
+	if (!(filename = malloc(sizeof(char) * (blen + elen + 4))))
 		return (NULL);
-	ft_memcpy(fileName, baseName, bLen);
-	ft_memcpy(fileName + bLen, "00.", 3);
-	ft_memcpy(fileName + bLen + 3, ext, eLen + 1);
-	while ((fdTest = open(fileName, O_RDONLY)) > 0)
+	ft_memcpy(filename, basename, blen);
+	ft_memcpy(filename + blen, "00.", 3);
+	ft_memcpy(filename + blen + 3, ext, elen + 1);
+	while ((fdtest = open(filename, o_rdonly)) > 0)
 	{
-		close(fdTest);
-		updateName(fileName, bLen);
-		if (fileName[bLen] == '0' && fileName[bLen + 1] == '0')
-			return (fileName);
+		close(fdtest);
+		updatename(filename, blen);
+		if (filename[blen] == '0' && filename[blen + 1] == '0')
+			return (filename);
 	}
-	close(fdTest);
-	return (fileName);
+	close(fdtest);
+	return (filename);
 }
 
 int				save_screen(t_mlximg *screen)
 {
-	t_bfh			fileHeader;
-	t_bih			infoHeader;
+	t_bfh			fileheader;
+	t_bih			infoheader;
 	int				fd;
 	unsigned char	*img;
-	char			*fileName;
+	char			*filename;
 
-	if (!(fileName = getFileName("screenshot/save", "bmp"))
-	|| ((fd = open(fileName, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
-	|| !(img = getCharArray(screen)))
+	if (!(filename = getfilename("screenshot/save", "bmp"))
+	|| ((fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
+	|| !(img = getchararray(screen)))
 		return (error_wrong_map(ER_DEFLT));
-	free(fileName);
-	fileHeader = createBitmapFileHeader(screen);
-	infoHeader = createBitmapInfoHeader(screen);
-	write(fd, &fileHeader, 14);
-	write(fd, &infoHeader, 40);
+	free(filename);
+	fileheader = createbitmapfileheader(screen);
+	infoheader = createbitmapinfoheader(screen);
+	write(fd, &fileheader, 14);
+	write(fd, &infoheader, 40);
 	write(fd, img, screen->width * screen->height * 3);
 	free(img);
 	return (0);

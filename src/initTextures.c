@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initTextures.c                                     :+:      :+:    :+:   */
+/*   inittextures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:38:57 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/09 23:38:57 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:24:16 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static void		allocTextures(t_mlxvar *mlxvar)
+static void		alloctextures(t_mlxvar *mlxvar)
 {
-	mlxvar->screen.img = mlx_new_image(mlxvar->id, mlxvar->set->X, mlxvar->set->Y);
 	mlxvar->screen.img_data = (int*)mlx_get_data_addr(mlxvar->screen.img,
 	&mlxvar->screen.bpp, &mlxvar->screen.line_size, &mlxvar->screen.endian);
-	mlxvar->screen.width = mlxvar->set->X;
-	mlxvar->screen.height = mlxvar->set->Y;
-	mlxvar->wallN.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->NO,
-	&mlxvar->wallN.width, &mlxvar->wallN.height);
-	mlxvar->wallN.img_data = (int*)mlx_get_data_addr(mlxvar->wallN.img,
-	&mlxvar->wallN.bpp, &mlxvar->wallN.line_size, &mlxvar->wallN.endian);
-	mlxvar->wallE.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->EA,
-	&mlxvar->wallE.width, &mlxvar->wallE.height);
-	mlxvar->wallE.img_data = (int*)mlx_get_data_addr(mlxvar->wallE.img,
-	&mlxvar->wallE.bpp, &mlxvar->wallE.line_size, &mlxvar->wallE.endian);
-	mlxvar->wallS.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->SO,
-	&mlxvar->wallS.width, &mlxvar->wallS.height);
-	mlxvar->wallS.img_data = (int*)mlx_get_data_addr(mlxvar->wallS.img,
-	&mlxvar->wallS.bpp, &mlxvar->wallS.line_size, &mlxvar->wallS.endian);
-	mlxvar->wallW.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->WE,
-	&mlxvar->wallW.width, &mlxvar->wallW.height);
-	mlxvar->wallW.img_data = (int*)mlx_get_data_addr(mlxvar->wallW.img,
-	&mlxvar->wallW.bpp, &mlxvar->wallW.line_size, &mlxvar->wallW.endian);
-	mlxvar->sprite.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->S,
+	mlxvar->screen.width = mlxvar->set->x;
+	mlxvar->screen.height = mlxvar->set->y;
+	mlxvar->walln.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->no,
+	&mlxvar->walln.width, &mlxvar->walln.height);
+	mlxvar->walln.img_data = (int*)mlx_get_data_addr(mlxvar->walln.img,
+	&mlxvar->walln.bpp, &mlxvar->walln.line_size, &mlxvar->walln.endian);
+	mlxvar->walle.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->ea,
+	&mlxvar->walle.width, &mlxvar->walle.height);
+	mlxvar->walle.img_data = (int*)mlx_get_data_addr(mlxvar->walle.img,
+	&mlxvar->walle.bpp, &mlxvar->walle.line_size, &mlxvar->walle.endian);
+	mlxvar->walls.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->so,
+	&mlxvar->walls.width, &mlxvar->walls.height);
+	mlxvar->walls.img_data = (int*)mlx_get_data_addr(mlxvar->walls.img,
+	&mlxvar->walls.bpp, &mlxvar->walls.line_size, &mlxvar->walls.endian);
+	mlxvar->wallw.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->we,
+	&mlxvar->wallw.width, &mlxvar->wallw.height);
+	mlxvar->wallw.img_data = (int*)mlx_get_data_addr(mlxvar->wallw.img,
+	&mlxvar->wallw.bpp, &mlxvar->wallw.line_size, &mlxvar->wallw.endian);
+	mlxvar->sprite.img = mlx_xpm_file_to_image(mlxvar->id , mlxvar->set->s,
 	&mlxvar->sprite.width, &mlxvar->sprite.height);
 	mlxvar->sprite.img_data = (int*)mlx_get_data_addr(mlxvar->sprite.img,
 	&mlxvar->sprite.bpp, &mlxvar->sprite.line_size, &mlxvar->sprite.endian);
@@ -43,34 +42,37 @@ static void		allocTextures(t_mlxvar *mlxvar)
 
 int				init_textures(t_mlxvar *mlxvar)
 {
-	mlxvar->wallN.img = NULL;
-	mlxvar->wallN.img_data = NULL;
-	mlxvar->wallE.img = NULL;
-	mlxvar->wallE.img_data = NULL;
-	mlxvar->wallS.img = NULL;
-	mlxvar->wallS.img_data = NULL;
-	mlxvar->wallW.img = NULL;
-	mlxvar->wallW.img_data = NULL;
+	mlxvar->walln.img = NULL;
+	mlxvar->walln.img_data = NULL;
+	mlxvar->walle.img = NULL;
+	mlxvar->walle.img_data = NULL;
+	mlxvar->walls.img = NULL;
+	mlxvar->walls.img_data = NULL;
+	mlxvar->wallw.img = NULL;
+	mlxvar->wallw.img_data = NULL;
 	mlxvar->sprite.img = NULL;
 	mlxvar->sprite.img_data = NULL;
 	mlxvar->screen.img = NULL;
-	mlxvar->wallN.img_data = NULL;
+	mlxvar->walln.img_data = NULL;
 	mlxvar->rays = NULL;
-	allocTextures(mlxvar);
-	if (!mlxvar->wallN.img || !mlxvar->wallN.img_data || !mlxvar->wallE.img
-	|| !mlxvar->wallE.img_data || !mlxvar->wallS.img || !mlxvar->wallS.img_data
-	|| !mlxvar->wallW.img || !mlxvar->wallW.img_data || !mlxvar->sprite.img
-	|| !mlxvar->sprite.img_data	|| !mlxvar->screen.img || !mlxvar->screen.img_data)
+	mlxvar->screen.img
+	= mlx_new_image(mlxvar->id, mlxvar->set->x, mlxvar->set->y);
+	alloctextures(mlxvar);
+	if (!mlxvar->walln.img || !mlxvar->walln.img_data || !mlxvar->walle.img
+	|| !mlxvar->walle.img_data || !mlxvar->walls.img || !mlxvar->walls.img_data
+	|| !mlxvar->wallw.img || !mlxvar->wallw.img_data || !mlxvar->sprite.img
+	|| !mlxvar->sprite.img_data	|| !mlxvar->screen.img
+	|| !mlxvar->screen.img_data)
 		return (-1);
 	return (0);
 }
 
-t_mlxvar		initMlx(t_set *set, int flags, t_bool *save)
+t_mlxvar		initmlx(t_set *set, int flags, t_bool *save)
 {
 	t_mlxvar	mlxvar;
 
 	*save = false;
-	if ((flags == SAVE) || (flags == (SAVE | BONUS)))
+	if ((flags == SAVE) || (flags == (SAVE | BONUS))
 		*save = true;
 	mlxvar.set = set;
 	mlxvar.id = NULL;
@@ -78,10 +80,10 @@ t_mlxvar		initMlx(t_set *set, int flags, t_bool *save)
 	mlxvar.screen.img = NULL;
 	mlxvar.screen.img_data = NULL;
 	mlxvar.rays = NULL;
-	mlxvar.posX = (double)mlxvar.set->spawn.X + 0.5;
-	mlxvar.posY = (double)mlxvar.set->spawn.Y + 0.5;
-	mlxvar.lastKey = -1;
-	mlxvar.isKeyPressed = 0;
+	mlxvar.posx = (double)mlxvar.set->spawn.x + 0.5;
+	mlxvar.posy = (double)mlxvar.set->spawn.y + 0.5;
+	mlxvar.lastkey = -1;
+	mlxvar.iskeypressed = 0;
 	return (mlxvar);
 }
 

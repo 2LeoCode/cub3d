@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 22:36:00 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/14 22:36:00 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 14:40:01 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char			*error_s(int errnum)
 {
-	ft_fputs(_stderr, "Error\nCub3D: ");
+	ft_fputs(_stderr, "error\ncub3d: ");
 	ft_fputs(_stderr, strerror(errnum));
 	ft_fputc(_stderr, '\n');
 	return (NULL);
@@ -32,31 +32,31 @@ static t_bool	is_warning(int errnum)
 
 int				error_wrong_file(char *path)
 {
-	ft_fputs(_stderr, "Error\nCub3D: Failed to open file '");
+	ft_fputs(_stderr, "Error\ncub3d: failed to open file '");
 	ft_fputs(_stderr, path);
 	ft_fputs(_stderr, "'\n");
 	return (-1);
 }
 
-int				errorWrongMap2(int errnum)
+int				errorwrongmap2(int errnum)
 {
 	if (errnum == ER_WRRGB)
-		ft_fputs(_stderr, "Wrong RGB input in map file\n\
-Use --help for more information\n");
+		ft_fputs(_stderr, "Wrong rgb input in map file\n\
+use --help for more information\n");
 	else if (errnum == ER_WRMAP)
 		ft_fputs(_stderr, "Minimap in map file is not valid\n\
-Use --help for more information\n");
+use --help for more information\n");
 	else if (errnum == ER_DEFLT)
 	{
 		ft_fputs(_stderr, strerror(errno));
 		ft_fputc(_stderr, '\n');
 	}
 	else if (errnum == ER_WPIMG)
-		ft_fputs(_stderr, "Wrong img file path in map file\n\
-Use --help for more information\n");
+		ft_fputs(_stderr, "Mrong img file path in map file\n\
+use --help for more information\n");
 	else if (errnum == ER_NOSPW)
 		ft_fputs(_stderr, "No spawn point set in map file\n\
-Use --help for more information\n");
+use --help for more information\n");
 	else
 		ft_fputs(_stderr, "An unknown error occured\n");
 	return (-1);
@@ -65,12 +65,12 @@ Use --help for more information\n");
 int				error_wrong_map(int errnum)
 {
 	ft_fputs(_stderr, (is_warning(errnum) ? "Warning\n" : "Error\n"));
-	ft_fputs(_stderr, "Cub3D: ");
+	ft_fputs(_stderr, "cub3d: ");
 	if (errnum == ER_WPATH)
 		ft_fputs(_stderr, "No input file or wrong file format \
-(has to be .cub)\nUsage: ./Cub3D [--save] [--bonus] [path_to_map.cub]\n");
+(has to be .cub)\nUsage: ./cub3d [--save] [--bonus] [path_to_map.cub]\n");
 	else if (errnum == ER_OPENF)
-		ft_fputs(_stderr, "Failed to open map file\nUsage: ./Cub3D \
+		ft_fputs(_stderr, "Failed to open map file\nUsage: ./cub3d \
 [--save] [--bonus] [path_to_map.cub]\n");
 	else if (errnum == ER_MISSI)
 		ft_fputs(_stderr, "Missing parameter(s) in map file\n\
@@ -78,9 +78,9 @@ Use --help for more information\n");
 	else if (errnum == ER_READF)
 		ft_fputs(_stderr, "Failed to read map file\n");
 	else if (errnum == ER_DOUBL)
-		ft_fputs(_stderr, "A parameter is declared 2 times in map file\n");
+		ft_fputs(_stderr, "a parameter is declared 2 times in map file\n");
 	else if (errnum == ER_WRRES)
-		ft_fputs(_stderr, "Wrong resolution\n\
+		ft_fputs(_stderr, "wrong resolution\n\
 Use --help for more information\n");
 	else if (errnum == (ER_WRRES | WARNING))
 		ft_fputs(_stderr, "Too low/high resolution (must be between \
@@ -88,5 +88,5 @@ Use --help for more information\n");
 	else if (errnum == ER_UNKNW)
 		ft_fputs(_stderr, "Unknown parameter in map file\n\
 Use --help for more information\n");
-	return (errorWrongMap2(errnum));
+	return (errorwrongmap2(errnum));
 }

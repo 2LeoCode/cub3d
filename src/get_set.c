@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:53:38 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/15 00:53:38 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:22:27 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ static t_bool	is_check(t_bool *check)
 	return (true);
 }
 
-int				getSet2(int fd, t_getSetVar *v, t_set *set)
+int				getset2(int fd, t_getsetvar *v, t_set *set)
 {
 	while (!v->total)
 	{
 		v->i = 0;
 		while (ft_isspace(v->line[v->i]))
 			v->i++;
-		if (((v->line[v->i] == 'R') && (v->i = get_res(&v->line[v->i], set, v->check)))
-		|| ((v->line[v->i] && ft_strchr("FC", v->line[v->i]))
+		if (((v->line[v->i] == 'r') && (v->i = get_res(&v->line[v->i],
+		set, v->check))) || ((v->line[v->i] && ft_strchr("fc", v->line[v->i]))
 		&& (v->i = get_rgb(&v->line[v->i], set, v->check)))
-		|| (!ft_strchr("RFC", v->line[v->i])
+		|| (!ft_strchr("rfc", v->line[v->i])
 		&& (v->i = get_path(&v->line[v->i], set, v->check))))
 			return (v->i);
 		free(v->line);
@@ -48,7 +48,7 @@ int				getSet2(int fd, t_getSetVar *v, t_set *set)
 
 int			get_set(int fd, t_set *set)
 {
-	t_getSetVar		v;
+	t_getsetvar		v;
 
 	v.i = -1;
 	v.total = false;
@@ -56,12 +56,12 @@ int			get_set(int fd, t_set *set)
 		v.check[v.i] = 0;
 	if ((v.i = get_next_line(fd, &v.line)) < 0)
 		return (ER_READF);
-	if ((v.i = getSet2(fd, &v, set)))
+	if ((v.i = getset2(fd, &v, set)))
 		return (v.i);
 	return (get_map(fd, set));
 }
 
-int			getSettings(int ac, char **av, t_set *settings)
+int			getsettings(int ac, char **av, t_set *settings)
 {
 	int		fd;
 	int		ret;
@@ -86,9 +86,9 @@ int			getSettings(int ac, char **av, t_set *settings)
 void		init_set(t_set *set)
 {
 	set->map = NULL;
-	set->NO = NULL;
-	set->SO = NULL;
-	set->WE = NULL;
-	set->EA = NULL;
-	set->S = NULL;
+	set->no = NULL;
+	set->so = NULL;
+	set->we = NULL;
+	set->ea = NULL;
+	set->s = NULL;
 }

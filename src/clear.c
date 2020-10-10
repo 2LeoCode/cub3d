@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 22:43:31 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/16 22:43:31 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:13:48 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static int	clear_mlx2(t_mlxvar *mlx)
 		free(mlx->wallW.img_data);
 	mlx->wallW.img_data = NULL;
 	clear_set(mlx->set);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
@@ -104,6 +105,6 @@ int			clear_mlx(t_mlxvar *mlx)
 	mlx->wallN.img_data = NULL;
 	if (mlx->wallE.img)
 		mlx_destroy_image(mlx->id, mlx->wallE.img);
-	mlx->wallE.img = NULL;
+	mlx->wallE.img = NULL;]
 	return (clear_mlx2(mlx));
 }

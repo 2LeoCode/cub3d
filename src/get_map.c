@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 22:39:21 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/19 22:39:21 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 14:42:41 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void		get_line(char **map, int index, char *line, int size)
 	map[index][i] = 0;
 }
 
-static int		getMapFromList2(t_line **lst, t_set *set)
+static int		getmapfromlist2(t_line **lst, t_set *set)
 {
 	int		i;
 	int		j;
@@ -76,19 +76,19 @@ static int		getMapFromList2(t_line **lst, t_set *set)
 
 	i = 0;
 	j = -1;
-	while (++j < set->mapX)
+	while (++j < set->mapx)
 		set->map[i][j] = ' ';
 	set->map[i][j] = 0;
-	i += (set->mapY - 1);
+	i += (set->mapy - 1);
 	j = -1;
-	while (++j < set->mapX)
+	while (++j < set->mapx)
 		set->map[i][j] = ' ';
 	set->map[i][j] = 0;
 	tmp = *lst;
 	i = 1;
 	while (tmp)
 	{
-		get_line(set->map, i, tmp->line, set->mapX);
+		get_line(set->map, i, tmp->line, set->mapx);
 		tmp = tmp->next;
 		i++;
 	}
@@ -99,19 +99,19 @@ static int		get_map_from_list(t_line **lst, t_set *set)
 {
 	int			i;
 
-	set->mapY = get_map_y(*lst);
-	if (!(set->map = (char**)malloc(sizeof(char*) * (set->mapY + 1))))
+	set->mapy = get_map_y(*lst);
+	if (!(set->map = (char**)malloc(sizeof(char*) * (set->mapy + 1))))
 		return (ER_DEFLT);
-	set->mapX = get_map_x(*lst);
+	set->mapx = get_map_x(*lst);
 	i = -1;
-	while (++i < set->mapY)
-		if (!(set->map[i] = (char*)malloc(sizeof(char) * (set->mapX + 1))))
+	while (++i < set->mapy)
+		if (!(set->map[i] = (char*)malloc(sizeof(char) * (set->mapx + 1))))
 			return (ER_DEFLT);
 	set->map[i] = NULL;
-	return (getMapFromList2(lst, set));
+	return (getmapfromlist2(lst, set));
 }
 
-int				getMapToList(int fd, char **line, t_line **lst)
+int				getmaptolist(int fd, char **line, t_line **lst)
 {
 	int		ret;
 
@@ -144,7 +144,7 @@ int				get_map(int fd, t_set *set)
 		return ((!i || !is_map_wall(line)) ? ER_WRMAP : ER_DEFLT);
 	}
 	tmp = lst_line_new(line);
-	if (getMapToList(fd, &line, &tmp))
+	if (getmaptolist(fd, &line, &tmp))
 		return (ER_DEFLT);
 	if (!(i = get_map_from_list(&tmp, set)) && !(j = check_map(set)))
 		return (0);

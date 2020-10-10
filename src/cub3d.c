@@ -6,27 +6,28 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:22:47 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/15 00:22:47 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:20:41 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-void	drawCols(t_mlxvar *mlxvar, t_updateVar *up)
+void	drawcols(t_mlxvar *mlxvar, t_updatevar *up)
 {
-	while (++up->j < (((int)up->size > mlxvar->screen.height) ? mlxvar->screen.height
-	: (int)up->size))
+	while (++up->j < (((int)up->size > mlxvar->screen.height) ?
+	mlxvar->screen.height : (int)up->size))
 	{
 		mlxvar->screen.img_data[(up->l + up->j) * mlxvar->screen.width + up->i]
 		= mlxvar->rays[up->i].texture->img_data
-		[(int)up->k * mlxvar->rays[up->i].texture->width + mlxvar->rays[up->i].col_pos];
+		[(int)up->k * mlxvar->rays[up->i].texture->width
+		+ mlxvar->rays[up->i].col_pos];
 		up->k += mlxvar->rays[up->i].texture->height / up->size;
 	}
 }
 
 int		update_screen(t_mlxvar *mlxvar)
 {
-	t_updateVar		up;
+	t_updatevar		up;
 	
 	if (!mlxvar->screen.img || !mlxvar->screen.img_data)
 		return (clear_mlx(mlxvar));
@@ -37,15 +38,18 @@ int		update_screen(t_mlxvar *mlxvar)
 		/ (cos(mlxvar->rays[up.i].rot) * mlxvar->rays[up.i].siz);
 		up.j = -1;
 		while (++up.j < (int)(mlxvar->screen.height / 2))
-			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i] = mlxvar->set->C;
+			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i]
+			= mlxvar->set->c;
 		while (++up.j < mlxvar->screen.height)
-			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i] = mlxvar->set->F;
+			mlxvar->screen.img_data[up.j * mlxvar->screen.width + up.i]
+			= mlxvar->set->f;
 		up.j = -1;
 		up.l = ((up.size > mlxvar->screen.height) ?
 		0 : ((int)(mlxvar->screen.height / 2) - (up.size / 2)));
 		up.k = (up.size < mlxvar->screen.height) ? 0 : ((((up.size / 2)
-		- (mlxvar->screen.height / 2)) / up.size) * mlxvar->rays[up.i].texture->height);
-		drawCols(mlxvar, &up);
+		- (mlxvar->screen.height / 2)) / up.size)
+		* mlxvar->rays[up.i].texture->height);
+		drawcols(mlxvar, &up);
 	}
 	return (0);
 }
@@ -53,13 +57,13 @@ int		update_screen(t_mlxvar *mlxvar)
 int		updateanddisplay(t_mlxvar *mlxvar)
 {
 	int			key;
-	t_dVar		d;
+	t_dvar		d;
 
-	if (!mlxvar->isKeyPressed)
+	if (!mlxvar->iskeypressed)
 		return (0);
-	key = mlxvar->lastKey;
-	d.r = (M_PI / 180);
-	checkKeys(mlxvar, key, d);
+	key = mlxvar->lastkey;
+	d.r = (m_pi / 180);
+	checkkeys(mlxvar, key, d);
 	if (update_rays(mlxvar)
 	|| update_screen(mlxvar) || draw_sprites(mlxvar))
 		return (clear_mlx_err(mlxvar));
@@ -67,26 +71,26 @@ int		updateanddisplay(t_mlxvar *mlxvar)
 	return (0);
 }
 
-int		cub3D(t_set *set, int flags)
+int		cub3d(t_set *set, int flags)
 {
 	t_bool		save;
 	t_mlxvar	mlxvar;
 
-	mlxvar = initMlx(set, flags, &save);
+	mlxvar = initmlx(set, flags, &save);
 	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
-	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->X, set->Y, "Cub3D"))
+	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->x, set->y, "Cub3D"))
 	|| update_rays(&mlxvar) || update_screen(&mlxvar) || draw_sprites(&mlxvar))
 	{
 		clear_mlx_err(&mlxvar);
-		return (ft_fputs(2, "Cub3D: Error while initializing window.\n"));
+		return (ft_fputs(2, "Cub3d: Error while initializing window.\n"));
 	}
 	mlx_put_image_to_window(mlxvar.id, mlxvar.win, mlxvar.screen.img, 0, 0);
 	if (save)
 		save_screen(&mlxvar.screen);
 	mlx_loop_hook(mlxvar.id, &updateanddisplay, &mlxvar);
-	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &keyIsPressed, &mlxvar);
-	mlx_hook(mlxvar.win, KeyRelease, KeyReleaseMask, &keyIsReleased, &mlxvar);
-	mlx_hook(mlxvar.win, DestroyNotify, StructureNotifyMask, &clear_mlx, &mlxvar);
+	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &keyispressed, &mlxvar);
+	mlx_hook(mlxvar.win, KeyRelease, KeyReleaseMask, &keyisreleased, &mlxvar);
+	mlx_hook(mlxvar.win, 33, (1L << 17), &clear_mlx, &mlxvar);
 	mlx_loop(mlxvar.id);
 	return (clear_mlx(&mlxvar));
 }

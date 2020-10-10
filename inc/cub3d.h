@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 16:01:49 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/12 21:05:16 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:31:17 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,14 @@ typedef struct			s_bih
 	unsigned int		clr_important;
 }						t_bih;
 
-typedef struct			s_spList
+typedef struct			s_splist
 {
 	double				x;
 	double				y;
 	double				len;
 	double				a;
-	struct s_spList 	*next;
-}						t_spList;
+	struct s_splist 	*next;
+}						t_splist;
 
 
 typedef struct			s_point
@@ -146,15 +146,15 @@ typedef enum			e_std
 
 typedef struct			s_rgb
 {
-	int					R;
-	int 				G;
-	int					B;
+	int					r;
+	int 				g;
+	int					b;
 }						t_rgb;
 
 typedef struct			s_coord
 {
-	int					X;
-	int					Y;
+	int					x;
+	int					y;
 }						t_coord;
 
 typedef struct			s_line
@@ -165,22 +165,22 @@ typedef struct			s_line
 
 typedef struct			s_set
 {
-	int					X;
-	int					Y;
-	char				*NO;
-	char				*SO;
-	char				*WE;
-	char				*EA;
-	char				*S;
-	int					F;
-	int					C;
-	double				FOV;
+	int					x;
+	int					y;
+	char				*no;
+	char				*so;
+	char				*we;
+	char				*ea;
+	char				*s;
+	int					f;
+	int					c;
+	double				fov;
 	t_coord				spawn;
 	double				rot_vert;
 	double				rot_hor;
 	char				**map;
-	int					mapX;
-	int					mapY;
+	int					mapx;
+	int					mapy;
 }						t_set;
 
 typedef struct			s_mlximg
@@ -207,57 +207,57 @@ typedef struct			s_mlxvar
 	void				*id;
 	void				*win;
 	t_set				*set;
-	double				posX;
-	double				posY;
+	double				posx;
+	double				posy;
 	t_mlximg			screen;
-	t_mlximg			wallN;
-	t_mlximg			wallE;
-	t_mlximg			wallS;
-	t_mlximg			wallW;
+	t_mlximg			walln;
+	t_mlximg			walle;
+	t_mlximg			walls;
+	t_mlximg			wallw;
 	t_mlximg			sprite;
 	t_ray				*rays;
-	int					lastKey;
-	int					isKeyPressed;
-	t_spList			*spList;
+	int					lastkey;
+	int					iskeypressed;
+	t_splist			*splist;
 }						t_mlxvar;
 
-typedef struct			s_updateVar
+typedef struct			s_updatevar
 {
 	int					i;
 	int					j;
 	double				k;
 	double				size;
 	int					l;
-}						t_updateVar;
+}						t_updatevar;
 
-typedef struct			s_spriteVar
+typedef struct			s_spritevar
 {
 	double				size;
 	double				a;
 	t_coord				end;
 	t_coord				d;
-	t_spList			*lst;
-	t_coord				screenC;
-	t_point				textC;
+	t_splist			*lst;
+	t_coord				screenc;
+	t_point				textc;
 	t_point				rap;
-}						t_spriteVar;
+}						t_spritevar;
 
-typedef struct			s_dVar
+typedef struct			s_dvar
 {
 	double				x;
 	double				y;
 	double				r;
-}						t_dVar;
+}						t_dvar;
 
-typedef struct			s_getSetVar
+typedef struct			s_getsetvar
 {
 	int					i;
 	t_bool				check[NB_PARAMS];
 	char				*line;
 	t_bool				total;
-}						t_getSetVar;
+}						t_getsetvar;
 
-typedef struct			s_rayVar
+typedef struct			s_rayvar
 {
 	int					i;
 	double				r;
@@ -267,7 +267,7 @@ typedef struct			s_rayVar
 	t_point				c;
 	t_point				length;
 	t_point				d;
-}						t_rayVar;
+}						t_rayvar;
 
 char					*ft_strstr(char *haystack, char *needle);
 
@@ -294,9 +294,9 @@ int						clear_mlx_err(t_mlxvar *mlx);
 int						help(int show_msg);
 t_bool					arg_help(int ac, char **av);
 
-int						cub3D(t_set *set, int flags);
+int						cub3d(t_set *set, int flags);
 
-void					fill_chunk_end(char *chunk, int startX, int startY);
+void					fill_chunk_end(char *chunk, int startx, int starty);
 t_bool					are_chunk_lines_null(char **lines);
 int						get_one_chunk(t_set *set, t_line **map);
 int						get_chunks(int fd, t_set *set);
@@ -304,7 +304,7 @@ int						get_path(char *line, t_set *set, t_bool *check);
 int						get_rgb(char *line, t_set *set, t_bool *check);
 int						get_set(int fd, t_set *set);
 int						get_res(char *line, t_set *set, t_bool *check);
-int						getSettings(int ac, char **av, t_set *settings);
+int						getsettings(int ac, char **av, t_set *settings);
 void					init_set(t_set *set);
 
 size_t					ft_strlen(char *s);
@@ -337,24 +337,24 @@ int						check_map(t_set *set);
 int						get_map(int fd, t_set *set);
 
 int						update_rays(t_mlxvar *mlxvar);
-void					freeSpList(t_spList **lst);
-
-double					ft_dabs(double n);
+void					freesplist(t_splist **lst);
 
 void					*ft_memcpy(void *d, void *s, size_t n);
 void					*ft_bzero(void *m, size_t n);
 
 int						save_screen(t_mlximg *screen);
-t_bfh					createBitmapFileHeader(t_mlximg *screen);
-t_bih					createBitmapInfoHeader(t_mlximg *screen);
-unsigned char			*getCharArray(t_mlximg *screen);
+t_bfh					createbitmapfileheader(t_mlximg *screen);
+t_bih					createbitmapinfoheader(t_mlximg *screen);
+unsigned char			*getchararray(t_mlximg *screen);
 
 int						init_textures(t_mlxvar *mlxvar);
-t_mlxvar				initMlx(t_set *set, int flags, t_bool *save);
+t_mlxvar				initmlx(t_set *set, int flags, t_bool *save);
 
-void					checkKeys(t_mlxvar *mlxvar, int key, t_dVar d);
-int						keyIsPressed(int key, t_mlxvar *mlxvar);
-int						keyIsReleased(int key, t_mlxvar *mlxvar);
+void					checkkeys(t_mlxvar *mlxvar, int key, t_dvar d);
+int						keyispressed(int key, t_mlxvar *mlxvar);
+int						keyisreleased(int key, t_mlxvar *mlxvar);
+int						keycond1(t_mlxvar *mlxvar, int key, t_dvar d);
+int						keycond2(t_mlxvar *mlxvar, int key, t_dvar d);
 
 int						draw_sprites(t_mlxvar *mlx);
 

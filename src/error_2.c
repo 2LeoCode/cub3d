@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 23:06:09 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/06/16 23:06:09 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 15:21:31 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ t_bool	print_wrong(char *map_path, int ac, char **av)
 			if (i > 0 && !ft_strcmp("--fov", av[i - 1]))
 				continue ;
 			wrong = true;
-			ft_fputs(_stderr, "Cub3D: invalid option -- '");
+			ft_fputs(_stderr, "cub3d: invalid option -- '");
 			while (*av[i] == '-')
 				av[i]++;
 			ft_fputs(_stderr, av[i]);
 			ft_fputs(_stderr, "'\n");
 		}
 	if (wrong)
-		ft_fputs(_stderr, "Use --help for help\n");
+		ft_fputs(_stderr, "use --help for help\n");
 	return (wrong);
 }
