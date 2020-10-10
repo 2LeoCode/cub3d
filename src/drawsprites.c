@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:43:34 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:27:00 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:27:33 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int				draw_sprites(t_mlxvar *mlx)
 {
 	t_spriteVar		sv;
 
-	sv.lst = mlx->spList;
+	sv.lst = mlx->splist;
 	while (sv.lst)
 	{
 		sv.a = sv.lst->a - mlx->set->rot_hor;
@@ -50,7 +50,7 @@ int				draw_sprites(t_mlxvar *mlx)
 		if (sv.a > _3PI2)
 			sv.a -= _2PI;
 		sv.size = (double)mlx->screen.height / (cos(sv.a) * sv.lst->len);
-		sv.screenC.x = ((sv.a + (mlx->set->FOV / 2) / mlx->set->FOV) * mlx->screen.width)
+		sv.screenC.x = ((sv.a + (mlx->set->fov / 2) / mlx->set->fov) * mlx->screen.width)
 		- (sv.size / 2);
 		sv.end.x = (((sv.screenC.x + sv.size) < mlx->screen.width) ?
 		(sv.screenC.x + sv.size) : mlx->screen.width);
@@ -62,6 +62,6 @@ int				draw_sprites(t_mlxvar *mlx)
 		drawCurrentSprite(mlx, &sv);
 		sv.lst = sv.lst->next;
 	}
-	freesplist(&mlx->spList);
+	freesplist(&mlx->splist);
 	return (0);
 }
