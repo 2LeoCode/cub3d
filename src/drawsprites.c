@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:43:34 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:23:03 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:23:55 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ static void		drawcurrentsprite(t_mlxvar *mlx, t_spritevar *sv)
 			printf("1\n");
 			if (mlx->sprite.img_data[(int)sv->textc.y * mlx->sprite.width + (int)sv->textc.x] && (mlx->rays[sv->screenc.x].siz > sv->lst->len))
 				mlx->screen.img_data[sv->screenc.y * mlx->screen.width + sv->screenc.x] = mlx->sprite.img_data[(int)sv->textc.y * mlx->sprite.width + (int)sv->textc.x];
+			printf("2\n");
 			sv->screenc.y++;
+			printf("3\n");
 			sv->textc.y += sv->rap.y;
 		}
 		sv->screenc.x++;
