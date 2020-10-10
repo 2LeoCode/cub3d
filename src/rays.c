@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 21:56:43 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:17:46 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:20:27 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int		shootrayhor(t_rayvar *ur, t_mlxvar *mlx)
 	&& (mlx->set->map[(int)ur->c.y][(int)ur->c.x] - '1'))
 	{
 		if ((mlx->set->map[(int)ur->c.y][(int)ur->c.x] == '2')
-		&& !(mlx->splist = splistaddfront(mlx->posx, mlx->posy, mlx->splist,
+		&& !(mlx->splist = splistaddfront(mlx, mlx->splist,
 		(double)((int)ur->c.x + 0.5), (double)((int)ur->c.y + 0.5))))
 			return (-1);
 		ur->c.y += ur->d.y;
