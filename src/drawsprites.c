@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:43:34 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:11:51 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 22:12:31 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		drawcurrentsprite(t_mlxvar *mlx, t_spritevar *sv)
 	{
 		sv->screenc.x = (mlx->screen.height / 2) - (sv->size / 2);
 		sv->end.x = (((sv->screenc.x + sv->size) < mlx->screen.height) ?
-		(sv->screenx.x + sv->size) : mlx->screen.height);
+		(sv->screenc.x + sv->size) : mlx->screen.height);
 		sv->d.y = -sv->screenc.y * (sv->screenc.y < 0);
 		sv->screenc.y += sv->d.y;
 		sv->textc.y = (sv->d.y / sv->size) * mlx->sprite.width;
