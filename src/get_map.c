@@ -6,13 +6,13 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 22:39:21 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:11:10 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:13:06 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static int		get_map_y(t_line *lst)
+int				get_map_y(t_line *lst)
 {
 	int		i;
 	int		j;
@@ -31,7 +31,7 @@ static int		get_map_y(t_line *lst)
 	return ((j - i) + 2);
 }
 
-static int		get_map_x(t_line *lst)
+int				get_map_x(t_line *lst)
 {
 	int		i;
 	int		j;
@@ -54,7 +54,7 @@ static int		get_map_x(t_line *lst)
 	return (i + 2);
 }
 
-static void		get_line(char **map, int index, char *line, int size)
+void			get_line(char **map, int index, char *line, int size)
 {
 	int		i;
 

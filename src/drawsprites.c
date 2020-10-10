@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:43:34 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:10:43 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:14:09 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int				draw_sprites(t_mlxvar *mlx)
 		sv.textc.x = (sv.d.x / sv.size) * mlx->sprite.width;
 		sv.rap.x = (1 / sv.size) * mlx->sprite.width;
 		sv.rap.y = (1 / sv.size) * mlx->sprite.height;
-		drawCurrentSprite(mlx, &sv);
+		drawcurrentsprite(mlx, &sv);
 		sv.lst = sv.lst->next;
 	}
 	freesplist(&mlx->splist);

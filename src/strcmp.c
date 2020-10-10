@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/14 22:27:29 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:56:46 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:15:13 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int		ft_memcmp(void *m1, void *m2, size_t n)
 {
-	while (n-- && m1 && m2 && *((char*)m1) && (char*)m2
-&& (*((char*)m1++) == *((char*)m2++)))
+	while (n-- && m1 && m2 && *((char*)m1) && (char*)m2 && (
+*((char*)m1++) == *((char*)m2++)))
 		continue ;
 	return ((n + 1) ? (*((unsigned char*)(m1 - 1)
 ) - *((unsigned char*)(m2 - 1))) : 0);

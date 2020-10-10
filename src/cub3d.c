@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:22:47 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:06:49 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:16:24 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	drawcols(t_mlxvar *mlxvar, t_updatevar *up)
 	{
 		mlxvar->screen.img_data[(up->l + up->j) * mlxvar->screen.width + up->i
 ] = mlxvar->rays[up->i].texture->img_data
-[(int)up->k * mlxvar->rays[up->i].texture->width
-+ mlxvar->rays[up->i].col_pos];
+[(int)up->k * mlxvar->rays[up->i].texture->width + (
+mlxvar->rays[up->i].col_pos)];
 		up->k += mlxvar->rays[up->i].texture->height / up->size;
 	}
 }

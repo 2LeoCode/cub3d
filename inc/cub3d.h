@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 16:01:49 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:02:29 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:13:23 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,6 +306,9 @@ int						get_set(int fd, t_set *set);
 int						get_res(char *line, t_set *set, t_bool *check);
 int						getsettings(int ac, char **av, t_set *settings);
 void					init_set(t_set *set);
+void					get_line(char **map, int index, char *line, int size)
+int						get_map_x(t_line *lst);
+int						get_map_y(t_line *lst);
 
 int						get_map_from_list(t_line **lst, t_set *set);
 
