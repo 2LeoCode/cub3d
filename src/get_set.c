@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:53:38 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:41:05 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:07:33 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				getsettings(int ac, char **av, t_set *settings)
 	return (0);
 }
 
-void		init_set(t_set *set)
+void			init_set(t_set *set)
 {
 	set->map = NULL;
 	set->no = NULL;

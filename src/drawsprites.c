@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:43:34 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:56:24 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:10:43 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void		drawcurrentsprite(t_mlxvar *mlx, t_spritevar *sv)
 		sv->textc.y = (sv->d.y / sv->size) * mlx->sprite.width;
 		while (sv->screenc.y < sv->end.y)
 		{
-			if (mlx->sprite.img_data[(int)sv->textc.y * mlx->sprite.width
-+ (int)sv->textc.x] && (mlx->rays[sv->screenc.x
+			if (mlx->sprite.img_data[(int)sv->textc.y * (mlx->sprite.width
+) + (int)sv->textc.x] && (mlx->rays[sv->screenc.x
 ].siz > sv->lst->len))
 				mlx->screen.img_data[sv->screenc.y * mlx
 ->screen.width + sv->screenc.x] = mlx->sprite.img_data
@@ -52,7 +52,7 @@ int				draw_sprites(t_mlxvar *mlx)
 			sv.a -= _2PI;
 		sv.size = (double)mlx->screen.height / (cos(sv.a) * sv.lst->len);
 		sv.screenc.x = ((sv.a + (mlx->set->fov / 2) / mlx->set->fov
-		) * mlx->screen.width) - (sv.size / 2);
+) * mlx->screen.width) - (sv.size / 2);
 		sv.end.x = (((sv.screenc.x + sv.size) < mlx->screen.width) ?
 		(sv.screenc.x + sv.size) : mlx->screen.width);
 		sv.d.x = -sv.screenc.x * (sv.screenc.x < 0);

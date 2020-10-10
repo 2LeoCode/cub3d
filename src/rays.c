@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 21:56:43 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:47:03 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:08:20 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	gettextcoord(t_rayvar *ur, t_mlxvar *mlx)
 		mlx->rays[ur->i].siz = ur->length.y;
 		mlx->rays[ur->i].texture = ((ur->a < M_PI) ? &mlx->walls : &mlx->walln);
 		mlx->rays[ur->i].col_pos = (double)(ur->b.x - (int)ur->b.x
-		) * mlx->rays[ur->i].texture->width;
+) * mlx->rays[ur->i].texture->width;
 	}
 	else
 	{
@@ -34,8 +34,8 @@ void	gettextcoord(t_rayvar *ur, t_mlxvar *mlx)
 int		shootrayvert(t_rayvar *ur, t_mlxvar *mlx)
 {
 	while (ur->a && (ur->a - M_PI) && (ur->b.x > 0) && (ur->b.y > 0)
-	 && (ur->b.x < mlx->set->mapx) && (ur->b.y < mlx->set->mapy)
-	 && (mlx->set->map[(int)ur->b.y][(int)ur->b.x] - '1'))
+&& (ur->b.x < mlx->set->mapx) && (ur->b.y < mlx->set->mapy)
+&& (mlx->set->map[(int)ur->b.y][(int)ur->b.x] - '1'))
 	{
 		if ((mlx->set->map[(int)ur->b.y][(int)ur->b.x] == '2')
 		&& !(mlx->splist = splistaddfront(mlx->posx, mlx->posy, mlx->splist,

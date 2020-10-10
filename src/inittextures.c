@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 23:38:57 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:54:27 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:09:58 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ int				init_textures(t_mlxvar *mlxvar)
 	mlxvar->screen.img = mlx_new_image(
 	mlxvar->id, mlxvar->set->x, mlxvar->set->y);
 	alloctextures(mlxvar);
-	if (!mlxvar->walln.img || !mlxvar->walln.img_data || !mlxvar->walle.img
-|| !mlxvar->walle.img_data || !mlxvar->walls.img || !mlxvar->walls.img_data
-|| !mlxvar->wallw.img || !mlxvar->wallw.img_data || !mlxvar->sprite.img
-|| !mlxvar->sprite.img_data	|| !mlxvar->screen.img
-|| !mlxvar->screen.img_data)
+	if (!mlxvar->walln.img || !mlxvar->walln.img_data || !(mlxvar->walle.img
+) || !mlxvar->walle.img_data || !mlxvar->walls.img || !(mlxvar->walls.img_data
+) || !mlxvar->wallw.img || !mlxvar->wallw.img_data || !(mlxvar->sprite.img
+) || !mlxvar->sprite.img_data || !mlxvar->screen.img || !(
+mlxvar->screen.img_data))
 		return (-1);
 	return (0);
 }

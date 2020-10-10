@@ -6,7 +6,7 @@
 /*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 22:39:21 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:05:01 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/10/10 23:11:10 by lsuardi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ int				get_map(int fd, t_set *set)
 	tmp = lst_line_new(line);
 	if (getmaptolist(fd, &line, &tmp))
 		return (ER_DEFLT);
-	if (!(i = get_map_from_list(&tmp, set))
-&& !(j = check_map(set)))
+	if (!(i = get_map_from_list(&tmp, set)
+) && !(j = check_map(set)))
 		return (0);
 	clear_set(set);
 	lst_line_clr(&tmp);
