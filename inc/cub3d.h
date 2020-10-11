@@ -56,15 +56,15 @@
 # define C_C 7
 # define C_S 8
 
-#define KEY_LEFT 65361
-#define KEY_RIGHT 65363
-#define KEY_UP 65362
-#define KEY_DOWN 65364
-#define KEY_ESC 65307
-#define KEY_W 119
-#define KEY_A 97
-#define KEY_S 115
-#define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_UP 65362
+# define KEY_DOWN 65364
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 
 # define BUFFER_GET_FILE 32
 
@@ -87,9 +87,9 @@
 #  define M_PI 3.14159265358979323846
 # endif
 
-# define _2PI (2 * M_PI)
-# define PI2 (M_PI / 2)
-# define _3PI2 (3 * M_PI / 2)
+# define _2PI 6.28318530718
+# define PI2 1.57079632679
+# define _3PI2 4.71238898038
 
 typedef struct			s_bfh
 {
@@ -121,9 +121,8 @@ typedef struct			s_splist
 	double				y;
 	double				len;
 	double				a;
-	struct s_splist 	*next;
+	struct s_splist		*next;
 }						t_splist;
-
 
 typedef struct			s_point
 {
@@ -147,7 +146,7 @@ typedef enum			e_std
 typedef struct			s_rgb
 {
 	int					r;
-	int 				g;
+	int					g;
 	int					b;
 }						t_rgb;
 
@@ -369,6 +368,5 @@ void					freesplist(t_splist **lst);
 int						freespfail(t_splist **lst);
 t_splist				*splistaddfront(t_mlxvar *mlx, t_splist *lst,
 double x, double y);
-
 
 #endif

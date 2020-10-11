@@ -90,7 +90,8 @@ int		cub3d(t_set *set, int flags)
 	mlx_loop_hook(mlxvar.id, &updateanddisplay, &mlxvar);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &keyispressed, &mlxvar);
 	mlx_hook(mlxvar.win, KeyRelease, KeyReleaseMask, &keyisreleased, &mlxvar);
-	mlx_hook(mlxvar.win, DestroyNotify, StructureNotifyMask, &clear_mlx, &mlxvar);
+	mlx_hook(mlxvar.win, DestroyNotify, StructureNotifyMask,
+&clear_mlx, &mlxvar);
 	mlx_loop(mlxvar.id);
 	return (clear_mlx(&mlxvar));
 }
