@@ -63,20 +63,13 @@ int			clear_mlx_err(t_mlxvar *mlx)
 
 static int	clear_mlx2(t_mlxvar *mlx)
 {
-	if (mlx->walle.img_data)
-		free(mlx->walle.img_data);
-	mlx->walle.img_data = NULL;
 	if (mlx->walls.img)
 		mlx_destroy_image(mlx->id, mlx->walls.img);
 	mlx->walls.img = NULL;
-	if (mlx->walls.img_data)
-		free(mlx->walls.img_data);
 	mlx->walls.img_data = NULL;
 	if (mlx->wallw.img)
 		mlx_destroy_image(mlx->id, mlx->wallw.img);
 	mlx->wallw.img = NULL;
-	if (mlx->wallw.img_data)
-		free(mlx->wallw.img_data);
 	mlx->wallw.img_data = NULL;
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -93,17 +86,14 @@ int			clear_mlx(t_mlxvar *mlx)
 	if (mlx->screen.img)
 		mlx_destroy_image(mlx->id, mlx->screen.img);
 	mlx->screen.img = NULL;
-	if (mlx->screen.img_data)
-		free(mlx->screen.img_data);
 	mlx->screen.img_data = NULL;
 	if (mlx->walln.img)
 		mlx_destroy_image(mlx->id, mlx->walln.img);
 	mlx->walln.img = NULL;
-	if (mlx->walln.img_data)
-		free(mlx->walln.img_data);
 	mlx->walln.img_data = NULL;
 	if (mlx->walle.img)
 		mlx_destroy_image(mlx->id, mlx->walle.img);
 	mlx->walle.img = NULL;
+	mlx->walle.img_data = NULL;
 	return (clear_mlx2(mlx));
 }
