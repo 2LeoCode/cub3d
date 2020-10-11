@@ -78,7 +78,6 @@ static int	clear_mlx2(t_mlxvar *mlx)
 	if (mlx->wallw.img_data)
 		free(mlx->wallw.img_data);
 	mlx->wallw.img_data = NULL;
-	clear_set(mlx->set);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
