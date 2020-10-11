@@ -1,0 +1,15 @@
+R 800 600
+NO ./assets/redbrick.xpm
+SO ./assets/wood.xpm
+WE ./assets/greystone.xpm
+EA ./assets/mossy.xpm
+S ./assets/barrel.xpm
+F 85,85,85
+C 85,55,0
+11111111111111
+10200102000001
+10000100011001
+11101100001001
+10000000200001
+100E0000000201
+11111111111111
