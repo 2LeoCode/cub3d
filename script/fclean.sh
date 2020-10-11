@@ -26,20 +26,24 @@ to_remove="ext\
 			inc/get_next_line.h\
 			src/get_next_line_utils.c\
 			src/get_next_line.c\
-			lib/*mlx*\
 			man\
-			map"
+			map\
+			assets\
+			Cub3D\
+			data\
+			lib\
+			screenshots"
 cd $1
 
 for i in $to_remove
 do
 	chmod -R 777 $i > /dev/null 2>&1
-	rm -r $i > /dev/null 2> data/temp
-	err=$(cat data/temp)
+	rm -r $i > /dev/null 2> temp
+	err=$(cat temp)
 	if [ "$err" = "" ]
 	then
 		printf $RED
 		echo "Removed [$BLD$i$NRM$RED]$NRM"
 	fi
 done
-rm -rf data/temp
+rm -rf temp
