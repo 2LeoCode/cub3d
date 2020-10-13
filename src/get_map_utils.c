@@ -39,18 +39,15 @@ static t_bool	check_case(char **map, int y, int x)
 	int		j;
 
 	i = (y - 1);
+	printf("%d : %d : %c\n", x, y, map[y][x]);
 	while (++i < (y + 1))
 	{
 		j = x - 1;
 		while (++j < (x + 1))
 		{
-			if (x == 6 && y == 7)
-				printf("%c", map[i][j]);
 			if (map[i][j] == ' ')
 				return (false);
 		}
-		if (x == 6 && y == 7)
-			printf("\n");
 	}
 	return (true);
 }
