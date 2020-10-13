@@ -100,9 +100,6 @@ int				check_map(t_set *set)
 	tmp = set->map;
 	i = -1;
 	while (tmp[++i])
-		printf("%s\n", tmp[i]);
-	i = -1;
-	while (tmp[++i])
 		if ((ret = workcase(tmp, i, &check, set)))
 			return (ret);
 	if (!check)

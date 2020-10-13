@@ -79,6 +79,13 @@ int				getmaptolist(int fd, char **line, t_line **lst)
 			lst_line_clr(lst);
 			return (ER_DEFLT);
 		}
+	t_line *tmp = *lst;
+
+	while (tmp)
+	{
+		printf("%s\n", tmp->line);
+		tmp = tmp->next;
+	}
 	return (0);
 }
 
