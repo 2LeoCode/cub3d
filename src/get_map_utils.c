@@ -45,7 +45,10 @@ static t_bool	check_case(char **map, int y, int x)
 		while (++j < (x + 1))
 		{
 			if (map[i][j] == ' ')
+			{
+				printf("ok\n");
 				return (false);
+			}
 		}
 	}
 	return (true);
@@ -76,7 +79,6 @@ int				workcase(char **tmp, int i, t_bool *check, t_set *set)
 		|| ((tmp[i][j] == '0') && !check_case(tmp, i, j)))
 		{
 			clear_set(set);
-			printf("ok\n");
 			return (ER_WRMAP);
 		}
 		else if (ft_strchr("NWSE", tmp[i][j]))
