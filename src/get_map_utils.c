@@ -68,7 +68,6 @@ void			setspawn(t_set *set, int i, int j, char c)
 void			print_map(char **tmp)
 {
 	int	i;
-	int	j;
 
 	i = -1;
 	while (tmp[++i])
