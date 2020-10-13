@@ -48,7 +48,7 @@ static t_bool	check_case(char **map, int y, int x)
 				printf("%c", map[i][j]);
 			if (map[i][j] == ' ')
 			{
-				printf("false");
+				printf("false\n");
 				return (false);
 			}
 		}
