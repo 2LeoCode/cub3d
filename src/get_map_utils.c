@@ -41,13 +41,16 @@ static t_bool	check_case(char **map, int y, int x)
 	i = (y - 1);
 	while (++i < (y + 1))
 	{
-		j = x - 1;
+		j = (x - 1);
 		while (++j < (x + 1))
 		{
 			if (y == 6 && x == 7)
 				printf("%c", map[i][j]);
 			if (map[i][j] == ' ')
+			{
+				printf("false");
 				return (false);
+			}
 		}
 		if (y == 6 && x == 7)
 			printf("\n");
