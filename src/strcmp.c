@@ -18,8 +18,8 @@ int		ft_memcmp(void *m1, void *m2, size_t n)
 
 	i = -1;
 	while (++i < n)
-		if ((unsigned char)*(m1 + i) - (unsigned char)*(m2 + i))
-			return ((unsigned char)*(m1 + i) - (unsigned char)*(m2 + i));
+		if (*((unsigned char*)(m1 + i)) - *((unsigned char*)(m2 + i)))
+			return (*((unsigned char*)(m1 + i)) - *((unsigned char*)(m2 + i)));
 	return (0);
 }
 
