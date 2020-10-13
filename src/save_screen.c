@@ -59,7 +59,7 @@ int				save_screen(t_mlximg *screen)
 	unsigned char	*img;
 	char			*filename;
 
-	if (!(filename = getfilename("screenshot/save", "bmp"))
+	if (!(filename = getfilename("screenshots/save", "bmp"))
 	|| ((fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
 	|| !(img = getchararray(screen)))
 		return (error_wrong_map(ER_DEFLT));
