@@ -59,7 +59,8 @@ Use --help for more information\n");
 Use --help for more information\n");
 	else if (errnum == ER_DBLSP)
 		ft_fputs(_stderr, "Multiple spawn points set in map file\n\
-Use --help for more information\n")
+Use --help for more information\n");
+	else
 		ft_fputs(_stderr, "An unknown error occured\n");
 	return (-1);
 }
