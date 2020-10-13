@@ -48,6 +48,7 @@ SRC =		main.c\
 			get_map.c\
 			get_map_from_list.c\
 			get_map_utils.c\
+			is_map_full_wall.c\
 			rays.c\
 			rays2.c\
 			splist.c\
