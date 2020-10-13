@@ -35,26 +35,14 @@ t_bool			is_map_wall(char *line)
 
 static t_bool	check_case(char **map, int y, int x)
 {
-	int		i;
-	int		j;
-
-	i = (y - 1);
-	while (++i < (y + 1))
-	{
-		j = (x - 1);
-		while (++j < (x + 1))
-		{
-			if (y == 6 && x == 7)
-				printf("%c", map[i][j]);
-			if (map[i][j] == ' ')
-			{
-				printf("false\n");
-				return (false);
-			}
-		}
-		if (y == 6 && x == 7)
-			printf("\n");
-	}
+	if ((map[y][x] == '1') || (map[y][x] == '0') || (map[y][x] == '2'))
+		if ((map[y - 1][x] == ' ') || (map[y][x + 1] == ' '
+) || (map[y + 1][x] == ' ') || (map[y][x - 1] == ' '))
+			return (false);
+	if (map[y][x] == '0' || map[y][x] == '2')
+		if ((map[y - 1][x - 1] == ' ') || (map[y - 1][x + 1] == ' '
+) || (map[y + 1][x - 1] == ' ') || (map[y + 1][x + 1] == ' '))
+			return (false);
 	return (true);
 }
 
@@ -80,7 +68,7 @@ int				workcase(char **tmp, int i, t_bool *check, t_set *set)
 	while (tmp[i][++j])
 	{
 		if (!ft_strchr("NWSE012 ", tmp[i][j])
-		|| ((tmp[i][j] == '0') && !check_case(tmp, i, j)))
+		|| !check_case(tmp, i, j))
 		{
 			clear_set(set);
 			return (ER_WRMAP);
