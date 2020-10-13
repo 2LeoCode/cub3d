@@ -29,6 +29,7 @@
 # define ER_NOSPW 10
 # define ER_WPIMG 11
 # define ER_COUNT 12
+# define ER_DBLSP 13
 # define WARNING 20
 
 # define NONE 0

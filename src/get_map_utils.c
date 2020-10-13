@@ -45,10 +45,7 @@ static t_bool	check_case(char **map, int y, int x)
 		while (++j < (x + 1))
 		{
 			if (map[i][j] == ' ')
-			{
-				printf("ok\n");
 				return (false);
-			}
 		}
 	}
 	return (true);
@@ -83,6 +80,8 @@ int				workcase(char **tmp, int i, t_bool *check, t_set *set)
 		}
 		else if (ft_strchr("NWSE", tmp[i][j]))
 		{
+			if (*check)
+				return (ER_DBLSP)
 			*check = true;
 			setspawn(set, i, j, tmp[i][j]);
 		}
@@ -103,6 +102,7 @@ int				check_map(t_set *set)
 	while (tmp[++i])
 		if ((ret = workcase(tmp, i, &check, set)))
 			return (ret);
+	printf("OK\n");
 	if (!check)
 	{
 		clear_set(set);
