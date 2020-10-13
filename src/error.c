@@ -88,5 +88,7 @@ Use --help for more information\n");
 	else if (errnum == ER_UNKNW)
 		ft_fputs(_stderr, "Unknown parameter in map file\n\
 Use --help for more information\n");
-	return (errorwrongmap2(errnum));
+	else
+		return (errorwrongmap2(errnum));
+	return (-1);
 }
