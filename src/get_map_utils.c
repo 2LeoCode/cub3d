@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <cub3d.h>
+#include <stdio.h>
 
 t_bool			is_map_wall(char *line)
 {
@@ -75,6 +76,7 @@ int				workcase(char **tmp, int i, t_bool *check, t_set *set)
 		|| ((tmp[i][j] == '0') && !check_case(tmp, i, j)))
 		{
 			clear_set(set);
+			printf("ok\n");
 			return (ER_WRMAP);
 		}
 		else if (ft_strchr("NWSE", tmp[i][j]))
