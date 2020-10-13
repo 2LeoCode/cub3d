@@ -79,7 +79,8 @@ int				getmaptolist(int fd, char **line, t_line **lst)
 			lst_line_clr(lst);
 			return (ER_DEFLT);
 		}
-	if (!is_map_full_wall(*lst) || !is_map_full_wall(lst_line_last(*lst)))
+	if (!is_map_full_wall((*lst)->line
+) || !is_map_full_wall(lst_line_last(*lst)->line))
 		return (ER_WRMAP);
 	return (0);
 }
