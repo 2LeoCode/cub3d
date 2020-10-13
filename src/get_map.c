@@ -108,8 +108,8 @@ int				get_map(int fd, t_set *set)
 		return ((!i || !is_map_wall(line)) ? ER_WRMAP : ER_DEFLT);
 	}
 	tmp = lst_line_new(line);
-	if (getmaptolist(fd, &line, &tmp))
-		return (ER_DEFLT);
+	if ((i = getmaptolist(fd, &line, &tmp)))
+		return (i);
 	if (!(i = get_map_from_list(&tmp, set)
 ) && !(j = check_map(set)))
 		return (0);
