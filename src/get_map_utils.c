@@ -44,9 +44,13 @@ static t_bool	check_case(char **map, int y, int x)
 		j = x - 1;
 		while (++j < (x + 1))
 		{
+			if (x == 6 && y == 7)
+				printf("%c", map[i][j]);
 			if (map[i][j] == ' ')
 				return (false);
 		}
+		if (x == 6 && y == 7)
+			printf("\n");
 	}
 	return (true);
 }
@@ -65,23 +69,11 @@ void			setspawn(t_set *set, int i, int j, char c)
 		set->rot_hor = M_PI;
 }
 
-void			print_map(char **tmp)
-{
-	int	i;
-
-	i = -1;
-	while (tmp[++i])
-	{
-		printf("%s\n", tmp[i]);
-	}
-}
-
 int				workcase(char **tmp, int i, t_bool *check, t_set *set)
 {
 	int j;
 
 	j = -1;
-	print_map(tmp);
 	while (tmp[i][++j])
 	{
 		if (!ft_strchr("NWSE012 ", tmp[i][j])
