@@ -81,7 +81,7 @@ int				workcase(char **tmp, int i, t_bool *check, t_set *set)
 		else if (ft_strchr("NWSE", tmp[i][j]))
 		{
 			if (*check)
-				return (ER_DBLSP)
+				return (ER_DBLSP);
 			*check = true;
 			setspawn(set, i, j, tmp[i][j]);
 		}
