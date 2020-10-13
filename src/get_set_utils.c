@@ -25,6 +25,8 @@ static int		get_single_rgb(char **line, int *col)
 	if (**line && !ft_isdigit(**line))
 		return (-1);
 	*col = ft_atoi(*line);
+	if ((*col < 0) || (*col > 255))
+		return (-1);
 	while (ft_isdigit(**line))
 		(*line)++;
 	while (ft_isspace(**line))

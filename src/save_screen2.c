@@ -22,11 +22,11 @@ unsigned char	*getchararray(t_mlximg *screen)
 	if (!(img = (unsigned char*)malloc(sizeof(unsigned char) * size * 3)))
 		return (NULL);
 	i = -1;
-	while (++i < size)
+	while (size-- > 0)
 	{
-		img[i * 3] = screen->img_data[i];
-		img[i * 3 + 1] = (screen->img_data[i] >> 8);
-		img[i * 3 + 2] = (screen->img_data[i] >> 16);
+		img[++i * 3] = screen->img_data[size];
+		img[i * 3 + 1] = (screen->img_data[size] >> 8);
+		img[i * 3 + 2] = (screen->img_data[size] >> 16);
 	}
 	return (img);
 }
