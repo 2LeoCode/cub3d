@@ -35,12 +35,10 @@ t_bool			is_map_wall(char *line)
 
 static t_bool	check_case(char **map, int y, int x)
 {
-	if ((map[y][x] == '1') || (map[y][x] == '0') || (map[y][x] == '2'))
+	if ((map[y][x] == '0') || (map[y][x] == '2'))
 		if ((map[y - 1][x] == ' ') || (map[y][x + 1] == ' '
-) || (map[y + 1][x] == ' ') || (map[y][x - 1] == ' '))
-			return (false);
-	if (map[y][x] == '0' || map[y][x] == '2')
-		if ((map[y - 1][x - 1] == ' ') || (map[y - 1][x + 1] == ' '
+) || (map[y + 1][x] == ' ') || (map[y][x - 1] == ' '
+) || (map[y - 1][x - 1] == ' ') || (map[y - 1][x + 1] == ' '
 ) || (map[y + 1][x - 1] == ' ') || (map[y + 1][x + 1] == ' '))
 			return (false);
 	return (true);
