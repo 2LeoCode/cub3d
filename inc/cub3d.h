@@ -309,8 +309,8 @@ void					init_set(t_set *set);
 void					get_line(char **map, int index, char *line, int size);
 int						get_map_x(t_line *lst);
 int						get_map_y(t_line *lst);
-
 int						get_map_from_list(t_line **lst, t_set *set);
+t_bool					is_map_full_wall(char *line);
 
 size_t					ft_strlen(char *s);
 
