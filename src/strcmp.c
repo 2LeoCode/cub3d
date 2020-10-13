@@ -14,11 +14,13 @@
 
 int		ft_memcmp(void *m1, void *m2, size_t n)
 {
-	while (n-- && m1 && m2 && *((char*)m1) && (char*)m2 && (
-*((char*)m1++) == *((char*)m2++)))
-		continue ;
-	return ((n + 1) ? (*((unsigned char*)(m1 - 1)
-) - *((unsigned char*)(m2 - 1))) : 0);
+	int		i;
+
+	i = -1;
+	while (++i < n)
+		if (*((unsigned char*)(m1 + i)) - ((unsigned char*)(m2 + i)))
+			return (*((unsigned char*)(m1 + i)) - ((unsigned char*)(m2 + i)));
+	return (0);
 }
 
 int		ft_strcmp(char *s1, char *s2)
