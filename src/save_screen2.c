@@ -21,8 +21,7 @@ unsigned char	*getchararray(t_mlximg *screen)
 	int				k;
 
 	extrabytes = 4 - ((screen->width * 3) % 4);
-	if (extrabytes == 4)
-  		extrabytes = 0;
+	extrabytes *= (extrabytes != 4);
 	if (!(img = (unsigned char*)malloc(sizeof(unsigned char) * (screen->width * screen->height * 3 + screen->height * extrabytes))))
 		return (NULL);
 	i = -1;
