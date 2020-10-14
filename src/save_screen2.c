@@ -15,18 +15,21 @@
 unsigned char	*getchararray(t_mlximg *screen)
 {
 	unsigned char	*img;
-	int				size;
 	int				i;
+	int				j;
 
-	size = screen->width * screen->height;
-	if (!(img = (unsigned char*)malloc(sizeof(unsigned char) * size * 3)))
+	if (!(img = (unsigned char*)malloc(sizeof(unsigned char) * screen->width * screen->height * 3)))
 		return (NULL);
 	i = -1;
-	while (size-- > 0)
+	while (++i < screen->height)
 	{
-		img[++i * 3] = screen->img_data[size];
-		img[i * 3 + 1] = (screen->img_data[size] >> 8);
-		img[i * 3 + 2] = (screen->img_data[size] >> 16);
+		j = -1;
+		while (++j < screen->width)
+		{
+			img[i * screen->width * 3 + j * 3] = screen->img_data[(screen->height - i - 1) * screen->width * 3 + j * 3];
+			img[i * screen->width * 3 + j * 3 + 1] = (screen->img_data[(screen->height - i - 1) * screen->width * 3 + j * 3] >> 8);
+			img[i * screen->width * 3 + j * 3 + 2] = (screen->img_data[(screen->height - i - 1) * screen->width * 3 + j * 3] >> 16);
+		}
 	}
 	return (img);
 }
