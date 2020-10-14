@@ -70,6 +70,7 @@ int				save_screen(t_mlximg *screen)
 	write(fd, &infoheader, 40);
 	infoheader.extrabytes = 4 - ((screen->width * 3) % 4);
 	infoheader.extrabytes *= (infoheader.extrabytes != 4);
+	printf("%d\n", infoheader.extrabytes);
 	write(fd, img, screen->width * screen->height * 3 + (screen->height * infoheader.extrabytes));
 	free(img);
 	return (0);
