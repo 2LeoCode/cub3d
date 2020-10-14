@@ -58,7 +58,11 @@ int				save_screen(t_mlximg *screen)
 	int				fd;
 	unsigned char	*img;
 	char			*filename;
+	int				extrabytes;
+	int				i;
 
+	extrabytes = 4 - ((screen->width * 3) % 4);
+	extrabytes *= (infoheader.extrabytes != 4);
 	if (!(filename = getfilename("screenshots/save", "bmp"))
 	|| ((fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
 	|| !(img = getchararray(screen)))
@@ -68,10 +72,16 @@ int				save_screen(t_mlximg *screen)
 	infoheader = createbitmapinfoheader(screen);
 	write(fd, &fileheader, 14);
 	write(fd, &infoheader, 40);
-	infoheader.extrabytes = 4 - ((screen->width * 3) % 4);
-	infoheader.extrabytes *= (infoheader.extrabytes != 4);
-	printf("%d\n", infoheader.extrabytes);
-	write(fd, img, screen->width * screen->height * 3 + (screen->height * infoheader.extrabytes));
+	i = -1;
+	while (++i < screen->height)
+	{
+		write(fd, &img[i * screen->width * 3], screen->width * 3);
+		if (extrabytes)
+		{
+			write(fd, "\0\0", extrabytes - 1);
+			write(fd, "\255", 1);
+		}
+	}
 	free(img);
 	return (0);
 }
