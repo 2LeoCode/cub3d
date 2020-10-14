@@ -68,7 +68,9 @@ int				save_screen(t_mlximg *screen)
 	infoheader = createbitmapinfoheader(screen);
 	write(fd, &fileheader, 14);
 	write(fd, &infoheader, 40);
-	write(fd, img, screen->width * screen->height * 3);
+	infoheader.extrabytes = 4 - ((screen->width * 3) % 4);
+	infoheader.extrabytes *= (infoheader.extrabytes != 4);
+	write(fd, img, screen->width * screen->height * 3 + (screen->height * infoheader.extrabytes));
 	free(img);
 	return (0);
 }

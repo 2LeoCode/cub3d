@@ -114,6 +114,7 @@ typedef struct			s_bih
 	unsigned int		ppm_y;
 	unsigned int		clr_used;
 	unsigned int		clr_important;
+	int					extrabytes;
 }						t_bih;
 
 typedef struct			s_splist
