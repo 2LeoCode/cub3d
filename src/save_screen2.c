@@ -36,7 +36,7 @@ unsigned char	*getchararray(t_mlximg *screen)
 		}
 		k = -1;
 		while (++k < extrabytes)
-			img[i * screen->width * 3 + j * 3 + k] = 0;
+			img[i * screen->width * 3 + j * 3 + k] = 0xff;
 	}
 	return (img);
 }
