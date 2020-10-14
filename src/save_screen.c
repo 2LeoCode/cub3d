@@ -51,27 +51,13 @@ static char		*getfilename(char *basename, char *ext)
 	return (filename);
 }
 
-int				save_screen(t_mlximg *screen)
+void			writeimg(int fd, unsigned char *img, t_mlximg *screen)
 {
-	t_bfh			fileheader;
-	t_bih			infoheader;
-	int				fd;
-	unsigned char	*img;
-	char			*filename;
 	int				extrabytes;
 	int				i;
 
 	extrabytes = 4 - ((screen->width * 3) % 4);
 	extrabytes *= (extrabytes != 4);
-	if (!(filename = getfilename("screenshots/save", "bmp"))
-	|| ((fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
-	|| !(img = getchararray(screen)))
-		return (error_wrong_map(ER_DEFLT));
-	free(filename);
-	fileheader = createbitmapfileheader(screen);
-	infoheader = createbitmapinfoheader(screen);
-	write(fd, &fileheader, 14);
-	write(fd, &infoheader, 40);
 	i = -1;
 	while (++i < screen->height)
 	{
@@ -82,6 +68,27 @@ int				save_screen(t_mlximg *screen)
 			write(fd, "\255", 1);
 		}
 	}
+}
+
+int				save_screen(t_mlximg *screen)
+{
+	t_bfh			fileheader;
+	t_bih			infoheader;
+	int				fd;
+	unsigned char	*img;
+	char			*filename;
+
+	if (!(filename = getfilename("screenshots/save", "bmp"))
+	|| ((fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
+	|| !(img = getchararray(screen)))
+		return (error_wrong_map(ER_DEFLT));
+	free(filename);
+	fileheader = createbitmapfileheader(screen);
+	infoheader = createbitmapinfoheader(screen);
+	write(fd, &fileheader, 14);
+	write(fd, &infoheader, 40);
+	writeimg(fd, img, screen);
 	free(img);
+	close(fd);
 	return (0);
 }
