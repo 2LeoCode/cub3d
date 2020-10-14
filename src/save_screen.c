@@ -62,7 +62,7 @@ int				save_screen(t_mlximg *screen)
 	int				i;
 
 	extrabytes = 4 - ((screen->width * 3) % 4);
-	extrabytes *= (infoheader.extrabytes != 4);
+	extrabytes *= (extrabytes != 4);
 	if (!(filename = getfilename("screenshots/save", "bmp"))
 	|| ((fd = open(filename, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU)) < 0)
 	|| !(img = getchararray(screen)))
