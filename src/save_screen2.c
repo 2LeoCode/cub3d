@@ -27,9 +27,9 @@ unsigned char	*getchararray(t_mlximg *screen)
 		while (++j < screen->width)
 		{
 			printf("%d %d\n", i, j);
-			img[i * screen->width * 3 + j * 3] = screen->img_data[(screen->height - i - 1) * screen->width * 3 + j * 3];
-			img[i * screen->width * 3 + j * 3 + 1] = (screen->img_data[(screen->height - i - 1) * screen->width * 3 + j * 3] >> 8);
-			img[i * screen->width * 3 + j * 3 + 2] = (screen->img_data[(screen->height - i - 1) * screen->width * 3 + j * 3] >> 16);
+			img[i * screen->width * 3 + j * 3] = screen->img_data[(screen->height - i - 1) * screen->width + j];
+			img[i * screen->width * 3 + j * 3 + 1] = (screen->img_data[(screen->height - i - 1) * screen->width + j] >> 8);
+			img[i * screen->width * 3 + j * 3 + 2] = (screen->img_data[(screen->height - i - 1) * screen->width + j] >> 16);
 		}
 	}
 	return (img);
