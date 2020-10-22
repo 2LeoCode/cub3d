@@ -71,6 +71,12 @@ int		updateanddisplay(t_mlxvar *mlxvar)
 	return (0);
 }
 
+int		displayscreen(t_mlxvar *mlx)
+{
+	mlx_put_image_to_window(mlx->id, mlx->win, mlx->screen.img, 0, 0);
+	return (0);
+}
+
 int		cub3d(t_set *set, int flags)
 {
 	t_bool		save;
@@ -91,6 +97,7 @@ int		cub3d(t_set *set, int flags)
 		clear_mlx(&mlxvar);
 	}
 	mlx_loop_hook(mlxvar.id, &updateanddisplay, &mlxvar);
+	mlx_expose_hook(mlxvar.win, &displayscreen, &mlxvar);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &keyispressed, &mlxvar);
 	mlx_hook(mlxvar.win, KeyRelease, KeyReleaseMask, &keyisreleased, &mlxvar);
 	mlx_hook(mlxvar.win, DestroyNotify, StructureNotifyMask,
