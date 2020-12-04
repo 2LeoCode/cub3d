@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 22:39:21 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:13:06 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/12/04 18:05:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ int				get_map(int fd, t_set *set)
 		get_next_line_end(fd, &line);
 		return ((!i || !is_map_wall(line)) ? ER_WRMAP : ER_DEFLT);
 	}
-	tmp = lst_line_new(line);
 	if ((i = getmaptolist(fd, &line, &tmp)))
 		return (i);
-	if (!(i = get_map_from_list(&tmp, set)
-) && !(j = check_map(set)))
-		return (0);
-	clear_set(set);
+	i = get_map_from_list(&tmp, set);
+	j = check_map(set);
+	get_next_line_end(fd, &line);
+	if (i || j)
+		clear_set(set);
 	lst_line_clr(&tmp);
 	return (i ? i : j);
 }

@@ -94,6 +94,8 @@ endif
 all: $(addprefix $(SHDIR)/, $(SCRIPT)) $(MAPDIR) $(addprefix $(LIBDIR)/, $(LIB)) $(NAME)
 	@(sh $(SHDIR)/help.sh .; echo '$(GRN)$(BLD)$(NAME)$(NRM)$(GRN) is up to date.$(NRM)')
 
+bonus: all
+
 $(addprefix $(LIBDIR)/, $(LIB)): $(addprefix $(EXTDIR)/, $(EXT))
 	@(sh $(SHDIR)/ext.sh .)
 

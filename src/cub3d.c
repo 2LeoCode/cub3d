@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:22:47 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:16:24 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/12/04 18:29:10 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,16 @@ int		cub3d(t_set *set, int flags)
 	t_mlxvar	mlxvar;
 
 	mlxvar = initmlx(set, flags, &save);
+	if (save)
+		exit_save(&mlxvar);
 	if (!(mlxvar.id = mlx_init()) || init_textures(&mlxvar)
 	|| !(mlxvar.win = mlx_new_window(mlxvar.id, set->x, set->y, "Cub3D"))
 	|| update_rays(&mlxvar) || update_screen(&mlxvar) || draw_sprites(&mlxvar))
 	{
-		clear_mlx_err(&mlxvar);
 		return (ft_fputs(2, "Cub3d: Error while initializing window.\n"));
+		clear_mlx_err(&mlxvar);
 	}
 	mlx_put_image_to_window(mlxvar.id, mlxvar.win, mlxvar.screen.img, 0, 0);
-	if (save)
-	{
-		save_screen(&mlxvar.screen);
-		clear_mlx(&mlxvar);
-	}
 	mlx_loop_hook(mlxvar.id, &updateanddisplay, &mlxvar);
 	mlx_expose_hook(mlxvar.win, &displayscreen, &mlxvar);
 	mlx_hook(mlxvar.win, KeyPress, KeyPressMask, &keyispressed, &mlxvar);

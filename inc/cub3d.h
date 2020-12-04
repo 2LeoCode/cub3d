@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 16:01:49 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:19:40 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/12/04 18:31:55 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,6 +341,7 @@ t_bool					is_map_wall(char *line);
 int						check_map(t_set *set);
 int						get_map(int fd, t_set *set);
 
+int						update_screen(t_mlxvar *mlxvar);
 int						update_rays(t_mlxvar *mlxvar);
 void					initrayvert(t_rayvar *ur, t_mlxvar *mlx);
 void					initrayhor(t_rayvar *ur, t_mlxvar *mlx);
@@ -348,6 +349,7 @@ void					initrayhor(t_rayvar *ur, t_mlxvar *mlx);
 void					*ft_memcpy(void *d, void *s, size_t n);
 void					*ft_bzero(void *m, size_t n);
 
+void					exit_save(t_mlxvar *mlx);
 int						save_screen(t_mlximg *screen);
 t_bfh					createbitmapfileheader(t_mlximg *screen);
 t_bih					createbitmapinfoheader(t_mlximg *screen);

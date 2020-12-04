@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 16:30:08 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 22:08:33 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/12/04 18:45:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,19 @@ int				save_screen(t_mlximg *screen)
 	free(img);
 	close(fd);
 	return (0);
+}
+
+void			exit_save(t_mlxvar *mlx)
+{
+	if (!(mlx->id = mlx_init())
+	|| init_textures(mlx)
+	|| update_rays(mlx)
+	|| update_screen(mlx)
+	|| draw_sprites(mlx))
+	{
+		ft_fputs(2, "Cub3d: Error while initializing screen.\n");
+		clear_mlx_err(mlx);
+	}
+	save_screen(&mlx->screen);
+	clear_mlx(mlx);
 }

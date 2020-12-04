@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_set.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsuardi <lsuardi@student.42.fr>            +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 00:53:38 by lsuardi           #+#    #+#             */
-/*   Updated: 2020/10/10 23:07:33 by lsuardi          ###   ########.fr       */
+/*   Updated: 2020/12/04 18:19:42 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ int				get_set(int fd, t_set *set)
 	if ((v.i = get_next_line(fd, &v.line)) < 0)
 		return (ER_READF);
 	if ((v.i = getset2(fd, &v, set)))
+	{
+		get_next_line_end(fd, &v.line);
 		return (v.i);
+	}
 	return (get_map(fd, set));
 }
 
